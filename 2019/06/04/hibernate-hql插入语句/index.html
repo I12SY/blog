@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://i12sy.github.io/blog">
   <title>hibernate hql插入语句 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.在hibernate中执行insert插入语句时需要注意的是,使用下面的方法会出现antlr.NoViableAltException: unexpected token: values异常：  Session session = sessionFactory.openSession();   String hql = “insert into User(name,age)values(?,?">
+  <meta name="description" content="1.在hibernate中执行insert插入语句时需要注意的是,使用下面的方法会出现antlr.NoViableAltException: unexpected token: values异常：  Session session = sessionFactory.openSession();String hql = “insert into User(name,age)values(?,?)”;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hibernate hql插入语句">
 <meta property="og:url" content="https://i12sy.github.io/blog/2019/06/04/hibernate-hql插入语句/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.在hibernate中执行insert插入语句时需要注意的是,使用下面的方法会出现antlr.NoViableAltException: unexpected token: values异常：  Session session = sessionFactory.openSession();   String hql = “insert into User(name,age)values(?,?">
+<meta property="og:description" content="1.在hibernate中执行insert插入语句时需要注意的是,使用下面的方法会出现antlr.NoViableAltException: unexpected token: values异常：  Session session = sessionFactory.openSession();String hql = “insert into User(name,age)values(?,?)”;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-04T03:09:45.926Z">
+<meta property="og:updated_time" content="2019-06-04T07:59:36.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hibernate hql插入语句">
-<meta name="twitter:description" content="1.在hibernate中执行insert插入语句时需要注意的是,使用下面的方法会出现antlr.NoViableAltException: unexpected token: values异常：  Session session = sessionFactory.openSession();   String hql = “insert into User(name,age)values(?,?">
+<meta name="twitter:description" content="1.在hibernate中执行insert插入语句时需要注意的是,使用下面的方法会出现antlr.NoViableAltException: unexpected token: values异常：  Session session = sessionFactory.openSession();String hql = “insert into User(name,age)values(?,?)”;">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -176,13 +176,7 @@
       
         <p>1.在hibernate中执行insert插入语句时需要注意的是,使用下面的方法会出现<code>antlr.NoViableAltException: unexpected token: values</code>异常：</p>
 <blockquote>
-<p>Session session = sessionFactory.openSession();</p>
-</blockquote>
-<blockquote>
-<p>String hql = “insert into User(name,age)values(?,?)”;</p>
-</blockquote>
-<blockquote>
-<p>session.createQuery(hql).setParameter(0,”xxxx”).setParameter(1,20).executeUpdate();</p>
+<p>Session session = sessionFactory.openSession();<br>String hql = “insert into User(name,age)values(?,?)”;<br>session.createQuery(hql).setParameter(0,”xxxx”).setParameter(1,20).executeUpdate();</p>
 </blockquote>
 <p>2.解决办法,使用createSQLQuery方法执行insert语句：</p>
 <blockquote>

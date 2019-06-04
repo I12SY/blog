@@ -174,13 +174,7 @@
       
         <p>1.在hibernate中执行insert插入语句时需要注意的是,使用下面的方法会出现<code>antlr.NoViableAltException: unexpected token: values</code>异常：</p>
 <blockquote>
-<p>Session session = sessionFactory.openSession();</p>
-</blockquote>
-<blockquote>
-<p>String hql = “insert into User(name,age)values(?,?)”;</p>
-</blockquote>
-<blockquote>
-<p>session.createQuery(hql).setParameter(0,”xxxx”).setParameter(1,20).executeUpdate();</p>
+<p>Session session = sessionFactory.openSession();<br>String hql = “insert into User(name,age)values(?,?)”;<br>session.createQuery(hql).setParameter(0,”xxxx”).setParameter(1,20).executeUpdate();</p>
 </blockquote>
 <p>2.解决办法,使用createSQLQuery方法执行insert语句：</p>
 <blockquote>
