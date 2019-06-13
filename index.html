@@ -205,7 +205,7 @@
 <h3 id="2-Dcoker容器常用命令"><a href="#2-Dcoker容器常用命令" class="headerlink" title="2.Dcoker容器常用命令"></a>2.Dcoker容器常用命令</h3><ul>
 <li><p>新建并启动容器<br>  使用以下docker run命令即可新建并启动一个容器。<br>  -d选项：表示后台运行<br>  -P选项：随机端口映射<br>  -p选项：指定端口映射，有以下四种形式：<br>  &#8195;&#8195;- ip:hostPort:containerPort<br>  &#8195;&#8195;- ip::containerPort<br>  &#8195;&#8195;- hostPort:containerPort<br>  &#8195;&#8195;- containerPort  </p>
 <p>  –network选项：指定网络模式，该选项有以下可选参数：<br>  &#8195;&#8195;- –network=bridge：默认选项，表示连接到默认的网桥。<br>  &#8195;&#8195;- –network=host：容器使用宿主机的网络。<br>  &#8195;&#8195;- –network=container：NAME_or_ID：告诉Docker让新建的容器使用已有容器的网络配置。<br>  &#8195;&#8195;- –network=none：不配置该容器的网络，用户可自定义网络配置。  </p>
-<p>  示例1：  </p>
+<p>  示例1：</p>
 <blockquote>
 <p>docker run java /bin/echo ‘Hello World’</p>
 </blockquote>
