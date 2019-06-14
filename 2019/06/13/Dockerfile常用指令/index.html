@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="I12SY">
 <meta property="og:description" content="1.ADD复制文件格式： ADD &amp;lt;src&amp;gt;... &amp;lt;dest&amp;gt;   ADD [&amp;quot;&amp;lt;src&amp;gt;&amp;quot;,... &amp;quot;&amp;lt;dest&amp;gt;&amp;quot;] 从src目录复制文件到容器的dest。其中src可以是Dockerfile所在目录的相对路径，也可以是一个URL，还可以是一个压缩包 注意：     1.src必须在构建的上下文内，不能使">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-13T16:06:28.772Z">
+<meta property="og:updated_time" content="2019-06-14T03:25:36.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dockerfile常用指令">
 <meta name="twitter:description" content="1.ADD复制文件格式： ADD &amp;lt;src&amp;gt;... &amp;lt;dest&amp;gt;   ADD [&amp;quot;&amp;lt;src&amp;gt;&amp;quot;,... &amp;quot;&amp;lt;dest&amp;gt;&amp;quot;] 从src目录复制文件到容器的dest。其中src可以是Dockerfile所在目录的相对路径，也可以是一个URL，还可以是一个压缩包 注意：     1.src必须在构建的上下文内，不能使">
@@ -185,7 +185,8 @@ ADD [&quot;&lt;src&gt;&quot;,... &quot;&lt;dest&gt;&quot;]
     4.如果src是一个URL，那么整个目录下的内容将会被复制，包括文件系统元数据。
     5.如果文件是可识别的压缩包格式，则docker会自动解压。
 示例：
-ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre><h3 id="2-ARG设置构建参数"><a href="#2-ARG设置构建参数" class="headerlink" title="2.ARG设置构建参数"></a>2.ARG设置构建参数</h3><pre><code>ARG指令用于设置构建参数，类似于ENV。和ENV不同的是，ARG设置的是构建时的环境变量，在容器运行时是不会存在这些变量的。
+ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre><a id="more"></a>
+<h3 id="2-ARG设置构建参数"><a href="#2-ARG设置构建参数" class="headerlink" title="2.ARG设置构建参数"></a>2.ARG设置构建参数</h3><pre><code>ARG指令用于设置构建参数，类似于ENV。和ENV不同的是，ARG设置的是构建时的环境变量，在容器运行时是不会存在这些变量的。
 格式：    
 ARG &lt;name&gt;[=&lt;default value&gt;]
 示例：
