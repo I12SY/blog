@@ -16,7 +16,7 @@
 <meta property="og:description" content="命令模式(Command Pattern)是一种数据驱动的设计模式，它属于行为型模式。请求以命令的形式包裹在对象中，并传递给调用对象。调用对象寻找可以处理该命令的合适的对象，并把该命令传给相应的对象，该对象执行命令。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i12sy.github.io/blog/img/2020/02/27/命令模式结构图.png">
-<meta property="og:updated_time" content="2020-02-27T03:40:35.274Z">
+<meta property="og:updated_time" content="2020-02-29T06:58:19.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="命令模式">
 <meta name="twitter:description" content="命令模式(Command Pattern)是一种数据驱动的设计模式，它属于行为型模式。请求以命令的形式包裹在对象中，并传递给调用对象。调用对象寻找可以处理该命令的合适的对象，并把该命令传给相应的对象，该对象执行命令。">
@@ -186,7 +186,7 @@ var _hmt = _hmt || [];
       
         <p>命令模式(Command Pattern)是一种数据驱动的设计模式，它属于行为型模式。请求以命令的形式包裹在对象中，并传递给调用对象。调用对象寻找可以处理该命令的合适的对象，并把该命令传给相应的对象，该对象执行命令。  </p>
 <a id="more"></a>  
-<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>将一个请求封装成一个对象，从而使您可以用不同的请求对客户进行参数化：队请求排队或记录请求日志，以及支持可撤销的操作。<br><strong>主要解决：</strong>在软件系统中，行为请求者与实现者通常是一种紧耦合关系，但某些场合，比如需要对行为进行记录、撤销或重做、事物等处理时，这种无法抵御变化的紧耦合设计就不太合适。<br><strong>何时使用：</strong>在某些场合，比如需要对行为进行’记录、撤销/重做、事物’等处理，这种无法抵御变化的紧耦合设计是不合适的。在这种情况下，如何将’行为请求者’与’行为实现者’解耦？将一组行为抽象为对象，可以实现二者之间的松耦合。<br><strong>如何解决：</strong>通过调用者调用接受者执行命令，顺序：调用者→接受者→命令。<br><strong>关键代码：</strong>定义三个角色：1、received真正的命令执行对象2、Command 3、invoker使用命令对象的入口。<br><strong>应用实例：</strong>struts1中的action核心控制器ActionServlet只有一个，相当于invoker，而模型层的类会随着不同的应用有不同的模型类，相当于具体的Command。<br><strong>优点：</strong>1、降低了系统的耦合度。2、新的命令可以很容易添加到系统中去。<br><strong>缺点：</strong>使用命令模式可能会导致某些系统有过多的具体命令类。<br><strong>使用场景：</strong>认为是命令的地方都可以使用命令模式，比如：1、GUI中的每一个按钮都是一条命令。2、模拟CMD。<br><strong>注意事项：</strong>系统需要支持命令的撤销(Undo)操作和恢复(Redo)操作，也可以考虑使用命令模式。  </p>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>将一个请求封装成一个对象，从而使您可以用不同的请求对客户进行参数化：对请求排队或记录请求日志，以及支持可撤销的操作。<br><strong>主要解决：</strong>在软件系统中，行为请求者与实现者通常是一种紧耦合关系，但某些场合，比如需要对行为进行记录、撤销或重做、事物等处理时，这种无法抵御变化的紧耦合设计就不太合适。<br><strong>何时使用：</strong>在某些场合，比如需要对行为进行’记录、撤销/重做、事物’等处理，这种无法抵御变化的紧耦合设计是不合适的。在这种情况下，如何将’行为请求者’与’行为实现者’解耦？将一组行为抽象为对象，可以实现二者之间的松耦合。<br><strong>如何解决：</strong>通过调用者调用接受者执行命令，顺序：调用者→接受者→命令。<br><strong>关键代码：</strong>定义三个角色：1、received真正的命令执行对象2、Command 3、invoker使用命令对象的入口。<br><strong>应用实例：</strong>struts1中的action核心控制器ActionServlet只有一个，相当于invoker，而模型层的类会随着不同的应用有不同的模型类，相当于具体的Command。<br><strong>优点：</strong>1、降低了系统的耦合度。2、新的命令可以很容易添加到系统中去。<br><strong>缺点：</strong>使用命令模式可能会导致某些系统有过多的具体命令类。<br><strong>使用场景：</strong>认为是命令的地方都可以使用命令模式，比如：1、GUI中的每一个按钮都是一条命令。2、模拟CMD。<br><strong>注意事项：</strong>系统需要支持命令的撤销(Undo)操作和恢复(Redo)操作，也可以考虑使用命令模式。  </p>
 <h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><img src="/blog/img/2020/02/27/命令模式结构图.png">  
 
 <h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h2><p>Command类，用来声明执行操作的接口(也就是命令)  </p>
