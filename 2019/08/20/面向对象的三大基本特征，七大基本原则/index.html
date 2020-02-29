@@ -17,7 +17,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i12sy.github.io/blog/img/2019/08/20/1.png">
 <meta property="og:image" content="https://i12sy.github.io/blog/img/2019/08/21/1.jpg">
-<meta property="og:updated_time" content="2020-02-29T05:32:32.269Z">
+<meta property="og:updated_time" content="2020-02-29T05:43:30.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面向对象的三大基本特征，七大基本原则">
 <meta name="twitter:description" content="1)三大基本特征 1、封装 2、继承 3、多态  2）六大基本原则(设计模式的七大基本原则) 1、单一职责原则（SRP）   2、开放封闭原则（OCP）   3、里氏替换原则（LSP）   4、依赖倒置原则（DIP）   5、接口隔离原则（ISP） 6、迪米特|最少知道原则（LKP） 7、合成复用原则（CAPP）">
@@ -363,7 +363,7 @@ public class Client {
 <img src="/blog/img/2019/08/21/1.jpg">  
 
 <p>如果Lily和Jack自己做hamburg那么就会与Vegetable、Meat、Bread产生千丝万缕关系。上图，则由KFC来做，这样Lily和Jack就只与Hamburg有关关联，与材料就没有关联了。  </p>
-<h2 id="6、合成复用原则（CAPP）"><a href="#6、合成复用原则（CAPP）" class="headerlink" title="6、合成复用原则（CAPP）"></a><span id="CAPP">6、合成复用原则（CAPP）</span></h2><p style="text-indent:2em"><b>尽量使用聚合、组合的方式，而不是使用继承。</b></p>
+<h2 id="7、合成复用原则（CAPP）"><a href="#7、合成复用原则（CAPP）" class="headerlink" title="7、合成复用原则（CAPP）"></a><span id="CAPP">7、合成复用原则（CAPP）</span></h2><p style="text-indent:2em"><b>尽量使用聚合、组合的方式，而不是使用继承。</b></p>
 <p style="text-indent:2em">其实大部分人刚开始学会用面向对象的继承时，感觉它既新颖又功能强大，所以只要可以用，就都用上继承。这就好比是’有了新锤子，所有的东西看上去都成了钉子’。但事实上，很多情况用继承会带来麻烦。比如，<b>对象的继承关系是在编译时就定义好了，所以无法在运行时改变从父类继承的实现。子类的实现与它的父类有非常紧密的依赖关系，以至于父类实现中的任何变化必然会导致子类发生变化。当你需要复用子类时，如果继承下来的实现不适合解决新的问题，则父类必须被重写或被其他更适合的类替换。这种依赖关系限制了灵活性并最终限制了复用性。</b></p>
 <p style="text-indent:2em">合成/聚合复用原则的好处是，<b>优先使用对象的合成/聚合将有助于你保持每个类被封装，并被集中在单个任务上。这样类和类继承层次会保持较小规模，并且不太可能增长为不可控制的庞然大物。</b></p>
 
