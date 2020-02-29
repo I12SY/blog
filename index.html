@@ -160,38 +160,27 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Dockerfile常用指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-设计模式/访问者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/06/13/Dockerfile常用指令/">Dockerfile常用指令</a>
+      <a class="article-title" href="/blog/2020/02/28/设计模式/访问者模式/">访问者模式</a>
     </h1>
   
 
         
-        <a href="/blog/2019/06/13/Dockerfile常用指令/" class="archive-article-date">
-  	<time datetime="2019-06-13T14:46:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-13</time>
+        <a href="/blog/2020/02/28/设计模式/访问者模式/" class="archive-article-date">
+  	<time datetime="2020-02-28T08:48:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-ADD复制文件"><a href="#1-ADD复制文件" class="headerlink" title="1.ADD复制文件"></a>1.ADD复制文件</h3><pre><code>格式：
-ADD &lt;src&gt;... &lt;dest&gt;  
-ADD [&quot;&lt;src&gt;&quot;,... &quot;&lt;dest&gt;&quot;]
-从src目录复制文件到容器的dest。其中src可以是Dockerfile所在目录的相对路径，也可以是一个URL，还可以是一个压缩包
-注意：
-    1.src必须在构建的上下文内，不能使用例如：ADD ../something /something这样的命令，因为docker build命令会首先将上下文路径和其子目录发送到docker daemon。
-    2.如果src是一个URL，同时dest不以斜杆结尾，dest将会被视为文件，src对应内容文件将会被下载到dest。
-    3.如果src是一个URL，同时dest以斜杆结尾，dest将被视为目录，src对应内容将会被下载到dest目录。
-    4.如果src是一个URL，那么整个目录下的内容将会被复制，包括文件系统元数据。
-    5.如果文件是可识别的压缩包格式，则docker会自动解压。
-示例：
-ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
+        <p>在访问者模式(Visitor Pattern)中，我们使用了一个访问者类，他改变了元素类的执行算法。通过这种方式，元素的执行算法可以随着访问者改变而改变。这种类型的设计模式属于行为型模式。根据模式，元素对象已经接受访问者对象，这样对访问者对象就可以处理元素对象上的操作。  </p>
         
       
 
@@ -204,7 +193,7 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/06/13/Dockerfile常用指令/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2020/02/28/设计模式/访问者模式/">展开全文 >></a>
         </p>
       
 
@@ -234,36 +223,32 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
 
   
-    <article id="post-Docker常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-设计模式/解释器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/06/13/Docker常用命令/">Docker常用命令</a>
+      <a class="article-title" href="/blog/2020/02/28/设计模式/解释器模式/">解释器模式</a>
     </h1>
   
 
         
-        <a href="/blog/2019/06/13/Docker常用命令/" class="archive-article-date">
-  	<time datetime="2019-06-13T12:29:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-13</time>
+        <a href="/blog/2020/02/28/设计模式/解释器模式/" class="archive-article-date">
+  	<time datetime="2020-02-28T07:57:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-Dcoker镜像常用命令"><a href="#1-Dcoker镜像常用命令" class="headerlink" title="1.Dcoker镜像常用命令"></a>1.Dcoker镜像常用命令</h3><ul>
-<li><p>搜索镜像<br>  例如搜索包含java关键词的镜像：</p>
-<blockquote>
-<p>docker search java</p>
-</blockquote>
+        <p>解释器模式(Interpreter Pattern)提供了评估语言的语法或表达式的方式。它属于行为型模式。这种模式实现了一个表达式接口，该接口解释一个特定的上下文。这种模式被用在SQL解析、符号处理引擎等。  </p>
         
       
 
       
-    </li></ul></div>
+    </div>
     <div class="article-info article-info-index">
       
       
@@ -271,7 +256,7 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/06/13/Docker常用命令/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2020/02/28/设计模式/解释器模式/">展开全文 >></a>
         </p>
       
 
@@ -301,35 +286,28 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
 
   
-    <article id="post-hibernate-hql插入语句" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-设计模式/享元模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/06/04/hibernate-hql插入语句/">hibernate hql插入语句</a>
+      <a class="article-title" href="/blog/2020/02/28/设计模式/享元模式/">享元模式</a>
     </h1>
   
 
         
-        <a href="/blog/2019/06/04/hibernate-hql插入语句/" class="archive-article-date">
-  	<time datetime="2019-06-04T02:27:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-04</time>
+        <a href="/blog/2020/02/28/设计模式/享元模式/" class="archive-article-date">
+  	<time datetime="2020-02-28T06:54:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1.在hibernate中执行insert插入语句时需要注意的是,使用下面的方法会出现<code>antlr.NoViableAltException: unexpected token: values</code>异常：</p>
-<blockquote>
-<p>Session session = sessionFactory.openSession();<br>String hql = “insert into User(name,age)values(?,?)”;<br>session.createQuery(hql).setParameter(0,”xxxx”).setParameter(1,20).executeUpdate();</p>
-</blockquote>
-<p>2.解决办法,使用createSQLQuery方法执行insert语句：</p>
-<blockquote>
-<p>session.createSQLQuery(hql).setParameter(0,”xxxx”).setParameter(1,20).executeUpdate();</p>
-</blockquote>
-
+        <p>享元模式(Flyweight Pattern)主要用于减少创建对象的数量，以减少内存占用和提高性能。这种类型的设计模式属于结构型模式，他提供了减少对象数量从而改变所需的对象结构的方式。<br>享元模式尝试重用现有的对象，如果未找到匹配的对象，则创建新的对象。  </p>
+        
       
 
       
@@ -341,7 +319,7 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/06/04/hibernate-hql插入语句/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2020/02/28/设计模式/享元模式/">展开全文 >></a>
         </p>
       
 
@@ -371,6 +349,451 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
 
   
+    <article id="post-设计模式/中介者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/02/27/设计模式/中介者模式/">中介者模式</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2020/02/27/设计模式/中介者模式/" class="archive-article-date">
+  	<time datetime="2020-02-27T13:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>中介者模式(Mediator Pattern)又叫做调停者模式，是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合，使代码易于维护。中介者模式属于行为型模式。  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2020/02/27/设计模式/中介者模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-设计模式/职责链模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/02/27/设计模式/职责链模式/">职责链模式</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2020/02/27/设计模式/职责链模式/" class="archive-article-date">
+  	<time datetime="2020-02-27T03:47:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>职责链模式又称责任链模式(Chain Responsibility Pattern)为请求创建了一个接收对象的链。这种模式给予请求的类型，对请求的发送者和接收者进行解耦。这种类型的设计属于行为型模式。<br>在这种模式中，通常每个接收者都包含对另一个接收者的引用。如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接收者，以此类推。  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2020/02/27/设计模式/职责链模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-设计模式/命令模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/02/27/设计模式/命令模式/">命令模式</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2020/02/27/设计模式/命令模式/" class="archive-article-date">
+  	<time datetime="2020-02-27T02:40:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>命令模式(Command Pattern)是一种数据驱动的设计模式，它属于行为型模式。请求以命令的形式包裹在对象中，并传递给调用对象。调用对象寻找可以处理该命令的合适的对象，并把该命令传给相应的对象，该对象执行命令。  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2020/02/27/设计模式/命令模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-设计模式/桥接模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/02/26/设计模式/桥接模式/">桥接模式</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2020/02/26/设计模式/桥接模式/" class="archive-article-date">
+  	<time datetime="2020-02-26T07:55:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>桥接(Bridge)模式是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型模式，它是通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。<br>这种模式涉及到一个作为桥接的接口，使得实体类的功能独立于接口实现类，这两种类型的类可被结构化改变而互不影响。  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2020/02/26/设计模式/桥接模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-设计模式/迭代器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/02/26/设计模式/迭代器模式/">迭代器模式</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2020/02/26/设计模式/迭代器模式/" class="archive-article-date">
+  	<time datetime="2020-02-26T06:05:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>迭代器模式(Iterator Pattern)是Java和.Net编程环境中非常常用的设计模式。这种模式用于顺序访问集合对象的元素，不需要知道集合对象的底层表示。<br>迭代器模式属于行为型模式。  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2020/02/26/设计模式/迭代器模式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-排序算法之基数排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/02/22/排序算法之基数排序/">排序算法之基数排序</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2020/02/22/排序算法之基数排序/" class="archive-article-date">
+  	<time datetime="2020-02-22T06:40:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>基数排序（radix sort）属于”分配式排序”（distribution sort），又称”桶子法”（bucket sort或bin sort），顾名思义，它是透过键值的部分资讯，将要排序的元素分配至某些”桶”中，藉以达到排序的作用，基数排序法是属于稳定性的排序，其时间复杂度为O (nlog(r)m)，其中r为所采取的基数，而m为堆数，在某些时候，基数排序法的效率高于其它的稳定性排序法。  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2020/02/22/排序算法之基数排序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-排序算法之桶排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/02/22/排序算法之桶排序/">排序算法之桶排序</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2020/02/22/排序算法之桶排序/" class="archive-article-date">
+  	<time datetime="2020-02-22T06:40:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>桶排序同样是一种线性时间的排序算法。类似于计数排序所创建的统计数组，桶排序需要创建若干个桶来协助排序。  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2020/02/22/排序算法之桶排序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/8/">8</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -381,7 +804,7 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 I12SY
+    		&copy; 2020 I12SY
     	</div>
       	<div class="footer-right">
       		
