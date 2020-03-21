@@ -160,63 +160,27 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-重写equals-为什么需要重写hashcode" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-设计模式/工厂方法模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/14/重写equals-为什么需要重写hashcode/">重写equals,为什么需要重写hashcode</a>
+      <a class="article-title" href="/blog/2019/08/28/设计模式/工厂方法模式/">工厂方法模式</a>
     </h1>
   
 
         
-        <a href="/blog/2019/08/14/重写equals-为什么需要重写hashcode/" class="archive-article-date">
-  	<time datetime="2019-08-14T13:53:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-14</time>
+        <a href="/blog/2019/08/28/设计模式/工厂方法模式/" class="archive-article-date">
+  	<time datetime="2019-08-28T15:58:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-首先看一个例子-不考虑重写hashcode的情况"><a href="#1-首先看一个例子-不考虑重写hashcode的情况" class="headerlink" title="1.首先看一个例子,不考虑重写hashcode的情况"></a>1.首先看一个例子,不考虑重写hashcode的情况</h3><pre><code>import java.util.HashMap;
-import java.util.Objects;
-
-public class Test {
-    public static void main(String[] args) {
-        Student s1 = new Student(&quot;张三&quot;,18,&quot;123456789&quot;);
-        Student s2 = new Student(&quot;张三&quot;,18,&quot;123456789&quot;);
-        System.out.println(s1.equals(s2));
-        System.out.println(s1.hashCode());
-        System.out.println(s2.hashCode());
-        HashMap&lt;Student, String&gt; map = new HashMap&lt;&gt;();
-        map.put(s1, &quot;123&quot;);
-        map.put(s2, &quot;456&quot;);
-        System.out.println(map.get(s1));
-        System.out.println(map.get(s2));
-    }
-}
-class Student{
-    private String name;
-    private  int age;
-    private  String QQ;
-
-    public Student(String name, int age, String qQ) {
-        this.name = name;
-        this.age = age;
-        QQ = qQ;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(this == obj) return true;
-        if(obj == null || getClass() != obj.getClass()) return false;
-        Student student = (Student)obj;
-        return Objects.equals(name, student.name) &amp;&amp; age==student.age 
-                &amp;&amp; Objects.equals(QQ, student.QQ);
-    }
-}</code></pre>
+        <h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h2><p>工厂方法模式（FACTORY METHOD），又称工厂模式、多态工厂模式和虚拟构造器模式，通过定义工厂父类负责定义创建对象的公共接口，而子类负责生成具体的对象。  </p>
         
       
 
@@ -229,7 +193,7 @@ class Student{
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/14/重写equals-为什么需要重写hashcode/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2019/08/28/设计模式/工厂方法模式/">展开全文 >></a>
         </p>
       
 
@@ -259,38 +223,27 @@ class Student{
 
 
   
-    <article id="post-JAVA基础知识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-设计模式/简单工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/14/JAVA基础知识/">JAVA基础知识</a>
+      <a class="article-title" href="/blog/2019/08/28/设计模式/简单工厂模式/">简单工厂模式</a>
     </h1>
   
 
         
-        <a href="/blog/2019/08/14/JAVA基础知识/" class="archive-article-date">
-  	<time datetime="2019-08-14T13:42:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-14</time>
+        <a href="/blog/2019/08/28/设计模式/简单工厂模式/" class="archive-article-date">
+  	<time datetime="2019-08-28T09:01:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-如果main方法被声明为private会怎样？"><a href="#1-如果main方法被声明为private会怎样？" class="headerlink" title="1.如果main方法被声明为private会怎样？"></a>1.如果main方法被声明为private会怎样？</h3><blockquote>
-<p>能正常编译，但运行的时候会提示”main方法不是public的”或者说在类XXX中找不到 main 方法, 请将 main 方法定义为:public static void main(String[] args)。</p>
-</blockquote>
-<h3 id="2-如果去掉了main方法的static修饰符会怎样？"><a href="#2-如果去掉了main方法的static修饰符会怎样？" class="headerlink" title="2.如果去掉了main方法的static修饰符会怎样？"></a>2.如果去掉了main方法的static修饰符会怎样？</h3><blockquote>
-<p>能正常编译，但是会提示方法不是类XXX中的static, 请将 main 方法定义为:public static void main(String[] args)。</p>
-</blockquote>
-<h3 id="3-Java里的传引用和传值的区别是什么？"><a href="#3-Java里的传引用和传值的区别是什么？" class="headerlink" title="3.Java里的传引用和传值的区别是什么？"></a>3.Java里的传引用和传值的区别是什么？</h3><blockquote>
-<p>传引用是指传递的是地址而不是值本身，传值则是传递值的一份拷贝。</p>
-</blockquote>
-<h3 id="4-如果要重写一个对象的equals方法，还要考虑什么？"><a href="#4-如果要重写一个对象的equals方法，还要考虑什么？" class="headerlink" title="4.如果要重写一个对象的equals方法，还要考虑什么？"></a>4.如果要重写一个对象的equals方法，还要考虑什么？</h3><blockquote>
-<p>考虑hashcode。<a href="/blog/2019/08/14/重写equals-为什么需要重写hashcode/" target="_blank"> &gt;&gt;更多</a></p>
-</blockquote>
+        <h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h2><p>简单工厂模式是属于创建型模式，又叫做静态工厂方法（Static Factory Method）模式，但不属于23种GOF设计模式之一。简单工厂模式是由一个工厂对象决定创建出哪一种产品类的实例。简单工厂模式是工厂模式家族中最简单实用的模式，可以理解为是不同工厂模式的一个特殊实现。  </p>
         
       
 
@@ -303,7 +256,7 @@ class Student{
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/14/JAVA基础知识/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2019/08/28/设计模式/简单工厂模式/">展开全文 >></a>
         </p>
       
 
@@ -333,38 +286,27 @@ class Student{
 
 
   
-    <article id="post-Dockerfile常用指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-设计模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/06/13/Dockerfile常用指令/">Dockerfile常用指令</a>
+      <a class="article-title" href="/blog/2019/08/28/设计模式/">设计模式</a>
     </h1>
   
 
         
-        <a href="/blog/2019/06/13/Dockerfile常用指令/" class="archive-article-date">
-  	<time datetime="2019-06-13T14:46:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-13</time>
+        <a href="/blog/2019/08/28/设计模式/" class="archive-article-date">
+  	<time datetime="2019-08-28T08:50:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-ADD复制文件"><a href="#1-ADD复制文件" class="headerlink" title="1.ADD复制文件"></a>1.ADD复制文件</h3><pre><code>格式：
-ADD &lt;src&gt;... &lt;dest&gt;  
-ADD [&quot;&lt;src&gt;&quot;,... &quot;&lt;dest&gt;&quot;]
-从src目录复制文件到容器的dest。其中src可以是Dockerfile所在目录的相对路径，也可以是一个URL，还可以是一个压缩包
-注意：
-    1.src必须在构建的上下文内，不能使用例如：ADD ../something /something这样的命令，因为docker build命令会首先将上下文路径和其子目录发送到docker daemon。
-    2.如果src是一个URL，同时dest不以斜杆结尾，dest将会被视为文件，src对应内容文件将会被下载到dest。
-    3.如果src是一个URL，同时dest以斜杆结尾，dest将被视为目录，src对应内容将会被下载到dest目录。
-    4.如果src是一个URL，那么整个目录下的内容将会被复制，包括文件系统元数据。
-    5.如果文件是可识别的压缩包格式，则docker会自动解压。
-示例：
-ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
+        <p>使用设计模式可以使得程序更加的灵活，容易修改，并且易于复用。  </p>
         
       
 
@@ -377,7 +319,7 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/06/13/Dockerfile常用指令/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2019/08/28/设计模式/">展开全文 >></a>
         </p>
       
 
@@ -407,31 +349,109 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
 
   
-    <article id="post-Docker常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-给一整型变量，写两段代码，第一个设置a的bit3为1，其他bit不变，怎么实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/06/13/Docker常用命令/">Docker常用命令</a>
+      <a class="article-title" href="/blog/2019/08/28/给一整型变量，写两段代码，第一个设置a的bit3为1，其他bit不变，怎么实现/">给一整型变量a，写两段代码，第一个设置a的bit3，第二个清除a的bit3.“a的bit3”</a>
     </h1>
   
 
         
-        <a href="/blog/2019/06/13/Docker常用命令/" class="archive-article-date">
-  	<time datetime="2019-06-13T12:29:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-13</time>
+        <a href="/blog/2019/08/28/给一整型变量，写两段代码，第一个设置a的bit3为1，其他bit不变，怎么实现/" class="archive-article-date">
+  	<time datetime="2019-08-28T08:09:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-Dcoker镜像常用命令"><a href="#1-Dcoker镜像常用命令" class="headerlink" title="1.Dcoker镜像常用命令"></a>1.Dcoker镜像常用命令</h3><ul>
-<li><p>搜索镜像<br>  例如搜索包含java关键词的镜像：</p>
-<blockquote>
-<p>docker search java</p>
-</blockquote>
+        <p>|操作,当操作数为1时,结果为1,当操作数为0时,结果不变.<br>&amp;操作,当操作数为1时,结果不变,当操作数为0时,结果为0  </p>
+<p>这个a是一个整形的,占8位,所以bit3应该是第三位。因为是从第零位开始计算的。  </p>
+<p>因此：设置a的bit3为1的方法就是将a和00001000作|操作,这样其他位都不变,只有第3位变成1。<br>清除a的bit3的方法就是将a和11110111作&amp;操作,这样第3位变成0,其他位不变。</p>
+<p>所以最终结果应该是：</p>
+<pre><code>#define BIT3 (0x1&lt;&lt;3) 
+static int a; 
+void set_bit3(void) 
+{ 
+    a |= BIT3; 
+} 
+void clear_bit3(void) 
+{ 
+    a &amp;= ~BIT3; 
+}   </code></pre><p>bit0 = 0x1&lt;&lt;0 = 0001<br>bit1 = 0x1&lt;&lt;1 = 0010<br>bit2 = 0x1&lt;&lt;2 = 0100<br>bit3 = 0x1&lt;&lt;3 = 1000<br>…</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/08/28/给一整型变量，写两段代码，第一个设置a的bit3为1，其他bit不变，怎么实现/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-transient关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/08/28/transient关键字/">transient关键字(转载整理)</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/08/28/transient关键字/" class="archive-article-date">
+  	<time datetime="2019-08-28T06:29:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>transient变量不会进行序列化。例如一个实现Serializable接口的类在序列化到ObjectStream的时候，transient类型的变量不会被写入流中，同时，反序列化回来的时候，对应变量的值为null。</strong>   </p>
+<p><strong>阅读目录</strong>  </p>
+<ul>
+<li><a href="#Serializable" title="#Serializable">先解释下java中的对象序列化</a></li>
+<li><a href="#transient" title="#transient">关于transient关键字</a></li>
+<li><a href="#example" title="#example">举个例子</a></li>
+<li><a href="#reference" title="#reference">参考资料</a>
         
       
 
@@ -444,7 +464,7 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/06/13/Docker常用命令/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2019/08/28/transient关键字/">展开全文 >></a>
         </p>
       
 
@@ -474,34 +494,164 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
 
   
-    <article id="post-hibernate-hql插入语句" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-StringTokenizer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/06/04/hibernate-hql插入语句/">hibernate hql插入语句</a>
+      <a class="article-title" href="/blog/2019/08/27/StringTokenizer/">StringTokenizer</a>
     </h1>
   
 
         
-        <a href="/blog/2019/06/04/hibernate-hql插入语句/" class="archive-article-date">
-  	<time datetime="2019-06-04T02:27:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-04</time>
+        <a href="/blog/2019/08/27/StringTokenizer/" class="archive-article-date">
+  	<time datetime="2019-08-27T15:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1.在hibernate中执行insert插入语句时需要注意的是,使用下面的方法会出现<code>antlr.NoViableAltException: unexpected token: values</code>异常：</p>
+        <p>StringTokenizer是一个用来分割字符串的工具类。<br>原文链接：<a href="https://www.cnblogs.com/gnivor/p/4509268.html" target="_blank" rel="noopener">https://www.cnblogs.com/gnivor/p/4509268.html</a></p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/08/27/StringTokenizer/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-synchronized修饰static方法与非static方法的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/08/27/synchronized修饰static方法与非static方法的区别/">synchronized修饰static方法与非static方法的区别</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/08/27/synchronized修饰static方法与非static方法的区别/" class="archive-article-date">
+  	<time datetime="2019-08-27T14:41:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文链接：<a href="https://www.cnblogs.com/ktao/p/8593914.html" target="_blank" rel="noopener">https://www.cnblogs.com/ktao/p/8593914.html</a>  </p>
+<p>1.当synchronized修饰一个static方法时，多线程下，获取的是类锁（即Class本身，注意：不是实例），作用范围是整个静态方法，作用的对象是这个类的所有对象。<br>2.当synchronized修饰一个非static方法时，多线程下，获取的是对象锁（即类的实例对象），作用范围是整个方法，作用对象是调用该方法的对象。  </p>
+<p><strong>结论：类锁和对象锁不同，他们之间不会产生互斥。</strong>  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/08/27/synchronized修饰static方法与非static方法的区别/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-原地交换两个变量的值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/08/27/原地交换两个变量的值/">原地交换两个变量的值</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/08/27/原地交换两个变量的值/" class="archive-article-date">
+  	<time datetime="2019-08-27T09:39:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>就以int a=5,b=10;为例子：  </p>
+<p><strong>第一种方法，也是最常见的一种方法</strong>  </p>
 <blockquote>
-<p>Session session = sessionFactory.openSession();<br>String hql = “insert into User(name,age)values(?,?)”;<br>session.createQuery(hql).setParameter(0,”xxxx”).setParameter(1,20).executeUpdate();</p>
+<p>int a=5,b=10;a=a+b; b=a-b; a=a-b;  </p>
 </blockquote>
-<p>2.解决办法,使用createSQLQuery方法执行insert语句：</p>
+<p><strong>第二种方法，使用异或操作，第一种方法还可能会引起溢出</strong>  </p>
 <blockquote>
-<p>session.createSQLQuery(hql).setParameter(0,”xxxx”).setParameter(1,20).executeUpdate();</p>
+<p>a = a ^ b;<br>b = a ^ b;<br>a = a ^ b;  </p>
 </blockquote>
+<p>异或的运算规律：两个操作数的位中，相同则结果为0，不同则结果为1。<br>例子中a=5的二进制码为：0101，b=10的二进制码为：1010，因此<br>a=a^b=0101 ^ 1010 = 1111<br>b=a^b=1111 ^ 1010 = 0101  ===&gt;5<br>a=a^b=1111 ^ 0101 = 1010  ===&gt;10</p>
 
       
 
@@ -514,7 +664,152 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/06/04/hibernate-hql插入语句/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2019/08/27/原地交换两个变量的值/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-怎么理解变量-变量是什么" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/08/27/怎么理解变量-变量是什么/">怎么理解变量(变量是什么)</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/08/27/怎么理解变量-变量是什么/" class="archive-article-date">
+  	<time datetime="2019-08-27T08:00:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>变量是一块命名的内存区域，以便程序进行访问。变量用来存储数据，随着程序的运行，存储的数据也可能跟着改变。  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/08/27/怎么理解变量-变量是什么/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-0xffffffff是多少" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/08/26/0xffffffff是多少/">0xffffffff是多少?</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/08/26/0xffffffff是多少/" class="archive-article-date">
+  	<time datetime="2019-08-26T14:47:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>0x表示16进制，所以0xffffffff表示的是一个十六进制数</strong>  </p>
+<p>1.将其转为二进制数时，其中f对应的十进制数为15，则对应的二进制是：1111，所以<br>0xffffffff = 1111 1111 1111 1111 1111 1111 1111 1111  </p>
+<p>2.转为十进制  </p>
+<ul>
+<li><p><strong>只是简单的把它当做一个普通的二进制数的话，对应的结果为4294967295</strong>  </p>
+<blockquote>
+<p>0xffffffff = 15x16<sup>7</sup>+15x16<sup>6</sup>+…+15x16<sup>0</sup>=4294967295  </p>
+</blockquote>
+</li>
+<li><p><strong>当它作为一个数的机器数的原码时，对应的结果为-2147483647</strong>  </p>
+<blockquote>
+<p>因为f对应二进制码为：1111，最高位为1，表示他是一个负数，那么他的结果应为0x7fffffff(0111 1111 1111 1111 1111 1111 1111 1111)的十进制数的负数。其中0x7fffffff转为十进制数时的结果为2147483647，所以当把0xffffffff作为机器数的原码时对应的结果为-2147483647  </p>
+</blockquote>
+</li>
+<li><p><strong>当把它作为一个补码时，对应的结果为-1</strong>  </p>
+<blockquote>
+<p>0xffffffff = [1111 1111 1111 1111 1111 1111 1111 1111]<sub>补</sub>=[1111 1111 1111 1111 1111 1111 1111 1110]<sub>反</sub>=[1000 0000 0000 0000 0000 0000 0000 0001]<sub>原</sub>=-1</p>
+</blockquote>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/08/26/0xffffffff是多少/">展开全文 >></a>
         </p>
       
 
@@ -546,7 +841,7 @@ ADD microservice-discovery-eureka-0.0.1-SNAPSHOT.jar app.jar</code></pre>
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/blog/page/7/">&laquo; Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><a class="page-number" href="/blog/page/7/">7</a><span class="page-number current">8</span>
+      <a class="extend prev" rel="prev" href="/blog/page/7/">&laquo; Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><a class="page-number" href="/blog/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/blog/page/9/">9</a><a class="page-number" href="/blog/page/10/">10</a><a class="extend next" rel="next" href="/blog/page/9/">Next &raquo;</a>
     </nav>
   
 

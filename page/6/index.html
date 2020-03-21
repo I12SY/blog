@@ -160,377 +160,613 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-transient关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/28/transient关键字/">transient关键字(转载整理)</a>
+      <a class="article-title" href="/blog/2020/01/08/排序算法/">排序算法</a>
     </h1>
   
 
         
-        <a href="/blog/2019/08/28/transient关键字/" class="archive-article-date">
-  	<time datetime="2019-08-28T06:29:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
+        <a href="/blog/2020/01/08/排序算法/" class="archive-article-date">
+  	<time datetime="2020-01-08T02:42:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>transient变量不会进行序列化。例如一个实现Serializable接口的类在序列化到ObjectStream的时候，transient类型的变量不会被写入流中，同时，反序列化回来的时候，对应变量的值为null。</strong>   </p>
-<p><strong>阅读目录</strong>  </p>
+        <p>按时间复杂度的不同，主流的排序算法可分为3大类。  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2020/01/08/排序算法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-优先队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/01/06/优先队列/">优先队列</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2020/01/06/优先队列/" class="archive-article-date">
+  	<time datetime="2020-01-06T07:25:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先我们可以知道一点，队列的特点是<strong>先进先出(FIFO)</strong>。入队时，新元素置于队尾；出队时，队头元素先被移出。<br>但优先队列不再遵循先入先出的原则，而是分为两种情况。<br><strong>最大优先队列，无论入队顺序如何，都是当前最大元素优先出队</strong><br><strong>最小优先队列，无论入队顺序如何，都是当前最小元素优先出队</strong>  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2020/01/06/优先队列/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-二叉堆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/01/03/二叉堆/">二叉堆</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2020/01/03/二叉堆/" class="archive-article-date">
+  	<time datetime="2020-01-03T08:59:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-什么是二叉堆？"><a href="#1-什么是二叉堆？" class="headerlink" title="1.什么是二叉堆？"></a>1.什么是二叉堆？</h2><p>二叉堆本质上是一种完全二叉树，它分为两个类型：<br><strong>1.最大堆</strong><br><strong>2.最小堆</strong>  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2020/01/03/二叉堆/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-二叉树的遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/12/31/二叉树的遍历/">二叉树的遍历</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/12/31/二叉树的遍历/" class="archive-article-date">
+  	<time datetime="2019-12-31T07:37:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在计算机中，遍历本身是一个线性操作。所以遍历同样具有线性结构的数组或链表，是一件轻而易举的事情。反观二叉树，是典型的非线性数据结构，遍历时需要把非线性关联的节点转化成一个线性序列，以不同的方式来遍历，遍历出的序列顺序也不同。  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/12/31/二叉树的遍历/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构基础之树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/12/30/数据结构基础之树/">数据结构基础之树</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/12/30/数据结构基础之树/" class="archive-article-date">
+  	<time datetime="2019-12-30T08:37:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-什么是树？"><a href="#1-什么是树？" class="headerlink" title="1.什么是树？"></a>1.什么是树？</h2><p><strong>树是n个节点的有限集，有且仅有一个特定的称为根的节点。当n&gt;1时，其余节点可分为m个互不相交的有限集，每一个集合本身又是一个树，并称为根的子树。</strong>  </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/12/30/数据结构基础之树/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构基础之散列表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/12/27/数据结构基础之散列表/">数据结构基础之散列表</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/12/27/数据结构基础之散列表/" class="archive-article-date">
+  	<time datetime="2019-12-27T07:59:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-什么是散列表？"><a href="#1-什么是散列表？" class="headerlink" title="1.什么是散列表？"></a>1.什么是散列表？</h2><blockquote>
+<p>散列表也叫哈希表，是存储Key-Value映射的集合。对于某一个Key，散列表可以在接近O(1)的时间内进行读写操作。散列表通过哈希函数实现Key和数组下标的转换，通过开放寻址法和链表法来解决哈希冲突。  </p>
+</blockquote>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/12/27/数据结构基础之散列表/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构基础之栈与队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/12/26/数据结构基础之栈与队列/">数据结构基础之栈与队列</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/12/26/数据结构基础之栈与队列/" class="archive-article-date">
+  	<time datetime="2019-12-26T13:49:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>栈与队列属于逻辑结构（逻辑结构是抽象的概念，它依赖于物理结构而存在），它们的物理实现既可以利用数组,也可以利用链表来完成。</strong>   </p>
+<h2 id="1-什么是栈？"><a href="#1-什么是栈？" class="headerlink" title="1.什么是栈？"></a>1.什么是栈？</h2><p>首先举一个我们生活中的例子（羽毛球筒）：    </p>
+<blockquote>
+<p>假如我们有一个又细又长的圆筒，圆筒一端封闭，另一端开口。往圆筒里面放入羽毛球，先放入的靠近圆筒底部，后放入的靠近圆筒入口。<br>那么，要想取出这些羽毛球，则只能按照和放入顺序相反的顺序来取，先取出后放入的，再取出先放入的，而不可能把最里面最先放入的羽毛球优先取出来。</p>
+</blockquote>
+<blockquote>
+<p>栈是一种线性逻辑结构，可以利用数组实现，也可以利用链表来实现。栈包含入栈和出栈操作，遵循<strong>先入后出</strong>（First In Last Out，简称FILO）的原则。最早放入的元素称为<strong>栈底（bottom）</strong>，最后进入的元素存放的位置叫做<strong>栈顶（top）</strong>。 </p>
+</blockquote>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/12/26/数据结构基础之栈与队列/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构基础之链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/12/26/数据结构基础之链表/">数据结构基础之链表</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/12/26/数据结构基础之链表/" class="archive-article-date">
+  	<time datetime="2019-12-26T13:48:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-什么是链表？"><a href="#1-什么是链表？" class="headerlink" title="1.什么是链表？"></a>1.什么是链表？</h2><blockquote>
+<p>链表是一种链式数据结构，由若干个节点组成，每个节点包含指向下一节点的指针。链表的物理存储方式是随机存储，访问方式是顺序访问。查找链表节点的时间复杂度是O(n)，中间插入、删除节点的时间复杂度是O(1)。</p>
+</blockquote>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/12/26/数据结构基础之链表/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构基础之数组" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/12/26/数据结构基础之数组/">数据结构基础之数组</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/12/26/数据结构基础之数组/" class="archive-article-date">
+  	<time datetime="2019-12-26T13:45:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-什么是数组？"><a href="#1-什么是数组？" class="headerlink" title="1.什么是数组？"></a>1.什么是数组？</h2><blockquote>
+<p>数组对应的英文是array，是由有限个相同类型的变量所组成的有序集合，数组中的每一个变量被称为元素。数组是最为简单、最为常用的数据结构。它的物理存储方式是顺序存储。访问方式是随机访问。利用数组下标查找数组元素的时间复杂度是O(1)，中间插入、删除数组元素的时间复杂度是O(n)。</p>
+</blockquote>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/12/26/数据结构基础之数组/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/12/14/数据结构基础/">数据结构基础</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/12/14/数据结构基础/" class="archive-article-date">
+  	<time datetime="2019-12-14T06:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>传送门</strong></p>
 <ul>
-<li><a href="#Serializable" title="#Serializable">先解释下java中的对象序列化</a></li>
-<li><a href="#transient" title="#transient">关于transient关键字</a></li>
-<li><a href="#example" title="#example">举个例子</a></li>
-<li><a href="#reference" title="#reference">参考资料</a>
-        
-      
-
-      
-    </li></ul></div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/28/transient关键字/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-StringTokenizer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/27/StringTokenizer/">StringTokenizer</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/27/StringTokenizer/" class="archive-article-date">
-  	<time datetime="2019-08-27T15:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>StringTokenizer是一个用来分割字符串的工具类。<br>原文链接：<a href="https://www.cnblogs.com/gnivor/p/4509268.html" target="_blank" rel="noopener">https://www.cnblogs.com/gnivor/p/4509268.html</a></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/27/StringTokenizer/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-synchronized修饰static方法与非static方法的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/27/synchronized修饰static方法与非static方法的区别/">synchronized修饰static方法与非static方法的区别</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/27/synchronized修饰static方法与非static方法的区别/" class="archive-article-date">
-  	<time datetime="2019-08-27T14:41:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文链接：<a href="https://www.cnblogs.com/ktao/p/8593914.html" target="_blank" rel="noopener">https://www.cnblogs.com/ktao/p/8593914.html</a>  </p>
-<p>1.当synchronized修饰一个static方法时，多线程下，获取的是类锁（即Class本身，注意：不是实例），作用范围是整个静态方法，作用的对象是这个类的所有对象。<br>2.当synchronized修饰一个非static方法时，多线程下，获取的是对象锁（即类的实例对象），作用范围是整个方法，作用对象是调用该方法的对象。  </p>
-<p><strong>结论：类锁和对象锁不同，他们之间不会产生互斥。</strong>  </p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/27/synchronized修饰static方法与非static方法的区别/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-原地交换两个变量的值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/27/原地交换两个变量的值/">原地交换两个变量的值</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/27/原地交换两个变量的值/" class="archive-article-date">
-  	<time datetime="2019-08-27T09:39:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>就以int a=5,b=10;为例子：  </p>
-<p><strong>第一种方法，也是最常见的一种方法</strong>  </p>
-<blockquote>
-<p>int a=5,b=10;a=a+b; b=a-b; a=a-b;  </p>
-</blockquote>
-<p><strong>第二种方法，使用异或操作，第一种方法还可能会引起溢出</strong>  </p>
-<blockquote>
-<p>a = a ^ b;<br>b = a ^ b;<br>a = a ^ b;  </p>
-</blockquote>
-<p>异或的运算规律：两个操作数的位中，相同则结果为0，不同则结果为1。<br>例子中a=5的二进制码为：0101，b=10的二进制码为：1010，因此<br>a=a^b=0101 ^ 1010 = 1111<br>b=a^b=1111 ^ 1010 = 0101  ===&gt;5<br>a=a^b=1111 ^ 0101 = 1010  ===&gt;10</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/27/原地交换两个变量的值/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-怎么理解变量-变量是什么" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/27/怎么理解变量-变量是什么/">怎么理解变量(变量是什么)</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/27/怎么理解变量-变量是什么/" class="archive-article-date">
-  	<time datetime="2019-08-27T08:00:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>变量是一块命名的内存区域，以便程序进行访问。变量用来存储数据，随着程序的运行，存储的数据也可能跟着改变。  </p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/27/怎么理解变量-变量是什么/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-0xffffffff是多少" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/26/0xffffffff是多少/">0xffffffff是多少?</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/26/0xffffffff是多少/" class="archive-article-date">
-  	<time datetime="2019-08-26T14:47:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>0x表示16进制，所以0xffffffff表示的是一个十六进制数</strong>  </p>
-<p>1.将其转为二进制数时，其中f对应的十进制数为15，则对应的二进制是：1111，所以<br>0xffffffff = 1111 1111 1111 1111 1111 1111 1111 1111  </p>
-<p>2.转为十进制  </p>
-<ul>
-<li><p><strong>只是简单的把它当做一个普通的二进制数的话，对应的结果为4294967295</strong>  </p>
-<blockquote>
-<p>0xffffffff = 15x16<sup>7</sup>+15x16<sup>6</sup>+…+15x16<sup>0</sup>=4294967295  </p>
-</blockquote>
-</li>
-<li><p><strong>当它作为一个数的机器数的原码时，对应的结果为-2147483647</strong>  </p>
-<blockquote>
-<p>因为f对应二进制码为：1111，最高位为1，表示他是一个负数，那么他的结果应为0x7fffffff(0111 1111 1111 1111 1111 1111 1111 1111)的十进制数的负数。其中0x7fffffff转为十进制数时的结果为2147483647，所以当把0xffffffff作为机器数的原码时对应的结果为-2147483647  </p>
-</blockquote>
-</li>
-<li><p><strong>当把它作为一个补码时，对应的结果为-1</strong>  </p>
-<blockquote>
-<p>0xffffffff = [1111 1111 1111 1111 1111 1111 1111 1111]<sub>补</sub>=[1111 1111 1111 1111 1111 1111 1111 1110]<sub>反</sub>=[1000 0000 0000 0000 0000 0000 0000 0001]<sub>原</sub>=-1</p>
-</blockquote>
-</li>
+<li>1.<a href="/blog/2019/12/26/数据结构基础之数组/" target="_blank">数组</a></li>
+<li>2.<a href="/blog/2019/12/26/数据结构基础之链表/" target="_blank">链表</a></li>
+<li>3.<a href="/blog/2019/12/26/数据结构基础之栈与队列/" target="_blank">栈与队列</a></li>
+<li>4.<a href="/blog/2019/12/27/数据结构基础之散列表/" target="_blank">散列表</a></li>
+<li>5.<a href="/blog/2019/12/30/数据结构基础之树/" target="_blank">树</a></li>
 </ul>
 
       
@@ -544,263 +780,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/26/0xffffffff是多少/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-原码，反码，补码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/24/原码，反码，补码/">原码，反码，补码</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/24/原码，反码，补码/" class="archive-article-date">
-  	<time datetime="2019-08-23T16:20:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在上一篇java整型的溢出问题的文章中涉及到了原码，反码，补码的知识，这篇文章就来讲讲这些东西。<br>原文出处：<a href="http://www.cnblogs.com/zhangziqiu/" target="_blank" rel="noopener">http://www.cnblogs.com/zhangziqiu/</a>   </p>
-<h2 id="一-机器数和真值"><a href="#一-机器数和真值" class="headerlink" title="一.机器数和真值"></a>一.机器数和真值</h2><p>在学习原码，反码和补码之前，需要先了解机器数和真值的概念。 </p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/24/原码，反码，补码/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java整形溢出和下溢问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/23/java整形溢出和下溢问题/">java整型溢出和下溢问题(转载整理)</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/23/java整形溢出和下溢问题/" class="archive-article-date">
-  	<time datetime="2019-08-23T12:54:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>提问：java是如何处理整型溢出和下溢问题的？<br><strong>java根据类型的大小，将计算结果中的对应低阶字节存储到对应的值里面。</strong><br>这里我们以int整型为例子。<br>java中的int是32位有符号整数类型，其最大值是0x7fffffff,最小值则是0x80000000。其取值范围在-2147483648 ～ 2147483647之间。当int类型的运算结果超出了这个范围时则发生了溢出，而且不会有任何异常抛出。  </p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/23/java整形溢出和下溢问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java中的向上类型转换和向下类型转换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/22/Java中的向上类型转换和向下类型转换/">Java中的向上类型转换和向下类型转换</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/22/Java中的向上类型转换和向下类型转换/" class="archive-article-date">
-  	<time datetime="2019-08-22T07:42:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一、向上类型转换"><a href="#一、向上类型转换" class="headerlink" title="一、向上类型转换"></a>一、向上类型转换</h3><blockquote>
-<p>通俗地讲即是将子类对象转为父类对象。此处父类对象可以是接口。</p>
-</blockquote>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/22/Java中的向上类型转换和向下类型转换/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java中native的用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/21/java中native的用法/">java中native的用法</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/21/java中native的用法/" class="archive-article-date">
-  	<time datetime="2019-08-21T06:52:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在看java源码时，我们有时能看见用native关键字声明的方法：<br>public native String intern();</p>
-<p><strong>那么native方法是什么?</strong><br>native方法是非java代码实现的方法。<br>native关键字修饰一个方法，那么说明这个方法是一个原生态方法，方法对应的实现不是在当前文件，而是在用其他语言（例如C和C++）实现的文件中。java语言本身不能对操作系统底层进行访问和操作，但是可用过JNI接口调用其他语言来实现对底层的访问。<br>JNI是java本地接口(Java Native Interface)，是一个本地编程接口，他是java软件开发工具箱(Java Software Development Kit,SDK)的一部分。JNI允许java代码使用以其他语言编写的代码和代码库。Invocation API（JNI的一部分）可以用来将Java虚拟机（JVM）嵌入到本地应用程序中，从而允许程序员从本地代码内部调用Java代码。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/21/java中native的用法/">展开全文 >></a>
+          <a class="article-more-a" href="/blog/2019/12/14/数据结构基础/">展开全文 >></a>
         </p>
       
 
@@ -832,7 +812,7 @@ var _hmt = _hmt || [];
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/blog/page/5/">&laquo; Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><a class="page-number" href="/blog/page/8/">8</a><a class="extend next" rel="next" href="/blog/page/7/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/blog/page/5/">&laquo; Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><a class="page-number" href="/blog/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/10/">10</a><a class="extend next" rel="next" href="/blog/page/7/">Next &raquo;</a>
     </nav>
   
 
