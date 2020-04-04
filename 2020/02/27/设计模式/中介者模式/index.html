@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>中介者模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="中介者模式(Mediator Pattern)又叫做调停者模式，是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合，使代码易于维护。中介者模,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">中介者模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">中介者模式</h1>
+        <div class="stuff">
+            <span>二月 27, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>中介者模式(Mediator Pattern)又叫做调停者模式，是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合，使代码易于维护。中介者模式属于行为型模式。  </p>
+<a id="more"></a>  
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>用一个中介对象来封装一系列的对象交互，中介者使各对象不需要显示地相互交互，从而使其耦合松散，而且可以独立的改变他们之间的交互。<br><strong>主要解决：</strong>对象与对象之间存在大量的关联关系，这样势必会导致系统的结构变得复杂很多，同时若一个对象发生改变，我们也需要跟踪与之相关联的对象，同时做出相应的处理。<br><strong>何时使用：</strong>多个类相互耦合，形成了网状结构。<br><strong>如何解决：</strong>将上述与网状结构分离为星型结构。<br><strong>关键代码：</strong>对象Colleague之间的通信封装到一个类中单独处理。<br><strong>应用实例：</strong>1、中国加入WTO之前是各个国家相互贸易，结构复杂，现在是各个国家通过WTO来相互贸易。2、机场调度系统。3、MVC框架，其中C（控制器）就是M（模型）和V（视图）的中介者。<br><strong>优点：</strong>1、降低了类的复杂度，将一对多转换成了一对一。2、各个类之间的解耦。3、符合迪米特原则。<br><strong>缺点：</strong>中介者会庞大，变得复杂难以维护。<br><strong>使用场景：</strong>1、系统中对象之间存在比较复杂的引用关系，导致它们之间的依赖关系结构混乱而且难以复用该对象。2、想通过一个中间类来封装多个类中的行为，而又不想生成太多的子类。<br><strong>注意事项：</strong>不应当在职责混乱的时候使用。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><img src="/blog/img/2020/02/28/中介者模式结构图.png">  
+
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h2><p>Mediator类 抽象中介者类  </p>
+<pre><code>public abstract class Mediator {
+
+    //定义一个抽象的发送消息方法，得到同事对象和发送信息
+    public abstract void send(String message,Colleague colleague);
+}</code></pre><p>Colleague类 抽象同事类  </p>
+<pre><code>public abstract class Colleague {
+
+    protected Mediator mediator;
+    //构造方法，得到中介者对象
+    public Colleague(Mediator mediator){
+        this.mediator=mediator;
+    }
+}</code></pre><p>ConcreteMediator类 具体中介者类  </p>
+<pre><code>public class ConcreteMediator extends Mediator {
+
+    private ConcreteColleague1 colleague1;
+    private ConcreteColleague2 colleague2;
+
+    //需要了解所有的具体同事类
+    public void setColleague1(ConcreteColleague1 colleague1){
+        this.colleague1=colleague1;
+    }
+
+    public void setColleague2(ConcreteColleague2 colleague2){
+        this.colleague2=colleague2;
+    }
+
+    @Override
+    public void send(String message, Colleague colleague) {
+        if(colleague == colleague1){
+            colleague2.Notify(message);
+        }else{
+            colleague1.Notify(message);
+        }
+    }
+
+}</code></pre><p>ConcreteColleague1和ConcreteColleague2等各种同事对象  </p>
+<pre><code>public class ConcreteColleague1 extends Colleague{
+
+    public ConcreteColleague1(Mediator mediator) {
+        super(mediator);
+    }
+
+    //发送消息时通常是中介者发送出去的
+    public void send(String message){
+        mediator.send(message, this);
+    }
+
+    public void Notify(String message){
+        System.out.println(&quot;同事1得到消息  &quot;+message);
+    }
+}
+
+class ConcreteColleague2 extends Colleague{
+
+    public ConcreteColleague2(Mediator mediator) {
+        super(mediator);
+    }
+    //发送消息时通常是中介者发送出去的
+    public void send(String message){
+        mediator.send(message, this);
+    }
+
+    public void Notify(String message){
+        System.out.println(&quot;同事2得到消息  &quot;+message);
+    }
+}</code></pre><p>客户端调用  </p>
+<pre><code>public class Client {
+
+    public static void main(String[] args) {
+        ConcreteMediator m = new ConcreteMediator();
+        //让两个具体同事认识中介者对象
+        ConcreteColleague1 c1 = new ConcreteColleague1(m);
+        ConcreteColleague2 c2 = new ConcreteColleague2(m);
+        //让中介者认识各个具体同事类对象
+        m.setColleague1(c1);
+        m.setColleague2(c2);
+
+        //具体同事类对象发送都是通过中介者转发
+        c1.send(&quot;吃过饭了吗？&quot;);
+        c2.send(&quot;没有，你打算请客？&quot;);
+    }
+}</code></pre><p>运行结果  </p>
+<pre><code>同事2得到消息  吃过饭了吗？
+同事1得到消息  没有，你打算请客？</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/mediator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/mediator-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

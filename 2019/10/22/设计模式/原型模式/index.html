@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>原型模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="原型模式(Prototype Pattern)用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，他提供了一种创建对象的最佳方式。  
+
+1.介绍意图：用原型实例指定创建对象的种,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">原型模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">原型模式</h1>
+        <div class="stuff">
+            <span>十月 22, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>原型模式(Prototype Pattern)用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，他提供了一种创建对象的最佳方式。  </p>
+<a id="more"></a>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。<br><strong>主要解决：</strong>在运行期间建立和删除原型。<br><strong>何时使用：</strong>1、当一个系统应该独立于它的产品创建，构成和表示时。2、当要实例化的类是在运行时刻指定时，例如，通过动态装载。3、为了避免创建一个与产品类层次平行的工厂类层次时。4、当一个类的实例只能有几个不同状态组合中的一种时。建立相应数目的原型并克隆它们可能比每次用合适的状态手工实例化该类更方便一些。<br><strong>如何解决：</strong>利用已有的一个原型对象，快速地生成和原型对象一样的实例。<br><strong>关键代码：</strong>1、实现克隆操作，在JAVA继承Cloneable，重写clone(),在.NET中可以使用Object类的MemberwiseClone()方法来实现对象的浅拷贝或通过序列化的方式来实现深拷贝。2、原型模式同样用于隔离类对象的使用者和具体类型(易变类)之间的耦合关系，它同样要求这些”易变类”拥有稳定的接口。<br><strong>应用实例：</strong> 1、细胞分裂。 2、JAVA中的Object Clone()方法。<br><strong>优点：</strong> 1、当创建的对象实例较为复杂的时候，使用原型模式可以简化对象的创建过程。2、扩展性好，由于写原型模式的时候使用了抽象原型类，在客户端进行编程的时候可以将具体的原型类通过配置进行读取。3、可以使用深度克隆来保存对象的状态，使用原型模式进行复制。当你需要恢复到某一时刻就直接跳到。比如我们的idea种就有历史版本，或则SVN中也有这样的操作。非常好用。<br><strong>缺点：</strong>1、配备克隆方法需要对类的功能进行通盘考虑，这对于全新的类不是很难，但对于已有的类不一定很容易，特别当一个类引用不支持串行化的间接对象，或者引用含有循环结构的时候。2、需要为每一个类配备一个克隆方法，而且该克隆方法位于一个类的里面，当对已有的类经行改造时需要修改源代码，违背了开闭原则。3、在实现深克隆的时需要编写较为复杂的代码，而且当对象之间存在多重嵌套引用的时候，为了实现深克隆，每一层对象对应的类都必须支持深克隆，实现相对麻烦。<br><strong>使用场景：</strong> 1、资源优化场景。2、类初始化需要消化非常多的资源，这个资源包括数据、硬件资源等。3、性能和安全要求的场景。4、通过new产生一个对象需要非常繁琐的数据准备或访问权限，则可以使用原型模式。5、一个对象多个修改者的场景。6、一个对象需要提供给其他对象的访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用。7、在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现，通过clone的方法创建一个对象，然后由工厂方法提供给调用者。<br><strong>注意事项：</strong>与通过对一个类进行实例化来构造新对象不同的是，原型模式是通过拷贝一个现有对象生成新对象。浅拷贝实现Cloneable，重写。深拷贝是通过实现Serializable读取二进制流。  </p>
+<p>举一个通俗的例子，来帮我们更好的理解原型模式，看过火影忍者都知道<strong>多重影分身</strong>这个东西吧。<br><img src="/blog/img/2020/01/07/多重影分身.gif"><br><br>多重影分身能够很好的体现原型模式的概念，在这里其中鸣人本体是<strong>原型对象</strong>，通过”多重影分身术”也就是原型模式（自己本身使用忍术创建），进行分身，创建<strong>新的对象</strong>！</p>
+<p>需要注意的是，创建新”分身”的人就是鸣人！这个意思就是说<strong>原型对象自己不仅是个对象还是个工厂</strong>！并且通过克隆方式<strong>创建的对象是全新的对象</strong>，他们都是有自己的新的地址，通常对克隆模式所产生的新对象（影分身）进行修改（攻击）是不会对原型对象（鸣人）造成任何影响的！，每一个克隆对象都是相对独立的，通过不同的方式克隆对象进行修改后，可以得到一系列相似但不完全相同的对象（参考多重影分身之色诱术）。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><h3 id="2-1-UML类图"><a href="#2-1-UML类图" class="headerlink" title="2.1 UML类图"></a>2.1 UML类图</h3><p><img src="/blog/img/2020/01/07/原型模式UML图.png"><br>  </p>
+<h3 id="2-2-模式组成"><a href="#2-2-模式组成" class="headerlink" title="2.2 模式组成"></a>2.2 模式组成</h3><p><strong>原型模式分三个角色，抽象类型角色，具体原型类，客户类</strong><br><strong>抽象原型类(prototype):</strong>它是声明克隆方法的接口，是所有具体原型类的<strong>公共父类</strong>，它可以是接口，抽象类甚至是一个具体的实现类。<br><strong>具体原型类(concretePrototype):</strong>它实现了抽象原型类中声明的<strong>克隆方法</strong>，在克隆方法中返回一个自己的克隆对象。<br><strong>客户类(Client):</strong>在客户类中，使用原型对象只需要<strong>通过工厂方式创建或直接NEW</strong>（实例化一个）原型对象，然后通过原型对象的克隆方法就能够获得多个相同的对象。由于客户端是针对抽象原型对象编程的所以还可以很方便的换成不同类型的原型对象。  </p>
+<h2 id="3-基本代码实现"><a href="#3-基本代码实现" class="headerlink" title="3.基本代码实现"></a>3.基本代码实现</h2><p>首先我们需要知道在原型模式中克隆分两种：<strong>浅克隆与深克隆</strong>。  </p>
+<blockquote>
+<p><strong>浅克隆：被克隆的对象的所有变量都含有与原来的对象相同的值，而所有的对其他对象的引用都仍然指向原来的对象。（或者你也可以这么理解，浅克隆只是复制了基础属性，例如八大基本类型，然而引用类型实际上并没有复制，只是将对应的引用给复制了，也复制了地址）</strong><br><strong>深克隆：深克隆把引用对象的变量指向复制过的新对象，而不是原有的被引用的对象。（你可能会觉得抽象，难以理解，没事后面通过代码演示，你就能更好的理解了）</strong>  </p>
+</blockquote>
+<h3 id="3-1-浅克隆"><a href="#3-1-浅克隆" class="headerlink" title="3.1 浅克隆"></a>3.1 浅克隆</h3><p>简历类  </p>
+<pre><code>package 设计模式.原型模式.prototype;
+
+/**
+ * 简历类
+ */
+public class Resume implements Cloneable{
+    private String name;
+    private String sex;
+    private int age;
+    private String timeArea;
+    private String company;
+
+    public Resume(String name){
+        this.name=name;
+    }
+    //设置个人信息
+    public void setPesonalInfo(String sex,int age){
+        this.sex=sex;
+        this.age=age;
+    }
+    //设置工作经历
+    public void setWorkExperience(String timeArea,String company){
+        this.timeArea=timeArea;
+        this.company=company;
+    }
+    //显示
+    public void disPlay(){
+        System.out.printf(&quot;%s   %s   %d&quot;,name,sex,age);
+        System.out.println();
+        System.out.printf(&quot;工作经历：  %s   %s&quot;,timeArea,company);
+        System.out.println();
+    }
+
+    //实现clone()方法实现浅克隆
+    public Object clone(){
+        //需要实现cloneable的接口，直接继承object就好，它里面自带一个clone方法！
+        Object obj = null;
+        try {
+            obj = super.clone();
+        } catch (Exception e) {
+            System.out.println(&quot;不支持克隆方法！&quot;);
+        }
+        return obj;
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        Resume a = new Resume(&quot;张三&quot;);
+        a.setPesonalInfo(&quot;男&quot;, 29);
+        a.setWorkExperience(&quot;1998-2000&quot;, &quot;XX公司&quot;);
+
+        Resume b = (Resume)a.clone();
+        b.setWorkExperience(&quot;1998-2006&quot;, &quot;YY企业&quot;);
+
+        Resume c = (Resume)a.clone();
+        c.setPesonalInfo(&quot;男&quot;, 24);
+
+        a.disPlay();
+        b.disPlay();
+        c.disPlay();
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>张三   男   29
+工作经历：  1998-2000   XX公司
+张三   男   29
+工作经历：  1998-2006   YY企业
+张三   男   24
+工作经历：  1998-2000   XX公司</code></pre><p>我们之前说到了浅克隆与深克隆的区别，<strong>浅克隆只是复制了被克隆对象中引用类型的引用</strong>，我们现在来修改一下简历类，并新增一个工作经历类，然后简历类中引用这个工作经历对象。  </p>
+<p>简历类  </p>
+<pre><code>/**
+ * 简历类
+ */
+public class Resume implements Cloneable{
+    private String name;
+    private String sex;
+    private int age;
+    //引用工作经历对象
+    private WorkExperience work;
+
+    public Resume(String name){
+        this.name=name;
+        //在简历类实例化时，同时实例化工作经历类
+        work = new WorkExperience();
+    }
+    //设置个人信息
+    public void setPesonalInfo(String sex,int age){
+        this.sex=sex;
+        this.age=age;
+    }
+    //设置工作经历
+    public void setWorkExperience(String workDate,String company){
+        work.setWorkDate(workDate);
+        work.setCompany(company);
+    }
+    //显示
+    public void disPlay(){
+        System.out.printf(&quot;%s   %s   %d&quot;,name,sex,age);
+        System.out.println();
+        System.out.printf(&quot;工作经历：  %s   %s&quot;,work.getWorkDate(),work.getCompany());
+        System.out.println();
+    }
+
+    //实现clone()方法实现浅克隆
+    public Object clone(){
+        //需要实现cloneable的接口，直接继承object就好，它里面自带一个clone方法！
+        Object obj = null;
+        try {
+            obj = super.clone();
+        } catch (Exception e) {
+            System.out.println(&quot;不支持克隆方法！&quot;);
+        }
+        return obj;
+    }
+}</code></pre><p>工作经历类  </p>
+<pre><code>//工作经历类
+public class WorkExperience {
+
+    private String workDate;
+    private String company;
+
+    public String getWorkDate() {
+        return workDate;
+    }
+    public void setWorkDate(String workDate) {
+        this.workDate = workDate;
+    }
+    public String getCompany() {
+        return company;
+    }
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+}</code></pre><p>客户端  </p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        Resume a = new Resume(&quot;张三&quot;);
+        a.setPesonalInfo(&quot;男&quot;, 29);
+        a.setWorkExperience(&quot;1998-2000&quot;, &quot;XX公司&quot;);
+
+        Resume b = (Resume)a.clone();
+        b.setWorkExperience(&quot;1998-2006&quot;, &quot;YY企业&quot;);
+
+        Resume c = (Resume)a.clone();
+        c.setWorkExperience(&quot;1998-2003&quot;, &quot;ZZ企业&quot;);
+
+        a.disPlay();
+        b.disPlay();
+        c.disPlay();
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>张三   男   29
+工作经历：  1998-2003   ZZ企业
+张三   男   29
+工作经历：  1998-2003   ZZ企业
+张三   男   29
+工作经历：  1998-2003   ZZ企业</code></pre><p>发现问题了吗？三个结果一样的，显然输出结果没有达到我们的要求。那么怎么才能达到我们想要的结果呢？请继续往下看！ </p>
+<h3 id="3-2-深克隆"><a href="#3-2-深克隆" class="headerlink" title="3.2 深克隆"></a>3.2 深克隆</h3><p>在前文介绍中的注意事项中，我提到过<strong>深拷贝是通过实现Serializable读取二进制流来完成的</strong>。简单讲就是通过序列化，将对象写到流的一个过程，写到流里面去（就是字节流）等于复制了对象，但是原来的对象并没有动，只是复制将类型通过流的方式进行读取，然后写到另一个内存中去！    </p>
+<p>代码示例  </p>
+<p>工作经历类  </p>
+<pre><code>//工作经历类
+public class WorkExperience implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+    private String workDate;
+    private String company;
+
+    public String getWorkDate() {
+        return workDate;
+    }
+    public void setWorkDate(String workDate) {
+        this.workDate = workDate;
+    }
+    public String getCompany() {
+        return company;
+    }
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+}</code></pre><p>简历类  </p>
+<pre><code>package 设计模式.原型模式.prototype;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+/**
+ * 简历类
+ */
+public class Resume implements Serializable{
+    private static final long serialVersionUID = 1L;
+    private String name;
+    private String sex;
+    private int age;
+    //引用工作经历对象
+    private WorkExperience work;
+
+    public Resume(String name){
+        this.name=name;
+        //在简历类实例化时，同时实例化工作经历类
+        work = new WorkExperience();
+    }
+    //设置个人信息
+    public void setPesonalInfo(String sex,int age){
+        this.sex=sex;
+        this.age=age;
+    }
+    //设置工作经历
+    public void setWorkExperience(String workDate,String company){
+        work.setWorkDate(workDate);
+        work.setCompany(company);
+    }
+    //显示
+    public void disPlay(){
+        System.out.printf(&quot;%s   %s   %d&quot;,name,sex,age);
+        System.out.println();
+        System.out.printf(&quot;工作经历：  %s   %s&quot;,work.getWorkDate(),work.getCompany());
+        System.out.println();
+    }
+
+    //通过序列化进行深克隆
+    public Object deepclone(){
+        Object obj = null;
+        try {
+            //将对象写入流中
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            oos.writeObject(this);
+            //将对象取出来
+            ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bis);
+            obj = ois.readObject();
+        } catch (Exception e) {
+            System.out.println(&quot;不支持克隆方法！&quot;);
+        }
+        return obj;
+    }
+}</code></pre><p>客户端  </p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        Resume a = new Resume(&quot;张三&quot;);
+        a.setPesonalInfo(&quot;男&quot;, 29);
+        a.setWorkExperience(&quot;1998-2000&quot;, &quot;XX公司&quot;);
+
+        Resume b = (Resume)a.deepclone();
+        b.setWorkExperience(&quot;1998-2006&quot;, &quot;YY企业&quot;);
+
+        Resume c = (Resume)a.deepclone();
+        c.setWorkExperience(&quot;1998-2003&quot;, &quot;ZZ企业&quot;);
+
+        a.disPlay();
+        b.disPlay();
+        c.disPlay();
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>张三   男   29
+工作经历：  1998-2000   XX公司
+张三   男   29
+工作经历：  1998-2006   YY企业
+张三   男   29
+工作经历：  1998-2003   ZZ企业</code></pre><p>好了，此时输出结果已经达到了我们的要求！</p>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/prototype-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/prototype-pattern.html</a><br><a href="https://blog.csdn.net/qq_40709468/article/details/82316418" target="_blank" rel="noopener">https://blog.csdn.net/qq_40709468/article/details/82316418</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

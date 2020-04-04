@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Java中的向上类型转换和向下类型转换 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="一、向上类型转换
+通俗地讲即是将子类对象转为父类对象。此处父类对象可以是接口。
+
+
+看下面的例子：  
+class Animal {
+    public void eat(){
+        S,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Java中的向上类型转换和向下类型转换</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Java中的向上类型转换和向下类型转换</h1>
+        <div class="stuff">
+            <span>八月 22, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h3 id="一、向上类型转换"><a href="#一、向上类型转换" class="headerlink" title="一、向上类型转换"></a>一、向上类型转换</h3><blockquote>
+<p>通俗地讲即是将子类对象转为父类对象。此处父类对象可以是接口。</p>
+</blockquote>
+<a id="more"></a>
+<p>看下面的例子：  </p>
+<pre><code>class Animal {
+    public void eat(){
+        System.out.println(&quot;animal eatting...&quot;);
+    }
+}
+
+class Bird extends Animal{
+    @Override
+    public void eat(){
+        System.out.println(&quot;bird eatting...&quot;);
+    }
+    public void fly(){  
+        System.out.println(&quot;bird flying...&quot;);  
+    }
+}
+
+public class Main{
+    public static void main(String[] args) {
+        Animal a = new Bird();//向上转型
+        a.eat();
+        //a.fly();//编译时出错,b虽指向子类对象，但此时丢失fly()方法  
+    }
+}</code></pre><p>运行结果：  </p>
+<pre><code>bird eatting...</code></pre><p>此处调用的是子类的eat()方法。原因：b实际指向的是Bird子类，故调用时会调用子类本身的方法。需要注意的是向上转型时b会遗失除与父类共有的其他方法。比如本例中的fly方法不在为B所有。  </p>
+<p>向上转型的好处：<br>我们来查看下面一个例子：  </p>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        Main.dosleep(new Male());
+        Main.dosleep(new Female());
+    }
+
+    public static void dosleep(Human h){
+        h.sleep();
+    }
+}
+
+class Human{
+    public void sleep(){
+        System.out.println(&quot;Human sleep..&quot;);
+    }
+}
+class Male extends Human{
+    @Override
+    public void sleep(){
+        System.out.println(&quot;Male sleep..&quot;);
+    }
+}
+class Female extends Human{
+    @Override
+    public void sleep(){
+        System.out.println(&quot;Female  sleep..&quot;);
+    }
+}</code></pre><p>输出结果： </p>
+<pre><code>Male sleep..
+Female  sleep..</code></pre><p>这里以父类作为参数，调用时用子类作为参数，就是利用了向上转型。这样使代码变得更简洁。不然的话，如果dosleep以子类对象为参数，则有多少个子类就需要写多少个函数。这也体现了JAVA的抽象编程思想。  </p>
+<h3 id="二、向下类型转换"><a href="#二、向下类型转换" class="headerlink" title="二、向下类型转换"></a>二、向下类型转换</h3><blockquote>
+<p>与向上类型相反，即是把父类对象转为子类对象。向下转换也可以说是指由一个通用类型转换成一个具体的类型，在继承结构上向下进行。</p>
+<p>看下面的例子：  </p>
+</blockquote>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        Girl g1 = new MMGirl();//向上转型
+        g1.smile();
+
+        MMGirl mmg = (MMGirl)g1;//向下转型，编译和运行都不会出错
+        mmg.smile();
+        mmg.c();
+
+        Girl g2 = new Girl();
+        try {
+            MMGirl mmg1 = (MMGirl)g2;//不安全的向下转型，编译不会出错，但运行时会出错
+            mmg1.smile();
+            mmg1.c();
+        } catch (Exception e) {
+            System.out.println(&quot;我出错了哦!&quot;);
+            e.printStackTrace();
+        }
+
+        if(g2 instanceof MMGirl){
+            System.out.println(&quot;我进来了哦!&quot;);
+            MMGirl mmg1 = (MMGirl)g2;
+            mmg1.smile();
+            mmg1.c();
+        }
+    }
+}
+
+class Girl{
+    public void smile(){
+        System.out.println(&quot;girl smile()...&quot;);
+    }
+}
+
+class MMGirl extends Girl{
+    @Override
+    public void smile(){
+        System.out.println(&quot;MMGirl smile()...&quot;);
+    }
+
+    public void c(){
+        System.out.println(&quot;MMGirl c()...&quot;);
+    }
+}</code></pre><p>输出结果：  </p>
+<pre><code>MMGirl smile()...
+MMGirl smile()...
+MMGirl c()...
+我出错了哦!
+java.lang.ClassCastException: Girl cannot be cast to MMGirl at Main.main(Main.java:18)</code></pre><p>Girl g1=new MMGirl(); //向上转型<br>    g1.smile();<br>    MMGirl mmg=(MMGirl)g1; //向下转型,编译和运行皆不会出错<br>这里的向下转型是安全的。因为g1指向的是子类对象。<br>而  
+Girl g2=new Girl();<br>    MMGirl mmg1=(MMGirl)g2; //不安全的向下转型,编译无错但会运行会出错<br>运行出错：<br>java.lang.ClassCastException: Girl cannot be cast to MMGirl at Main.main(Main.java:18)<br>如代码所示，可以通过instanceof来防止出现异常。  </p>
+<p>到了这里你可能会发现，向下转型是不是很傻，我要是用子类实例对象，先是生成子类实例赋值给父类引用，再将父类引用向下强转给子类引用，这不是多此一举吗？我不向上转型也不向下转型，直接用子类实例就行了。<br>然后给人一种错觉，向下转型没啥用处额。这种想法是错误的，下面我们来看个例子就知道了，通过此例子来了解下这种特性的意义和使用场景。<br>新建一个电子产品接口，如下：  </p>
+<pre><code>public interface Electronics {
+
+}</code></pre><p>很简单，什么方法都没有。  </p>
+<p>新建一个ThinkPad笔记本类，并实现电子产品接口：  </p>
+<pre><code>public class ThinkPad implements Electronics {
+
+    //ThinkPad引导方法
+    public void boot(){
+        System.out.println(&quot;welcome,I am ThinkPad&quot;);
+    }
+
+    //使用ThinkPad编程
+    public void program(){
+        System.out.println(&quot;using ThinkPad program&quot;);
+    }
+}</code></pre><p>新建一个mouse类，并实现电子产品接口：</p>
+<pre><code>public class Mouse implements Electronics {
+
+    //鼠标移动
+    public void move(){
+        System.out.println(&quot;move the mouse&quot;);
+    }
+
+    //鼠标点击
+    public void onClick(){
+        System.out.println(&quot;a click of the mouse&quot;);
+    }
+}</code></pre><p>新建一个Keyboard键盘类，并实现电子产品接口：  </p>
+<pre><code>public class Keyboard implements Electronics {
+
+    //使用键盘输入
+    public void input(){
+        System.out.println(&quot;using Keyboard input&quot;);
+    }
+}</code></pre><p>接下来，我们想象一个场景：我们去商城购买电子产品，电子产品很多，比如笔记本电脑，鼠标，键盘，步步高点读机等等，这些都属于电子产品。电子产品是抽象的。好，那么我们决定买一台ThinkPad,一个鼠标和一个键盘。<br>这时，我们需要一个购物车来装这些电子产品吧。我们可以添加进购物车，然后通过购物车还能知道存放的电子产品数量，能拿到对应的电子产品。<br>那么，一个购物车类就出来了，如下：  </p>
+<pre><code>public class ShopCar {
+
+    //list用来存放电子产品
+    private List&lt;Electronics&gt; list = new ArrayList&lt;&gt;();
+
+    //添加电子产品
+    public void add(Electronics e){
+        list.add(e);
+    }
+
+    //获取购物车电子产品数量
+    public int getSize(){
+        return list.size();
+    }
+
+    //获取相应的电子产品
+    public Electronics getListItem(int position){
+        return list.get(position);
+    }
+}</code></pre><p>可以看到 List<electronics> 用了泛型的知识，然后你们可能会觉得比较疑惑为什么是放 Electronics 的泛型，而不是放Thinkpad，Mouse，Keyboard，Phone等？<br>打个比方，如果我们的集合定义为List<thinkpad>，肯定是无法放入鼠标Mouse的，这里难道要生成3个集合，然后我们的add方法也要写3个？但是如果我有100个呢？难道要定义100个集合？这个就太可怕了。<br>所以之前，我们写了一个Electronics接口，提供了一个Electronics的标准，然后让每一个子类都去实现这个接口。<br>实际上这里又涉及到了向上转型的知识点，我们虽然在add方法将子类实例传了进来存放，但子类实例在传进去的过程中也进行了向上转型。<br>所以，此时购物车里存放的子类实例对象，由于向上转型成Electronics，已经丢失了子类独有的方法，以上述例子来分析，ThinkPad实例就是丢失了boot()和program()这两个方法，而Mouse实例就是丢失了move()和onClick()这两个方法。</thinkpad></electronics></p>
+<p>但是实际使用ThinkPad或Mouse或Keyboard时，这种情况肯定不是我们想要的。  </p>
+<p>接着我们写一个测试类Test去测试购物车里的电子产品。  </p>
+<p>测试类Test如下：  </p>
+<pre><code>public class Test {
+
+    public static final int THINKPAD = 0;
+    public static final int MOUSE = 1;
+    public static final int KEYBOARD = 2;
+
+    public static void main(String[] args) {
+
+        //添加进购物车
+        ShopCar car = new ShopCar();
+        car.add(new ThinkPad());
+        car.add(new Mouse());
+        car.add(new Keyboard());
+
+        //获取大小
+        System.out.println(&quot;购物车存放的电子产品数量为 ——&gt; &quot;+car.getSize());
+
+        //开始测试thinkpad电脑
+        ThinkPad thinkPad = (ThinkPad)car.getListItem(THINKPAD);
+        thinkPad.boot();
+        thinkPad.program();
+
+        System.out.println(&quot;-------------------&quot;);
+
+        //开始测试mouse鼠标
+        Mouse mouse = (Mouse)car.getListItem(MOUSE);
+        mouse.move();
+        mouse.onClick();
+
+        System.out.println(&quot;-------------------&quot;);
+
+        //开始测试keyboard键盘
+        Keyboard keyboard = (Keyboard)car.getListItem(KEYBOARD);
+        keyboard.input();
+    }
+}</code></pre><p>运行结果：  </p>
+<pre><code>购物车存放的电子产品数量为 ——&gt; 3
+welcome,I am ThinkPad
+using ThinkPad program
+-------------------
+move the mouse
+a click of the mouse
+-------------------
+using Keyboard input</code></pre><p>举个例子分析：  </p>
+<blockquote>
+<p>//开始测试thinkpad电脑<br>ThinkPad thinkPad = (ThinkPad)car.getListItem(THINKPAD);<br>thinkPad.boot();<br>thinkPad.program();  </p>
+</blockquote>
+<p><code>car.getListItem(THINKPAD)</code>这句代码是获取到Electronics类型的实例。不是ThinkPad的实例<br>通过向下转型，赋值给子类引用  </p>
+<blockquote>
+<p>ThinkPad thinkPad = (ThinkPad)car.getListItem(THINKPAD);</p>
+</blockquote>
+<p>这样子类实例又重新获得了因为向上转型而丢失的方法（boot和program）  </p>
+<p>总结一下吧，很多时候，我们需要把很多种类的实例对象，全部扔到一个集合。（这句话很重要）<br>在这个例子里就是把Thinkpad笔记本，Mouse鼠标，KeyBoard键盘等实例对象，全部扔到一个Shopcar购物车集合。<br>但是肯定不可能给他们每个种类都用一个独立的集合去存放吧，这个时候我们应该寻找到一个标准，接口就是一个标准。这些都是各种电子产品，抽象成电子产品。然后一个Electronics接口就出来了。<br>在回到刚才，我们把很多种类的实例对象全部扔到一个集合。或许这样比较好理解：把很多种类的子类实例对象全部扔到存放父类实例的集合。<br>经过了这个过程，子类实例已经赋值给了父类引用（即完成了向上转型），但很遗憾的丢失了子类扩展的方法。<br>很好的是Java语言有个向下转型的特性，让我们可以重新获得丢失的方法，即强转回子类<br>所以我们需要用到子类实例的时候，就从那个父类集合里拿出来向下转型就可以了，一样可以使用子类实例对象<br>原文链接：<a href="https://blog.csdn.net/xyh269/article/details/52231944" target="_blank" rel="noopener">https://blog.csdn.net/xyh269/article/details/52231944</a>  </p>
+<p><strong>题外话：父类为什么不能直接转为子类？</strong><br>这里涉及到一个安全问题，我们都知道对子类实现向上转型得到的 父类对象是安全的，因为子类会完全继承父类的方法，我们向上转型为父类，当我们调用父类的方法其实在子类实现中是能完全找到的。反之向下转型是不安全的，我们子类除了完全继承父类的方法外还会扩展自己的方法，所以我们在调用子类方法时可能在父类实现中是找不到的，所以向下转型不安全。  </p>
+<p>说到这里让我们来看下面这个例子：  </p>
+<pre><code>HTTPServletrequest  req = (HTTPServletrequest)new ServletRequest();
+
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    HttpServletRequest req = (HttpServletRequest) request;
+    HttpServletResponse resp = (HttpServletResponse) response;
+
+  }</code></pre><p>你会发现我对ServletRequest进行了强转，然后编译运行都没问题。可是后来一想不对啊，我们不仅实现了向下转型，同时还调用了子类的扩展方法，是父类没有的，可是却实现了。这不是自相矛盾吗？其实看一下API和一些资料你就会发现，这和我们所学的并不冲突！我们先看API：  </p>
+<blockquote>
+<p>public interface HttpServletRequest extends ServletRequest  </p>
+</blockquote>
+<p>你会发现原来HttpServletRequest和ServletRequest都是接口，他们都只定义了方法却没有提供相关的实现。所以我们看到的ServletRequest request中的request对象其实并不是我们ServletRequest的一个具体实现。<br>这里我们要看我们提出的问题是否安全，其实主要是看request对象的具体实现类究竟是继承的哪个接口，如果继承自HttpServletRequest接口那么我们向下转型使用HttpServletRequest接口的方法就是安全的。测试如下：  </p>
+<pre><code> if(request instanceof HttpServletRequest){
+    System.out.println(&quot;我是右边类的实例&quot;);
+}</code></pre><p>输出：我是右边类的实例，证明我们的request对象的确是HttpServletRequest的一个实例。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

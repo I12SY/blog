@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>观察者模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="当对象间存在一对多关系时，则使用观察者模式（Observer Pattern），观察者模式又叫做发布-订阅模式（Publish/Subscribe）模式。比如，当一个对象修改时，则会自动通知它的依赖,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">观察者模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">观察者模式</h1>
+        <div class="stuff">
+            <span>十月 21, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>当对象间存在一对多关系时，则使用观察者模式（Observer Pattern），观察者模式又叫做发布-订阅模式（Publish/Subscribe）模式。比如，当一个对象修改时，则会自动通知它的依赖对象。观察者模式属于行为型模式。  </p>
+<a id="more"></a>
+
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>定义对象间的一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使他们能够自动更新自己。<br><strong>主要解决：</strong>一个对象状态改变给其他对象通知的问题，而且要考虑到易用和低耦合，保证高度的协作。<br><strong>何时使用：</strong>一个对象（目标对象）的状态发生改变，所有的依赖对象（观察者对象）都将得到通知，进行广播通知。<br><strong>如何解决：</strong>使用面向对象技术，可以将这种依赖关系弱化。<br><strong>关键代码：</strong>在抽象类里面有一个ArrayList存放观察者。<br><strong>应用实例：</strong>1、拍卖的时候，拍卖师观察最高标价，然后通知给其他竞价者竞价。2、天气发生变化，将变化通知给所有关注它的人，通知他们天气发生了变化。<br><strong>优点：</strong>1、观察者和被观察者是抽象耦合的。2、建立一套触发机制。<br><strong>缺点：</strong>1、如果一个被观察者对象有很多的直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间。2、如果在观察者和观察目标之间有循环依赖的话，观察者目标会触发它们之间循环调用，可能导致系统崩溃。3、观察者模式没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察者目标发生了变化。<br><strong>使用场景：</strong>1、一个抽象模型有两个方面，其中一个方面依赖于另一个方面，将这些方面封装在独立的对象中使它们可以各自独立地改变和复用。2、一个对象的改变将导致其他一个或多个对象也发生变化，而不知道具体有多少对象将发生变化，可以降低对象间的耦合度。3、一个对象必须通知其他对象，而不知道这些对象是谁。4、需要在系统中创建一个触发链，A对象的行为将影响B对象，B对象的行为将影响C对象……，可以使用观察者模式创建一种链式触发机制。<br><strong>注意事项：</strong>1、JAVA中已经有了对观察者模式的支持类。2、避免循环使用。3、如果顺序执行，某一观察者错误会导致系统卡壳，一般采用异步方式。</p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><h3 id="2-1-UML类图"><a href="#2-1-UML类图" class="headerlink" title="2.1 UML类图"></a>2.1 UML类图</h3><img src="/blog/img/2019/12/30/观察者模式UML类图.png"> 
+
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h2><p>Subject类，可翻译为主题或抽象通知者，一般用一个抽象类或者一个接口实现。它把所有对观察者对象的引用保存在一个集合里，每个主题都可以拥有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象。   </p>
+<pre><code>public abstract class Subject {
+
+    //观察者列表
+    List&lt;Observer&gt; observers = new ArrayList&lt;&gt;();
+
+
+    //增加观察者
+    public void Attach(Observer observer){
+        observers.add(observer);
+    }
+
+    //移除观察者
+    public void Detach(Observer observer){
+        observers.remove(observer);
+    }
+
+    //通知观察者
+    public void Notify(){
+        for (Observer observer : observers) {
+            observer.Update();
+        }
+    }
+
+}</code></pre><p>Observer类，抽象观察者，为所有的具体观察者定义一个接口，在得到主题的通知时更新自己。这个接口叫做更新接口。抽象观察者一般使用一个抽象类或者一个接口实现。更新接口通常包含一个Update()方法，这个方法叫做更新方法。  </p>
+<pre><code>public abstract class Observer {
+    //更新
+    public abstract void Update();
+}</code></pre><p>ConcreteSubject类，叫做具体主题或具体通知者，将有关状态存入具体观察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。具体主题角色通常用一个具体子类实现。  </p>
+<pre><code>public class ConcreteSubject extends Subject {
+
+    //具体被观察者状态
+    private String subjectState;
+
+    public String getSubjectState(){
+        return subjectState;
+    }
+
+    public void setSubjectState(String subjectState){
+        this.subjectState=subjectState;
+    }
+}</code></pre><p>ConcreteObserver类，具体观察者，实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。具体观察者角色可以保存一个指向具体主题对象的引用。具体观察者角色通常用一个具体子类实现。  </p>
+<pre><code>public class ConcreteObserver extends Observer{
+
+    private ConcreteSubject subject;
+    private String subjectState;
+    //观察者名字
+    private String name;
+
+
+    public ConcreteObserver(ConcreteSubject subject,String name){
+        this.subject=subject;
+        this.name = name;
+    }
+
+    @Override
+    public void Update() {
+        subjectState = subject.getSubjectState();
+        System.out.println(String.format(&quot;观察者%s的新状态是%s&quot;,name,subjectState));
+    }
+
+    public ConcreteSubject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(ConcreteSubject subject) {
+        this.subject = subject;
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Test {
+
+    public static void main(String[] args) {
+
+        ConcreteSubject concreteSubject = new ConcreteSubject();
+        concreteSubject.Attach(new ConcreteObserver(concreteSubject, &quot;X&quot;));
+        concreteSubject.Attach(new ConcreteObserver(concreteSubject, &quot;Y&quot;));
+        concreteSubject.Attach(new ConcreteObserver(concreteSubject, &quot;Z&quot;));
+        concreteSubject.setSubjectState(&quot;ABC&quot;);
+        concreteSubject.Notify();
+        concreteSubject.setSubjectState(&quot;abc&quot;);
+        concreteSubject.Notify();
+    }
+}</code></pre><p>结果显示  </p>
+<pre><code>观察者X的新状态是ABC
+观察者Y的新状态是ABC
+观察者Z的新状态是ABC
+观察者X的新状态是abc
+观察者Y的新状态是abc
+观察者Z的新状态是abc</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/observer-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/observer-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

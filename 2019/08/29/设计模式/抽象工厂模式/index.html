@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>抽象工厂模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="抽象工厂模式（Abstract Factory Pattern）是围绕一个超级工厂创建其他工厂。该超级工厂又称为其他工厂的工厂。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。  ,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">抽象工厂模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">抽象工厂模式</h1>
+        <div class="stuff">
+            <span>八月 29, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>抽象工厂模式（Abstract Factory Pattern）是围绕一个超级工厂创建其他工厂。该超级工厂又称为其他工厂的工厂。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。  </p>
+<p>在抽象工厂模式中，接口是负责创建一个相关对象的工厂，不需要显式指定它们的类。每个生成的工厂都能按照工厂模式提供对象。  </p>
+<a id="more"></a> 
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。<br><strong>主要解决：</strong>主要解决接口选择的问题。<br><strong>何时使用：</strong>系统的产品有多于一个的产品族，而系统只消费其中某一族的产品。<br><strong>关键代码：</strong>在一个工厂里聚合多个同类产品。<br><strong>应用实例：</strong>工作了，为了参加一些聚会，肯定有两套或多套衣服吧，比如说有商务装（成套，一系列具体产品）、时尚装（成套，一系列具体产品），甚至对于一个家庭来说，可能有商务女装、商务男装、时尚女装、时尚男装，这些也都是成套的，即一系列具体产品。假设一种情况（现实中是不存在的，要不然，没法进入共产主义了，但有利于说明抽象工厂模式），在您的家中，某一个衣柜（具体工厂）只能存放某一种这样的衣服（成套，一系列具体产品），每次拿这种成套的衣服时也自然要从这个衣柜中取出了。用 OOP 的思想去理解，所有的衣柜（具体工厂）都是衣柜类的（抽象工厂）某一个，而每一件成套的衣服又包括具体的上衣（某一具体产品），裤子（某一具体产品），这些具体的上衣其实也都是上衣（抽象产品），具体的裤子也都是裤子（另一个抽象产品）。<br><strong>优点：</strong>当一个产品中的多个对象被设计成一起工作时，它能保证客户端始终只使用同一个产品族中的对象。<br><strong>缺点：</strong>产品族扩展非常困难，要增加一个系列的某一产品，既要在抽象的Creator里加代码，又要在具体的里面加代码。<br><strong>使用场景：</strong>1、QQ换皮肤，一整套一起换。2、生成不同操作系统的程序。<br><strong>注意事项：</strong>产品族难扩展，产品等级易扩展。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><h3 id="2-1-UML类图"><a href="#2-1-UML类图" class="headerlink" title="2.1 UML类图"></a>2.1 UML类图</h3><img src="/blog/img/2019/08/29/1.webp">   
+
+<h3 id="2-2-模式组成"><a href="#2-2-模式组成" class="headerlink" title="2.2 模式组成"></a>2.2 模式组成</h3><table>
+<thead>
+<tr>
+<th>组成（角色）</th>
+<th align="center">关系</th>
+<th align="right">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>抽象产品族（AbstractProduct）</td>
+<td align="center">抽象产品的父类</td>
+<td align="right">描述抽象产品的公共接口</td>
+</tr>
+<tr>
+<td>抽象产品（Product）</td>
+<td align="center">具体产品的父类</td>
+<td align="right">描述具体产品的公共接口</td>
+</tr>
+<tr>
+<td>具体产品(Concrete Product)</td>
+<td align="center">抽象产品的子类；工厂类创建的目标类</td>
+<td align="right">描述生产的具体产品</td>
+</tr>
+<tr>
+<td>抽象工厂（Creator）</td>
+<td align="center">具体工厂的父类</td>
+<td align="right">描述具体工厂的公共接口</td>
+</tr>
+<tr>
+<td>具体工厂（Concrete Creator）</td>
+<td align="center">抽象工厂的子类；被外界调用</td>
+<td align="right">描述具体工厂；实现FactoryMethod工厂方法创建产品的实例</td>
+</tr>
+</tbody></table>
+<p>如何理解抽象产品族、抽象产品和具体产品的区别呢？请看下图<br><img src="/blog/img/2019/08/29/2.webp">  </p>
+<h3 id="2-3-使用步骤"><a href="#2-3-使用步骤" class="headerlink" title="2.3 使用步骤"></a>2.3 使用步骤</h3><p>步骤1： 创建抽象工厂类，定义具体工厂的公共接口；<br>步骤2： 创建抽象产品族类 ，定义抽象产品的公共接口；<br>步骤3： 创建抽象产品类 （继承抽象产品族类），定义具体产品的公共接口；<br>步骤4： 创建具体产品类（继承抽象产品类） &amp; 定义生产的具体产品；<br>步骤5： 创建具体工厂类（继承抽象工厂类），定义创建对应具体产品实例的方法；<br>步骤6： 客户端通过实例化具体的工厂类，并调用其创建不同目标产品的方法创建不同具体产品类的实例  </p>
+<h2 id="3-实例讲解"><a href="#3-实例讲解" class="headerlink" title="3.实例讲解"></a>3.实例讲解</h2><p>这里我们以数据访问程序作为例子，要求能动态更换数据库，从基础做法一步一步深入抽象工厂模式  </p>
+<h3 id="3-1-最基本的数据访问程序例子"><a href="#3-1-最基本的数据访问程序例子" class="headerlink" title="3.1 最基本的数据访问程序例子"></a>3.1 最基本的数据访问程序例子</h3><p>用户类  </p>
+<pre><code>public class User {
+    private int id;
+    private String name;
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+}</code></pre><p>SqlserverUser类——用于操作User表，假设只有”新增用户”和”得到用户”方法，其余方法以及具体的SQL语句省略。  </p>
+<pre><code>class SqlserverUser{
+    public void insert(){
+        System.out.println(&quot;在SQL Server中给User表增加一条记录&quot;);
+    }
+    public User getUser(int id){
+        System.out.println(&quot;在SQL Server中根据ID得到User表的一条记录&quot;);
+        return null;
+    }
+}</code></pre><p>客户端代码：  </p>
+<pre><code>public static void main(String[] args) {
+    User user = new User();
+    SqlserverUser su = new SqlserverUser();//与SQL Server耦合
+    su.insert(user);//插入用户
+    su.getUser(1);//得到ID为1的用户
+}</code></pre><p>运行结果：  </p>
+<pre><code>在SQL Server中给User表增加一条记录
+在SQL Server中根据ID得到User表的一条记录</code></pre><p>在这个例子中因为SqlserverUser su = new SqlserverUser();的原因使得su这个对象被框死在SQL Server上了，所以不能直接更换数据库，因为在不同的数据库之间的语法不同，这里更改了数据库的还需要一一修改业务逻辑里对应的sql语句，这是不明智的。如果这里是灵活的，专业点的说法就是多态，那么在执行”su.insert(user)”和”su.getUser(1)”时就不用考虑是在用SQL Server还是在用Access。也就是说使用<strong>工厂方法模式</strong>来封装new SqlserverUser()所造成的变化。那么我们接着来看下一个例子。  </p>
+<h3 id="3-2-用了工厂方法模式的数据访问程序"><a href="#3-2-用了工厂方法模式的数据访问程序" class="headerlink" title="3.2 用了工厂方法模式的数据访问程序"></a>3.2 用了工厂方法模式的数据访问程序</h3><p>代码结构图  </p>
+<img src="/blog/img/2019/08/30/1.png">  
+
+<p>IUser接口，用于客户端访问，解除与具体数据库访问的耦合。  </p>
+<pre><code>public interface IUser {
+    void insert(User user);
+    User getUser(int id);
+}</code></pre><p>SqlserverUser类，用于访问SQL Server的User。  </p>
+<pre><code>class SqlserverUser implements IUser{
+
+    @Override
+    public void insert(User user) {
+        System.out.println(&quot;在SQL Server中给User表增加一条记录&quot;);
+    }
+
+    @Override
+    public User getUser(int id) {
+        System.out.println(&quot;在SQL Server中根据ID得到User表的一条记录&quot;);
+        return null;
+    }
+
+}</code></pre><p>AccessUser类，用于访问Access的User。  </p>
+<pre><code>class AccessUser implements IUser{
+
+    @Override
+    public void insert(User user) {
+        System.out.println(&quot;在Access中给User表增加一条记录&quot;);
+    }
+
+    @Override
+    public User getUser(int id) {
+        System.out.println(&quot;在Access中根据ID得到User表的一条记录&quot;);
+        return null;
+    }
+
+}</code></pre><p>IFactory接口，定义一个创建访问User表对象的抽象的工厂接口。  </p>
+<pre><code>public interface IFactory {
+    IUser creatorUser();
+}</code></pre><p>SqlServerFactory类，实现IFactory接口，实例化SqlserverUser。  </p>
+<pre><code>class SqlServerFactory implements IFactory{
+
+    @Override
+    public IUser creatorUser() {
+        return new SqlserverUser();
+    }
+
+}</code></pre><p>AccessFactory类，实现IFactory接口，实例化AccessUser。 </p>
+<pre><code>class AccessFactory implements IFactory{
+
+    @Override
+    public IUser creatorUser() {
+        return new AccessUser();
+    }
+
+}</code></pre><p>客户端代码  </p>
+<pre><code>public static void main(String[] args) {
+    User user = new User();
+    IFactory factory = new SqlServerFactory();//若要改成Acces数据库，只需要将本句话改成IFactory factory = new AccessFactory();
+    IUser iu = factory.creatorUser();
+    iu.insert(user);
+    iu.getUser(1);
+}</code></pre><p>现在如果要换数据库，只需要new SqlServerFactory()改成new AccessFactory()，此时由于多态的关系，使得声明IUser接口的对象iu事先根本不知道是在访问哪个数据库，却可以在运行时很好的完成工作，这就是所谓的业务逻辑与数据访问的解耦。<br>那么新的问题来了，你的数据库里不可能只有一个User表吧，很可能有其他表，比如增加部门表(Department表)，此时如何办呢?  </p>
+<pre><code>public class Department {
+
+    private int id;
+    private String deptName;
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getDeptName() {
+        return deptName;
+    }
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+}</code></pre><h3 id="3-3-用了抽象工厂模式的数据访问程序"><a href="#3-3-用了抽象工厂模式的数据访问程序" class="headerlink" title="3.3 用了抽象工厂模式的数据访问程序"></a>3.3 用了抽象工厂模式的数据访问程序</h3><p>代码结构图  </p>
+<img src="/blog/img/2019/08/30/2.png">  
+
+<p>IDepartment接口，用于客户端访问，解除与具体数据库访问的耦合。  </p>
+<pre><code>public interface IDepartment {
+
+    void insert(Department department);
+
+    Department getDepartment(int id);
+}</code></pre><p>SqlserverDepartment类，用于访问SQL Server的Department。  </p>
+<pre><code>class SqlserverDepartment implements IDepartment{
+
+    @Override
+    public void insert(Department department) {
+        System.out.println(&quot;在SQL Server中给Department表增加一条记录&quot;);
+    }
+
+    @Override
+    public Department getDepartment(int id) {
+        System.out.println(&quot;在SQL Server中根据ID得到Department表的一条记录&quot;);
+        return null;
+    }
+
+}</code></pre><p>AccessDepartment类，用于访问Access的Department。 </p>
+<pre><code>class AccessDepartment implements IDepartment{
+
+    @Override
+    public void insert(Department department) {
+        System.out.println(&quot;在Access中给Department表增加一条记录&quot;);
+    }
+
+    @Override
+    public Department getDepartment(int id) {
+        System.out.println(&quot;在Access中根据ID得到Department表的一条记录&quot;);
+        return null;
+    }
+
+}</code></pre><p>IFactory接口，定义一个创建访问Department表对象的抽象的工厂接口。  </p>
+<pre><code>public interface IFactory {
+    IUser creatorUser();
+    IDepartment creatorDepartment();
+}</code></pre><p>SqlServerFactory类，实现IFactory接口，实例化SqlserverUser和SqlserverDepartment。  </p>
+<pre><code>public class SqlServerFactory implements IFactory{
+
+    @Override
+    public IUser creatorUser() {
+        return new SqlserverUser();
+    }
+
+    @Override
+    public IDepartment creatorDepartment() {
+        return new SqlserverDepartment();
+    }
+
+}</code></pre><p>AccessFactory类，实现IFactory接口，实例化AccessUser和AccessDepartment。 </p>
+<pre><code>public class AccessFactory implements IFactory{
+
+    @Override
+    public IUser creatorUser() {
+        return new AccessUser();
+    }
+
+    @Override
+    public IDepartment creatorDepartment() {
+        return new AccessDepartment();
+    }
+
+} </code></pre><p>客户端代码  </p>
+<pre><code>public static void main(String[] args) {
+    User user = new User();
+    Department department = new Department();
+    IFactory factory = new AccessFactory();
+    IUser iu = factory.creatorUser();
+    iu.insert(user);
+    iu.getUser(1);
+    IDepartment id = factory.creatorDepartment();
+    id.insert(department);
+    id.getDepartment(1);
+}</code></pre><p>只有一个User类和User操作类的时候，是只需要工厂方法模式的，但现在显然你数据库中有很多的表，而SQL Server与Access又是两大不同的分类，所以解决这种涉及多个产品系列的问题，有一个专门的工厂模式叫抽象工厂模式(Abstract Factory,提供一个创建一系列相关或相互依赖对象的接口，而无需指定他们具体的类)。  </p>
+<p>看到这里你就会发现抽象工厂的好处是什么了：<br>最大的好处<strong>便是易于交换产品系列，由于具体工厂类，</strong>例如IFactory factory = new AccessFactory(),<strong>在一个应用中只需要在初始化的时候出现一次，这就使得改变一个应用的具体工厂变得非常容易，它只需要改变具体工厂即可使用不同的产品配置。</strong>我们的设计不能去防止需求的更改，那么我们的理想便是让改动变得最小，现在如果你要更改数据库的访问，我们只需要更改具体的工厂就可以做到。第二大好处是，<strong>它让具体的创建实例过程与客户端分离，客户端是通过它们的抽象接口操纵实例，产品的具体类名也被具体工厂的实现分类，不会出现在客户代码中。</strong>事实上刚刚的那个例子，客户端所认识的只有IUser和IDepartment，至于它是用SQL Server来实现还是Access来实现就不知道了。 </p>
+<p>任何模式都有缺点，不适用的时候，那么我们来谈谈他的缺点：<br>比如我们现在要增加项目表Project，需要改动的地方有哪些？是不是至少要增加三个类<strong>IProject、SqlserverProject、AccessProject</strong>，还需要更改<strong>IFactory、SqlserverFactory和AccessFactory</strong>才可以完全实现。还有就是我们的客户端程序类显然不会是只有一个，有很多地方都在使用IUser和IDepartment，而这样的设计，其实在每一个类的开始都需要声明IFactory factory = new SqlserverFactory()，如果我有100个调用数据库的访问类，是不是就要更改100次IFactory factory = new AccessFactory()这样的代码才行？这不能解决我要更改数据库访问时，改动一处就完全更改的需求呀！  </p>
+<p><strong>编程是门艺术，这样大批量的改动，显然是非常丑陋的做法。</strong>  </p>
+<h3 id="3-4-用简单工厂来改进抽象工厂"><a href="#3-4-用简单工厂来改进抽象工厂" class="headerlink" title="3.4 用简单工厂来改进抽象工厂"></a>3.4 用简单工厂来改进抽象工厂</h3><p>去除<strong>IFactory、SqlserverFactory和AccessFactory</strong>三个工厂类，取而代之的是<strong>DataAccess</strong>类，用一个简单的工厂来实现。<br>代码结构图  </p>
+<img src="/blog/img/2019/08/30/3.png">  
+
+<pre><code>public class DataAccess {
+    private static final String DB=&quot;Sqlserver&quot;;
+    //private static final String DB=&quot;Access&quot;;
+
+    public static IUser createUser(){
+        IUser result = null;
+        switch (DB) {
+        case &quot;Sqlserver&quot;:
+            result = new SqlserverUser();
+            break;
+        case &quot;Access&quot;:
+            result = new AccessUser();
+            break;
+        }
+        return result;
+    }
+
+    public static IDepartment createDepartment(){
+        IDepartment result = null;
+        switch (DB) {
+        case &quot;Sqlserver&quot;:
+            result = new SqlserverDepartment();
+            break;
+        case &quot;Access&quot;:
+            result = new AccessDepartment();
+            break;
+        }
+        return result;
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Test {
+    public static void main(String[] args) {
+        User user = new User();
+        Department department = new Department();
+        IUser iu = DataAccess.createUser();//直接得到实际数据访问实例，而不存在任何依赖
+        iu.insert(user);
+        iu.getUser(1);
+        IDepartment id = DataAccess.createDepartment();//直接得到实际数据访问实例，而不存在任何依赖
+        id.insert(department);
+        id.getDepartment(1);
+    }
+}</code></pre><p><strong>客户端没有出现任何一个SQL Server或Access字样了，达到了解耦的目的。</strong>但是还是存在不足之处，如果我现在要增加一个Oracle数据库访问，本来抽象工厂只增加一个OracleFactory工厂类就行了，现在比较麻烦了。需要在DataAccess类中每个方法的switch中加case了。  </p>
+<p>那么我们是不是可以考虑不在程序里写明‘如果是Sqlserver就去实例化SQL Server数据库相关类，如果是Access就去实例化Access相关类’这样的语句，而是根据字符串DB的值去某个地方找应该要实例化的类是哪一个。这样，我们的switch就可以对它说再见了。也就是<strong>依赖注入(Dependency Injection)这种编程方式。</strong>本来依赖注入是需要专门的Ioc容器提供，比如Spring.NET，显然当前这个程序不需要那么麻烦，你只需要再了解一个简单的.NET技术‘反射’就可以了。  </p>
+<blockquote>
+<p><strong>Assembly.Load(“程序集名称”).CreateInstance(“命名空间.类名称”)</strong><br>或者Java中使用反射<br><strong>Class.forName(“命名空间.类名称”).newInstance()</strong> </p>
+</blockquote>
+<h3 id="3-5-用反射-抽象工厂的数据访问程序"><a href="#3-5-用反射-抽象工厂的数据访问程序" class="headerlink" title="3.5 用反射+抽象工厂的数据访问程序"></a>3.5 用反射+抽象工厂的数据访问程序</h3><p>改造DataAccess类，用反射取代IFactory、SqlserverFactory和AccessFactory。  </p>
+<pre><code>public class DataAccess {
+    //private static final String DB=&quot;Sqlserver&quot;;
+    private static final String DB=&quot;Access&quot;;
+
+    public static IUser createUser() throws Exception{
+        //JAVA基础.设计模式.抽象工厂模式.SqlserverUser
+        return (IUser) Class.forName(&quot;JAVA基础.设计模式.抽象工厂模式.&quot;+DB+&quot;User&quot;).newInstance();
+    }
+
+    public static IDepartment createDepartment() throws Exception{
+        return (IDepartment)Class.forName(&quot;JAVA基础.设计模式.抽象工厂模式.&quot;+DB+&quot;Department&quot;).newInstance();
+    }
+}</code></pre><p>现在如果我们要增加Oracle数据访问，相关的类的增加是不可避免的，这点无论我们用任何代码都解决不了，不过这叫扩展，开放-封闭原则性告诉我们对于扩展，我们开放。对于修改我们应该尽量关闭，就目前而言，我们只需要修改private static final String DB=”Access”;为private static final String DB=”Oracle”;就可以了。  </p>
+<p>那么如果我们要增加一个Project产品时，如何做呢?<br>只需要增加三个与Project相关的类，再修改DataAccess，在其增加一个public static IProject createProject()方法就行了。  </p>
+<p>你有没有发现代码还是有点缺憾的呢，因为在更换数据库访问时，我们还是要去改程序(改DB这个字符串的值)重编译，如果可以不改程序，那才是真正的符合开放-封闭原则。  </p>
+<h3 id="3-6-用反射-配置文件实现数据访问程序"><a href="#3-6-用反射-配置文件实现数据访问程序" class="headerlink" title="3.6 用反射+配置文件实现数据访问程序"></a>3.6 用反射+配置文件实现数据访问程序</h3><p>在资源文件夹下添加一个db.properties文件，内容如下：  </p>
+<pre><code>db=Sqlserver</code></pre><p>修改DataAccess类  </p>
+<pre><code>private static final String DB=ResourceBundle.getBundle(&quot;db&quot;).getString(&quot;db&quot;);</code></pre><p>这样的话我们就不用去修改代码来控制数据库的切换啦。这个程序写到这基本上就是满分了。</p>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/abstract-factory-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/abstract-factory-pattern.html</a><br><a href="https://www.jianshu.com/p/7deb64f902db" target="_blank" rel="noopener">https://www.jianshu.com/p/7deb64f902db</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>    </p>
+<p>PS:三大工厂模式的区别<br>1、简单工厂模式：由一个工厂对象来决定创建出哪一个产品类的实例。<br>2、工厂方法模式：通过定义工厂父类负责定义创建对象的公共接口，而子类负责创建具体的产品，也就是将实际创建操作延迟到子类当中。<br>3、抽象工厂模式：提供一个创建一系列相关或相互依赖对象的接口，而无需指定他们具体的类。  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

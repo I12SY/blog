@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Docker常用命令 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.Dcoker镜像常用命令
+搜索镜像  例如搜索包含java关键词的镜像：
+
+docker search java
+
+
+下载镜像  从Docker Register上下载最新版本的镜像：
+
+doc,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Docker常用命令</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Docker常用命令</h1>
+        <div class="stuff">
+            <span>六月 13, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h3 id="1-Dcoker镜像常用命令"><a href="#1-Dcoker镜像常用命令" class="headerlink" title="1.Dcoker镜像常用命令"></a>1.Dcoker镜像常用命令</h3><ul>
+<li><p>搜索镜像<br>  例如搜索包含java关键词的镜像：</p>
+<blockquote>
+<p>docker search java</p>
+</blockquote>
+<a id="more"></a></li>
+<li><p>下载镜像<br>  从Docker Register上下载最新版本的镜像：</p>
+<blockquote>
+<p>docker pull java</p>
+</blockquote>
+<p>  指定想要下载的镜像标签以及Docker Register地址：</p>
+<blockquote>
+<p>docker pull reg.itmuch.com/java:7</p>
+</blockquote>
+</li>
+<li><p>镜像列表<br>  列出已下载的镜像命令：</p>
+<blockquote>
+<p>docker images</p>
+</blockquote>
+</li>
+<li><p>删除本地镜像<br>  删除指定名称镜像，例如删除hello-world这个镜像:</p>
+<blockquote>
+<p>docker rmi hello-world</p>
+</blockquote>
+<p>  删除所有镜像：</p>
+<blockquote>
+<p>docker rmi -f $(docker images)</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-Dcoker容器常用命令"><a href="#2-Dcoker容器常用命令" class="headerlink" title="2.Dcoker容器常用命令"></a>2.Dcoker容器常用命令</h3><ul>
+<li><p>新建并启动容器<br>  使用以下docker run命令即可新建并启动一个容器。<br>  -d选项：表示后台运行<br>  -P选项：随机端口映射<br>  -p选项：指定端口映射，有以下四种形式：<br>  &#8195;&#8195;- ip:hostPort:containerPort<br>  &#8195;&#8195;- ip::containerPort<br>  &#8195;&#8195;- hostPort:containerPort<br>  &#8195;&#8195;- containerPort  </p>
+<p>  –network选项：指定网络模式，该选项有以下可选参数：<br>  &#8195;&#8195;- –network=bridge：默认选项，表示连接到默认的网桥。<br>  &#8195;&#8195;- –network=host：容器使用宿主机的网络。<br>  &#8195;&#8195;- –network=container：NAME_or_ID：告诉Docker让新建的容器使用已有容器的网络配置。<br>  &#8195;&#8195;- –network=none：不配置该容器的网络，用户可自定义网络配置。  </p>
+<p>  示例1：</p>
+<blockquote>
+<p>docker run java /bin/echo ‘Hello World’</p>
+</blockquote>
+<p>  示例2(-p 宿主机端口：容器端口==&gt;开放容器端口到宿主机端口,访问<code>http://Docker宿主机IP:91/</code>,就能看到nginx首页了)：  </p>
+<blockquote>
+<p>docker run -d -p 91:80 nginx  </p>
+</blockquote>
+</li>
+<li><p>列出容器<br>  列出运行中的容器：</p>
+<blockquote>
+<p>docker ps</p>
+</blockquote>
+<p>  列出所有容器：</p>
+<blockquote>
+<p>docker ps -a</p>
+</blockquote>
+</li>
+<li><p>停止容器<br>  通过容器ID来停止容器，例如停止ID为be2ec13ed1f0的容器：</p>
+<blockquote>
+<p>docker stop be2ec13ed1f0</p>
+</blockquote>
+<p>  通过容器名称来停止容器，例如停止名称为nginx的容器：</p>
+<blockquote>
+<p>docker stop nginx</p>
+</blockquote>
+</li>
+<li><p>强制停止容器</p>
+<blockquote>
+<p>docker kill be2ec13ed1f0</p>
+</blockquote>
+</li>
+<li><p>启动已停止容器</p>
+<blockquote>
+<p>docker start be2ec13ed1f0</p>
+</blockquote>
+</li>
+<li><p>重启容器</p>
+<blockquote>
+<p>docker restart be2ec13ed1f0</p>
+</blockquote>
+</li>
+<li><p>进入容器<br>  使用docker attach命令进入容器：</p>
+<blockquote>
+<p>docker attach be2ec13ed1f0</p>
+</blockquote>
+<p>  使用nsenter进入容器(nsenter工具包含在util-linux2.23或更高的版本中)：<br>  首先需要找到容器第一个进程的PID，可通过以下命令获取：</p>
+<blockquote>
+<p>docker inspect –format “&#123;&#123;.State.Pid&#125;&#125;” be2ec13ed1f0<br>  获得PID后，例如返回的PID为<code>4709</code>，就可以使用nsenter命令进入容器了：<br>  nsenter –target 4709 –mount –uts –ipc –net –pid</p>
+</blockquote>
+</li>
+<li><p>删除容器<br>  删除指定的容器(只能删除已停止的容器)：  </p>
+<blockquote>
+<p>docker rm be2ec13ed1f0</p>
+</blockquote>
+<p>  删除正在运行的容器:</p>
+<blockquote>
+<p>docker rm -f be2ec13ed1f0</p>
+</blockquote>
+<p>  删除所有的容器：  </p>
+<blockquote>
+<p>docker rm -f $(docker ps -a -q)</p>
+</blockquote>
+</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

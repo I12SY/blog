@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JVM面试知识点 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="https://blog.csdn.net/qq_39037047/article/details/80532908  
+1.内存模型以及分区，需要详细到每个区放什么。  
+
+Java内存模型(即J,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">JVM面试知识点</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">JVM面试知识点</h1>
+        <div class="stuff">
+            <span>三月 26, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p><a href="https://blog.csdn.net/qq_39037047/article/details/80532908" target="_blank" rel="noopener">https://blog.csdn.net/qq_39037047/article/details/80532908</a>  </p>
+<h2 id="1-内存模型以及分区，需要详细到每个区放什么。"><a href="#1-内存模型以及分区，需要详细到每个区放什么。" class="headerlink" title="1.内存模型以及分区，需要详细到每个区放什么。"></a>1.内存模型以及分区，需要详细到每个区放什么。</h2><a id="more"></a>  
+<blockquote>
+<p>Java内存模型(即Java Memory Model，简称JMM)本身是一种抽象的概念。java内存模型中分为主内存和工作内存。主内存里面存储着所有变量，主内存是共享内存区域，所有线程都可以访问。每一个线程都私有一个工作内存，工作内存里面保存着主内存里面变量值的副本，线程对变量的操作都是在工作内存中完成，操作结束后再放回主内存。主内存可粗略认为是堆，工作内存认为是栈。<br><strong>方法区：</strong>主要是存储类信息，常量池（static常量和static变量），编译后的代码（字节码）等数据。<br><strong>堆：</strong>初始化的对象，成员变量 （那种非static的变量），所有的对象实例和数组都要在堆上分配。<br><strong>栈：</strong>又分为java虚拟机栈和本地方法栈。其中Java虚拟机栈，它是线程私有的，生命周期与线程相同。每个方法执行都会创建一个栈帧，用于存放局部变量表，操作栈，动态链接，方法出口等。每个方法从被调用，直到被执行完。对应着一个栈帧在虚拟机中从入栈到出栈的过程。<br><strong>本地方法栈：</strong>主要为Native方法服务。<br><strong>程序计数器：</strong>记录当前线程执行的行号。<br><a href="https://blog.csdn.net/qiuchaoxi/article/details/79889097" target="_blank" rel="noopener">https://blog.csdn.net/qiuchaoxi/article/details/79889097</a><br><a href="https://www.cnblogs.com/feicheninfo/p/9684658.html" target="_blank" rel="noopener">https://www.cnblogs.com/feicheninfo/p/9684658.html</a>  </p>
+</blockquote>
+<h2 id="2-堆里面的分区：Eden，survival-from-to，老年代，各自的特点"><a href="#2-堆里面的分区：Eden，survival-from-to，老年代，各自的特点" class="headerlink" title="2.堆里面的分区：Eden，survival from to，老年代，各自的特点"></a>2.堆里面的分区：Eden，survival from to，老年代，各自的特点</h2><blockquote>
+<p><a href="https://blog.csdn.net/qiuchaoxi/article/details/79891761" target="_blank" rel="noopener">https://blog.csdn.net/qiuchaoxi/article/details/79891761</a>  </p>
+</blockquote>
+<h2 id="3-对象创建方法，对象的内存分配，对象的访问定位"><a href="#3-对象创建方法，对象的内存分配，对象的访问定位" class="headerlink" title="3.对象创建方法，对象的内存分配，对象的访问定位"></a>3.对象创建方法，对象的内存分配，对象的访问定位</h2><blockquote>
+<p><a href="https://www.jianshu.com/p/73bc18bab332" target="_blank" rel="noopener">https://www.jianshu.com/p/73bc18bab332</a>  </p>
+</blockquote>
+<h2 id="4-GC的两种判定方法：引用计数与引用链。"><a href="#4-GC的两种判定方法：引用计数与引用链。" class="headerlink" title="4.GC的两种判定方法：引用计数与引用链。"></a>4.GC的两种判定方法：引用计数与引用链。</h2><h2 id="5-GC的三种收集方法：标记清除、标记整理、复制算法的原理与特点，分别用在什么地方，如果让你优化收集方法，有什么思路？"><a href="#5-GC的三种收集方法：标记清除、标记整理、复制算法的原理与特点，分别用在什么地方，如果让你优化收集方法，有什么思路？" class="headerlink" title="5.GC的三种收集方法：标记清除、标记整理、复制算法的原理与特点，分别用在什么地方，如果让你优化收集方法，有什么思路？"></a>5.GC的三种收集方法：标记清除、标记整理、复制算法的原理与特点，分别用在什么地方，如果让你优化收集方法，有什么思路？</h2><h2 id="6-GC收集器有哪些？CMS收集器与G1收集器的特点。"><a href="#6-GC收集器有哪些？CMS收集器与G1收集器的特点。" class="headerlink" title="6.GC收集器有哪些？CMS收集器与G1收集器的特点。"></a>6.GC收集器有哪些？CMS收集器与G1收集器的特点。</h2><h2 id="7-Minor-GC与Full-GC分别在什么时候发生？"><a href="#7-Minor-GC与Full-GC分别在什么时候发生？" class="headerlink" title="7.Minor GC与Full GC分别在什么时候发生？"></a>7.Minor GC与Full GC分别在什么时候发生？</h2><h2 id="8-几种常用的内存调试工具：jmap、jstack、jconsole。"><a href="#8-几种常用的内存调试工具：jmap、jstack、jconsole。" class="headerlink" title="8.几种常用的内存调试工具：jmap、jstack、jconsole。"></a>8.几种常用的内存调试工具：jmap、jstack、jconsole。</h2><h2 id="9-类加载的五个过程：加载、验证、准备、解析、初始化"><a href="#9-类加载的五个过程：加载、验证、准备、解析、初始化" class="headerlink" title="9.类加载的五个过程：加载、验证、准备、解析、初始化."></a>9.类加载的五个过程：加载、验证、准备、解析、初始化.</h2><blockquote>
+<p><strong>加载：</strong>通过一个类名的全限定名来获取定义此类的二进制字节流；将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构；在内存中生成一个代表这个类的java.lang.Class对象，作为方法区这个类的各种数据的访问入口。<br><strong>验证：</strong>确保Class文件的字节流中包含的信息符合当前虚拟机的要求。<br><strong>准备：</strong>正式为类变量分配内存并设置类变量初始值（通常情况下是数据类型的零值）的阶段。<br><strong>解析：</strong>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程。<br><strong>初始化：</strong>类初始化阶段是类加载过程的最后一步，到了这个阶段才真正开始执行类中定义的Java程序代码（或者说是字节码）。<br><a href="https://blog.csdn.net/chenge_j/article/details/72677766" target="_blank" rel="noopener">https://blog.csdn.net/chenge_j/article/details/72677766</a></p>
+</blockquote>
+<h2 id="10-双亲委派模型：Bootstrap-ClassLoader、Extension-ClassLoader、ApplicationClassLoader。"><a href="#10-双亲委派模型：Bootstrap-ClassLoader、Extension-ClassLoader、ApplicationClassLoader。" class="headerlink" title="10.双亲委派模型：Bootstrap ClassLoader、Extension ClassLoader、ApplicationClassLoader。"></a>10.双亲委派模型：Bootstrap ClassLoader、Extension ClassLoader、ApplicationClassLoader。</h2><h2 id="11-分派：静态分派与动态分派。"><a href="#11-分派：静态分派与动态分派。" class="headerlink" title="11.分派：静态分派与动态分派。"></a>11.分派：静态分派与动态分派。</h2>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>删除K个数字后的最小值 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.题目给出一个正数，从该整数中去掉k个数字，要求剩下的数字形成的新整数尽可能小。应该如何选取被去掉的数字？其中整数的长度大于或等于k，给出的整数的大小可以超过long类型的数字范围。什么意思呢？让,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">删除K个数字后的最小值</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">删除K个数字后的最小值</h1>
+        <div class="stuff">
+            <span>三月 03, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1.题目"></a>1.题目</h2><p>给出一个正数，从该整数中去掉k个数字，要求剩下的数字形成的新整数尽可能小。应该如何选取被去掉的数字？<br>其中整数的长度大于或等于k，给出的整数的大小可以超过long类型的数字范围。<br>什么意思呢？让我们举几个例子。  </p>
+<a id="more"></a>  
+<p>假设给出一个整数<strong>1 593 212</strong>，删去 <strong>3</strong> 个数字，新整数最小的情况是<strong>1212</strong> 。<br><img src="/blog/img/2020/03/03/删除k个数字1.png"><br><br>假设给出一个整数<strong>30 200</strong>，删去 <strong>1</strong> 个数字，新整数最小的情况是<strong>200</strong> 。<br><img src="/blog/img/2020/03/03/删除k个数字2.png"><br><br>假设给出一个整数<strong>10</strong>，删去 <strong>2</strong> 个数字（注意，这里要求删去的不是1个数字，而是2个），新整数最小的情况是<strong>0</strong> 。<br><img src="/blog/img/2020/03/03/删除k个数字3.png"><br></p>
+<p>为了让新整数最小，如果你说要优先删除最大的数字，那就错了，比如下面这个例子。<br><img src="/blog/img/2020/03/03/删除k个数字4.png"><br></p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2.解题思路"></a>2.解题思路</h2><p>题目要求我们删除k个数字，首先我们不妨先把问题简化一下：如果只删除一个数字，如何让新整数的值最小？<br>数字的大小固然重要，数字的位置则更加重要。<br>你想想，一个整数的最高位哪怕是只减少1，对数值的影响也是非常大的。  </p>
+<p>我们来举个例子：<br>给出一个整数<strong>541 270 936</strong>，要求删去1个数字，让剩下的整数尽可能的小。<br>此时无论删除哪一个数字，最后的结果都是从9位整数变成8位整数。既然同样是8位整数，显然是应该优先把高位的数字降低，这样对新整数的值影响最大。<br><img src="/blog/img/2020/03/03/解题思路1.png"><br><br>如何把高位的数字降低呢？很简单，把<strong>原整数的所有数字从左向右进行比较，如果发现某一位数字大于它右面的数字，那么在删除该数字后，必然会使该数位的值降低</strong>，因为右面比它小的数字顶替了它的位置。<br>在上面这个例子中，数字5右侧的数字4小于5，所以删除数字5，最高位数字降低成了4。<br>第2步，重复上述操作，因为4&gt;1，所以删除数字4。<br><img src="/blog/img/2020/03/03/解题思路2.png"><br><br>第3步，重复上述操作，因为1&lt;2、2&lt;7、7&gt;0，所以被删除的数字应该是7！<br><img src="/blog/img/2020/03/03/解题思路3.png"><br></p>
+<p>这里每一步都要求得到删除一个数字后的最小值，经历3次，相当于求出了删除k(k=3)个数字后的最小值。<br>像这样依次求得 <strong>局部最优解</strong> ，最终得到 <strong>全局最优解</strong> 的思想，叫做<strong>贪心算法</strong> 。  </p>
+<p><strong>代码实现</strong>  </p>
+<pre><code>public class Exercise {
+
+    /**
+     * 删除整数的k个数字，获得删除后的最小值
+     * @param num 原数字
+     * @param k 删除位数
+     * @return
+     */
+    public static String removeKDigits(String num,int k){
+        //如果删除数量等于原数字长度，直接返回0
+        if(num.length() == k){
+            return &quot;0&quot;;
+        }
+        for (int i = 0; i &lt; k; i++) {
+            boolean hasCut = false;
+            //从左向右遍历，找到右侧比自己数字大的数字并删除
+            for (int j = 0; j &lt; num.length()-1; j++) {
+                int leftNum = num.charAt(j);
+                int rightNum = num.charAt(j+1);
+                if(leftNum&gt;rightNum){//如果左边的数字大于右边的数字，则删除右边的数字
+                    num = num.substring(0,j)+num.substring(j+1,num.length());
+                    hasCut=true;
+                    break;
+                }
+            }
+            //如果没有找到想要删除的数字，则删除最后一个数字
+            if(!hasCut){
+                num = num.substring(0,num.length()-1);
+            }
+        }
+        //清除左边的0
+        num = removeZero(num);
+        //如果num全是0被清除了，则直接返回0
+        if(num.length() == 0){
+            return &quot;0&quot;;
+        }
+        return num;
+    }
+
+    private static String removeZero(String num) {
+        while(num.length()&gt;0 &amp;&amp; (num.charAt(0)-&apos;0&apos;)==0){
+            num = num.substring(1);
+        }
+        return num;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(removeKDigits(&quot;1593212&quot;,3));
+        System.out.println(removeKDigits(&quot;30200&quot;,1));
+        System.out.println(removeKDigits(&quot;10&quot;,2));
+        System.out.println(removeKDigits(&quot;541270936&quot;,3));
+        System.out.println(removeKDigits(&quot;123456&quot;,3));
+    }
+}</code></pre><p>上面的代码使用了两层循环，外循环次数就是要删除的数字个数k，内层循环从左到右遍历所有数字。当遍历到需要删除的数字时，利用字符串的自身的方法subString()把对应的数字删除，并重新拼接字符串。<br>显然这段代码的时间复杂度是O(kn)。  </p>
+<p>这段代码在功能是没有问题的，但是性能却不怎么好，主要问题在于以下两个方面。<br><strong>1.每一次内层循环都要重头开始遍历所有数字。</strong><br><strong>2.subString()方法本身性能不高。</strong>  </p>
+<p>怎么优化呢？<br>我们换一个思路，以遍历数字作为外循环，以k作为内循环。<br><strong>优化版代码实现</strong>  </p>
+<pre><code>public static String removeKDigits(String num,int k){
+    //新整数的长度=原整数的长度-k
+    int newLength = num.length()-k;
+    //新整数的长度为0，直接返回0
+    if(newLength == 0){
+        return &quot;0&quot;;
+    }
+    //创建一个栈用于接收所有的数字
+    char[] stack = new char[num.length()];
+    int top = 0;
+    for (int i = 0; i &lt; num.length(); ++i) {
+        //遍历当前数字
+        char c = num.charAt(i);
+        //当栈顶数字大于遍历到的当前数字时，栈顶数字出栈(相当于删除数字)
+        while(top&gt;0 &amp;&amp; stack[top-1]&gt;c &amp;&amp; k&gt;0){
+            top -=1;
+            k -=1;
+        }
+        //把遍历到的当前数字入栈
+        stack[top++] = c;
+    }
+    //找到栈中第1个非零数字的位置，以此构建新的整数字符串
+    int offset = 0;
+    while(offset&lt;newLength &amp;&amp; stack[offset]==&apos;0&apos;){
+        offset++;
+    }
+    return new String(stack,offset,newLength-offset);
+}</code></pre><p>上面的方法只对所有数字遍历了一次，遍历的时间复杂度是O(n)，把栈转化为字符串的时间复杂度也是O(n)，所以最终的时间复杂度是<strong>O(n)。</strong><br>同时，程序中利用栈来回溯遍历过的数字及删除数字，所以程序的空间复杂度是<strong>O(n)。</strong></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

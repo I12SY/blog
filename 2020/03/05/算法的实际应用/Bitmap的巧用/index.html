@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bitmap的巧用 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.1 一个关于用户标签的需求
+为了满足用户标签的统计需求，小灰利用关系型数据库设计了如下的表结构，每一个维度的标签对应着数据库表中的一列。要想统计所有“90后”的程序员，该怎么做呢？用一条求交集的,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Bitmap的巧用</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Bitmap的巧用</h1>
+        <div class="stuff">
+            <span>三月 05, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-1-一个关于用户标签的需求"><a href="#1-1-一个关于用户标签的需求" class="headerlink" title="1.1 一个关于用户标签的需求"></a>1.1 一个关于用户标签的需求</h2><a id="more"></a>
+<p><img src="/blog/img/2020/03/05/一个关于用户标签的需求1.png"><br><br><img src="/blog/img/2020/03/05/一个关于用户标签的需求2.png"><br><br><img src="/blog/img/2020/03/05/小灰的用户标签.png"><br><br><img src="/blog/img/2020/03/05/一个关于用户标签的需求3.png"><br><br>为了满足用户标签的统计需求，小灰利用关系型数据库设计了如下的表结构，每一个维度的标签对应着数据库表中的一列。<br><img src="/blog/img/2020/03/05/表格1.png"><br><br>要想统计所有“90后”的程序员，该怎么做呢？<br>用一条求交集的SQL语句即可。  </p>
+<blockquote>
+<p>Select count（distinct Name）as 用户数 from table where age = ‘90 后’ and Occupation = ‘程序员’ ;  </p>
+</blockquote>
+<p>要想统计所有使用苹果手机或“00后”的用户总和，该怎么做呢？<br>用一条求并集的SQL语句即可。  </p>
+<blockquote>
+<p>Select count （distinct Name） as 用户数 from table where Phone = ‘苹果’ or age = ‘00 后’ ;  </p>
+</blockquote>
+<p><img src="/blog/img/2020/03/05/小灰1.png"><br><br>两个月之后······<br><img src="/blog/img/2020/03/05/小灰2.png"><br><br><img src="/blog/img/2020/03/05/小灰3.png"><br><br><img src="/blog/img/2020/03/05/小灰4.png"><br><br><img src="/blog/img/2020/03/05/小灰5.png"><br> </p>
+<h2 id="1-2-用算法解决问题"><a href="#1-2-用算法解决问题" class="headerlink" title="1.2 用算法解决问题"></a>1.2 用算法解决问题</h2><p><img src="/blog/img/2020/03/05/位图算法.png"><br><br>很简单，具体做法如下。<br>第1步，给出一块长度为10的Bitmap，其中的每一个bit位分别对应着从0到9的整型数。此时，Bitmap的所有位都是0（用紫色表示）。<br><img src="/blog/img/2020/03/05/位图算法1.png"><br><br>第2步，把整型数4存入Bitmap，对应存储的位置就是下标为4的位置，将此bit设置为1（用黄色表示）。<br><img src="/blog/img/2020/03/05/位图算法2.png"><br><br>第3步，把整型数2存入Bitmap，对应存储的位置就是下标为2的位置，将此bit设置为1。<br><img src="/blog/img/2020/03/05/位图算法3.png"><br><br>第4步，把整型数1存入Bitmap，对应存储的位置就是下标为1的位置，将此bit设置为1。<br><img src="/blog/img/2020/03/05/位图算法4.png"><br><br>第5步，把整型数3存入Bitmap，对应存储的位置就是下标为3的位置，将此bit设置为1。<br><img src="/blog/img/2020/03/05/位图算法5.png"><br><br>如果问此时Bitmap里存储了哪些元素。显然是4、3、2、1，一目了然。Bitmap不仅方便查询，还可以去掉重复的整数。<br><img src="/blog/img/2020/03/05/小灰6.png"><br><br>第1步，建立用户名和用户ID的映射。<br><img src="/blog/img/2020/03/05/表格2.png"><br><br>第2步，让每一个标签存储包含此标签的所有用户ID，每一个标签都是一个独立的Bitmap。<br><img src="/blog/img/2020/03/05/表格3.png"><br><br>这样一来，每一个用户特征都变得一目了然。<br>例如程序员和“00后”这两个群体，各自的Bitmap分别如下。<br><img src="/blog/img/2020/03/05/表格4.png"><br><br><img src="/blog/img/2020/03/05/小灰7.png"><br><br><strong>1.如何查找使用苹果手机的程序员用户</strong><br><img src="/blog/img/2020/03/05/表格5.png"><br><br><strong>2.如何查找所有男性用户或“00后”用户</strong><br><img src="/blog/img/2020/03/05/表格6.png"><br><br><img src="/blog/img/2020/03/05/小灰8.png"><br><br>会出现什么问题呢？我们来看一看。<br>“90后”用户的Bitmap如下。<br><img src="/blog/img/2020/03/05/表格7.png"><br><br>如果想得到非“90后” 的用户，能够直接进行非运算吗？<br><img src="/blog/img/2020/03/05/表格8.png"><br><br>显然，非“90后”用户实际上只有1个，而不是图中所得到的8个结果，所以不能直接进行非运算。<br><img src="/blog/img/2020/03/05/小灰9.png"><br><br>同样是刚才的例子，我们给出“90后”用户的Bitmap，再给出一个全量用户的Bitmap。最终要求出的是存在于全量用户，但又不存在于“90后”用户的部分。<br><img src="/blog/img/2020/03/05/表格9.png"><br><br>如何求出这部分用户呢？我们可以使用<strong>异或</strong> 运算进行操作，即相同位为0，不同位为1。<br><img src="/blog/img/2020/03/05/表格10.png"><br><br><img src="/blog/img/2020/03/05/小灰10.png"><br> </p>
+<pre><code>public class MyBitmap {
+
+    //每一个word是一个long类型元素，对应一个64位二进制数据
+    private long[] words;
+    //Bitmap的位数大小
+    private int size;
+
+    public MyBitmap(int size){
+        this.size=size;
+        this.words = new long[getWordIndex(size-1)+1];
+    }
+
+    /**
+     * 判断Bitmap某一位的状态
+     * @param bitIndex 位图的第bitIndex位(bitIndex=0代表Bitmap左数第1位)
+     * @return
+     */
+    public boolean getBit(int bitIndex) throws Exception{
+        if(bitIndex &lt; 0 || bitIndex&gt;size-1){
+            throw new Exception(&quot;超过Bitmap有效范围&quot;);
+        }
+        int wordIndex = getWordIndex(bitIndex);
+        return (words[wordIndex]&amp;(1L &lt;&lt; bitIndex))!=0;
+    }
+
+    /**
+     * 把Bitmap的某一位设置为true
+     * @param bitIndex 位图的第bitIndex位(bitIndex=0代表Bitmap左数第1位)
+     */
+    public void setBit(int bitIndex) throws Exception{
+        if(bitIndex &lt; 0 || bitIndex&gt;size-1){
+            throw new Exception(&quot;超过Bitmap有效范围&quot;);
+        }
+        int wordIndex = getWordIndex(bitIndex);
+        words[wordIndex] |= (1L &lt;&lt; bitIndex);
+    }
+
+
+    /**
+     * 定位Bitmap某一位所对应的word
+     * @param bitIndex 位图的第bitIndex(bitIndex=0代表Bitmap左数第1位)
+     * @return
+     */
+    private int getWordIndex(int bitIndex) {
+        //右移6位，相当于除以64
+        return bitIndex&gt;&gt;6;
+    }
+
+    public static void main(String[] args) throws Exception {
+        MyBitmap bitmap = new MyBitmap(128);
+        bitmap.setBit(126);
+        bitmap.setBit(75);
+        System.out.println(bitmap.getBit(126));
+        System.out.println(bitmap.getBit(78));
+    }
+}</code></pre><p>在上述代码中，<strong>使用一个命名为words的long类型数组来存储所有的二进制位。每一个long元素占用其中的64位</strong> 。 </p>
+<p>如果要把Bitmap的某一位设为1，需要经过两步。</p>
+<ol>
+<li>定位到words中的对应的long元素。  </li>
+<li>通过与运算修改long元素的值。<br>如果要查看Bitmap的某一位是否为1，也需要经过两步。  </li>
+<li>定位到words中的对应的long元素。  </li>
+<li>判断long元素的对应的二进制位是否为1。<br>有了Bitmap的基本读写操作，该如何实现两个Bitmap的与、或、异或运算呢？感兴趣的读者可以思考一下。<br><img src="/blog/img/2020/03/05/小灰11.png"><br><br>虽然有现成的工具类和数据库，但我们仍然应该了解Bitmap算法的底层原理和实现方式。  </li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

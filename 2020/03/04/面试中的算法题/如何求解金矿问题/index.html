@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>如何求解金矿问题 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.题目很久很久以前，有一位国王拥有5座金矿，每座金矿的黄金储量不同，需要参与挖掘的工人人数也不同。例如有的黄金储量是500kg黄金，需要5个人来挖掘；有的金矿储量是200kg，需要3个人来挖掘··,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">如何求解金矿问题</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">如何求解金矿问题</h1>
+        <div class="stuff">
+            <span>三月 04, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1.题目"></a>1.题目</h2><p>很久很久以前，有一位国王拥有5座金矿，每座金矿的黄金储量不同，需要参与挖掘的工人人数也不同。例如有的黄金储量是500kg黄金，需要5个人来挖掘；有的金矿储量是200kg，需要3个人来挖掘······<br>如果参与挖矿的工人的总数是10。每座金矿要么全挖，要么不挖，不能派出一半人挖取一半的金矿。要求用程序求出，要想得到尽可能多的黄金，应该选择挖取那几座金矿？<br><img src="/blog/img/2020/03/04/金矿问题.png"><br>  </p>
+<a id="more"></a>  
+
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2.解题思路"></a>2.解题思路</h2><p>这是一个典型的<strong>动态规划</strong>题目，和著名的“背包问题”类似。<br>所谓动态规划，就是把复杂的问题简化成规模较小的子问题，再从简单的子问题自底向上一步一步递推，最终得到复杂问题的最优解。  </p>
+<p>首先，对于问题中的金矿采集来说，每一个金矿都存在着“挖”和“不挖”两种选择。<br>让我们假设一下，如果最后一个金矿注定不被挖掘，那么问题会转化成什么样子呢？<br>显然，问题简化成了10个工人在前4个金矿中做出最优选择。<br><img src="/blog/img/2020/03/04/金矿问题解法11.png"><br><br>相应地，假设最后一个金矿一定会被挖掘，那么问题又转化成什么样子呢？<br>由于最后一个金矿消耗了3个工人，问题简化成了7个工人在前4个金矿中做出最优选择。<br><img src="/blog/img/2020/03/04/金矿问题解法12.png"><br><br>这两种简化情况，被称为全局问题的两个<strong>最优子结构</strong> 。<br>究竟哪一种最优子结构可以通向全局最优解呢？，换句话说，最后一个金矿到底该不该挖呢？<br>那就要看<strong>10个工人在前4个金矿的收益，和7个工人在前4四个金矿金矿的收益+最后一个金矿的收益</strong>谁大谁小了。<br><img src="/blog/img/2020/03/04/金矿问题解法13.png"><br><br>同样的道理，对于前4个金矿的选择，我们还可以做进一步简化。<br>首先针对10个工人4个金矿这个子结构，第4个金矿(300kg黄金/4人)可以选择挖与不挖。根据第4个金矿的选择，问题又简化成了两种更小的子结构。<br><strong>1.10个工人在前3个金矿中做出最优选择。</strong><br><strong>2.6（10-4=6）个工人在前3个金矿中做出最优选择。</strong><br>相应地，对于7个工人4个金矿这个子结构，第4个金矿同样可以选择挖与不挖。根据第4个金矿的选择，问题也简化成了两种更小的子结构。<br><strong>1.7个工人在前3个金矿中做出最优选择。</strong><br><strong>2.3（7-4=3）个工人在前3个金矿中做出最优选择。</strong><br>……<br>就这样，问题一分为二，二分为四，一直把问题简化成在0个金矿或0个工人时的最优选择，这个收益结果显然是0，也就是问题的<strong>边界</strong> 。   </p>
+<p>这就是动态规划的要点：<strong>确定全局最优解和最优子结构之间的关系，以及问题的边界。</strong><br>这个用数学公式来表达的话么就叫做<strong>状态转移方程式。</strong>  </p>
+<p>我们把金矿数量设为n，工人数量设为w，金矿的含金量设为数组g[]，金矿所需开采人数设为数组p[]，设F(n,w)为n个金矿、w个工人时的最优收益函数，那么状态方程式如下：<br>&emsp;&emsp;&emsp;&emsp;<strong>F(n,w) = 0(n=0或w=0)</strong><br>问题边界，金矿数为0或工人数为0的情况。<br>&emsp;&emsp;&emsp;&emsp;<strong>F(n,w) = F(n-1,w)(n&gt;=1或w&lt;p[n-1])</strong><br>当所剩工人不够挖掘当前金矿时，只有一种最优子结构。<br>&emsp;&emsp;&emsp;&emsp;<strong>F(n,w) = max(F(n-1,w),F(n-1,w-p[n-1])+g[n-1])(n&gt;=1,w&gt;=p[n-1])</strong><br>在常规情况下，具有两种最优子结构(挖当前金矿或不挖当前金矿)。  </p>
+<p><strong>代码实现</strong>  </p>
+<pre><code>public class Exercise {
+
+    /**
+     * 获取金矿的最优收益
+     * @param w 工人数量
+     * @param n 可选金矿数
+     * @param p 金矿开采所需的工人数量
+     * @param g 金矿储量
+     * @return
+     */
+    public static int getBestGoldMining(int w,int n,int[] p,int[] g){
+        if(w==0 || n==0){
+            return 0;
+        }
+        if(w&lt;p[n-1]){
+            return getBestGoldMining(w,n-1,p,g);
+        }
+        return Math.max(getBestGoldMining(w, n-1, p, g), getBestGoldMining(w-p[n-1],n-1,p,g)+g[n-1]);
+    }
+
+
+    public static void main(String[] args) {
+        //工人数
+        int w=10;
+        //金矿所需开采人数 数组
+        int[] p = new int[]{5,5,3,4,3};
+        //金矿的含金量 数组
+        int[] g = new int[]{400,500,200,300,350};
+        System.out.println(&quot;最优收益： &quot;+getBestGoldMining(w,g.length,p,g));
+    }
+}</code></pre><p>但是这样虽然得到了正确结果，但是你有注意到这段代码的时间复杂度吗？<br>让我们来分析一下，全局问题经过简化，会拆解成两个子结构；两个子结构再次简化，会拆解成4个更小的子结构。就像下图一样。<br><img src="/blog/img/2020/03/04/金矿问题解法1的不足.png"><br><br>你会发现这样算下来，如果金矿数量是n，工人数量充足，时间复杂度就是<strong>O(n²)！</strong>为什么会这样？<br>因为递归做了许多重复的计算，你看上图中，标位红色的方法调用是重复的。可以看到F(2,7)、F(1,7)、F(1,2)，这几个入参相同的方法都被调用了两次。<br>当金矿数为5时，重复调用的问题还不太明显，当金矿数量越多，递归层次越深，重复调用也就越来越多，这些无谓的调用必然会降低程序的性能。  </p>
+<p>那么我们该如何避免这些重复调用呢？<br>这就要说到动态规划的另一个核心要点：<strong>自底向上求解。</strong>让我们来详细演示一下这种求解过程。<br>在进行求解之前，先准备一张表格，用于记录选择金矿的中间数据。<br><img src="/blog/img/2020/03/04/金矿问题解法21.png"><br><br>表格最左侧代表不同的金矿选择范围，从上到下，每增加1行，就代表多1个金矿可供选择，也就是F(n,w)函数中的n值。<br>表格的最上方代表工人数量，从1个工人到10个工人，也就是F(n,w)函数中的w值。<br>其余空白的格子，都是等待填写的，代表当给出n个金矿、w个工人时的最优收益，也就是F(n,w)的值。<br>举个例子，下面中绿色的这个格子里，应该填充的是在有5个工人的情况下，在前3个金矿可供选择时，最优的黄金收益。<br><img src="/blog/img/2020/03/04/金矿问题解法22.png"><br><br>下面我们重第1行第1列开始，尝试把空白的格子一一填满，填充的依据就是状态转移方程式。<br>对于第1行的前4个格子，由于w&lt;p[n-1]，对应的状态转移方程式如下：<br>&emsp;&emsp;&emsp;&emsp;<strong>F(n,w) = F(n-1,w)(n&gt;=1或w&lt;p[n-1])</strong><br>带入求解：<br>&emsp;&emsp;&emsp;&emsp; F(1,1) = F(1-1,1) = F(0,1) = 0<br>&emsp;&emsp;&emsp;&emsp; F(1,2) = F(1-1,2) = F(0,2) = 0<br>&emsp;&emsp;&emsp;&emsp; F(1,3) = F(1-1,3) = F(0,3) = 0<br>&emsp;&emsp;&emsp;&emsp; F(1,4) = F(1-1,4) = F(0,4) = 0<br><img src="/blog/img/2020/03/04/金矿问题解法23.png"><br><br>第1行第6个格子怎么计算呢？此时w&gt;=p[n-1]，对于如下公式：<br>&emsp;&emsp;&emsp;&emsp;<strong>F(n,w) = max(F(n-1,w),F(n-1,w-p[n-1])+g[n-1])(n&gt;1,w&gt;=p[n-1])；</strong><br>带入求解：<br>&emsp;&emsp;&emsp;&emsp; F(1,5) = max(F(1-1,5),F(1-1,5-5)+400) = max(F(0,5),F(0,0)+400) = max(0,400) = 400<br>&emsp;&emsp;&emsp;&emsp; F(1,6) = max(F(1-1,6),F(1-1,6-5)+400) = max(F(0,6),F(0,1)+400) = max(0,400) = 400<br>&emsp;&emsp;&emsp;&emsp; ······<br>&emsp;&emsp;&emsp;&emsp; F(1,10) = max(F(1-1,10),F(1-1,10-5)+400) = max(F(0,5),F(0,5)+400) = max(0,400) = 400<br><img src="/blog/img/2020/03/04/金矿问题解法24.png"><br><br>对于第2行的前4个格子，和第1行同理，由于w&lt;p[n-1]，对应的状态转移方程式如下：<br>&emsp;&emsp;&emsp;&emsp;<strong>F(n,w) = F(n-1,w)(n&gt;=1或w&lt;p[n-1])</strong><br>带入求解：<br>&emsp;&emsp;&emsp;&emsp; F(2,1) = F(2-1,1) = F(1,1) = 0<br>&emsp;&emsp;&emsp;&emsp; F(2,2) = F(2-1,2) = F(1,2) = 0<br>&emsp;&emsp;&emsp;&emsp; F(2,3) = F(2-1,3) = F(1,3) = 0<br>&emsp;&emsp;&emsp;&emsp; F(2,4) = F(2-1,4) = F(1,4) = 0<br><img src="/blog/img/2020/03/04/金矿问题解法25.png"><br><br>第2行的后6个格子，和第1行同理，此时w&gt;=p[n-1]，对应的状态转移方程式如下：<br>&emsp;&emsp;&emsp;&emsp;<strong>F(n,w) = max(F(n-1,w),F(n-1,w-p[n-1])+g[n-1])(n&gt;1,w&gt;=p[n-1])；</strong><br>带入求解：<br>&emsp;&emsp;&emsp;&emsp; F(2,5) = max(F(2-1,5),F(2-1,5-5)+500) = max(F(1,5),F(1,0)+500) = max(400,400) = 500<br>&emsp;&emsp;&emsp;&emsp; F(2,6) = max(F(2-1,6),F(2-1,6-5)+500) = max(F(1,6),F(1,1)+500) = max(400,400) = 500<br>&emsp;&emsp;&emsp;&emsp; ······<br>&emsp;&emsp;&emsp;&emsp; F(2,10) = max(F(2-1,10),F(2-1,10-5)+500) = max(F(1,5),F(1,5)+500) = max(400,400+500) = 900<br><img src="/blog/img/2020/03/04/金矿问题解法26.png"><br><br>第3行的计算方法如出一辙。<br><img src="/blog/img/2020/03/04/金矿问题解法27.png"><br><br>再接再厉，计算出第4行的答案。<br><img src="/blog/img/2020/03/04/金矿问题解法28.png"><br><br>最后，计算出第5行的结果。<br><img src="/blog/img/2020/03/04/金矿问题解法29.png"><br><br>此时，最后1行最后1个格子所填的900就是最终要求的结果，即5个金矿、10个工人的最优收益是900kg黄金。  </p>
+<p>那么如何实现，在程序中我们可以用二维数组来代表所填写的表格。<br><strong>改进版代码</strong>   </p>
+<pre><code>/**
+ * 获取金矿的最优收益  改进版
+ * @param w 工人数量
+ * @param p 金矿开采所需的工人数量
+ * @param g 金矿储量
+ */
+public static int getBestGoldMining2(int w,int[] p,int[] g){
+    //1.创建表格
+    int[][] arr = new int[g.length+1][w+1];
+    //2.填充表格
+    for (int i = 1; i &lt;= g.length; i++) {
+        for (int j = 1; j &lt;= w; j++) {
+            if(j&lt;p[i-1]){
+                arr[i][j] = arr[i-1][j];
+            }else{
+                arr[i][j] = Math.max(arr[i-1][j], arr[i-1][j-p[i-1]]+g[i-1]);
+            }
+        }
+    }
+    //返回最后1个格子的值
+    return arr[g.length][w];
+}</code></pre><p>上面的程序使用双循环来填充一个二维数组，所以时间和空间复杂度都是<strong>O(nw)</strong>，比递归的性能好多了！<br>虽然这段代码在时间上已经没有什么可优化的了，但是在空间上还可以做一些优化。<br>想一想，在表格中除第一行之外，每一行的结果都是由<strong>上一行数据</strong>推导出来的，我们以4个金矿9个工人为例。<br><img src="/blog/img/2020/03/04/金矿问题解法3.png"><br><br>4个金矿、9个工人的最优结果，是由它的两个最优子结构，也就是3个金矿、5个工人和3个金矿、9个工人的结果推导而来的，这两个最优子结构都位于它的上一行。<br>所以，在程序中并不需要保存整个表格，无论金矿有多少座，我们只保存一行的数据即可。在计算下一行时，要从右向左统计(为什么要从右向左统计？因为如果从左向右统计，左边的数字已经改变，后面的数组统计时加的前一个数据已经是修改过的数据了，所以当然不行了)，把旧的数据一个一个替换掉。  </p>
+<p><strong>优化后的代码</strong>  </p>
+<pre><code>/**
+ * 获取金矿的最优收益  改进版后的优化版
+ * @param w 工人数量
+ * @param p 金矿开采所需的工人数量
+ * @param g 金矿储量
+ */
+public static int getBestGoldMining(int w,int[] p,int[] g){
+    //1.创建当前结果
+    int[] arr = new int[w+1];
+    //2.填充唯一数组
+    for (int i = 1; i &lt;= g.length; i++) {
+        for (int j = w; j &gt;=1; j--) {
+            if(j&gt;=p[i-1]){
+                arr[j] = Math.max(arr[j], arr[j-p[i-1]]+g[i-1]);
+            }
+        }
+    }
+    //返回最后1个格子的值
+    return arr[w];
+}</code></pre><p>优化版后的代码更简洁了，而且空间复杂度也降低到了<strong>O(n)</strong> 。  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

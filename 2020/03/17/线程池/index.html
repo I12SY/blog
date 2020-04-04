@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>线程池 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="在了解线程池之前，首先我们先了解一下，什么是进程？什么是线程？  
+
+1.进程进程是计算机中的程序关于某数据集合的一次运行活动，是系统进行资源分配的调度的基本单位，是操作系统结构的基础。简单来讲：进,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">线程池</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">线程池</h1>
+        <div class="stuff">
+            <span>三月 17, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>在了解线程池之前，首先我们先了解一下，什么是进程？什么是线程？  </p>
+<a id="more"></a>
+<h2 id="1-进程"><a href="#1-进程" class="headerlink" title="1.进程"></a>1.进程</h2><p>进程是计算机中的程序关于某数据集合的一次运行活动，是系统进行资源分配的调度的基本单位，是操作系统结构的基础。简单来讲：进程是指运行中的应用程序，进程是一个实体，每一个进程都有它自己的地址空间。例如我们点击了QQ，就启动了一个进程，操作系统就会为这个进程分配独立的地址空间，当我们又点击浏览器，这样又启动了一个进程，操作系统将为新的进程分配新的独立的地址空间。  </p>
+<h2 id="2-线程"><a href="#2-线程" class="headerlink" title="2.线程"></a>2.线程</h2><p>线程是操作系统能够进行运算调度的最小单位，被包含在进程之中，是进程中的实际运作单位。一个进程至少有一个线程。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。注意：线程自己不拥有系统资源，只拥有一点在运行中必不可少的资源，但它可与同属于一个进程的其他线程共享进程所拥有的全部资源，线程有就绪，阻塞，运行三种基本状态。  </p>
+<h2 id="3-什么是线程池？"><a href="#3-什么是线程池？" class="headerlink" title="3.什么是线程池？"></a>3.什么是线程池？</h2><p>线程池就是创建多个线程并且进行管理的容器。（线程池是个容器，可以创建线程和管理线程，并且给线程分配任务）。<br>线程池是一种多线程处理形式，处理过程中将任务添加队列，然后在创建线程后自动启动这些任务，每个线程都使用默认的堆栈大小，以默认的优先级运行，并处在多线程单元中，如果某个线程在托管代码中空闲，则线程池将插入另一个辅助线程来使所有处理器保持繁忙。如果所有线程池都始终保持繁忙，但队列中包含挂起的工作，则线程池将在一段时间后辅助线程的数目永远不会超过最大值。超过最大值的线程可以排队，但他们要等到其他线程完成后才能启动。  </p>
+<h2 id="4-为什么要用线程池？"><a href="#4-为什么要用线程池？" class="headerlink" title="4.为什么要用线程池？"></a>4.为什么要用线程池？</h2><p>我们都知道，在Java中创建一个线程其实是一个很简单的事情，只要new Thread就可以了，但是这样做并不是一种很好的方式。那么为什么不好呢？<br>比如在一个项目里，全部都是用的new Thread的方式去启用线程，那么创建好Thread1，而1在运行的时候，创建了Thread2，等等等… 创建了10个线程的时候，1，2，3都执行完毕了但是没被销毁，就可能导致<strong>无限制的新建线程，相互竞争，占用过多的系统资源，导致死锁以及OOM。</strong> 而且这些线程缺乏统一的<strong>管理的功能，也缺乏定期执行，定时执行，线程中断的功能。</strong>  </p>
+<h2 id="5-如何创建一个线程池？"><a href="#5-如何创建一个线程池？" class="headerlink" title="5.如何创建一个线程池？"></a>5.如何创建一个线程池？</h2><p><strong>5.1 ThreadPoolExecutor 的构造方法如下</strong>  </p>
+<pre><code>public ThreadPoolExecutor(int corePoolSize,
+                          int maximumPoolSize,
+                          long keepAliveTime,
+                          TimeUnit unit,
+                          BlockingQueue&lt;Runnable&gt; workQueue,
+                          ThreadFactory threadFactory,
+                          RejectedExecutionHandler handler) {
+    if (corePoolSize &lt; 0 ||
+        //maximumPoolSize必须&gt;=1 &amp; corePoolSize(第1处)
+        maximumPoolSize &lt;= 0 ||
+        maximumPoolSize &lt; corePoolSize ||
+        keepAliveTime &lt; 0)
+        throw new IllegalArgumentException();
+    //（第2处）
+    if (workQueue == null || threadFactory == null || handler == null)
+        throw new NullPointerException();
+    this.corePoolSize = corePoolSize;
+    this.maximumPoolSize = maximumPoolSize;
+    this.workQueue = workQueue;
+    this.keepAliveTime = unit.toNanos(keepAliveTime);
+    this.threadFactory = threadFactory;
+    this.handler = handler;
+}    </code></pre><p><strong>5.2 第1个参数: corePoolSize 表示常驻核心线程数</strong>  </p>
+<pre><code>如果等于0,则任务执行完之后,没有任何请求进入时销毁线程池的线程;
+如果大于0,即使本地任务执行完毕,核心线程也不会被销毁.
+这个值的设置非常关键;
+设置过大会浪费资源;
+设置过小会导致线程频繁地创建或销毁.</code></pre><p><strong>5.3 第2个参数: maximumPoolSize 表示线程池能够容纳同时执行的最大线程数</strong>  </p>
+<pre><code>从第1处来看,必须&gt;=1.
+如果待执行的线程数大于此值,需要借助第5个参数的帮助,缓存在队列中.
+如果maximumPoolSize = corePoolSize,即是固定大小线程池.</code></pre><p><strong>5.4 第3个参数: keepAliveTime 表示线程池中的线程空闲时间</strong>  </p>
+<pre><code>当空闲时间达到keepAliveTime时,线程会被销毁,直到只剩下corePoolSize个线程;
+避免浪费内存和句柄资源.
+在默认情况下,当线程池的线程数大于corePoolSize时,keepAliveTime才起作用.
+但是当ThreadPoolExecutor的allowCoreThreadTimeOut = true时,核心线程超时后也会被回收.</code></pre><p><strong>5.5 第4个参数: TimeUnit表示时间单位</strong>  </p>
+<pre><code>keepAliveTime的时间单位通常是TimeUnit.SECONDS.</code></pre><p><strong>5.6 第5个参数: workQueue 表示缓存队列</strong>  </p>
+<pre><code>当请求的线程数大于maximumPoolSize时,线程进入BlockingQueue.
+后续示例代码中使用的LinkedBlockingQueue是单向链表,使用锁来控制入队和出队的原子性;
+两个锁分别控制元素的添加和获取,是一个生产消费模型队列.</code></pre><p><strong>5.7 第6个参数: threadFactory 表示线程工厂</strong>  </p>
+<pre><code>它用来生产一组相同任务的线程;
+线程池的命名是通过给这个factory增加组名前缀来实现的.
+在虚拟机栈分析时,就可以知道线程任务是由哪个线程工厂产生的.</code></pre><p><strong>5.8 第7个参数: handler 表示执行拒绝策略的对象</strong>  </p>
+<pre><code>当超过第5个参数workQueue的任务缓存区上限的时候,就可以通过该策略处理请求,这是一种简单的限流保护.
+友好的拒绝策略可以是如下三种:
+(1)保存到数据库进行削峰填谷;在空闲时再提取出来执行
+(2)转向某个提示页面
+(3)打印日志</code></pre><h2 id="6-JAVA中的常用线程池有哪些？作用分别是什么"><a href="#6-JAVA中的常用线程池有哪些？作用分别是什么" class="headerlink" title="6.JAVA中的常用线程池有哪些？作用分别是什么?"></a>6.JAVA中的常用线程池有哪些？作用分别是什么?</h2><p>java里面的线程池的顶级接口是Executor，Executor并不是一个线程池，而只是一个执行线程的工具，而真正的线程池是ExecutorService。<br><strong>6.1 newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。</strong><br>是一种线程数量不定的线程池，并且其最大线程数（maximumPoolSize）为Integer.MAX_VALUE，这个数是很大的，一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。但是线程池中的空闲线程都有超时限制，这个超时时长是60秒，超过60秒闲置线程就会被回收。调用execute将重用以前构造的线程(如果线程可用)。这类线程池比较适合执行大量的耗时较少的任务，当整个线程池都处于闲置状态时，线程池中的线程都会超时被停止。  </p>
+<pre><code>public static void newCachedThreadPool(){
+    ExecutorService cacheThreadPool = Executors.newCachedThreadPool();
+    for (int i = 0; i &lt; 10; i++) {
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //cacheThreadPool.submit(task); 有返回值
+        cacheThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread().getName()+&quot;正在被执行&quot;);
+            }
+        });
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>pool-1-thread-1正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-1正在被执行</code></pre><p>线程池为无限大，当执行当前任务时上一个任务已经完成，会复用执行上一个任务的线程，而不用每次新建线程。  </p>
+<p><strong>6.2 newFixedThreadPool创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。</strong><br>创建一个指定工作线程数量的线程池，每当提交一个任务就创建一个工作线程，当线程 处于空闲状态时，它们并不会被回收，除非线程池被关闭了，如果工作线程数量达到线程池初始的最大数，则将提交的任务存入到池队列（没有大小限制）中。由于newFixedThreadPool只有核心线程并且这些核心线程不会被回收，这样它能更加快速的响应外界的请求。  </p>
+<pre><code>public static void newFixedThreadPool(){
+    //创建一个可重用固定个数的线程池
+    ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+    for (int i = 0; i &lt; 10; i++) {
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        fixedThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread().getName()+&quot;正在被执行&quot;);
+            }
+        });
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>pool-1-thread-1正在被执行
+pool-1-thread-2正在被执行
+pool-1-thread-3正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-2正在被执行
+pool-1-thread-3正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-2正在被执行
+pool-1-thread-3正在被执行
+pool-1-thread-1正在被执行</code></pre><p>因为线程池大小为3，每个任务输出打印结果后sleep 2秒，所以每两秒打印3个结果。<br>定长线程池的大小最好根据系统资源进行设置。如Runtime.getRuntime().availableProcessors()  </p>
+<p><strong>6.3 newScheduledThreadPool创建一个定长线程池，支持定时及周期性任务执行。</strong><br>创建一个线程池，它的核心线程数量是固定的，而非核心线程数是没有限制的，并且当非核心线程闲置时会被立即回收，它可安排给定延迟后运行命令或者定期地执行。这类线程池主要用于执行定时任务和具有固定周期的重复任务。  </p>
+<pre><code>public static void newScheduledThreadPool(){
+    //创建一个定长线程池，支持定时及周期性任务执行
+    ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(5);
+    //延迟执行——延迟1秒执行
+    scheduledThreadPool.schedule(new Runnable() {
+        @Override
+        public void run() {
+            System.out.println(&quot;延迟1秒执行&quot;);
+        }
+    }, 1, TimeUnit.SECONDS);
+    //定期执行——延迟1秒后每3秒执行一次
+    scheduledThreadPool.scheduleAtFixedRate(new Runnable() {
+        @Override
+        public void run() {
+            System.out.println(&quot;延迟1秒后每3秒执行一次&quot;);
+        }
+    }, 1,3, TimeUnit.SECONDS);
+}</code></pre><p>输出结果  </p>
+<pre><code>延迟1秒执行
+延迟1秒后每3秒执行一次
+延迟1秒后每3秒执行一次
+延迟1秒后每3秒执行一次
+延迟1秒后每3秒执行一次
+延迟1秒后每3秒执行一次
+......</code></pre><p><strong>6.4 newSingleThreadExecutor创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。</strong><br>这类线程池内部只有一个核心线程，以无界队列方式来执行该线程，这使得这些任务之间不需要处理线程同步的问题，它确保所有的任务都在同一个线程中按顺序中执行，并且可以在任意给定的时间不会有多个线程是活动的。  </p>
+<pre><code>public static void newSingleThreadExecutor(){
+    //创建一个单线程化的线程池
+    ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+    for (int i = 0; i &lt; 10; i++) {
+        final int index = i;
+        singleThreadExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //结果依次输出，相当于顺序执行
+                    System.out.println(Thread.currentThread().getName()+&quot;正在被执行,打印的值是:&quot;+index);
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>pool-1-thread-1正在被执行,打印的值是:0
+pool-1-thread-1正在被执行,打印的值是:1
+pool-1-thread-1正在被执行,打印的值是:2
+pool-1-thread-1正在被执行,打印的值是:3
+pool-1-thread-1正在被执行,打印的值是:4
+pool-1-thread-1正在被执行,打印的值是:5
+pool-1-thread-1正在被执行,打印的值是:6
+pool-1-thread-1正在被执行,打印的值是:7
+pool-1-thread-1正在被执行,打印的值是:8
+pool-1-thread-1正在被执行,打印的值是:9</code></pre><p><strong>6.5 newWorkStealingPool创建一个具有抢占式操作的线程池。</strong><br>这个是 JDK1.8 版本加入的一种线程池，stealing 翻译为抢断、窃取的意思。<br>newWorkStealingPool适合使用在很耗时的操作，但是newWorkStealingPool不是ThreadPoolExecutor的扩展，它是新的线程池类ForkJoinPool的扩展，但是都是在统一的一个Executors类中实现，由于能够合理的使用CPU进行对任务操作（并行操作），所以适合使用在很耗时的任务中：    </p>
+<pre><code> // 线程数
+private static final int threads = 10;
+ // 用于计数线程是否执行完成
+static CountDownLatch countDownLatch = new CountDownLatch(threads);
+
+public static void newWorkStealingPool(){
+    //创建一个抢占式的线程池
+    System.out.println(&quot;---- start ----&quot;);
+    ExecutorService executorService = Executors.newWorkStealingPool(5);
+    for (int i = 0; i &lt; threads; i++) {
+        executorService.execute(() -&gt; {
+            try {
+                System.out.println(Thread.currentThread().getName());
+            } catch (Exception e) {
+                System.out.println(e);
+            } finally {
+                countDownLatch.countDown();
+            }
+        });
+    }
+    try {
+        countDownLatch.await();
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    System.out.println(&quot;---- end ----&quot;);
+}   </code></pre><p>输出结果  </p>
+<pre><code>---- start ----
+ForkJoinPool-1-worker-2
+ForkJoinPool-1-worker-1
+ForkJoinPool-1-worker-1
+ForkJoinPool-1-worker-1
+ForkJoinPool-1-worker-3
+ForkJoinPool-1-worker-2
+ForkJoinPool-1-worker-1
+ForkJoinPool-1-worker-4
+ForkJoinPool-1-worker-2
+ForkJoinPool-1-worker-3
+---- end ----</code></pre><p>来看看newWorkStealingPool的构造函数：  </p>
+<pre><code>/**
+    * Creates a thread pool that maintains enough threads to support
+    * the given parallelism level, and may use multiple queues to
+    * reduce contention. The parallelism level corresponds to the
+    * maximum number of threads actively engaged in, or available to
+    * engage in, task processing. The actual number of threads may
+    * grow and shrink dynamically. A work-stealing pool makes no
+    * guarantees about the order in which submitted tasks are
+    * executed.
+    *
+    * @param parallelism the targeted parallelism level
+    * @return the newly created thread pool
+    * @throws IllegalArgumentException if {@code parallelism &lt;= 0}
+    * @since 1.8
+*/
+public static ExecutorService newWorkStealingPool(int parallelism) {
+    return new ForkJoinPool(parallelism,
+        ForkJoinPool.defaultForkJoinWorkerThreadFactory,
+        null, true);
+}</code></pre><p>从上面代码的介绍，最明显的用意就是它是一个并行的线程池，参数中传入的是一个线程并发的数量，这里和之前就有很明显的区别，前面4种线程池都有核心线程数、最大线程数等等，而这就使用了一个并发线程数解决问题。从介绍中，还说明这个线程池不会保证任务的顺序执行，也就是 WorkStealing 的意思，抢占式的工作。  </p>
+<p>如下图，任务的执行是无序的，哪个线程抢到任务，就由它执行：<br><img src="/blog/img/2020/03/17/抢占式线程池.jpg"><br> </p>
+<h2 id="7-使用线程池的优点"><a href="#7-使用线程池的优点" class="headerlink" title="7.使用线程池的优点"></a>7.使用线程池的优点</h2><p>1.重用线程池的线程，避免因为线程的创建和销毁锁带来的性能开销。<br>2.有效控制线程池的最大并发数，避免大量的线程之间因抢占系统资源而阻塞。<br>3.能够对线程进行简单的管理，并提供一下特定的操作如：可以提供定时、定期、单线程、并发数控制等功能。   </p>
+<p><strong>PS:在线程池的编程模式下，任务是提交给整个线程池，而不是直接提交给某个线程，线程池在拿到任务后，就在内部寻找是否有空闲的线程，如果有，则将任务交给某个空闲的线程。</strong>  </p>
+<h2 id="8-参考文章"><a href="#8-参考文章" class="headerlink" title="8.参考文章"></a>8.参考文章</h2><p><a href="https://blog.csdn.net/hnd978142833/article/details/80253784" target="_blank" rel="noopener">https://blog.csdn.net/hnd978142833/article/details/80253784</a><br><a href="https://blog.csdn.net/tjbsl/article/details/98480843" target="_blank" rel="noopener">https://blog.csdn.net/tjbsl/article/details/98480843</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Calendar日历类的简单使用 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="Calendar 类是一个抽象类，为我们提供了关于日期计算的相关功能，比如：年、月、日、时、分、秒的展示和计算。  
+YEAR(年份) MONTH(月份从0开始) DATE(一月的某天) HOUR(,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Calendar日历类的简单使用</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">Calendar日历类的简单使用</h1>
+        <div class="stuff">
+            <span>八月 19, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>Calendar 类是一个抽象类，为我们提供了关于日期计算的相关功能，比如：年、月、日、时、分、秒的展示和计算。  </p>
+<pre><code>YEAR(年份) MONTH(月份从0开始) DATE(一月的某天) HOUR(指示上午或下午的小时)
+HOUR_F_DAY(指示一天中的小时) DAY_OF_WEEK(一个星期中的某天) DAY_OF_MONTH(一个月中的某天) DAY_OF_YEAR(一年中的某天)
+DAY_OF_WEEK_IN_MONTH(一个月中的第几个星期，从1号开始算起，1-7号才算第一周) 
+WEEK_OF_MONTH(指示当前月中的星期数，或者说是本月的第几周，日历上显示的第几周) 
+WEEK_OF_YEAR(指示当前年终的星期数，或者说是本年的第几周)</code></pre><p>其中关于DAY_OF_WEEK_IN_MONTH需要注意的地方是：  </p>
+<pre><code>1.在网上DAY_OF_WEEK_IN_MONTH有另外一种说法，表示某个月的第几个星期几，与DAY_OF_WEEK一起使用，可以指定唯一日期(这个说法也没错)
+2.DAY_OF_WEEK_IN_MONTH是从每个月1号开始算第一周的第一天,与WEEK_OF_MONTH不同(WEEK_OF_MONTH是日历上显示是第几周，就是第几周)
+3.所以DAY_OF_MONTH 1 到 7 总是对应于 DAY_OF_WEEK_IN_MONTH 1；8 到 14 总是对应于 DAY_OF_WEEK_IN_MONTH 2，依此类推。
+4.又因为1-7号一定把星期一到星期日都占全了，所以不管是哪天，都是本月的第一个星期N。8-14号，一样，不管是哪天，前面1-7号一定有一个星期N了，那么它就是第二个星期N。
+具体信息请参考此文章：http://www.mytju.com/classcode/news_readNews.asp?newsID=97</code></pre><a id="more"></a>
+
+<p>使用说明：  </p>
+<pre><code>public class CalendarTest {
+
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+
+    public static void main(String[] args) {
+        //通过 Calendar类的静态方法getInstance获得。
+        Calendar ca = Calendar.getInstance();
+        System.out.println(&quot;初始化日期===&gt;&quot;+dateFormat.format(ca.getTime()));
+        ca.clear();
+
+        //void set(int field, int value) 将给定的日历字段设置为给定值。
+        ca.set(Calendar.YEAR, 2019);
+        ca.set(Calendar.MONTH, 7);//注意,Calendar对象默认一月为0 ,这里指的是8月份
+        ca.set(Calendar.DATE, 7);
+        ca.set(Calendar.HOUR, 12);
+        ca.set(Calendar.MINUTE, 30);
+        ca.set(Calendar.SECOND, 00);
+        System.out.println(&quot;指定日期1===&gt;&quot;+dateFormat.format(ca.getTime()));
+        ca.clear();
+
+        //void set(int year,int month,int date)//设置年月日。
+        ca.set(2019, 7, 8);
+        System.out.println(&quot;指定日期2===&gt;&quot;+dateFormat.format(ca.getTime()));
+        ca.clear();
+
+        //void set(int year, int month, int date, int hourOfDay, int minute)//设置年月日时分
+        ca.set(2019, 7, 8,13,50);
+        System.out.println(&quot;指定日期3===&gt;&quot;+dateFormat.format(ca.getTime()));
+        ca.clear();
+
+        //void set(int year, int month, int date, int hourOfDay, int minute, int second)//设置年月日时分秒
+        ca.set(2019, 7, 8,13,50,30);
+        System.out.println(&quot;指定日期4===&gt;&quot;+dateFormat.format(ca.getTime()));
+        ca.clear();
+
+        //void setTime(Date date);//使用给定的 Date 设置此 Calendar 的时间。
+        ca.setTime(new Date());
+        System.out.println(&quot;指定日期5===&gt;&quot;+dateFormat.format(ca.getTime()));
+        ca.clear();
+
+        ca.set(2019, 7, 7,22,30,30);
+
+        String[] mon = {&quot;一月&quot;,&quot;二月&quot;,&quot;三月&quot;,&quot;四月&quot;,&quot;五月&quot;,&quot;六月&quot;,&quot;七月&quot;,&quot;八月&quot;,&quot;九月&quot;,&quot;十月&quot;,&quot;十一月&quot;,&quot;十二月&quot;};  
+        String[] week = {&quot;&quot;,&quot;星期日&quot;,&quot;星期一&quot;,&quot;星期二&quot;,&quot;星期三&quot;,&quot;星期四&quot;,&quot;星期五&quot;,&quot;星期六&quot;};
+
+        //int  get(int field)//返回给定日历字段的值。如：int month = acobj.get(Calendar.MONTH);
+        int month = ca.get(Calendar.MONTH);
+        System.out.println(&quot;当前月份====&gt;&quot;+mon[month]);
+
+        //获取当前日期 Date
+        Date date = ca.getTime();
+        System.out.println(&quot;当前日期====&gt;&quot;+date);
+
+        //返回从1970.1.1   00：00：00到该日历的毫秒数
+        long ms = ca.getTimeInMillis();
+        System.out.println(&quot;获取毫秒数====&gt;&quot;+ms);
+
+        //当前月份天数
+        int day = ca.getActualMaximum(Calendar.DAY_OF_MONTH);
+        System.out.println(&quot;本月份的天数====&gt;&quot;+day);
+
+        System.out.println(&quot;指示上午或下午的小时===&gt;&quot;+ca.get(Calendar.HOUR));
+        System.out.println(&quot;指示一天中的小时===&gt;&quot;+ca.get(Calendar.HOUR_OF_DAY));
+        System.out.println(&quot;一个星期中的某天===&gt;&quot;+week[ca.get(Calendar.DAY_OF_WEEK)]);//星期天算第一天,这里返回的是4，代表星期三
+        System.out.println(&quot;一个月中的某天===&gt;&quot;+ca.get(Calendar.DAY_OF_MONTH));
+        System.out.println(&quot;一年中的某天===&gt;&quot;+ca.get(Calendar.DAY_OF_YEAR));
+        //一个月中的第几个星期
+        System.out.println(&quot;DAY_OF_WEEK_IN_MONTH===&gt;&quot;+ca.get(Calendar.DAY_OF_WEEK_IN_MONTH));//返回1
+        //本月的第几个星期几
+        String s = String.format(&quot;本月的第%s个%s&quot;, ca.get(Calendar.DAY_OF_WEEK_IN_MONTH),week[ca.get(Calendar.DAY_OF_WEEK)]);
+        System.out.println(&quot;本月的第几个星期几===&gt;&quot;+s);//本月的第1个星期三
+        //本月的第几周
+        System.out.println(&quot;WEEK_OF_MONTH===&gt;&quot;+ca.get(Calendar.WEEK_OF_MONTH));//返回2
+        //本年的第几周
+        System.out.println(&quot;WEEK_OF_MONTH===&gt;&quot;+ca.get(Calendar.WEEK_OF_YEAR));
+        //返回一周的第一天
+        System.out.println(&quot;返回一周的第一天===&gt;&quot;+ca.getFirstDayOfWeek());
+
+        //日期增减计算 例如：下个月今天减一天
+        ca.add(Calendar.MONTH, 1);
+        ca.add(Calendar.DATE, -1);
+        System.out.println(&quot;日期增减计算,下个月今天减一天====&gt;&quot;+dateFormat.format(ca.getTime()));
+
+
+    }
+}</code></pre><p>输出结果:  </p>
+<pre><code>初始化日期===&gt;2019-08-19 15:34:30
+指定日期1===&gt;2019-08-07 12:30:00
+指定日期2===&gt;2019-08-08 00:00:00
+指定日期3===&gt;2019-08-08 13:50:00
+指定日期4===&gt;2019-08-08 13:50:30
+指定日期5===&gt;2019-08-19 15:34:30
+当前月份====&gt;八月
+当前日期====&gt;Wed Aug 07 22:30:30 CST 2019
+获取毫秒数====&gt;1565188230000
+本月份的天数====&gt;31
+指示上午或下午的小时===&gt;10
+指示一天中的小时===&gt;22
+一个星期中的某天===&gt;星期三
+一个月中的某天===&gt;7
+一年中的某天===&gt;219
+DAY_OF_WEEK_IN_MONTH===&gt;1
+本月的第几个星期几===&gt;本月的第1个星期三
+WEEK_OF_MONTH===&gt;2
+WEEK_OF_MONTH===&gt;32
+返回一周的第一天===&gt;1
+日期增减计算,下个月今天减一天====&gt;2019-09-06 22:30:30</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

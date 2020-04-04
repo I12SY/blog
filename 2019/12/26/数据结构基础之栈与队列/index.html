@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据结构基础之栈与队列 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="栈与队列属于逻辑结构（逻辑结构是抽象的概念，它依赖于物理结构而存在），它们的物理实现既可以利用数组,也可以利用链表来完成。   
+1.什么是栈？首先举一个我们生活中的例子（羽毛球筒）：    
+
+假,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据结构基础之栈与队列</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">数据结构基础之栈与队列</h1>
+        <div class="stuff">
+            <span>十二月 26, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p><strong>栈与队列属于逻辑结构（逻辑结构是抽象的概念，它依赖于物理结构而存在），它们的物理实现既可以利用数组,也可以利用链表来完成。</strong>   </p>
+<h2 id="1-什么是栈？"><a href="#1-什么是栈？" class="headerlink" title="1.什么是栈？"></a>1.什么是栈？</h2><p>首先举一个我们生活中的例子（羽毛球筒）：    </p>
+<blockquote>
+<p>假如我们有一个又细又长的圆筒，圆筒一端封闭，另一端开口。往圆筒里面放入羽毛球，先放入的靠近圆筒底部，后放入的靠近圆筒入口。<br>那么，要想取出这些羽毛球，则只能按照和放入顺序相反的顺序来取，先取出后放入的，再取出先放入的，而不可能把最里面最先放入的羽毛球优先取出来。</p>
+</blockquote>
+<blockquote>
+<p>栈是一种线性逻辑结构，可以利用数组实现，也可以利用链表来实现。栈包含入栈和出栈操作，遵循<strong>先入后出</strong>（First In Last Out，简称FILO）的原则。最早放入的元素称为<strong>栈底（bottom）</strong>，最后进入的元素存放的位置叫做<strong>栈顶（top）</strong>。 </p>
+</blockquote>
+<a id="more"></a>
+<p><strong>1）.数组实现</strong>  </p>
+<pre><code>public class ArrayStack {
+    private int[] stack;
+    private int top;//栈顶指针
+
+    public ArrayStack(int capacity){
+        stack = new int[capacity];
+        top=0;
+    }
+
+    /**
+     * 入栈
+     * @param element 入栈的元素
+     */
+    public void push(int element) throws Exception{
+        if(top == stack.length){
+            throw new Exception(&quot;栈已满&quot;);
+        }
+        stack[top++]=element;
+    }
+
+    /**
+     * 出栈
+     * @return
+     */
+    public int pop()throws Exception{
+        if(top == 0){
+            throw new Exception(&quot;栈为空&quot;);
+        }
+        return stack[--top];
+    }
+
+    /**
+     * 获取栈顶元素，只查看，不删除
+     * @return
+     * @throws Exception
+     */
+    public int getTop()throws Exception{
+        if(top == 0){
+            throw new Exception(&quot;栈为空&quot;);
+        }
+        return stack[top-1];
+    }
+
+    public static void main(String[] args) throws Exception {
+        ArrayStack arrayStack = new ArrayStack(10);
+        arrayStack.push(3);
+        arrayStack.push(5);
+        arrayStack.push(1);
+        arrayStack.push(4);
+        arrayStack.push(9);
+        System.out.println(arrayStack.pop());
+        System.out.println(arrayStack.pop());
+    }
+}</code></pre><p><strong>2）.链表实现</strong>  </p>
+<pre><code>public class LinkedStack {
+
+    //栈顶
+    private Node top;
+    /**
+     * 入栈
+     * @param element 入栈的元素
+     */
+    public void push(int element){
+        Node currentNode = new Node(element);
+        if(top == null){
+            top = currentNode;
+        }else{
+            currentNode.next=top;
+            top=currentNode;
+        }
+    }
+
+    /**
+     * 出栈
+     * @return 出栈的元素
+     */
+    public int pop()throws Exception{
+        if(top == null){
+            throw new Exception(&quot;栈为空&quot;);
+        }
+        int element = top.data;
+        Node next = top.next;
+        top = next;
+        return element;
+    }
+
+    private class Node{
+        Node next;
+        int data;
+        public Node(int data){
+            this.data=data;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        LinkedStack linkedStack = new LinkedStack();
+        linkedStack.push(1);
+        linkedStack.push(2);
+        linkedStack.push(3);
+        System.out.println(linkedStack.pop());
+        System.out.println(linkedStack.pop());
+        System.out.println(linkedStack.pop());
+    }
+}</code></pre><p><strong>PS:入栈和出栈只会影响到最后一个元素，不涉及其他元素的整体移动，所以无论是以数组还是以链表实现，入栈、出栈的时间复杂度都是O(1)。</strong></p>
+<h2 id="2-什么是队列？"><a href="#2-什么是队列？" class="headerlink" title="2.什么是队列？"></a>2.什么是队列？</h2><p>首先举一个生活中的例子（单行汽车隧道）：  </p>
+<blockquote>
+<p>加入公路上有一条单行隧道，所有通过隧道的车辆只允许从隧道入口驶入，从隧道出口驶出，不允许逆行。<br>因此，要想让车辆驶出隧道，只能按照它们驶入隧道的顺序，先驶入的车辆先驶出，后驶入的车辆后驶出，任何车辆都无法跳过它前面的车辆提前驶出。  </p>
+</blockquote>
+<blockquote>
+<p>队列也是一种线性逻辑结构，可以用数组实现，也可以用链表实现。队列包含入队和出队操作，遵循<strong>先入先出</strong>（First In First Out，简称FIFO）原则。队列的出口段叫<strong>队头</strong>(front)，队列的入口段叫<strong>队尾</strong>(rear)。  </p>
+</blockquote>
+<p><strong>1）.数组实现</strong>  </p>
+<pre><code>public class ArrayQueue {
+
+    private int[] array;
+    //队尾
+    private int rear;
+
+    public ArrayQueue(int capacity){
+        array = new int[capacity];
+    }
+
+    /**
+     * 入队
+     * @param element 入队的元素
+     */
+    public void enqueue(int element) throws Exception{
+        if(rear == array.length){
+            throw new Exception(&quot;队列已满&quot;);
+        }
+        array[rear++] = element;
+    }
+
+    /**
+     * 出队
+     * @return 出队元素
+     */
+    public int dequeue()throws Exception{
+        if(rear==0){
+            throw new Exception(&quot;队列为空&quot;);
+        }
+        int topElement = array[0];
+        //后续队列元素前挪
+        for(int i=0;i&lt;rear-1;i++){
+            array[i]=array[i+1];
+        }
+        //队尾前移
+        rear--;
+        return topElement;
+    }
+
+    public void output(){
+        for(int i=0;i&lt;rear;i++){
+            System.out.print(array[i]+&quot; &quot;);
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) throws Exception {
+        ArrayQueue queue = new ArrayQueue(5);
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        queue.enqueue(4);
+        queue.enqueue(5);
+        queue.output();
+        System.out.println(queue.dequeue());
+        System.out.println(queue.dequeue());
+        queue.output();
+        queue.enqueue(6);
+        queue.output();
+    }
+}</code></pre><p><strong>这里有个问题就是每次队头出队，后续元素都要整体移动，有点麻烦。这里可以使用循环队列进行优化一下。</strong><br><img src="/blog/img/2019/12/26/循环队列1.png"><br><img src="/blog/img/2019/12/26/循环队列2.png"><br><strong>2）.循环队列实现</strong> </p>
+<pre><code>public class MyQueue {
+
+    private int[] array;
+    //队头
+    private int front; 
+    //队尾
+    private int rear;
+
+    public MyQueue(int capacity){
+        array = new int[capacity];
+    }
+
+    /**
+     * 入队
+     * @param element 入队元素
+     */
+    public void enqueue(int element)throws Exception{
+        if((rear+1)%array.length == front){
+            throw new Exception(&quot;队列已满&quot;);
+        }
+        array[rear] = element;
+        rear = (rear+1)%array.length;
+    }
+
+    /**
+     * 出队
+     * @return 出队元素
+     */
+    public int dequeue()throws Exception{
+        if(rear == front){
+            throw new Exception(&quot;队列为空&quot;);
+        }
+        int element = array[front];
+        front = (front+1)%array.length;
+        return element;
+    }
+
+    public void output(){
+        for(int i=front;i != rear;i=i%array.length){
+            System.out.print(array[i]+&quot; &quot;);
+            i++;
+        }
+        System.out.println();
+    }
+
+    public void output2(){
+        for(int i=0;i&lt;array.length;i++){
+            System.out.print(array[i]+&quot; &quot;);
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) throws Exception {
+        MyQueue queue = new MyQueue(5);
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        queue.enqueue(4);
+        queue.output();
+        System.out.println(queue.dequeue());
+        System.out.println(queue.dequeue());
+        queue.output();
+    }
+}</code></pre><p><strong>循环队列不但充分的利用了数组的空间，同时还避免了元素整体移动的麻烦，出队入队时间复杂度都变为了O(1)。</strong><br><strong>PS:为什么队尾指向的位置永远空出一位呢？</strong><br>因为想区别队空和队满的条件.<br>队空条件:Q.front==Q.rear;<br>队满条件:(Q.rear+1)%Maxsize==Q.front</p>
+<p><strong>3）.链表实现</strong>  </p>
+<pre><code>public class LinkedQueue {
+
+    //队头
+    private Node head;
+    //队尾
+    private Node last;
+
+    /**
+     * 入队
+     * @param element 入队元素
+     */
+    public void enqueue(int element){
+        Node currentNode = new Node(element);
+        if(head == null){
+            head = currentNode;
+            last = currentNode;
+        }else{
+            last.next = currentNode;
+            last = currentNode;
+        }
+    }
+
+    /**
+     * 出队
+     * @return
+     */
+    public int dequeue()throws Exception{
+        if(head == null){
+            throw new Exception(&quot;队列为空&quot;);
+        }
+        int headElement = head.data;
+        head = head.next;
+        return headElement;
+    }
+
+    /**
+     * 输出元素
+     */
+    public void output(){
+        Node temp = head;
+        while(temp!=null){
+            System.out.print(temp.data+&quot; &quot;);
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    private class Node{
+        int data;
+        Node next;
+        public Node(int data){
+            this.data=data;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        LinkedQueue linkedQueue = new LinkedQueue();
+        linkedQueue.enqueue(1);
+        linkedQueue.enqueue(2);
+        linkedQueue.enqueue(3);
+        linkedQueue.enqueue(4);
+        linkedQueue.enqueue(5);
+        linkedQueue.output();
+        System.out.println(linkedQueue.dequeue());
+        System.out.println(linkedQueue.dequeue());
+        linkedQueue.output();
+        linkedQueue.enqueue(6);
+        linkedQueue.enqueue(7);
+        linkedQueue.output();
+    }
+}</code></pre><h2 id="3-栈与队列的应用场景？"><a href="#3-栈与队列的应用场景？" class="headerlink" title="3.栈与队列的应用场景？"></a>3.栈与队列的应用场景？</h2><p><strong>1）.栈的应用</strong><br>栈的输出顺序与输入顺序相反，所以栈通常用于对“历史”的回溯，也就是逆流而上追溯历史。<br>例如实现递归的逻辑，就可以用栈来代替，因为栈可以回溯方法的调用链。<br><strong>2）.队列的应用</strong><br>队列的输出顺序与输入顺序相同，所以队列通常用于对“历史”的回放，也就是按照“历史”顺序，把“历史”重演一遍。<br>例如在多线程中，争夺公平锁的等待队列，就是按照访问顺序来决定线程在队列中的次序的。<br>再如网络爬虫实现网站抓取时，也是把待抓取的网站URL存入队列中，再按照存入队列的顺序来依次抓取和解析的。<br><strong>3）.双端队列</strong><br>双端队列这种数据结构综合了栈和队列的优点，对双端队列来说，从队头一端可以入队或出队，从队尾一端也可以入队或出队。<br>例子暂无，后续补充。<br><strong>4）.优先队列</strong><br>还有一种队列，他遵循的不是先入先出，而是谁的优先级最高，谁先出队。<br>优先队列已经不属于线性数据结构的范畴了，它是基于二叉堆来实现的。关于优先队列的原理和使用情况，后续补充。  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

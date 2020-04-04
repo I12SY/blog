@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>一道关于Integer的面试题 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="下面给出题目，想想分别输出什么？  
+  
+
+public class Test {
+    public static void main(String[] args) {
+        Int,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">一道关于Integer的面试题</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">一道关于Integer的面试题</h1>
+        <div class="stuff">
+            <span>三月 30, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>下面给出题目，想想分别输出什么？  </p>
+<a id="more"></a>  
+
+<pre><code>public class Test {
+    public static void main(String[] args) {
+        Integer a = 100;
+        Integer b = 100;
+        int c=100;
+        System.out.println(a==b);//1
+        System.out.println(a==c);//2
+
+        Integer a2 = 200;
+        Integer b2 = 200;
+        int d=200;
+        System.out.println(a2==b2);//3
+        System.out.println(a2==d);//4
+
+        Integer a3 = new Integer(100);
+        Integer b3 = new Integer(100);
+        System.out.println(a3==b3);//5
+        System.out.println(a==a3);//6
+        System.out.println(c==a3);//7
+
+        Integer a4 = new Integer(200);
+        Integer b4 = new Integer(200);
+        System.out.println(a4==b4);//8
+        System.out.println(a2==a4);//9
+        System.out.println(d==a4);//10
+    }
+}</code></pre><p>运行结果  </p>
+<pre><code>true --------1
+true --------2
+false --------3
+true --------4
+false --------5
+false --------6
+true --------7
+false --------8
+false --------9
+true --------10</code></pre><h3 id="1-为什么1输出true-而3输出false？"><a href="#1-为什么1输出true-而3输出false？" class="headerlink" title="1.为什么1输出true,而3输出false？"></a>1.为什么1输出true,而3输出false？</h3><p>我们知道==比较的是两个对象的引用，这里的a b a2 b2都是新建出来的对象，按理说都应该输入false才对。这就是这道题的有趣之处，无论是面试题还是论坛讨论区，这道题的出场率都很高。原理其实很简单，我们去看下Integer.java这个类就了然了。    </p>
+<pre><code>public static Integer valueOf(int i) {
+   return i &gt;= 128 || i &lt; -128 ? new Integer(i) : SMALL_VALUES[i + 128];
+ }
+
+ /**
+  * A cache of instances used by {@link Integer#valueOf(int)} and auto-boxing
+  */
+ private static final Integer[] SMALL_VALUES = new Integer[256];
+
+ static {
+   for (int i = -128; i &lt; 128; i++) {
+     SMALL_VALUES[i + 128] = new Integer(i);
+   }
+ }</code></pre><p><strong>当我们声明一个Integer c = 100;的时候。此时会进行自动装箱操作，简单点说，也就是把基本数据类型转换成Integer对象，而转换成Integer对象正是调用的valueOf方法，可以看到，Integer中把-128~127 缓存了下来。</strong>官方解释是小的数字使用的频率比较高，所以为了优化性能，把这之间的数缓存了下来。这就是为什么这道题的答案回事false和ture了。当声明的Integer对象的值在-128-127之间的时候，引用的是同一个对象，所以结果是true。  </p>
+<h3 id="2-Integer与int比较"><a href="#2-Integer与int比较" class="headerlink" title="2.Integer与int比较"></a>2.Integer与int比较</h3><p>上面的例子中2、4、7、10输出的结果为true，而5、6、8、9的输出结果为false，又是什么情况呢？  </p>
+<p>首先我们来看5这个例子，按上一题来说Integer不是把-128~127缓存起来了吗？这不是应该为true吗，但是你仔细看，这里的Integer是我们自己new出来的，并不是用的缓存，所以结果是false，6、8、9的输出结果同理。  </p>
+<p>我们再来看看10这个输出结果为什么是true呢？首先这里的值为200，肯定和我们所知的Integer缓存没有关系。既然和缓存没有关系，a4是新new出来的对象，按理说输出应该是false才对。但是你要注意了d这里是int类型。当int和Integer进行==比较的时候，Java会把Integer进行自动拆箱，也就是把Integer转成int类型，所以这里进行比较的是int类型的值，所以结果即为true。2、4、7输出结果同理。  </p>
+<p><strong>总结一下：</strong>  </p>
+<ul>
+<li>（1）int与int比较由于比较的字面量，始终是true</li>
+<li>(2) int与Integer比较，由于integer会发生自动拆箱，始终是ture</li>
+<li>（3）Integer与Integer比较：<ul>
+<li>a.若两个都是new，始终都是false</li>
+<li>b.若一个new，一个非new(包括字面量和Integer.valueOf()等)，那么一个是自动装箱的对象，一个是new的对象，始终是false</li>
+<li>c.两个都不是new，都会发生自动装箱（调用 Integer.valueOf()自动装箱），就要看值的范围了，在-128-127之间，会取IntegerCache里的对象，这样就是true了，不在范围之间，就是false了</li>
+</ul>
+</li>
+</ul>
+<p><strong>参考文章</strong><br><a href="https://blog.csdn.net/jonesAriven/article/details/98513132" target="_blank" rel="noopener">https://blog.csdn.net/jonesAriven/article/details/98513132</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

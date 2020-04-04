@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>访问者模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="在访问者模式(Visitor Pattern)中，我们使用了一个访问者类，他改变了元素类的执行算法。通过这种方式，元素的执行算法可以随着访问者改变而改变。这种类型的设计模式属于行为型模式。根据模式，,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">访问者模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">访问者模式</h1>
+        <div class="stuff">
+            <span>二月 28, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>在访问者模式(Visitor Pattern)中，我们使用了一个访问者类，他改变了元素类的执行算法。通过这种方式，元素的执行算法可以随着访问者改变而改变。这种类型的设计模式属于行为型模式。根据模式，元素对象已经接受访问者对象，这样对访问者对象就可以处理元素对象上的操作。  </p>
+<a id="more"></a>  
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>表示一个作用于某对象结构中的个元素操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作（主要将数据结构与数据操作分离）。<br><strong>主要解决：</strong>稳定的数据结构和异变的操作耦合问题。<br><strong>何时使用：</strong>需要对一个对象结构中的对象进行很多不同的并且不相关的操作，而需要避免让这些操作”污染”这些对象的类，使用访问者模式将这些封装到类中。<br><strong>如何解决：</strong>在数据基础类里面增加一个对外提供接待访问者的接口。<br><strong>关键代码：</strong>在数据基础类里面有一个方法接受访问者，将自身引用传入访问者。<br><strong>应用实例：</strong>您在朋友家做客，您是访问者，朋友接受您的访问，您通过朋友的描述，然后对朋友的描述做出一个判断，这就是访问者模式。<br><strong>优点：</strong>1、符合单一职责原则。2、优秀的扩展性。3、灵活性。<br><strong>缺点：</strong>1、具体元素对访问者公布细节，违反了迪米特原则。2、具体元素变更比较困难。3、违反了依赖倒置原则，依赖了具体类，没有依赖抽象。<br><strong>使用场景：</strong>1、对象结构中对象对应的类很少改变，但经常需要在此对象结构上定义新的操作。2、需要对一个对象结构中的对象进行很多不同的并且不相关的操作，而需要避免让这些操作”污染”这些对象的类，也不希望在增加新操作时修改这些类。<br><strong>注意事项：</strong>访问者可以对功能进行统一，可以做报表、UI、拦截器与过滤器。 </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><img src="/blog/img/2020/02/28/访问者模式结构图.png">  
+
+<h2 id="3-实例"><a href="#3-实例" class="headerlink" title="3.实例"></a>3.实例</h2><h3 id="3-1男人和女人！"><a href="#3-1男人和女人！" class="headerlink" title="3.1男人和女人！"></a>3.1男人和女人！</h3><img src="/blog/img/2020/02/28/男人与女人1.png">   
+<img src="/blog/img/2020/02/28/男人与女人2.png">   
+
+<h3 id="3-2简单的面向对象实现！"><a href="#3-2简单的面向对象实现！" class="headerlink" title="3.2简单的面向对象实现！"></a>3.2简单的面向对象实现！</h3><p>“人”类，是”男人”和”女人”类的抽象类  </p>
+<pre><code>public abstract class Person {
+    protected String action;
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+    //得到结论或反应
+    public abstract void getConclusion();
+} </code></pre><p>“男人”类  </p>
+<pre><code>class Man extends Person{
+
+    @Override
+    public void getConclusion() {
+        if(action.equals(&quot;成功&quot;)){
+            System.out.println(&quot;男人&quot;+action+&quot;时，背后多半有一个伟大的女人。&quot;);
+        }else if(action.equals(&quot;失败&quot;)){
+            System.out.println(&quot;男人&quot;+action+&quot;时，闷头喝酒，谁也不用劝。&quot;);
+        }else if(action.equals(&quot;恋爱&quot;)){
+            System.out.println(&quot;男人&quot;+action+&quot;时，凡是不懂也要装懂。&quot;);
+        }
+    }
+}</code></pre><p>“女人”类  </p>
+<pre><code>class Woman extends Person{
+
+    @Override
+    public void getConclusion() {
+        if(action.equals(&quot;成功&quot;)){
+            System.out.println(&quot;女人&quot;+action+&quot;时，背后大多有一个不成功的男人。&quot;);
+        }else if(action.equals(&quot;失败&quot;)){
+            System.out.println(&quot;女人&quot;+action+&quot;时，眼泪汪汪，谁也劝不了。&quot;);
+        }else if(action.equals(&quot;恋爱&quot;)){
+            System.out.println(&quot;女人&quot;+action+&quot;时，遇事懂也装作不懂。&quot;);
+        }
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Client {
+
+    public static void main(String[] args) {
+        List&lt;Person&gt; persons = new ArrayList&lt;&gt;();
+
+        Person man1 = new Man();
+        man1.setAction(&quot;成功&quot;);
+        persons.add(man1);
+        Person woman1 = new Woman();
+        woman1.setAction(&quot;成功&quot;);
+        persons.add(woman1);
+
+        Person man2 = new Man();
+        man2.setAction(&quot;失败&quot;);
+        persons.add(man2);
+        Person woman2 = new Woman();
+        woman2.setAction(&quot;失败&quot;);
+        persons.add(woman2);
+
+        Person man3 = new Man();
+        man3.setAction(&quot;恋爱&quot;);
+        persons.add(man3);
+        Person woman3 = new Woman();
+        woman3.setAction(&quot;恋爱&quot;);
+        persons.add(woman3);
+
+        for (Person person : persons) {
+            person.getConclusion();
+        }
+    }
+}</code></pre><p>运行结果  </p>
+<pre><code>男人成功时，背后多半有一个伟大的女人。
+女人成功时，背后大多有一个不成功的男人。
+男人失败时，闷头喝酒，谁也不用劝。
+女人失败时，眼泪汪汪，谁也劝不了。
+男人恋爱时，凡是不懂也要装懂。
+女人恋爱时，遇事懂也装作不懂。</code></pre><p>虽然代码算是面向对象的编程了，但是在’男人’类和’女人’类当中的那些if······else······很是碍眼。<br>而且如果现在要增加一个’结婚’状态，需要改什么？<br>这两个类都需要增加分支判断了。怎么处理这种情况？  </p>
+<h3 id="3-3用了模式的实现"><a href="#3-3用了模式的实现" class="headerlink" title="3.3用了模式的实现"></a>3.3用了模式的实现</h3><p>结构图  </p>
+<img src="/blog/img/2020/02/28/男人与女人结构图.png">  
+
+<p>‘状态’的抽象类  </p>
+<pre><code>public abstract class Action {
+    //得到男人结论或反应
+    public abstract void getManConclusion(Man concreteElementA);
+    //得到女人结论或反应
+    public abstract void getWomanConclusion(Woman concreteElementB);
+}</code></pre><p>‘人’的抽象类  </p>
+<pre><code>public abstract class Person {
+    //接受
+    public abstract void accept(Action visitor);
+}</code></pre><p>这里的关键就在于人就只分为男人和女人，这个性别的分类是稳定的，所以可以在状态类中，增加’男人反应’和’女人反应’两个方法，方法的个数是稳定的，不会很容易的发生变化。而’人’的抽象类中有一个抽象方法’接受’，它是用来获得’状态’对象的。每一种具体状态都继承’状态’抽象类，实现两个反应的方法。 </p>
+<p>具体’状态类’  </p>
+<pre><code>/成功
+class Success extends Action{
+
+    @Override
+    public void getManConclusion(Man concreteElementA) {
+        System.out.println(&quot;男人成功时，背后多半有一个伟大的女人。&quot;);
+    }
+
+    @Override
+    public void getWomanConclusion(Woman concreteElementB) {
+        System.out.println(&quot;女人成功时，背后大多有一个不成功的男人。&quot;);
+    }
+}
+
+//失败
+class Failing extends Action{
+
+    @Override
+    public void getManConclusion(Man concreteElementA) {
+        System.out.println(&quot;男人失败时，闷头喝酒，谁也不用劝。&quot;);
+    }
+
+    @Override
+    public void getWomanConclusion(Woman concreteElementB) {
+        System.out.println(&quot;女人失败时，眼泪汪汪，谁也劝不了。&quot;);
+    }
+}
+
+//恋爱
+class Amativeness extends Action{
+
+    @Override
+    public void getManConclusion(Man concreteElementA) {
+        System.out.println(&quot;男人恋爱时，凡是不懂也要装懂。&quot;);
+    }
+
+    @Override
+    public void getWomanConclusion(Woman concreteElementB) {
+        System.out.println(&quot;女人恋爱时，遇事懂也装作不懂。&quot;);
+    }
+}</code></pre><p>“男人”类和”女人”类  </p>
+<pre><code>//男人
+class Man extends Person{
+
+    @Override
+    public void accept(Action visitor) {
+        //首先在客户程序中将具体状态作为参数传递给&quot;男人&quot;类
+        //完成了一次分派，然后&quot;男人&quot;类调用作为参数的&quot;具体状态&quot;
+        //中的方法&quot;男人反应&quot;，同时将自己(this)作为参数传递进去。
+        //这便完成了第二次分派
+        visitor.getManConclusion(this);
+    }
+}
+//女人
+class Woman extends Person{
+
+    @Override
+    public void accept(Action visitor) {
+        visitor.getWomanConclusion(this);
+    }
+}</code></pre><p>这里需要提一下当中用到的双分派技术，首先在客户程序中将具体状态作为参数传递给”男人”类完成了一次分派，然后”男人”类调用作为参数的”具体状态”中的方法”男人反应”，同时将自己(this)作为参数传递进去。这便完成了第二次分派。双分派意味着得到执行的操作决定于请求的种类和两个接收者的类型。’接受’方法就是一个双分派的操作，它得到执行的操作不仅决定于’状态类’的具体状态，还决定于它访问’人’的类别。  </p>
+<p>对象结构类 由于总是需要’男人’与’女人’在不同状态的对比，所以我们需要一个’对象结构’类来针对不同的’状态’遍历’男人’与’女人’，得到不同反应。  </p>
+<pre><code>public class ObjectStructure {
+    private List&lt;Person&gt; elements = new ArrayList&lt;&gt;();
+
+    //增加
+    public void attach(Person element){
+        elements.add(element);
+    }
+
+    //移除
+    public void detach(Person element){
+        elements.remove(element);
+    }
+
+    //查看显示
+    public void display(Action visitor){
+        for (Person person : elements) {
+            person.accept(visitor);
+        }
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Client {
+
+    public static void main(String[] args) {
+        ObjectStructure o = new ObjectStructure();
+        o.attach(new Man());
+        o.attach(new Woman());
+
+        //成功时的反应
+        Success v1 = new Success();
+        o.display(v1);
+
+        //失败时的反应
+        Failing v2 = new Failing();
+        o.display(v2);
+
+        //恋爱时的反应
+        Amativeness v3 = new Amativeness();
+        o.display(v3);
+    }
+}</code></pre><p>现在这么做的好处就是，如果我们现在要增加’结婚’的状态来考察’男人’和’女人’的反应，只需要增加一个’状态’子类，就可以在客户端调用来查看，不需要改动其他任何类的代码。  </p>
+<h2 id="4-访问者模式基本代码"><a href="#4-访问者模式基本代码" class="headerlink" title="4.访问者模式基本代码"></a>4.访问者模式基本代码</h2><p>Visitor类，为该对象结构中ConcreteElement的每一个类声明一个Visit操作。  </p>
+<pre><code>public abstract class Visitor {
+    public abstract void visitConcreteElementA(ConcreteElementA concreteElementA);
+    public abstract void visitConcreteElementB(ConcreteElementB concreteElementB);
+}</code></pre><p>ConcreteVisitor1和ConcreteVisitor2类，具体的访问者，实现每个有Visitor声明的操作。每个操作实现算法的一部分，而该算法片段乃是对应于结构中对象的类。  </p>
+<pre><code>class ConcreteVisitor1 extends Visitor{
+
+    @Override
+    public void visitConcreteElementA(ConcreteElementA concreteElementA) {
+        System.out.println(concreteElementA.getClass().getName()+&quot; 被  &quot;+this.getClass().getName()+&quot;  访问&quot;);
+    }
+
+    @Override
+    public void visitConcreteElementB(ConcreteElementB concreteElementB) {
+        System.out.println(concreteElementB.getClass().getName()+&quot; 被  &quot;+this.getClass().getName()+&quot;  访问&quot;);
+    }
+}
+
+class ConcreteVisitor2 extends Visitor{
+
+    @Override
+    public void visitConcreteElementA(ConcreteElementA concreteElementA) {
+        System.out.println(concreteElementA.getClass().getName()+&quot; 被  &quot;+this.getClass().getName()+&quot;  访问&quot;);
+    }
+
+    @Override
+    public void visitConcreteElementB(ConcreteElementB concreteElementB) {
+        System.out.println(concreteElementB.getClass().getName()+&quot; 被  &quot;+this.getClass().getName()+&quot;  访问&quot;);
+    }
+}</code></pre><p>Element类，定义一个accept操作，它以一个访问者为参数。  </p>
+<pre><code>public abstract class Element {
+    //接受
+    public abstract void accept(Visitor visitor);
+}</code></pre><p>ConcreteElementA和ConcreteElementB类，具体元素，实现accept操作。  </p>
+<pre><code>class ConcreteElementA extends Element{
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitConcreteElementA(this);
+    }
+
+    //其他相关方法
+    public void operationA(){
+
+    }
+}
+
+class ConcreteElementB extends Element{
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitConcreteElementB(this);
+    }
+
+    //其他相关方法
+    public void operationB(){
+
+    }
+}</code></pre><p>ObjectStructure类，能枚举它的元素，可以提供一个高层的接口以允许访问者访问它的元素。  </p>
+<pre><code>public class ObjectStructure {
+    private List&lt;Element&gt; elements = new ArrayList&lt;&gt;();
+
+    //增加
+    public void attach(Element element){
+        elements.add(element);
+    }
+
+    //移除
+    public void detach(Element element){
+        elements.remove(element);
+    }
+
+    public void accept(Visitor visitor){
+        for (Element person : elements) {
+            person.accept(visitor);
+        }
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Client {
+
+    public static void main(String[] args) {
+        ObjectStructure o = new ObjectStructure();
+        o.attach(new ConcreteElementA());
+        o.attach(new ConcreteElementB());
+
+        ConcreteVisitor1 v1 = new ConcreteVisitor1();
+        ConcreteVisitor2 v2 = new ConcreteVisitor2();
+
+        o.accept(v1);
+        o.accept(v2);
+    }
+}</code></pre><h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/visitor-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/visitor-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a> </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

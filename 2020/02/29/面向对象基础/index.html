@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>面向对象基础 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1. 类与实例对象是什么？类是什么？一切事物皆为对象，即所有的东西都是对象，对象就是可以看到、感觉到、听到、触摸到、尝到、或闻到的东西。准确的说，对象是一个自包含的实体，用一组可识别的特性和行为来标,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">面向对象基础</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">面向对象基础</h1>
+        <div class="stuff">
+            <span>二月 29, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-类与实例"><a href="#1-类与实例" class="headerlink" title="1. 类与实例"></a>1. 类与实例</h2><h3 id="对象是什么？类是什么？"><a href="#对象是什么？类是什么？" class="headerlink" title="对象是什么？类是什么？"></a>对象是什么？类是什么？</h3><p>一切事物皆为对象，即所有的东西都是对象，对象就是可以看到、感觉到、听到、触摸到、尝到、或闻到的东西。准确的说，<strong>对象是一个自包含的实体，用一组可识别的特性和行为来标识。</strong>面向对象编程，英文叫<strong>Object-Oriented Programming</strong>，其实就是针对对象来进行编程的意思。  </p>
+<a id="more"></a>   
+<p><strong>“类”：就是具有相同的属性和功能的对象的抽象的集合</strong>，看代码：  </p>
+<pre><code>public class Cat{
+    public String shout(){
+        return &quot;喵&quot;;
+    }
+}</code></pre><p>这里’class’<strong>是表示定义类的关键字</strong>，’Cat’就是类的名称，’shout’就是类的方法。  </p>
+<p><strong>“实例”：就是一个真实的对象。</strong>比如我们都是’人’，而你和我其实就是’人’类的实例了。而<strong>实例化就是创建对象的过程，使用new关键字来创建</strong>。  </p>
+<pre><code>private void button1_Click(Object sender,EventArgs e){
+    //将Cat类实例化
+    Cat cat = new Cat();
+    MessageBox.Show(cat.shout());
+}</code></pre><p>注意，Cat cat = new Cat();其实做了两件事。  </p>
+<pre><code>//声明一个Cat对象，对象名为cat
+Cat cat;
+//将此cat对象实例化
+cat = new Cat();</code></pre><p>Cat实例化后，等同于出生了一只小猫cat，此时就可以让小猫cat.shout()。在任何需要小猫叫的地方都可以实例化它。  </p>
+<h2 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2. 构造方法"></a>2. 构造方法</h2><p><strong>构造方法，又叫构造函数，其实就是对类进行初始化。构造方法与类同名，无返回值，也不需要void，在new时候调用</strong>。  
+在Cat cat = new Cat();中，new后面的Cat()其实就是构造方法。<br>有些不清楚的人可能会问，在Cat类当中没有写构造方法Cat()，怎么可以调用啊？<br>实际情况是这样的，<strong>所有类都有构造方法，如果你不编码则系统默认生成空的构造方法，若你有定义的构造方法，那么默认的构造方法就会失效了</strong>。  </p>
+<pre><code>public class Cat{
+    //声明Cat类的私有字符串变量name
+    private String name = &quot;&quot;;
+    //定义Cat类的构造方法，参数是输入一个字符串
+    public Cat(String name){
+        //将参数赋值给私有变量
+        this.name = name;
+    }        
+
+    public String shout(){
+        return &quot;我的名字叫&quot;+name+&quot; 喵&quot;;
+    }
+}
+
+private void button1_Click(Object sender,EventArgs e){
+    //将Cat类实例化
+    Cat cat = new Cat(&quot;咪咪&quot;);
+    MessageBox.Show(cat.shout());
+}</code></pre><h2 id="3-方法重载"><a href="#3-方法重载" class="headerlink" title="3. 方法重载"></a>3. 方法重载</h2><p>在上面的代码示例中，如果没有实现起好小猫的名字，是不能创建这个实例的，也就是不能通过Cat cat = new Cat();这种方式创建实例。怎么才能在不起名的情况下，也能创建实例？可以用<strong>方法重载</strong>。    
+<strong>方法重载提供了创建同名的多个方法的能力，但这些方法需要使用不同的参数类型</strong>。并不是只有构造方法可重载，普通方法也可以重载。</p>
+<pre><code>public class Cat{
+    private String name = &quot;&quot;;
+    public Cat(String name){
+        this.name = name;
+    }        
+    //构造方法重载
+    public Cat(){
+        this.name=&quot;无名&quot;;
+    }        
+
+    public String shout(){
+        return &quot;我的名字叫&quot;+name+&quot; 喵&quot;;
+    }
+}</code></pre><p>这样的话再通过Cat cat = new Cat();这种方式创建实例就不会报错了。而猫叫时会是’我的名字叫无名 喵’。<br>注意：<strong>方法重载时</strong>，两个方法的名字必须要<strong>方法名相同，但参数类型或个数必须要有所不同</strong>，否则重载就没有意义了。  </p>
+<p>这么做的好处是：<strong>方法重载可以在不改变原有方法的基础上，新增功能</strong>。  </p>
+<h2 id="4-属性与修饰符"><a href="#4-属性与修饰符" class="headerlink" title="4. 属性与修饰符"></a>4. 属性与修饰符</h2><p><strong>属性是一个方法或一对方法，但在调用它的代码看来，它是一个字段，即属性适合于以字段的方式使用方法调用的场合</strong>。这里还需要解释一下字段的意思，<strong>字段是存储类要满足其设计所需要的数据，字段是与类相关的变量</strong>。  比如刚才的Cat类中’private String name = “”;’name其实就是一个字段，它通常是私有的类变量。那么属性是什么样的呢？我们现在增加一个’猫叫次数ShoutNum’的属性。  </p>
+<pre><code>//声明一个内部字段，注意是private，默认叫的次数为3
+private int shoutNum=3;
+
+//ShoutNum属性，注意是public，当中有两个方法get表示外界调用时可以得到shoutNum的值，set表示外界可以给内部的shoutNum赋值。
+public void setShoutNum(int shoutNum){//shoutNum的可写属性
+    this.shoutNum=shoutNum;
+}
+
+public int getShoutNum(){//shoutNum的可读属性
+    return this.shoutNum;
+}</code></pre><p>其中public和private都是修饰符，<strong>public表示它所修饰的类成员可以允许其他任何类来访问，俗称公有的。而private表示只允许同一个类中的成员访问，其它类包括它的子类无法访问，俗称私有的</strong>。在java语言中如果类中的成员没有加修饰符。则默认为是default，只能同一个包下面的类可以访问（不在同一个包里面的子类不能访问），还有一种修饰符是protected，类中的成员变量可以被同一个包下面的类访问以及不同包下的子类访问。<strong>通常字段都是private，即私有的变量，而属性都是public，即公有的变量</strong>。</p>
+<p><strong>PS:Java中的属性(property)，通常可以理解为get和set方法，而字段(field)，通常叫做“类成员”，或 “类成员变量”，有时也叫“域”，理解为“数据成员”，用来承载数据的。</strong><br>区别开属性与字段是为了更好的实现数据安全，比如当我们想给一个类的属性赋值或者其他类用到了，就需要将这个字段设置为public，然而这样可以对字段进行任意的读写操作，非常不利于数据安全。于是就加上了属性，简单说属性实现了字段的封装，属性有get、set 方法来控制字段，该字段的属性只有set方法没有get方法，就只可以对该方法进行赋值操作，没有读操作，反之亦然。就是对对字段的操作通过属性来控制。<br><strong>注意其规则是：去掉get或set后其剩余的字符串，如果第二个字母是小写的，则把第一个字母也变成小写，否则第一个字母也不变</strong>  </p>
+<h2 id="5-封装、继承、多态"><a href="#5-封装、继承、多态" class="headerlink" title="5. 封装、继承、多态"></a>5. 封装、继承、多态</h2><p>具体参考这篇<a href="/blog/2019/08/20/面向对象的三大基本特征，七大基本原则/" target="_blank">文章</a>   </p>
+<h2 id="6-抽象类与接口"><a href="#6-抽象类与接口" class="headerlink" title="6.抽象类与接口"></a>6.抽象类与接口</h2><p>待定</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>生产者消费者模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="生产者消费者问题是线程模型中的经典问题：生产者和消费者在同一时间段内共用同一存储空间，生产者向空间里生产数据，而消费者取走数据。阻塞队列就相当于一个缓冲区，平衡了生产者和消费者的处理能力。这个阻塞队,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">生产者消费者模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">生产者消费者模式</h1>
+        <div class="stuff">
+            <span>三月 20, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>生产者消费者问题是线程模型中的经典问题：生产者和消费者在同一时间段内共用同一存储空间，生产者向空间里生产数据，而消费者取走数据。<br>阻塞队列就相当于一个缓冲区，平衡了生产者和消费者的处理能力。这个阻塞队列就是用来给生产者和消费者解耦的。  </p>
+<a id="more"></a>  
+<img src="/blog/img/2020/03/20/producer-consumer.png">
+
+<p>主要是如何使用wait notify/notifyAll    </p>
+<pre><code>//仓库代码 主要处理同步问题
+public class Storage {
+
+    private final int MAX_SIZE=100;//仓库最大容量
+    private Queue&lt;Object&gt; queue = new LinkedBlockingDeque&lt;&gt;(MAX_SIZE);//产品存储在这里
+
+    //生产num个产品
+    public void produce(int num){
+        synchronized (queue){
+            //一定是while，因为wait被唤醒后需要判断是不是满足生产条件
+            while(queue.size()+num&gt;MAX_SIZE){
+                System.out.println(&quot;暂时不能执行生产任务&quot;);
+                try {
+                    queue.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            //满足生产条件开始生产
+            for (int i = 0; i &lt; num; i++) {
+                queue.add(new Object());
+            }
+            System.out.println(&quot;已生产产品数&quot;+num+&quot; 仓库容量&quot;+queue.size());
+            queue.notifyAll();
+        }
+    }
+
+    //消费num个产品
+    public void consume(int num){
+        synchronized(queue){
+            while(queue.size()&lt;num){
+                System.out.println(&quot;暂时不能执行消费任务&quot;);
+                try {
+                    queue.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            //满足消费条件开始消费
+            for (int i = 0; i &lt; num; i++) {
+                queue.poll();
+            }
+            System.out.println(&quot;已消费产品数&quot;+num+&quot; 仓库容量&quot;+queue.size());
+            queue.notifyAll();
+        }
+    }
+}</code></pre><p>之后定义生产者消费者线程  </p>
+<pre><code>//生产者线程
+public class Producer extends Thread {
+
+    private int num;//生产数量
+    public Storage storage;//仓库
+
+    public Producer(Storage storage){
+        this.storage=storage;
+    }
+
+    public void setNum(int num){
+        this.num = num;
+    }
+
+    public void run() {
+        storage.produce(num);
+    }
+}
+
+//消费者
+public class Consumer extends Thread {
+
+    private int num;//生产数量
+    public Storage storage;//仓库
+
+    public Consumer(Storage storage){
+        this.storage=storage;
+    }
+
+    public void setNum(int num){
+        this.num = num;
+    }
+
+    public void run() {
+        storage.consume(num);
+    }
+}</code></pre><p>主程序 用来开启多个生产者消费者线程执行操作  </p>
+<pre><code>public class Client {
+
+    public static void main(String[] args) {
+         Storage storage = new Storage();
+            Producer p1 = new Producer(storage);
+            Producer p2 = new Producer(storage);
+            Producer p3 = new Producer(storage);
+            Producer p4 = new Producer(storage);
+            Producer p5 = new Producer(storage);
+
+            Consumer c1 = new Consumer(storage);
+            Consumer c2 = new Consumer(storage);
+            Consumer c3 = new Consumer(storage);
+            p1.setNum(10);
+            p2.setNum(20);
+            p3.setNum(10);
+            p4.setNum(80);
+            p5.setNum(10);
+            c1.setNum(50);
+            c2.setNum(20);
+            c3.setNum(20);
+            c1.start();
+            c2.start();
+            c3.start();
+            p1.start();
+            p2.start();
+            p3.start();
+            p4.start();
+            p5.start();
+    }
+
+}</code></pre><p>输出结果  </p>
+<pre><code>暂时不能执行消费任务
+已生产产品数80 仓库容量80
+已生产产品数10 仓库容量90
+已生产产品数10 仓库容量100
+暂时不能执行生产任务
+暂时不能执行生产任务
+已消费产品数20 仓库容量80
+已消费产品数20 仓库容量60
+已生产产品数10 仓库容量70
+已生产产品数20 仓库容量90
+已消费产品数50 仓库容量40</code></pre><p>核心的就是每个线程拿到锁之后检测是不是满足条件，不满足则wait释放锁及CPU资源，等待被唤醒之后判断条件满足的话执行生产/消费操作，然后唤醒别的等待的线程，此线程结束。  </p>
+<p>参考文章：<a href="https://www.jianshu.com/p/de683751dcef" target="_blank" rel="noopener">https://www.jianshu.com/p/de683751dcef</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JAVA7与JAVA8的新特性 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="一、jdk1.7新特性  
+1.泛型实例的创建可以通过类型推断来简化，可以去掉后面new部分的泛型类型，只用&amp;lt;&amp;gt;就可以了。//在 Java7 以前，实例化一个 HashMap 对象的写法,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">JAVA7与JAVA8的新特性</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">JAVA7与JAVA8的新特性</h1>
+        <div class="stuff">
+            <span>三月 26, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="一、jdk1-7新特性"><a href="#一、jdk1-7新特性" class="headerlink" title="一、jdk1.7新特性"></a>一、jdk1.7新特性</h2><a id="more"></a>  
+<h3 id="1-泛型实例的创建可以通过类型推断来简化，可以去掉后面new部分的泛型类型，只用-lt-gt-就可以了。"><a href="#1-泛型实例的创建可以通过类型推断来简化，可以去掉后面new部分的泛型类型，只用-lt-gt-就可以了。" class="headerlink" title="1.泛型实例的创建可以通过类型推断来简化，可以去掉后面new部分的泛型类型，只用&lt;&gt;就可以了。"></a>1.泛型实例的创建可以通过类型推断来简化，可以去掉后面new部分的泛型类型，只用&lt;&gt;就可以了。</h3><pre><code>//在 Java7 以前，实例化一个 HashMap 对象的写法如下：
+Map&lt;String, String&gt; map1=new HashMap&lt;String, String&gt;();
+//而 Java7 引进了类型推断机制，因此，可以采用更加简洁的写法，如下所示：
+Map&lt;String, String&gt; map2=new HashMap&lt;&gt;();</code></pre><h3 id="2-并发工具增强：-fork-join框架最大的增强，充分利用多核特性，将大问题分解成各个子问题，由多个cpu-可以同时-解决多个子问题，最后合并结果，继承RecursiveTask，实现compute方法，然后调用fork计算，最后用join合并结果。"><a href="#2-并发工具增强：-fork-join框架最大的增强，充分利用多核特性，将大问题分解成各个子问题，由多个cpu-可以同时-解决多个子问题，最后合并结果，继承RecursiveTask，实现compute方法，然后调用fork计算，最后用join合并结果。" class="headerlink" title="2.并发工具增强： fork-join框架最大的增强，充分利用多核特性，将大问题分解成各个子问题，由多个cpu 可以同时 解决多个子问题，最后合并结果，继承RecursiveTask，实现compute方法，然后调用fork计算，最后用join合并结果。"></a>2.并发工具增强： fork-join框架最大的增强，充分利用多核特性，将大问题分解成各个子问题，由多个cpu 可以同时 解决多个子问题，最后合并结果，继承RecursiveTask，实现compute方法，然后调用fork计算，最后用join合并结果。</h3><h3 id="3-try-with-resources-语句是一个声明了一个或多个资源的try-语句。这里的一个资源指的是在使用完成后，必须关闭释放的对象。try-with-resources-语句可以确保在该语句执行之后关闭每个资源，确保了每个资源都在生命周期结束后被关闭，因此，在读取文件结束后，不需要显式地调用-close-方法。"><a href="#3-try-with-resources-语句是一个声明了一个或多个资源的try-语句。这里的一个资源指的是在使用完成后，必须关闭释放的对象。try-with-resources-语句可以确保在该语句执行之后关闭每个资源，确保了每个资源都在生命周期结束后被关闭，因此，在读取文件结束后，不需要显式地调用-close-方法。" class="headerlink" title="3.try-with-resources 语句是一个声明了一个或多个资源的try 语句。这里的一个资源指的是在使用完成后，必须关闭释放的对象。try-with-resources 语句可以确保在该语句执行之后关闭每个资源，确保了每个资源都在生命周期结束后被关闭，因此，在读取文件结束后，不需要显式地调用 close 方法。"></a>3.try-with-resources 语句是一个声明了一个或多个资源的try 语句。这里的一个资源指的是在使用完成后，必须关闭释放的对象。try-with-resources 语句可以确保在该语句执行之后关闭每个资源，确保了每个资源都在生命周期结束后被关闭，因此，在读取文件结束后，不需要显式地调用 close 方法。</h3><pre><code>public class TryWithResources {
+    public static void main(String[] args) {
+        try(InputStream is = new FileInputStream(&quot;input.txt&quot;);) {
+            while(is.read() != -1){
+                System.out.println(is.read());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre><h3 id="4-Catch多个异常：在Java-7中，catch代码块得到了升级，用以在单个catch块中处理多个异常。如果你要捕获多个异常并且它们包含相似的代码，使用这一特性将会减少代码重复度。"><a href="#4-Catch多个异常：在Java-7中，catch代码块得到了升级，用以在单个catch块中处理多个异常。如果你要捕获多个异常并且它们包含相似的代码，使用这一特性将会减少代码重复度。" class="headerlink" title="4.Catch多个异常：在Java 7中，catch代码块得到了升级，用以在单个catch块中处理多个异常。如果你要捕获多个异常并且它们包含相似的代码，使用这一特性将会减少代码重复度。"></a>4.Catch多个异常：在Java 7中，catch代码块得到了升级，用以在单个catch块中处理多个异常。如果你要捕获多个异常并且它们包含相似的代码，使用这一特性将会减少代码重复度。</h3><pre><code>class Exception1 extends RuntimeException {
+
+}
+
+class Exception2 extends RuntimeException {
+
+}
+
+public class Test{
+    public static void main(String[] args) {
+        try {
+
+        } catch (Exception1 | Exception2 e) {
+            // TODO: handle exception
+        }
+    }
+}</code></pre><h3 id="5-switch-可以接受-String-类型。随着-Java-语言的发展，在-Java7-中，switch-开始支持-String类型。"><a href="#5-switch-可以接受-String-类型。随着-Java-语言的发展，在-Java7-中，switch-开始支持-String类型。" class="headerlink" title="5.switch 可以接受 String 类型。随着 Java 语言的发展，在 Java7 中，switch 开始支持 String类型。"></a>5.switch 可以接受 String 类型。随着 Java 语言的发展，在 Java7 中，switch 开始支持 String类型。</h3><pre><code>public class Switch {
+    public void test(String str){
+        switch(str){
+            case &quot;computer&quot;:
+                System.out.println(&quot;computer&quot;);
+                break;
+            case &quot;book&quot;:
+                System.out.println(&quot;book&quot;);
+                break;
+            case &quot;iphone&quot;:
+                System.out.println(&quot;iphone&quot;);
+                break;
+            default:
+                System.out.println(&quot;default&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        Switch switch1=new Switch();
+        switch1.test(&quot;computer&quot;);
+    }
+}</code></pre><p>其实，jdk1.7并没有新的指令来处理switch string，而是通过调用switch中string.hashCode,将string转换为int从而进行判断。  </p>
+<h3 id="6-数值字面量进行了改进-。"><a href="#6-数值字面量进行了改进-。" class="headerlink" title="6.数值字面量进行了改进 。"></a>6.数值字面量进行了改进 。</h3><p>① 可以用二进制来表示整数，用0b开头。增加了二进制字面量的表示（0B001、0b111）。整数类型（例如 byte、short、int 与 long等）也可以使用二进制数来表示。要指定一个二进制字面量，可以给二进制数字添加前缀 0b 或者 0B。相比于十六进制或者八进制，二进制字面量可以使数据之间的关系更加清晰。<br>② 在数字中可以添加分隔符，例如 123_456，下划线只能被用在数字中间，编译的时候这些下划线会被编译器去掉。这样做的好处是避免了一些难以通过观察代码来发现的细微错误。例如数字 10000000000 和数字 1000000000，不仔细看很难发现两个数字中谁少了一个 0 或多了一个 0，但对于 10_000_000_000 和 1_000_000_000 却不然。  </p>
+<pre><code>public class Vaule {
+    public static void main(String[] args) {
+        int a1=0B001;
+        int a2=0b01111111;
+        long a3= 10_000_000_000L;
+        long a4= 1_000_000_000L;
+        System.out.println(a1+&quot; &quot;+a2);
+        System.out.println(a3+&quot; &quot;+a4);
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>1 127
+10000000000 1000000000</code></pre><h2 id="二、jdk1-8新特性"><a href="#二、jdk1-8新特性" class="headerlink" title="二、jdk1.8新特性"></a>二、jdk1.8新特性</h2><h3 id="1-接口的默认方法与静态方法"><a href="#1-接口的默认方法与静态方法" class="headerlink" title="1.接口的默认方法与静态方法"></a>1.接口的默认方法与静态方法</h3><p>Java1.8以前，接口里的方法要求全部是抽象方法，java 8允许我们给接口添加一个非抽象的方法实现，只需要使用 default关键字即可。  </p>
+<pre><code>interface Inter8 {
+    void f();
+    default void g(){
+        System.out.println(&quot;this is default method in interface&quot;);
+    }
+    static void h(){
+        System.out.println(&quot;this is static method in interface&quot;);
+    }
+}</code></pre><p>这样做的最重要的一个目的就是为了实现接口升级。在原有的设计中，如果想要升级接口，例如给接口中添加一个新的方法，会导致所有实现这个接口的类都需要被修改，这给Java 语言已有的一些框架进行升级带来了很大的麻烦。如果接口能支持默认方法的实现，那么可以给这些类库的升级带来许多便利。例如，为了支持 Lambda 表达式，Collection 中引入了 foreach 方法，可以通过这个语法增加默认的实现，从而降低了对这个接口进行升级的代价，不需要对所有实现这个接口的类进行修改。  </p>
+<h3 id="2-增加了对-Lambda-表达式的支持。"><a href="#2-增加了对-Lambda-表达式的支持。" class="headerlink" title="2.增加了对 Lambda 表达式的支持。"></a>2.增加了对 Lambda 表达式的支持。</h3><p>Lambda 表达式是一个匿名函数（指的是没有函数名的函数），它基于数学中的 λ 演算得名，直接对应于其中的 Lambda 抽象。Lambda 表达式可以表示闭包（注意和数学传统意义上的不同）。<br>Lambda 表达式允许把函数作为一个方法的参数。<br>Lambda 表达式的基本语法如下：<br>(parameters) -&gt; expression<br>或者<br> (parameters) -&gt;{ statements;}  </p>
+<p>显然，采用 Lambda 表达式后，代码会变得更加简洁。  </p>
+<pre><code>public class Lambda{
+    public static void main(String[] args) {
+        Arrays.asList(1,2,3).forEach(i -&gt; System.out.print(i+&quot; &quot;));
+        System.out.println();
+        Arrays.asList(1,2,3).forEach((Integer i) -&gt; System.out.print(i+&quot; &quot;));
+        System.out.println();
+        Person[] people={new Person(&quot;James&quot;, 25),new Person(&quot;Jack&quot;, 21)};
+        Arrays.sort(people,new Comparator&lt;Person&gt;() {
+
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getAge()-o2.getAge();
+            }
+
+        });
+        //采用 Lambda 表达式后，写法如下：
+        Arrays.sort(people,(Person a,Person b) -&gt; a.getAge()-b.getAge());
+        //或
+        Arrays.sort(people,(a,b) -&gt; a.getAge()-b.getAge());
+        for (Person person : people) {
+            System.out.print(person+&quot; &quot;);
+        }
+    }
+}
+/**
+在 Java8 以前，Java 语言通过匿名函数的方法来代替 Lambda 表达式。
+对于列表的排序，如果列表里面存放的是自定义的类，通常需要指定自定义的排序方法，传
+统的写法如下：
+ */
+class Person{
+    private String name;
+    private int age;
+    public Person(String name,int age){
+        this.name=name;
+        this.age=age;
+    }
+    public int getAge(){
+        return age;
+    }
+    public String getName(){
+        return name;
+    }
+    @Override
+    public String toString() {
+        return &quot;Person [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;
+    }
+
+}</code></pre><h3 id="3-函数式接口"><a href="#3-函数式接口" class="headerlink" title="3.函数式接口"></a>3.函数式接口</h3><p>Lambda 表达式是通过函数式接口（只有一个方法的普通接口）来实现的。函数式接口可以被隐式地转换为 Lambda 表达式。为了与普通的接口区分开（普通接口中可能会有多个方法），JDK1.8 新增加了一种特殊的注解@FunctionalInterface。下面给出一个函数式接口的定义：   </p>
+<pre><code>@FunctionalInterface
+interface fun {
+    void f();
+}  </code></pre><h3 id="4-方法引用"><a href="#4-方法引用" class="headerlink" title="4.方法引用"></a>4.方法引用</h3><p>方法引用指的是可以直接引用 Java 类或对象的方法。它可以被看成是一种更加简洁易懂的 Lambda 表达式，使用方法引用后，上例中的排序代码就可以使用下面更加简洁的方式来编写：<br>Arrays.sort(people, Comparator.comparing(Person::getAge));<br>方法引用共有下面 4 种形式：<br>① 引用构造方法：ClassName::new。<br>② 引用类静态方法：ClassName::methodName。<br>③ 引用特定类的任意对象方法：ClassName::methodName。<br>④ 引用某个对象的方法：instanceName::methodName。  </p>
+<pre><code>class Person2{
+    private String name;
+    private int age;
+    public Person2(){}
+    public Person2(String name,int age){
+        this.name=name;
+        this.age=age;
+    }
+    public static Person2 getInstance(final Supplier&lt;Person2&gt; supplier){
+        return supplier.get();
+    }
+    public String getName() {
+        return name;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public static int compareByAge(Person2 a,Person2 b)
+    {
+        return b.age-a.age;
+    }
+    @Override
+    public String toString() {
+        return &quot;Person2 [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;
+    }
+}
+class CompareProvider{
+    public int compareByAge(Person2 a,Person2 b){
+        return a.getAge()-b.getAge();
+    }
+}
+public class MethodReference {
+    public static void main(String[] args) {
+        //引用是构造方法
+        Person2 p1=Person2.getInstance(Person2 :: new);
+        p1.setAge(19);
+        System.out.println(&quot;测试引用构造方法：&quot;+p1.getAge());
+        Person2[] people ={new Person2(&quot;James&quot;, 25), new Person2(&quot;Jack&quot;, 21)};
+        //引用特定类的任意对象方法
+        Arrays.sort(people,Comparator.comparing(Person2::getAge));
+        System.out.println(&quot;测试引用特定类的任意对象方法：&quot;);
+        for (Person2 p : people) {
+            System.out.println(p);
+        }
+        //引用类静态方法
+        Arrays.sort(people,Person2::compareByAge);
+        System.out.println(&quot;测试引用类静态方法：&quot;);
+        for (Person2 p : people) {
+            System.out.println(p);
+        }
+        //引用某个对象的方法
+        Arrays.sort(people,new CompareProvider()::compareByAge);
+        System.out.println(&quot;测试引用某个对象的方法：&quot;);
+        for (Person2 p : people) {
+            System.out.println(p);
+        }
+    }
+}</code></pre><h2 id="5-类型注解和重复注解"><a href="#5-类型注解和重复注解" class="headerlink" title="5.类型注解和重复注解"></a>5.类型注解和重复注解</h2><p>① JDK1.5 中引入了注解机制，但是有一个限制：相同的注解在同一位置只能声明一次。<br>JDK1.8 引入了重复注解机制后，相同的注解在同一个地方可以声明多次。  </p>
+<pre><code>public class Annotation {
+    /**
+     * 对于注解（也被称做元数据），Java 8 主要有两点改进：类型注解和重复注解。
+        1.类型注解
+        1）Java 8 的类型注解扩展了注解使用的范围。
+        在java 8之前，注解只能是在声明的地方所使用，java8开始，注解可以应用在任何地方。
+     * 在 Java 8 版本中，Annotation 可以被用在任何使用 Type 的地方，例如：初始化对象时 (new)，对象类型转化时，使用 implements 表达式时，
+     * 或者使用 throws 表达式时。
+     */
+    //初始化对象时
+    String myString =new @NotNull String();
+    //对象类型转化时
+    myString = (@NonNull String) str;
+    //使用 implements 表达式时
+    class MyList&lt;T&gt; implements @ReadOnly List&lt;@ReadOnly T&gt;{}
+    //使用 throws 表达式时
+    public void validateValues() throws @Critical ValidationFailedException{}
+}
+/**
+ 2）新增ElementType.TYPE_USE 和ElementType.TYPE_PARAMETER（在Target上）
+新增的两个注释的程序元素类型 ElementType.TYPE_USE 和 ElementType.TYPE_PARAMETER用来描述注解的新场合。
+ElementType.TYPE_PARAMETER 表示该注解能写在类型变量的声明语句中。
+ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中（eg：声明语句、泛型和强制转换语句中的类型）。
+ */
+@Target({ElementType.TYPE_USE,ElementType.TYPE_PARAMETER})
+@interface MyAnnotation{}
+/**
+ * 3)类型注解的作用
+    类型注解被用来支持在Java的程序中做强类型检查。配合第三方插件工具Checker Framework（注：此插件so easy,这里不介绍了），
+    可以在编译的时候检测出runtime error（eg：UnsupportedOperationException； NumberFormatException；NullPointerException
+    异常等都是runtime error），以提高代码质量。这就是类型注解的作用。
+    Note：
+    使用Checker Framework可以找到类型注解出现的地方并检查。
+    eg:
+    public class TestDemo{  
+    void sample() {  
+        @NonNull Object my = new Object();  
+        }  
+    } 
+ */</code></pre><p>② JDK1.8 对注解进行了扩展。使得注解被使用的范围更广，例如可以给局部变量、泛型和方法异常等提供注解。  </p>
+<pre><code>@interface MyHints{
+    Hint[] value();
+}
+
+@Repeatable(MyHints.class)
+@interface Hint{
+    String value();
+}
+//使用包装类当容器来存多个注解（旧版本方法）
+@MyHints({@Hint(&quot;hint1&quot;),@Hint(&quot;hint2&quot;)})
+class Person22{}
+//使用多重注解（新方法）
+@Hint(&quot;hint1&quot;)
+@Hint(&quot;hint2&quot;)
+class Person33{}</code></pre><h3 id="6-把-Base64-编码添加到了标准类库中"><a href="#6-把-Base64-编码添加到了标准类库中" class="headerlink" title="6.把 Base64 编码添加到了标准类库中"></a>6.把 Base64 编码添加到了标准类库中</h3><p>Base64 编码是一种常见的字符编码，可用来作为电子邮件或 Web Service 附件的传输编码。JDK1.8 把 Base64 编码添加到了标准类库中.  </p>
+<pre><code>public class Base64s {
+    public static void main(String[] args) {
+        String str = &quot;Hello world&quot;;
+        String encodStr = Base64.getEncoder().encodeToString(str.getBytes(StandardCharsets.UTF_8));
+        System.out.println(encodStr);
+        String decodStr = new String(Base64.getDecoder().decode(encodStr));
+        System.out.println(decodStr);
+    }
+}</code></pre><h3 id="7-日期新特性，新时间日期API"><a href="#7-日期新特性，新时间日期API" class="headerlink" title="7.日期新特性，新时间日期API"></a>7.日期新特性，新时间日期API</h3><p>在 JDK1.8 以前，处理日期相关的类主要有如下三个：<br>① Calendar：实现日期和时间字段之间转换，它的属性是可变的。因此，它不是线程安全的。<br>② DateFormat：格式化和分析日期字符串。<br>③ Date：用来承载日期和时间信息，它的属性是可变的。因此，它不是线程安全的。<br>这些 API 使用起来很不方便，而且有很多缺点，以如下代码为例：<br>Date date = new Date(2015,10,1);<br>System.out.println(date);<br>在 Date 类传入参数中，月份为 10 月，但输出却为 Mon Nov 01 00:00:00 CST 3915。<br>JDK1.8 对日期相关的 API 进行了改进，提供了更加强大的 API。新的 java.time 主要包含了处<br>理日期、时间、日期/时间、时区、时刻（Instants）和时钟（Clock）等操作。下面给出一个<br>使用示例：    </p>
+<pre><code>public class DateDemo {
+    public static void main(String[] args){
+        //Clock 类通过指定一个时区，可以获取到当前的时刻、日期与时间
+        Clock c = Clock.system(ZoneId.of(&quot;Asia/Shanghai&quot;));//上海时区
+        System.out.println(&quot;测试Clock: &quot;);
+        System.out.println(c.millis());
+        System.out.println(c.instant());
+
+        //Instant 使用方法
+        System.out.println(&quot;测试 Instant:&quot;);
+        Instant ist = Instant.now();
+        System.out.println(ist.getEpochSecond());//精确到秒
+        System.out.println(ist.toEpochMilli());//精确到毫秒
+
+        //LocalDate 以ISO-8601格式显示的日期类型，无时区信息
+        LocalDate date = LocalDate.now();
+        LocalDate dateFromClock = LocalDate.now(c);
+        System.out.println(&quot;测试LocalDate:&quot;);
+        System.out.println(date);
+        System.out.println(dateFromClock);
+
+        //LocalTime 是以ISO-8601 格式显示时间类型，无时区信息
+        final LocalTime time = LocalTime.now();
+        final LocalTime timeFromClock = LocalTime.now(c);
+        System.out.println(&quot;测试LocalTime:&quot;);
+        System.out.println(time);
+        System.out.println(timeFromClock);
+
+        //LocalDateTime 以ISO-8601 格式显示日期和时间
+        final LocalDateTime dateTime = LocalDateTime.now();
+        final LocalDateTime dateTimeFromClock = LocalDateTime.now(c);
+        System.out.println(&quot;测试LocalDateTime:&quot;);
+        System.out.println(dateTime);
+        System.out.println(dateTimeFromClock);
+
+        //新旧日期转换 
+        Instant instant = new Date().toInstant();  
+        Date date2 = Date.from(instant);  
+        System.out.println(instant);  
+        System.out.println(date2); 
+
+        //提供对java.util.Calendar的替换，提供对年历系统的支持 
+        Chronology c1 = HijrahChronology.INSTANCE;  
+        ChronoLocalDateTime d = c1.localDateTime(LocalDateTime.now());  
+        System.out.println(d.toLocalTime()); 
+    }
+}</code></pre><h3 id="8-增加了调用-JavaScript-的引擎Nashorn。JDK1-8-增加-API-使得可以通过-Java-程序来调用JavaScript-代码"><a href="#8-增加了调用-JavaScript-的引擎Nashorn。JDK1-8-增加-API-使得可以通过-Java-程序来调用JavaScript-代码" class="headerlink" title="8.增加了调用 JavaScript 的引擎Nashorn。JDK1.8 增加 API 使得可以通过 Java 程序来调用JavaScript 代码"></a>8.增加了调用 JavaScript 的引擎Nashorn。JDK1.8 增加 API 使得可以通过 Java 程序来调用JavaScript 代码</h3><p>从JDK 6开始，Java就已经捆绑了JavaScript引擎，该引擎基于Mozilla的Rhino。该特性允许开发人员将JavaScript代码嵌入到Java中，甚至从嵌入的JavaScript中调用Java。此外，它还提供了使用jrunscript从命令行运行JavaScript的能力。如果不需要非常好的性能，并且可以接受ECMAScript 3有限的功能集的话，那它相当不错了。<br>从JDK 8开始，Nashorn取代Rhino成为Java的嵌入式JavaScript引擎。Nashorn完全支持ECMAScript 5.1规范以及一些扩展。它使用基于JSR 292的新语言特性，其中包含在JDK 7中引入invokedynamic，将JavaScript编译成Java字节码。<br>与先前的Rhino实现相比，这带来了2到10倍的性能提升，虽然它仍然比Chrome和Node.js中的V8引擎要差一些。  </p>
+<pre><code>public class JavaScriptDemo {
+    public static void main(String[] args) throws ScriptException, NoSuchMethodException, IOException{
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName(&quot;JavaScript&quot;);
+        System.out.println(engine.getClass().getName());
+        System.out.println(engine.eval(&quot;function f(){return &apos;Hello&apos;;}; f()+&apos; world!&apos;;&quot;));
+
+        //-------------------------------------------------------------JDK 6---------------------------------------------------------------------------
+        //在Java中直接调用js代码
+        //不能调用浏览器中定义的js函数，会抛出异常提示ReferenceError: “alert” is not defined。
+        engine.eval(&quot;var a=3; var b=4;print (a+b);&quot;);
+
+        //engine.eval(&quot;alert(\&quot;js alert\&quot;);&quot;);    // 不能调用浏览器中定义的js函数 // 错误，会抛出alert引用不存在的异常
+
+        //在Java中绑定js变量
+        //在调用engine.get(key);时，如果key没有定义，则返回null
+        engine.put(&quot;a&quot;, 3);
+        engine.put(&quot;b&quot;, 4);
+        Bindings bindings = engine.getBindings(ScriptContext.ENGINE_SCOPE);
+        // 只能为Double，使用Float和Integer会抛出异常 
+        Double result = (Double)engine.eval(&quot;a+b&quot;);
+        System.out.println(&quot;result------&gt;&quot;+result);
+        engine.eval(&quot;c=a+b&quot;);
+        Double c = (Double)engine.get(&quot;c&quot;);
+        System.out.println(&quot;c-----&gt;&quot;+c);
+
+        //在Java中调用js文件中的function，传入调用参数，并获取返回值
+        //js文件中的merge函数将两个参数a，b相加，并返回c。
+        //在Java代码中读取js文件，并参数两个参数，然后回去返回值。
+        String jsFileName = &quot;E:\\workspace_sts\\JAVA\\JAVA面试知识点\\src\\java8特性\\expression.js&quot;;  // 读取js文件
+        FileReader reader = new FileReader(jsFileName);  // 执行指定脚本
+        engine.eval(reader);
+        if(engine instanceof Invocable){
+            Invocable invoke = (Invocable)engine; // 调用merge方法，并传入两个参数
+            // c = merge(2, 3); 
+            Double cc = (Double)invoke.invokeFunction(&quot;merge&quot;, 3,4);
+            System.out.println(&quot;cc----------&gt;&quot;+cc);
+        }
+
+        reader.close();
+    }
+}</code></pre><p>expression.js脚本内容  </p>
+<pre><code>function merge(a,b){
+    var c = a + b;
+    return c;
+}</code></pre><h3 id="9-Optional容器，新增-Optional-类。"><a href="#9-Optional容器，新增-Optional-类。" class="headerlink" title="9.Optional容器，新增 Optional 类。"></a>9.Optional容器，新增 Optional 类。</h3><p>在使用 Java 语言进行编程时，经常需要使用大量的代码来处理空指针<br>异常，而这种操作往往会降低程序的可读性。JDK1.8 引入了Optional 类来处理空指针的情况，从而增强了代码的可读性。下面给出一个简单的例子：  </p>
+<pre><code>public class OptionalDemo {
+    @SuppressWarnings(&quot;all&quot;)
+    public static void main(String[] args) {
+        //创建optional实例，也可以通过方法返回值得到
+        Optional&lt;String&gt; name = Optional.of(&quot;Sanaulla&quot;);
+
+        //创建没有值的Optional实例，例如值为&apos;null&apos;
+        Optional empty = Optional.ofNullable(null);
+
+        //isPresent方法来检查Optional实例是否有值
+        if(name.isPresent()){
+            //调用get()返回Optional值
+            System.out.println(name.get());
+        }
+
+        try{
+            //在Optional实例上调用get()抛出NoSuchElementException
+            System.out.println(empty.get());
+        }catch(NoSuchElementException ex){
+            System.out.println(ex.getMessage());
+        }
+
+        //ifPresent方法接受lambda表达式参数
+        //如果Optional值不为空，lambda表0达式会处理并在其上执行操作
+        name.ifPresent((value) -&gt; {
+            System.out.println(&quot;The length of the value is: &quot;+ value.length());
+        }); 
+
+        //如果有值orElse方法会返回Optional实例，否则返回传入的错误信息
+        System.out.println(empty.orElse(&quot;There is no value present!&quot;));
+        System.out.println(name.orElse(&quot;There is some value!&quot;));
+
+        //orElseGet与orElse类似，区别在于传入的默认值
+        //orElseGet接收lambda表达式生成默认值
+        System.out.println(empty.orElseGet(() -&gt; &quot;Default value&quot;));
+        System.out.println(name.orElseGet(() -&gt; &quot;Default value&quot;));
+
+        try {
+            //orElseThrow与orElse方法类似，区别在于返回值
+            //orElseThrow接收lambda表达式/方法生成异常
+            empty.orElseThrow(ValueAbsentException :: new);
+        } catch (Throwable e) {
+            System.out.println(e.getMessage());
+        }
+
+        //map方法通过传入的lambda表达式修改Optional实例默认值
+        //lambda表达式返回值会包装为Optional实例
+        Optional&lt;String&gt; upperName = name.map((value) -&gt; value.toUpperCase());
+        System.out.println(upperName.orElse(&quot;No value found&quot;));
+
+        //faltMap与map（Function）非常相似，区别在于lambda表达式的返回值
+        //map方法的lambda表达式返回值可以是任何类型，但是返回值会包装成Optional实例
+        //但是faltMap方法的lambda返回值总是Optional类型
+        upperName = name.flatMap((value) -&gt; Optional.of(value.toLowerCase()));
+        System.out.println(upperName.orElse(&quot;No value found&quot;));
+
+        //filter方法检查Optional值是否满足给定条件
+        //如果满足返回Optional实例值，否则返回空Optional
+        Optional&lt;String&gt; longName = name.filter((value) -&gt; value.length()&gt;6);
+        System.out.println(longName.orElse(&quot;The name is less than 6 characters&quot;));
+
+        //另一个示例，Optional值不满足给定条件
+        Optional&lt;String&gt; anotherName = Optional.of(&quot;Sana&quot;);
+        Optional&lt;String&gt; shortName = anotherName.filter((value) -&gt; value.length()&gt;6);
+        System.out.println(shortName.orElse(&quot;The name is less than 6 characters&quot;));
+
+    }
+}
+
+@SuppressWarnings(&quot;serial&quot;)
+class ValueAbsentException extends Throwable {
+    public ValueAbsentException(){
+        super();
+    }
+    public ValueAbsentException(String msg){
+        super(msg);
+    }
+    @Override
+    public String getMessage() {
+        return &quot;No value present in the Optional instance&quot;;
+    }
+}</code></pre><h3 id="10-增加了对数组并行处理的方法（parallelXxx），并行流和串行流"><a href="#10-增加了对数组并行处理的方法（parallelXxx），并行流和串行流" class="headerlink" title="10. 增加了对数组并行处理的方法（parallelXxx），并行流和串行流"></a>10. 增加了对数组并行处理的方法（parallelXxx），并行流和串行流</h3><p>JDK1.8 增加了对数组并行处理的方法（parallelXxx），可以说，最重要的是parallelSort()方法，因为它可以在多核机器上。<br>极大提高数组排序的速度。下面的例子展示了新方法（parallelXxx）的使用。  </p>
+<pre><code>public class ParallelArrays {
+    public static void main(String[] args) {
+        long[] arrayOfLong = new long[20000];
+        Arrays.parallelSetAll(arrayOfLong, index -&gt; ThreadLocalRandom.current().nextInt(1000000));
+        Arrays.stream(arrayOfLong).limit(10).forEach(i -&gt; System.out.print(i + &quot; &quot;));
+        System.out.println();
+        Arrays.parallelSort(arrayOfLong);
+        Arrays.stream(arrayOfLong).limit(10).forEach(i -&gt; System.out.print(i + &quot; &quot;));
+        System.out.println();
+    }
+    /**
+     * 上面的代码片段使用了parallelSetAll()方法来对一个有20000个元素的数组进行随机赋值。然后，调用parallelSort方法。
+     * 这个程序首先打印出前10个元素的值，之后对整个数组排序。这个程序在控制台上的输出如下（请注意数组元素是随机生产的）：
+     */
+}</code></pre><h3 id="11-编译器优化。"><a href="#11-编译器优化。" class="headerlink" title="11.编译器优化。"></a>11.编译器优化。</h3><p>JDK1.8 通过在编译的时候增加–parameters 选项，以及增加反射 API 与Parameter.getName()方法实现了获取方法参数名的功能。  </p>
+<pre><code>public class ParameterName {
+    /**
+     *  如果使用命令 javac Test.java 来编译并运行以上程序，程序的运行结果为 Parameter: args0。
+        如果使用命令 javac Test.java –parameters 来编译并运行以上程序，程序的运行结果为
+        Parameter: args。
+     */
+    public static void main(String[] args) {
+        Method method;
+        try {
+            method = Parameter.class.getMethod(&quot;main&quot;, String[].class);
+            for(final Parameter parameter:method.getParameters()){
+                System.out.println(&quot;Parameter :&quot;+ parameter.getName());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre><h3 id="12-引入流的概念，Stream-API"><a href="#12-引入流的概念，Stream-API" class="headerlink" title="12.引入流的概念，Stream API"></a>12.引入流的概念，Stream API</h3><pre><code>/**
+ * 1.1 什么是流？
+ * 流是Java8引入的全新概念，它用来处理集合中的数据，暂且可以把它理解为一种高级集合。
+ * 
+ * 众所周知，集合操作非常麻烦，若要对集合进行筛选、投影，需要写大量的代码，而流是以声明的形式操作集合，它就像SQL语句，
+ * 我们只需告诉流需要对集合进行什么操作，它就会自动进行操作，并将执行结果交给你，无需我们自己手写代码。
+ *
+ *因此，流的集合操作对我们来说是透明的，我们只需向流下达命令，它就会自动把我们想要的结果给我们。由于操作过程完全由Java处理，
+ *因此它可以根据当前硬件环境选择最优的方法处理，我们也无需编写复杂又容易出错的多线程代码了。
+ *
+ *1.2 流的特点
+ *    1.只能遍历一次 
+ *      我们可以把流想象成一条流水线，流水线的源头是我们的数据源(一个集合)，数据源中的元素依次被输送到流水线上，我们可以在流水
+ *      线上对元素进行各种操作。一旦元素走到了流水线的另一头，那么这些元素就被“消费掉了”，我们无法再对这个流进行操作。当然，我们
+ *      可以从数据源那里再获得一个新的流重新遍历一遍。
+ *    2.采用内部迭代方式 
+ *      若要对集合进行处理，则需我们手写处理代码，这就叫做外部迭代。而要对流进行处理，我们只需告诉流我们需要什么结果，处理过程
+ *      由流自行完成，这就称为内部迭代。
+ *
+ *1.3 流的操作种类
+ *    1.中间操作 
+ *        当数据源中的数据上了流水线后，这个过程对数据进行的所有操作都称为“中间操作”。 
+ *        中间操作仍然会返回一个流对象，因此多个中间操作可以串连起来形成一个流水线。
+ *    2.终端操作 
+ *        当所有的中间操作完成后，若要将数据从流水线上拿下来，则需要执行终端操作。 
+ *        终端操作将返回一个执行结果，这就是你想要的数据
+ *
+ *1.4 流的操作过程
+ *    使用流一共需要三步：
+ *    1.准备一个数据源
+ *    2.执行中间操作
+ *        中间操作可以有多个，它们可以串连起来形成流水线。
+ *    3.执行终端操作 
+ *      执行终端操作后本次流结束，你将获得一个执行结果。
+ *
+ *2. 流的使用
+ */
+public class StreamDemo {
+    @SuppressWarnings(&quot;all&quot;)
+    public static void main(String[] args) {
+        //2.1获取流
+        //集合 这种数据源较为常用，通过stream()方法即可获取流对象：
+        List&lt;Student&gt; list = new ArrayList&lt;Student&gt;();
+        Student s1 = new Student(&quot;张三&quot;,&quot;Y&quot;,20);
+        Student s2 = new Student(&quot;李四&quot;,&quot;N&quot;,30);
+        Student s3 = new Student(&quot;王五&quot;,&quot;Y&quot;,40);
+        list.add(s1);
+        list.add(s2);
+        list.add(s3);
+        Stream&lt;Student&gt; stream1 = list.stream();
+        //数组 通过Arrays类提供的静态函数stream()获取数组的流对象：
+        String[] names = {&quot;chaimm&quot;,&quot;peter&quot;,&quot;john&quot;,&quot;peter&quot;,&quot;john&quot;};
+        Stream&lt;String&gt; stream2 = Arrays.stream(names);
+        //值  直接将几个值变成流对象
+        Stream&lt;String&gt; stream3 = Stream.of(&quot;chaimm&quot;,&quot;peter&quot;,&quot;john&quot;);
+        //文件 PS：Java7简化了IO操作，把打开IO操作放在try后的括号中即可省略关闭IO的代码。
+        try (Stream lines = Files.lines(Paths.get(&quot;文件路径名&quot;),Charset.defaultCharset())){
+            //可对lines做一些操作
+        } catch (IOException e) {
+            // TODO: handle exception
+        }
+
+        //2.2 筛选filter filter函数接收一个Lambda表达式作为参数，该表达式返回boolean，在执行过程中，流将元素逐一输送给filter，并筛选出执行结果为true的元素。
+        //如，筛选出所有学生：
+        List&lt;Student&gt; result1 = stream1.filter(Student :: isStudent).collect(Collectors.toList());
+        System.out.println(result1.toString());
+
+        //2.3 去重distinct
+        String[] result2 = stream2.distinct().toArray(String[] :: new);
+        System.out.println(Arrays.toString(result2));
+
+        //2.4 截取 截取流的前N个元素：
+        //List&lt;Student&gt; result3 = stream1.limit(2).collect(Collectors.toList());  stream1 77行流已经关闭，再次执行报错! 只能遍历一次 
+        List&lt;Student&gt; result3 = list.stream().limit(2).collect(Collectors.toList());
+        System.out.println(result3.toString());
+        String[] result4 =Arrays.stream(names).limit(2).toArray(String[] :: new);
+        System.out.println(Arrays.toString(result4));
+
+        //2.5 跳过 跳过流的前n个元素
+        String[] result5 = stream3.skip(1).toArray(String[] :: new);
+        System.out.println(Arrays.toString(result5));
+
+        //2.6 映射  对流中的每个元素执行一个函数，使得元素转换成另一种类型输出。流会将每一个元素输送给map函数，并执行map中的Lambda表达式，最后将执行结果存入一个新的流中。 
+        //如，获取每个人的姓名(实则是将Perosn类型转换成String类型)：
+        List&lt;String&gt; result6 = list.stream().map(Student :: getName).collect(Collectors.toList());
+        System.out.println(result6.toString());
+
+        //2.7 合并多个流
+        //例：列出List中各不相同的单词，List集合如下：
+        List&lt;String&gt; list2 = new ArrayList&lt;String&gt;();
+        list2.add(&quot;I am a boy&quot;);
+        list2.add(&quot;I love the girl&quot;);
+        list2.add(&quot;But the girl loves another girl&quot;);
+        //首先将list2变成流：list2.stream();
+        //Stream&lt;String&gt; stream4 = list2.stream();
+        //按空格分词： list.stream().map(line-&gt;line.split(&quot; &quot;));
+        //分完词之后，每个元素变成了一个String[]数组。
+        //将每个String[]变成流：
+        Stream stream5 = list2.stream().map(line -&gt; line.split(&quot; &quot;)).map(Arrays :: stream);
+        //此时一个大流里面包含了一个个小流，我们需要将这些小流合并成一个流。
+        //将小流合并成一个大流：用flagmap替换刚才的map stream4.map(line -&gt; line.split(&quot; &quot;)).flagmap(Arrays :: stream);
+        //去重
+        List&lt;String&gt; result7 =  list2.stream().map(line -&gt; line.split(&quot; &quot;)).flatMap(Arrays :: stream).distinct().collect(Collectors.toList());
+        System.out.println(result7.toString());
+
+        //2.8 是否匹配任一元素：anyMatch anyMatch用于判断流中是否存在至少一个元素满足指定的条件，这个判断条件通过Lambda表达式传递给anyMatch，执行结果为boolean类型。 
+        //如，判断list中是否有学生： 类似 ||
+        boolean result8 = list.stream().anyMatch(Student :: isStudent);
+        System.out.println(&quot;result8-----&gt;&quot;+result8);
+        List&lt;Student&gt; list3 = new ArrayList&lt;Student&gt;();
+        Student s4 = new Student(&quot;张三&quot;,&quot;N&quot;);
+        Student s5 = new Student(&quot;李四&quot;,&quot;N&quot;);
+        Student s6 = new Student(&quot;王五&quot;,&quot;N&quot;);
+        list3.add(s4);
+        list3.add(s5);
+        list3.add(s6);
+        boolean result9 = list3.stream().anyMatch(Student :: isStudent);
+        System.out.println(&quot;result9-----&gt;&quot;+result9);
+
+        //2.9 是否匹配所有元素：allMatch
+        //allMatch用于判断流中的所有元素是否都满足指定条件，这个判断条件通过Lambda表达式传递给anyMatch，执行结果为boolean类型。如，判断是否所有人都是学生：
+        boolean result10 = list3.stream().allMatch(Student :: isStudent);
+        System.out.println(&quot;result10-----&gt;&quot;+result10);
+        List&lt;Student&gt; list4 = new ArrayList&lt;Student&gt;();
+        Student s7 = new Student(&quot;张三&quot;,&quot;Y&quot;);
+        Student s8 = new Student(&quot;李四&quot;,&quot;Y&quot;);
+        Student s9 = new Student(&quot;王五&quot;,&quot;Y&quot;);
+        list3.add(s7);
+        list3.add(s8);
+        list3.add(s9);
+        boolean result11 = list4.stream().allMatch(Student :: isStudent);
+        System.out.println(&quot;result11-----&gt;&quot;+result11);
+
+        //2.10 是否未匹配所有元素：noneMatch
+        //noneMatch与allMatch恰恰相反，它用于判断流中的所有元素是否都不满足指定条件：
+        boolean result12 = list.stream().noneMatch(Student :: isStudent);
+        System.out.println(&quot;result12-----&gt;&quot;+result12);
+        boolean result13 = list3.stream().noneMatch(Student :: isStudent);
+        System.out.println(&quot;result13-----&gt;&quot;+result13);
+        boolean result14 = list4.stream().noneMatch(Student :: isStudent);
+        System.out.println(&quot;result14-----&gt;&quot;+result14);
+
+        //2.11 获取任一元素findAny
+        Optional&lt;Student&gt; student = list.stream().findAny();
+        Student stu = student.get();
+        System.out.println(stu.toString());
+
+        //2.12 获取第一个元素findFirst
+        Optional&lt;Student&gt; student2 = list.stream().findFirst();
+        Student stu2 = student.get();
+        System.out.println(stu2.toString());
+
+        //2.13 归约
+        //归约是将集合中的所有元素经过指定运算，折叠成一个元素输出，如：求最值、平均数等，这些操作都是将一个集合的元素折叠成一个元素输出
+        //在流中，reduce函数能实现归约。 reduce函数接收两个参数：
+        //*初始值
+        //*进行归约操作的Lambda表达式
+        //2.13.1 元素求和：自定义Lambda表达式实现求和 例：计算所有人的年龄总和
+        int age1 = list.stream().map(Student::getAge).reduce(0, (a,b) -&gt; a+b);
+        System.out.println(&quot;age1----&gt;&quot;+age1);
+        int age2 = list.stream().filter(stud -&gt; &quot;Y&quot;.equals(stud.getIsStudent())).map(Student :: getAge).reduce(0,(a,b) -&gt; a+b);
+        System.out.println(&quot;age2----&gt;&quot;+age2);
+        int[] digital = {1,2,3,4};
+        int total1 = Arrays.stream(digital).reduce(0, (a,b) -&gt; a+b);
+        System.out.println(&quot;total1----&gt;&quot;+total1);
+        //reduce的第一个参数表示初试值为0； 
+        //reduce的第二个参数为需要进行的归约操作，它接收一个拥有两个参数的Lambda表达式，reduce会把流中的元素两两输给Lambda表达式，最后将计算出累加之和。
+        //2.13.2 元素求和：使用Integer.sum函数求和
+        int age3 = list.stream().filter(stud -&gt; &quot;Y&quot;.equals(stud.getIsStudent())).map(Student :: getAge).reduce(0,Integer :: sum);
+        System.out.println(&quot;age3----&gt;&quot;+age3);
+        int total2 = Arrays.stream(digital).reduce(0, Integer :: max);
+        System.out.println(&quot;total2----&gt;&quot;+total2);
+        //Integer类还提供了min、max等一系列数值操作，当流中元素为数值类型时可以直接使用。
+
+        //2.14 数值流的使用
+        //采用reduce进行数值操作会涉及到基本数值类型和引用数值类型之间的装箱、拆箱操作，因此效率较低。 当流操作为纯数值操作时，使用数值流能获得较高的效率。
+        //2.14.1 将普通流转换成数值流
+        //StreamAPI提供了三种数值流：IntStream、DoubleStream、LongStream，也提供了将普通流转换成数值流的三种方法：mapToInt、mapToDouble、mapToLong。 
+        //如，将Person中的age转换成数值流：
+        IntStream intStream = list.stream().mapToInt(Student :: getAge);
+        //2.14.2 数值计算
+        //每种数值流都提供了数值计算函数，如max、min、sum等。 
+        //如，找出最大的年龄：
+        OptionalInt optionalInt = list.stream().mapToInt(Student :: getAge).max();
+        System.out.println(&quot;最大的年龄----&gt;&quot;+optionalInt.getAsInt());
+        OptionalInt optionalInt2 = Arrays.stream(digital).max();
+        System.out.println(&quot;最大的数字----&gt;&quot;+optionalInt2.getAsInt());
+        //由于数值流可能为空，并且给空的数值流计算最大值是没有意义的，因此max函数返回OptionalInt，它是Optional的一个子类，能够判断流是否为空，并对流为空
+        //的情况作相应的处理。 
+        //此外，mapToInt、mapToDouble、mapToLong进行数值操作后的返回结果分别为：OptionalInt、OptionalDouble、OptionalLong
+    }
+}
+
+class Student{
+    private String name;
+    private String isStudent;
+    private int age;
+    public Student(){}
+    public Student(String name,String isStudent){
+        this.name=name;
+        this.isStudent=isStudent;
+    }
+    public Student(String name,String isStudent,int age){
+        this.name=name;
+        this.isStudent=isStudent;
+        this.age=age;
+    }
+    public static boolean isStudent(Student student){
+        if(&quot;Y&quot;.equals(student.isStudent)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getIsStudent() {
+        return isStudent;
+    }
+    public void setIsStudent(String isStudent) {
+        this.isStudent = isStudent;
+    }
+    @Override
+    public String toString() {
+        return &quot;Student [name=&quot; + name + &quot;, isStudent=&quot; + isStudent + &quot;]&quot;;
+    }
+
+}</code></pre><p>//<a href="http://blog.csdn.net/u010425776/article/details/52344425" target="_blank" rel="noopener">http://blog.csdn.net/u010425776/article/details/52344425</a><br>//<a href="http://www.cnblogs.com/shenlanzhizun/p/6027042.html" target="_blank" rel="noopener">http://www.cnblogs.com/shenlanzhizun/p/6027042.html</a>  </p>
+<h3 id="13-加强了类型推测机制"><a href="#13-加强了类型推测机制" class="headerlink" title="13.加强了类型推测机制"></a>13.加强了类型推测机制</h3><p>JDK1.8 加强了类型推测机制，这种机制可以使得代码更为简洁，假如有如下类的 定义：  </p>
+<pre><code>@SuppressWarnings(&quot;all&quot;)
+class List&lt;E&gt;{
+    public static&lt;Z&gt; List&lt;Z&gt; nil(){
+        return null;
+    };
+    public static&lt;Z&gt; List&lt;Z&gt; cons(Z head,List&lt;Z&gt; tail){
+        return null;
+    }
+    E head(){
+        return null;
+    }
+}
+
+@SuppressWarnings(&quot;all&quot;)
+public class TypeSpeculation {
+    public static void main(String[] args) {
+        //在调用时，可以使用下面的代码： 推荐写法
+        List&lt;Integer&gt; list1=List.nil();
+        //在 Java7 中，这种写法将会产生编译错误，正确写法如下：
+        List&lt;Integer&gt; list2=List.&lt;Integer&gt;nil();
+        //同理，在调用 cons 方法时的写法为 推荐写法
+        List&lt;Integer&gt; list3=List.cons(5, List.nil()); 
+        //而不需要显式地指定类型：
+        List&lt;Integer&gt; list4=List.cons(5, List.&lt;Integer&gt;nil());
+
+        Integer s = (Integer) List.nil().head();
+        //因此在上面的链式方法调用中，会延迟到整个赋值表达式完成时才进行类型推断。通过赋值语句左边，编译器会为head()调用推断;为String。
+        //然后，再次推断nil()调用的为String 。
+    }
+}</code></pre><h3 id="14-jdk1-8对hashMap等map集合的优化"><a href="#14-jdk1-8对hashMap等map集合的优化" class="headerlink" title="14.jdk1.8对hashMap等map集合的优化"></a>14.jdk1.8对hashMap等map集合的优化</h3><p><strong>hashMap数据结构的优化：</strong><br>原来的hashMap采用的数据结构是<strong>哈希表（数组+链表），</strong> hashMap默认大小是16，一个0-15索引的数组，如何往里面存储元素，首先调用元素的hashcode方法，计算出哈希码值，经过哈希算法算成数组的索引值，如果对应的索引处没有元素，直接存放，如果有对象在，那么比较它们的equals方法比较内容，如果内容一样，后一个value会将前一个value的值覆盖，如果不一样，在1.7的时候，后加的放在前面，形成一个链表，形成了碰撞，在某些情况下如果链表无限下去，那么效率极低，<strong>碰撞是避免不了的。</strong><br>加载因子：0.75，数组扩容，达到总容量的75%，就进行扩容，但是无法避免碰撞的情况发生。<br><strong>在1.8之后，在数组+链表+红黑树</strong>来实现hashmap，当碰撞的元素个数大于8时 &amp; 总容量大于64，会有红黑树的引入。<br>除了添加之后，效率都比链表高，<strong>1.8之后链表新进元素加到末尾。</strong><br><strong>ConcurrentHashMap (锁分段机制)，concurrentLevel，jdk1.8采用CAS算法(无锁算法，不再使用锁分段)，数组+链表中也引入了红黑树的使用。</strong>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

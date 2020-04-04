@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>模板方法模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="在模板方法模式（Template Method pattern）中，一个抽象类公开定义了执行它的方法的方式/模板。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。这种类型的设计模式,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">模板方法模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">模板方法模式</h1>
+        <div class="stuff">
+            <span>八月 29, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>在模板方法模式（Template Method pattern）中，一个抽象类公开定义了执行它的方法的方式/模板。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。这种类型的设计模式属于行为型模式。  </p>
+<a id="more"></a>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法结构即可重新定义该算法的某些特定步骤。<br><strong>主要解决：</strong>一些方法通用，却在每一个子类都重写了这一方法。<br><strong>何时使用：</strong>有一些通用方法。<br><strong>关键代码：</strong>将这些通用算法抽象出来。<br><strong>应用实例：</strong>1、在建造房子的时候，地基、走线、水管都一样，只有在建筑的后期才有加壁橱加栅栏等差异。2、西游记里面菩萨定好的81难，这就是一个顶层的逻辑骨架。3、spring中对Hibernate的支持，将一些已经定好的方法封装起来，比如开启事物、获取Session、关闭Session等，程序员不重复写那些已经规范好的代码，直接丢一个实现就可以保存。<br><strong>优点：</strong>1、封装不变部分，扩展可变部分。2、提取公共代码，便于维护。3、行为由父类控制，子类实现。<br><strong>缺点：</strong>每一个不同的实现都需要子类来实现，导致类的个数增加，使得系统庞大。<br><strong>使用场景：</strong>1、有多个子类共有的方法，且逻辑相同。2、重要的、复杂的方法，可以考虑作为模板方法。<br><strong>注意事项：</strong>为防止恶意操作，一般模板方法都加上final关键词。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><img src="/blog/img/2019/09/01/1.png">     
+
+<p><strong>AbstractClass</strong>是抽象类，其实也就是一抽象模板，定义并实现了一个模板方法。这个模板方法一般是一个具体方法，他给出了一个顶级逻辑的骨架，而逻辑的组成步骤在相应的抽象操作中，推迟到子类实现。顶级逻辑也有可能调用一些具体的方法。  </p>
+<pre><code>public abstract class AbstractClass{
+    //一些抽象行为，放到子类去实现
+    public abstract void primitiveOperation1();
+    public abstract void primitiveOperation2();
+
+    //模板方法，给出了逻辑的骨架，而逻辑的组成是一些相应的抽象操作，他们都推迟到子类实现
+    public final void templateMethod(){
+        primitiveOperation1();
+        primitiveOperation2();
+        System.out.println(&quot;&quot;);
+    }
+}</code></pre><p><strong>ConcreteClass</strong>，实现父类所定义的一个或多个抽象方法。每一个<strong>AbstractClass</strong>都可以有任意多个<strong>ConcreteClass</strong>与之对应，而每一个<strong>ConcreteClass</strong>都可以给出这些抽象方法(也就是顶级逻辑的组成步骤)的不同实现，从而使得顶级逻辑的实现各不相同。  </p>
+<pre><code>class ConcreteClassA extends AbstractClass{
+    @Override
+    public void primitiveOperation1(){
+        System.out.println(&quot;具体类A方法1实现&quot;);//与ConcreteClassB不同的方法实现
+    }
+    @Override
+    public void primitiveOperation2(){
+        System.out.println(&quot;具体类A方法2实现&quot;);//与ConcreteClassB不同的方法实现
+    }
+}
+
+class ConcreteClassB extends AbstractClass{
+    @Override
+    public void primitiveOperation1(){
+        System.out.println(&quot;具体类B方法1实现&quot;);//与ConcreteClassA不同的方法实现
+    }
+    @Override
+    public void primitiveOperation2(){
+        System.out.println(&quot;具体类B方法2实现&quot;);//与ConcreteClassA不同的方法实现
+    }
+}</code></pre><p>客户端调用  </p>
+<pre><code>public static void main(String[] args){
+    AbstractClass c;
+    c = new ConcreteClassA();
+    c.templateMethod();
+
+    c = new ConcreteClassB();
+    c.templateMethod();
+}</code></pre><h2 id="3-例子"><a href="#3-例子" class="headerlink" title="3.例子"></a>3.例子</h2><p>场景：小时候，数学老师的随堂测验，都是在黑板上抄题目，要我们先抄题目，然后再做答案，我那时候眼镜已经开始不好了，所以有时候没看清楚就会把题目抄错，比如数字3看成数字8,7看成1，那就意味着我做的再好，也不会正确了。惨啊，没考好，回家父母还说我考试成绩差是不认真学习，还专门找借口。  </p>
+<p>原因在哪里？<br>题目抄错了，那就不是考试题目了，而考试试卷最大的好处就是，大家都是一样的题目，特别是标准化的考试，比如全是选择或判断的题目，那就是最大化地限制了答题者的发挥，大家都是ABCD或打勾打叉，非对即错的结果。  </p>
+<p><strong>设计一个抄题目的程序。</strong>  </p>
+<h3 id="3-1-重复-易错-难改"><a href="#3-1-重复-易错-难改" class="headerlink" title="3.1 重复=易错+难改"></a>3.1 重复=易错+难改</h3><p>代码结构图<br><img src="/blog/img/2019/09/01/2.png">   </p>
+<p>学生甲抄的试卷类  </p>
+<pre><code>//学生甲抄的试题
+public class TestPaperA {
+    //试题1
+    public void question1(){
+        System.out.println(&quot;1+1=?答案是[] a.1 b.2 c.3 d.4&quot;);
+        System.out.println(&quot;答案：b&quot;);
+    }
+    //试题2
+    public void question2(){
+        System.out.println(&quot;1+2=?答案是[] a.1 b.2 c.3 d.4&quot;);
+        System.out.println(&quot;答案：c&quot;);
+    }
+    //试题3
+    public void question3(){
+        System.out.println(&quot;2+2=?答案是[] a.1 b.2 c.3 d.4&quot;);
+        System.out.println(&quot;答案：d&quot;);
+    }
+}</code></pre><p>学生乙抄的试卷类  </p>
+<pre><code>//学生乙抄的试题
+public class TestPaperB {
+    //试题1
+    public void question1(){
+        System.out.println(&quot;1+1=?答案是[] a.1 b.2 c.3 d.4&quot;);
+        System.out.println(&quot;答案：a&quot;);
+    }
+    //试题2
+    public void question2(){
+        System.out.println(&quot;1+2=?答案是[] a.1 b.2 c.3 d.4&quot;);
+        System.out.println(&quot;答案：b&quot;);
+    }
+    //试题3
+    public void question3(){
+        System.out.println(&quot;2+2=?答案是[] a.1 b.2 c.3 d.4&quot;);
+        System.out.println(&quot;答案：d&quot;);
+    }
+}</code></pre><p>客户端测试类  </p>
+<pre><code>public class Test {
+    public static void main(String[] args) {
+        System.out.println(&quot;学生甲抄的试卷：&quot;);
+        TestPaperA a = new TestPaperA();
+        a.question1();
+        a.question2();
+        a.question3();
+        System.out.println();
+        System.out.println(&quot;学生乙抄的试卷：&quot;);
+        TestPaperB b = new TestPaperB();
+        b.question1();
+        b.question2();
+        b.question3();
+    }
+}</code></pre><p>在这个程序中你会发现，学生甲和学生乙两个抄的试卷非常类似，除了答案不同，没什么不一样，这样写又容易错，又难以维护。<br>如果老师突然改题目，那么两个人都要改代码，如果某个人抄错了，那就糟糕了。怎么办？<br>老师出一份试卷，打印多份，让学生填答案就可以了。</p>
+<h3 id="3-2-代码提炼"><a href="#3-2-代码提炼" class="headerlink" title="3.2 代码提炼"></a>3.2 代码提炼</h3><p>试卷父类代码  </p>
+<pre><code>//考题试卷
+public class Paper {
+    //试题1
+    public void question1(){
+        System.out.println(&quot;1+1=?答案是[] a.1 b.2 c.3 d.4&quot;);
+    }
+    //试题2
+    public void question2(){
+        System.out.println(&quot;1+2=?答案是[] a.1 b.2 c.3 d.4&quot;);
+    }
+    //试题3
+    public void question3(){
+        System.out.println(&quot;2+2=?答案是[] a.1 b.2 c.3 d.4&quot;);
+    }    
+}</code></pre><p>学生子类代码  </p>
+<pre><code>//学生甲抄的试题
+public class TestPaperA extends Paper{
+    public void question1(){
+        super.question1();
+        System.out.println(&quot;答案：b&quot;);
+    }
+    public void question2(){
+        super.question2();
+        System.out.println(&quot;答案：c&quot;);
+    }
+    public void question3(){
+        super.question3();
+        System.out.println(&quot;答案：d&quot;);
+    }
+}
+
+//学生乙抄的试题
+public class TestPaperB extends Paper{
+    public void question1(){
+        super.question1();
+        System.out.println(&quot;答案：a&quot;);
+    }
+    public void question2(){
+        super.question2();
+        System.out.println(&quot;答案：b&quot;);
+    }
+    public void question3(){
+        super.question3();
+        System.out.println(&quot;答案：d&quot;);
+    }
+}</code></pre><p>客户端代码相同，略。  </p>
+<p>到了这里有些人可能就会觉得子类已经非常简单了，只要填写答案就可以了。<br>实际上这只是初步泛化，你仔细看一下就会发现，这个类里面还有类似代码<strong>super.question1()</strong>以及<strong>System.out.println(“答案：”)</strong>，除了选项abcd，其他的都是重复的。  </p>
+<p>这里我们<strong>既然用了继承，并且肯定这个继承有意义，就应该要成为子类的模板，所有重复的代码都应该上升到父类去，而不是让每个子类都去重复。怎么办？</strong>  </p>
+<p>这时模板方法登场了，<strong>当我们要完成在某一细节层次一致的一个过程或一系列步骤，但其个别步骤在更详细的层次上的实现可能不同时，我们通常考虑用模板方法模式来考虑。</strong>  </p>
+<p>改造试卷父类  </p>
+<pre><code>//考题试卷
+public class Paper {
+    //试题1
+    public final void question1(){
+        System.out.println(&quot;1+1=?答案是[] a.1 b.2 c.3 d.4&quot;);
+        System.out.println(&quot;答案：&quot;+answer1());
+    }
+    //试题2
+    public final void question2(){
+        System.out.println(&quot;1+2=?答案是[] a.1 b.2 c.3 d.4&quot;);
+        System.out.println(&quot;答案：&quot;+answer2());
+    }
+    //试题3
+    public final void question3(){
+        System.out.println(&quot;2+2=?答案是[] a.1 b.2 c.3 d.4&quot;);
+        System.out.println(&quot;答案：&quot;+answer3());
+    }    
+
+    public String answer1(){
+        return &quot;&quot;;
+    }
+    public String answer2(){
+        return &quot;&quot;;
+    }
+    public String answer3(){
+        return &quot;&quot;;
+    }
+}</code></pre><p>改造子类  </p>
+<pre><code>//学生甲抄的试题
+public class TestPaperA extends Paper{
+    public String answer1(){
+        return &quot;b&quot;;
+    }
+    public String answer2(){
+        return &quot;c&quot;;
+    }
+    public String answer3(){
+        return &quot;d&quot;;
+    }
+}
+
+//学生乙抄的试题
+public class TestPaperB extends Paper{
+    public String answer1(){
+        return &quot;a&quot;;
+    }
+    public String answer2(){
+        return &quot;b&quot;;
+    }
+    public String answer3(){
+        return &quot;d&quot;;
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Test {
+    public static void main(String[] args) {
+        System.out.println(&quot;学生甲抄的试卷：&quot;);
+        Paper a = new TestPaperA();//将子类对象的声明改成了父类，利用了多态性，实现了代码的复用。
+        a.question1();
+        a.question2();
+        a.question3();
+        System.out.println();
+        System.out.println(&quot;学生乙抄的试卷：&quot;);
+        Paper b = new TestPaperB();
+        b.question1();
+        b.question2();
+        b.question3();
+    }
+}</code></pre><p>代码结构图<br><img src="/blog/img/2019/09/01/3.png">   </p>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/template-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/template-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>    </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

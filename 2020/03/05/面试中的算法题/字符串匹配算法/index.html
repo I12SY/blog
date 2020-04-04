@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>字符串匹配算法 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.题目给你两个字符串A和B，请你判断B是否A的子串，并返回B在A中第一次出现的位置。什么意思呢？举个例子：字符串A：a b c d e f g h字符串B：c d e f在上面的例子中，字符串B是,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">字符串匹配算法</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">字符串匹配算法</h1>
+        <div class="stuff">
+            <span>三月 05, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1.题目"></a>1.题目</h2><p>给你两个字符串A和B，请你判断B是否A的子串，并返回B在A中第一次出现的位置。<br>什么意思呢？举个例子：<br>字符串A：a b <strong>c d e f</strong> g h<br>字符串B：<strong>c d e f</strong><br>在上面的例子中，字符串B是A的子串，B第一次在A中出现的位置下标是2（字符串的首位下标是0），所以返回 2。</p>
+<a id="more"></a>  
+<p>我们再看另一个例子：<br>字符串A：a b c d e f g h<br>字符串B：b c d g<br>在上面的例子中，字符串B在A中并不存在，所以返回 -1。<br>为了统一概念，在后文中，我们把字符串A称为主串，把字符串B称为模式串。    </p>
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2.解题思路"></a>2.解题思路</h2><h3 id="2-1-BF算法-是Brute-Force（暴力算法）的缩写"><a href="#2-1-BF算法-是Brute-Force（暴力算法）的缩写" class="headerlink" title="2.1 BF算法(是Brute Force（暴力算法）的缩写)"></a>2.1 BF算法(是Brute Force（暴力算法）的缩写)</h3><p><strong>第一轮</strong>，我们从主串的首位开始，把主串和模式串的字符逐个比较：<br><img src="/blog/img/2020/03/05/BF算法1.jpg"><br><br>显然，主串的首位字符是a，模式串的首位字符是b，两者并不匹配。<br><strong>第二轮</strong>，我们把模式串后移一位，从主串的第二位开始，把主串和模式串的字符逐个比较：<br><img src="/blog/img/2020/03/05/BF算法2.png"><br><br>主串的第二位字符是b，模式串的第二位字符也是b，两者匹配，继续比较：<br><img src="/blog/img/2020/03/05/BF算法3.png"><br><br>主串的第三位字符是b，模式串的第三位字符也是c，两者并不匹配。<br><strong>第三轮</strong>，我们把模式串再次后移一位，从主串的第三位开始，把主串和模式串的字符逐个比较：<br><img src="/blog/img/2020/03/05/BF算法4.png"><br><br>主串的第三位字符是b，模式串的第三位字符也是b，两者匹配，继续比较：<br><img src="/blog/img/2020/03/05/BF算法5.png"><br><br>主串的第四位字符是c，模式串的第四位字符也是c，两者匹配，继续比较：<br><img src="/blog/img/2020/03/05/BF算法6.png"><br><br>主串的第五位字符是e，模式串的第五位字符也是e，两者匹配，比较完成！<br>由此得到结果，模式串 bce 是主串 abbcefgh 的子串，在主串第一次出现的位置下标是 2：<br><img src="/blog/img/2020/03/05/BF算法7.png"><br> </p>
+<pre><code>public static int bruteForce(String a,String b){
+    for (int i = 0; i &lt; a.length()-b.length()+1; i++) {
+        //主串开始比较的起始位置
+        int point = i;
+        //是否匹配成功
+        boolean flag = true;
+        for (int j = 0; j &lt; b.length(); j++) {
+            //开始进行匹配
+            if((b.charAt(j) == a.charAt(point))){
+                point++;
+            }else{
+                //只要有一个位置没有对应成功，修改标记，并结束内循环，重新开始下一轮的比较
+                flag = false;
+                break;
+            }
+        }
+        if(flag){
+            return i;
+        }
+    }
+    return -1;
+}</code></pre><p>虽然这个方法能解决问题，但是在极端情况下算法的效率会很低，举个例子：<br><img src="/blog/img/2020/03/05/BF算法8.png"><br><br>上图的情况，在每一轮进行字符匹配时，模式串的前三个字符a都和主串中的字符相匹配，一直检查到模式串最后一个字符b，才发现不匹配：<br><img src="/blog/img/2020/03/05/BF算法9.png"><br><br>这样一来，两个字符串在每一轮都需要白白比较4次，显然非常浪费。<br>假设主串的长度是m，模式串的长度是n，那么在这种极端情况下，BF算法的最坏时间复杂度是<strong>O（mn）</strong>。  </p>
+<h3 id="2-2-RK算法-比较两个字符串的哈希值"><a href="#2-2-RK算法-比较两个字符串的哈希值" class="headerlink" title="2.2 RK算法(比较两个字符串的哈希值)"></a>2.2 RK算法(比较两个字符串的哈希值)</h3><p>比较哈希值是什么意思呢？<br>用过哈希表的朋友们都知道，每一个字符串都可以通过某种哈希算法，转换成一个整型数，这个整型数就是hashcode：<br>hashcode = hash（string）<br>显然，相对于逐个字符比较两个字符串，仅比较两个字符串的hashcode要容易得多。<br><img src="/blog/img/2020/03/05/RK算法1.png"><br><br>给定主串和模式串如下（假定字符串只包含26个小写字母）：<br><img src="/blog/img/2020/03/05/RK算法2.png"><br><br><strong>第一步，我们需要生成模式串的hashcode。</strong><br>生成hashcode的算法多种多样，比如：<br><strong>按位相加</strong><br>这是最简单的方法，我们可以把a当做1，b当做2，c当做3……然后把字符串的所有字符相加，相加结果就是它的hashcode。<br>bce =  2 + 3 + 5 = 10<br>但是，这个算法虽然简单，却很可能产生hash冲突，比如bce、bec、cbe的hashcode是一样的。<br><strong>转换成26进制数</strong><br>既然字符串只包含26个小写字母，那么我们可以把每一个字符串当成一个26进制数来计算。<br>bce = 2x(26^2) + 3x26 + 5 = 1435<br>这样做的好处是大幅减少了hash冲突，缺点是计算量较大，而且有可能出现超出整型范围的情况，需要对计算结果进行取模。<br>为了方便演示，后续我们采用的是按位相加的hash算法，所以bce的hashcode是10：<br><img src="/blog/img/2020/03/05/RK算法3.jpg"><br><br><strong>第二步，生成主串当中第一个等长子串的hashcode。</strong><br>由于主串通常要长于模式串，把整个主串转化成hashcode是没有意义的，只有比较主串当中<strong>和模式串等长的子串</strong>才有意义。<br>因此，我们首先生成主串中第一个和模式串等长的子串hashcode，<br>即abb = 1 + 2 + 2 = 5：<br><img src="/blog/img/2020/03/05/RK算法4.png"><br><br><strong>第三步，比较两个hashcode。</strong><br>显然，5！=10，说明模式串和第一个子串不匹配，我们继续下一轮比较。<br><strong>第四步，生成主串当中第二个等长子串的hashcode。</strong><br>bbc = 2 + 2 + 3 = 7：<br><img src="/blog/img/2020/03/05/RK算法5.jpg"><br><br><strong>第五步，比较两个hashcode。</strong><br>显然，7！=10，说明模式串和第二个子串不匹配，我们继续下一轮比较。<br><strong>第六步，生成主串当中第三个等长子串的hashcode。</strong><br>bce= 2 + 3 + 5 = 10：<br><img src="/blog/img/2020/03/05/RK算法6.jpg"><br><br><strong>第七步，比较两个hashcode。</strong><br>显然，10 ==10，两个hash值相等！这是否说明两个字符串也相等呢？<br>别高兴的太早，由于存在hash冲突的可能，我们还需要进一步验证。<br><strong>第八步，逐个字符比较两字符串。</strong><br>hashcode的比较只是初步验证，之后我们还需要像BF算法那样，对两个字符串逐个字符比较，最终判断出两个字符串匹配。<br><img src="/blog/img/2020/03/05/RK算法7.png"><br><br>最后得出结论，模式串bce是主串abbcefgh的子串，第一次出现的下标是2。<br><img src="/blog/img/2020/03/05/RK算法8.png"><br><br>什么意思呢？让我们再来看一个例子：<br><img src="/blog/img/2020/03/05/RK算法9.png"><br><br>上图中，我已知子串abbcefg的hashcode是26，那么如何计算下一个子串，也就是bbcefgd的hashcode呢？<br><img src="/blog/img/2020/03/05/RK算法10.png"><br><br>我们没有必要把子串的字符重新进行累加运算，而是可以采用一个更简单的方法。由于新子串的前面少了一个a，后面多了一个d，所以：<br><strong>新hashcode = 旧hashcode - 1 + 4 = 26-1+4 = 29</strong><br>再下一个子串bcefgde的计算也是同理：<br><strong>新hashcode = 旧hashcode - 2 + 5 = 29-2+5 = 32</strong></p>
+<pre><code>public static int rabinKarp(String a,String b){
+    //主串长度
+    int m = a.length();
+    //模式串长度
+    int n = b.length();
+    //计算模式串哈希值
+    int bHashCode = hash(b);
+    //计算主串当中第一个和模式串等长的子串的hash值
+    int aHashCode = hash(a.substring(0,n));
+    for (int i = 0; i &lt; m-n+1; i++) {
+        if(bHashCode == aHashCode &amp;&amp; compareString(i,a,b)){
+            return i;
+        }
+        //如果不是最后一轮，更新主串从i到i+n的hash值
+        if(i&lt;m-n){
+            aHashCode = nextHash(a,aHashCode,i,n);
+        }
+    }
+    return -1;
+}
+
+private static int hash(String str){
+    int hashcode = 0;
+    //这里采用最简单的hashcode计算方式：
+    //把a当做1，把b当中2，把c当中3.....然后按位相加
+    for (int i = 0; i &lt; str.length(); i++) {
+        hashcode +=(str.charAt(i)-&apos;a&apos;);
+    }
+    return hashcode;
+}
+
+private static int nextHash(String str,int hash,int index,int n){
+    hash -=str.charAt(index)-&apos;a&apos;;
+    hash +=str.charAt(index+n)-&apos;a&apos;;
+    return hash;
+}
+
+private static boolean compareString(int i,String a,String b){
+    String subStr = a.substring(i,i+b.length());
+    return subStr.equals(b);
+}</code></pre><p>RK算法计算单个子串hash的时间复杂度是O(n)，但由于后续的子串hash是增量计算，所以总的时间复杂度仍然是O(n)。<br>相比于BF算法，RK算法采用哈希值比较的方式，免去了许多无谓的字符串比较，所以时间复杂度大大提高了。<br>RK算法的不足之处：RK算法的缺点在于哈希冲突。每一次哈希冲突的时候，RK算法都要对子串和模式串进行逐个字符的比较，如果冲突太多了，RK算法就退化成了BF算法。  </p>
+<h3 id="2-3-BM算法"><a href="#2-3-BM算法" class="headerlink" title="2.3 BM算法"></a>2.3 BM算法</h3><p>上面讲的RK算法回避了字符的直接比较，改为比较两个字符串的哈希值。但这样可能产生哈希冲突，性能并不稳定。<br>那么，我们能否仍然用字符串比较的思路呢，并且尽量减少无谓的比较呢？这就是BM算法的努力方向。<br>为了能减少比较，BM算法制定了两条规则，一个是[坏字符串规则]，一个是[好后缀规则]。<br><strong>坏字符规则</strong><br>“坏字符” 是什么意思？就是指模式串和子串当中不匹配的字符。<br>还以上面的字符串为例，当模式串和主串的第一个等长子串比较时，子串的最后一个字符T就是坏字符：<br><img src="/blog/img/2020/03/06/BM算法1.jpg"><br><br><img src="/blog/img/2020/03/06/小灰1.jpg"><br><br>当检测到第一个坏字符之后，我们有必要让模式串一位一位向后挪动和比较吗？并不需要。<br>因为只有<strong>模式串与坏字符T对齐的位置也是字符T的情况下，</strong>两者才有匹配的可能。<br>不难发现，模式串的第1位字符也是T，这样一来我们就可以对模式串做一次“乾坤大挪移”，直接把模式串当中的字符T和主串的坏字符对齐，进行下一轮的比较：<br><img src="/blog/img/2020/03/06/BM算法2.png"><br><br>坏字符的位置越靠右，下一轮模式串的挪动跨度就可能越长，节省的比较次数也就越多。这就是BM算法从右向左检测的好处。<br>接下来，我们继续逐个字符比较，发现右侧的G、C、G都是一致的，但主串当中的字符A，是又一个坏字符：<br><img src="/blog/img/2020/03/06/BM算法3.png"><br><br>我们按照刚才的方式，找到模式串的第2位字符也是A，于是我们把模式串的字符A和主串中的坏字符对齐，进行下一轮比较：<br><img src="/blog/img/2020/03/06/BM算法4.png"><br><br>接下来，我们继续逐个字符比较，这次发现全部字符都是匹配的，比较公正完成：<br><img src="/blog/img/2020/03/06/BM算法5.png"><br><br><img src="/blog/img/2020/03/06/小灰2.jpg"><br><br><img src="/blog/img/2020/03/06/BM算法6.png"><br> </p>
+<p><strong>代码实现，这段代码是BM算法的阉割版实现</strong>  </p>
+<pre><code>public static int boyerMoore(String a,String b){
+    //主串长度
+    int m = a.length();
+    //模式串长度
+    int n = b.length();
+    //模式串的起始位置
+    int start = 0;
+    while(start &lt;= m-n){
+        int i;
+        //从后向前，逐个字符比较
+        for (i=n-1; i&gt;=0; i--) {
+            if(a.charAt(start+i)!=b.charAt(i)){
+                //发现坏字符串，跳出比较，i记录了坏字符串的位置
+                break;
+            }
+        }
+        if(i&lt;=0){
+            //匹配成功，返回第一次匹配的下标位置
+            return start;
+        }
+        //寻找坏字符串在模式串中的对应  
+        int charIndex = findCharacter(b,a.charAt(start+i),i);
+        //计算坏字符串产生的位移
+        int bcOffset = charIndex&gt;=0?i-charIndex:i+1;
+        start +=bcOffset;
+    }
+    return -1;
+}
+
+private static int findCharacter(String b, char badCharacter, int index) {
+    for (int i = index-1; i&gt;=0; i--) {
+        if(b.charAt(i) == badCharacter){
+            return i;
+        }
+    }
+    //模式串不存在该字符串，则返回-1
+    return -1;
+}</code></pre><p>为什么说它是阉割版代码呢？<br>因为坏字符串规则只是BM算法额两大法宝之一，除此之外它还具有另一件法宝:[好后缀规则]。<br><strong>好后缀规则</strong><br>“好后缀” 又是什么意思？就是指模式串和子串当中相匹配的后缀。<br>让我们看一组新的例子：<br><img src="/blog/img/2020/03/06/BM算法7.png"><br><br>对于上面的例子，如何我们继续使用“坏字符规则”，会有怎样的效果呢？<br>从后向前比对字符，我们发现后面三个字符都是匹配的，到了第四个字符的时候，发现坏字符G：<br><img src="/blog/img/2020/03/06/BM算法8.png"><br><br>接下来我们在模式串找到了对应的字符G，但是按照坏字符规则，模式串仅仅能够向后挪动一位：<br><img src="/blog/img/2020/03/06/BM算法9.jpg"><br><br>这时候坏字符规则显然并没有起到作用，为了能真正减少比较次数，轮到我们的好后缀规则出场了。由于好后缀规则的实现细节比坏字符规则要难理解得多，所以我们这里只介绍一个大概思路：<br><img src="/blog/img/2020/03/06/BM算法10.png"><br><br>我们回到第一轮的比较过程，发现主串和模式串都有共同的后缀“GCG”，这就是所谓的“好后缀”。<br>如果模式串其他位置也包含与“GCG”相同的片段，那么我们就可以挪动模式串，让这个片段和好后缀对齐，进行下一轮的比较：<br><img src="/blog/img/2020/03/06/BM算法11.jpg"><br><br>显然，在这个例子中，采用好后缀规则能够让模式串向后移动更多位，节省了更多无谓的比较。<br><img src="/blog/img/2020/03/06/小灰3.jpg"><br><br><img src="/blog/img/2020/03/06/BM算法12.jpg"><br><br><img src="/blog/img/2020/03/06/小灰4.jpg"><br><br><img src="/blog/img/2020/03/06/BM算法13.jpg"><br><br><img src="/blog/img/2020/03/06/小灰5.jpg"><br><br><img src="/blog/img/2020/03/06/小灰6.jpg"><br><br><img src="/blog/img/2020/03/06/小灰7.jpg"><br><br><img src="/blog/img/2020/03/06/小灰8.jpg"><br></p>
+<p><strong>坏字符规则+好后缀规则代码实现(后续加入)</strong> </p>
+<h3 id="2-4-KMP算法"><a href="#2-4-KMP算法" class="headerlink" title="2.4 KMP算法"></a>2.4 KMP算法</h3><p>和BM算法类似，KMP算法也在视图减少无谓的字符比较。为了实现这一点，KMP算法把专注点放在了[已匹配的前缀]。<br><strong>KMP算法的整体思路</strong> </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

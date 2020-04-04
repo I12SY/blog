@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>==与equals的区别 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.equals方法是java.lang.Object类的方法有两种有用法说明(1)对于字符串变量来说，使用”==”和”equals()”方法比较字符串时，其比较方法不同。“==”比较两个变量本身的,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">==与equals的区别</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">==与equals的区别</h1>
+        <div class="stuff">
+            <span>八月 14, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h3 id="1-equals方法是java-lang-Object类的方法"><a href="#1-equals方法是java-lang-Object类的方法" class="headerlink" title="1.equals方法是java.lang.Object类的方法"></a>1.equals方法是java.lang.Object类的方法</h3><p>有两种有用法说明<br>(1)对于字符串变量来说，使用”==”和”equals()”方法比较字符串时，其比较方法不同。<br>“==”比较两个变量本身的值，即两个对象在内存中的首地址<br>“equals”比较字符串中所包含的内容是否相同  </p>
+<pre><code>public static void main(String[] args) {
+        String s1,s2,s3;
+        s1 = new String(&quot;abc&quot;);
+        s2 = new String(&quot;abc&quot;);
+        s3 = s1;
+        System.out.println(s1 == s2); //false
+        System.out.println(s1.equals(s2));//true
+        System.out.println(s1 == s3); //true
+}
+
+ 注意(1):
+ 解释：
+     StringBuffer类中没有重新定义equals这个方法，因此这个方法就来自Object类，
+     而Object类中的equals方法是用来比较&quot;地址&quot;的，所以等于false
+    public static void main(String[] args) {
+        StringBuffer s1 = new StringBuffer(&quot;a&quot;);
+        StringBuffer s2 = new StringBuffer(&quot;a&quot;);
+        System.out.println(s1.equals(s2));//false
+    }
+
+ 注意(2):
+ 解释：
+      对于s3和s4来说，有一点不一样要引起注意，由于s3和s4是`两个字符串常量`所生成的变量，其中所存放的内存地址是相等的
+    所以s3==s4是true（即使没有s3=s4这样一个赋值语句）
+    public static void main(String[] args) {
+        String s3=&quot;abc&quot;,s4=&quot;abc&quot;;
+        System.out.println(s3 == s4); //true
+    }</code></pre><a id="more"></a>
+<p>(2)对于非字符串变量来说,==与equals方法的作用是相同的，都是用来比较其对象在堆内存的首地址，即用来比较两个引用变量是否指向同一个地址  </p>
+<pre><code>public class Test {
+    public static void main(String[] args) {
+        A obj1 = new  A();
+        A obj2 = new  A();
+        System.out.println(obj1 == obj2);//false
+        System.out.println(obj1.equals(obj2));//false
+        //如果
+        A obj3 = obj1;
+        System.out.println(obj1 == obj3);//true
+        System.out.println(obj1.equals(obj3));//true
+    }
+}
+class A{
+
+}</code></pre><h3 id="2-对于基本数据来说，-比较的是值是否相等，不能用equals来比较"><a href="#2-对于基本数据来说，-比较的是值是否相等，不能用equals来比较" class="headerlink" title="2.对于基本数据来说，==比较的是值是否相等，不能用equals来比较"></a>2.对于基本数据来说，==比较的是值是否相等，不能用equals来比较</h3><pre><code>public static void main(String[] args) {
+    int a = 3; 
+    int b = 4; 
+    int c = 3; 
+    System.out.println(a == b);//结果是false 
+    System.out.println(a == c);//结果是true 
+    //System.out.println(a.equals(c));//错误，编译不能通过，equals方法 
+}</code></pre><h3 id="3-对于基本数据来的包装类来说，用法与String类基本一直，且都是final修饰的类以Integer为例子，其他的比如Double、Character、Float等也一样"><a href="#3-对于基本数据来的包装类来说，用法与String类基本一直，且都是final修饰的类以Integer为例子，其他的比如Double、Character、Float等也一样" class="headerlink" title="3.对于基本数据来的包装类来说，用法与String类基本一直，且都是final修饰的类以Integer为例子，其他的比如Double、Character、Float等也一样"></a>3.对于基本数据来的包装类来说，用法与String类基本一直，且都是final修饰的类以Integer为例子，其他的比如Double、Character、Float等也一样</h3><pre><code>public static void main(String[] args) {
+    Integer n1 = new Integer(30); 
+    Integer n2 = new Integer(30); 
+    Integer n3 = new Integer(31); 
+    Integer n4 = 31;
+    Integer n5 = 31;
+    System.out.println(n1 == n2);//结果是false 两个不同的Integer对象，故其地址不同， 
+    System.out.println(n1 == n3);//false 那么不管是new Integer(30)还是new Integer(31) 结果都显示false 
+    System.out.println(n1.equals(n2));//结果是true 根据jdk文档中的说明，n1与n2指向的对象中的内容是相等的，都是30，故equals比较后结果是true 
+    System.out.println(n1.equals(n3));//结果是false 因对象内容不一样，一个是30一个是31 
+    System.out.println(n4 == n5);//true
+    System.out.println(n4.equals(n5));//true
+    System.out.println(n3 == n4);//false
+    System.out.println(n3.equals(n4));//true
+}</code></pre><h3 id="4-关于String的比较的详细说明"><a href="#4-关于String的比较的详细说明" class="headerlink" title="4.关于String的比较的详细说明"></a>4.关于String的比较的详细说明</h3><pre><code>/**
+ * 关于String的比较：
+ * 解释：
+ *     1.s1与s2分别指向由字符串常量”123” 创建的对象，在常量池中，只有一个对象，内容为123，
+ * 有两个引用s1和s2指向这个对象，故这两个引用变量所指向的地址是相同的，因而（1）处的运行结果为
+ * true，又因为s1.equals(s2)是比较s1和s2所指向的对象的内容是否相等，而我们知道这两个对
+ * 象的内容都是字符串常量”123”，故标记（2）处的运行结果是true。
+ * 
+ * 2.用同样的方法分析，s1和s3所指向的对象不一样，内容也不一样，故标记（3）和（4）处运行结果是false。
+ * 
+ * 3.再看看s4和s5，这两个引用变量所指向的对象的内容都是一样的（内容都是123），但是这两个对象是用
+ * new操作符创建处类的，是在内存中分配两块空间给这两个对象的，因而这两个对象的内存地址不一样，故是两个
+ * 不同的对象，标记（5）处的s4 == s5 运行结果为false，但是内容一样，故标记（6）处的s4.equals(s5)
+ * 运行结果为true。同理，s4和s6所指向的对象地址不同，内容也不相同。故标记（7）（8）处运行结果为false。
+ * 
+ * 4.s1和s4分别指向两个不同的对象（之所以这样称呼，是因为这两个对象在内存中的地址不相同，故而对象不相同），
+ * 故标记为（9）处的s1 == s4运行结果为false，而标记为（10）处的s1.equals(s4)运行结果为true.
+ */
+public static void main(String[] args) {
+    String s1 = &quot;123&quot;; 
+    String s2 = &quot;123&quot;; 
+    String s3 = &quot;abc&quot;; 
+    String s4 = new String(&quot;123&quot;); 
+    String s5 = new String(&quot;123&quot;); 
+    String s6 = new String(&quot;abc&quot;); 
+
+    System.out.println(s1 == s2);//（1）true 
+    System.out.println(s1.equals(s2));//（2）true 
+    System.out.println(s1 == s3);//（3）flase 
+    System.out.println(s1.equals(s3));//（4）flase 
+
+    System.out.println(s4 == s5);//（5）flase 
+    System.out.println(s4.equals(s5));//（6）true 
+    System.out.println(s4 == s6);//（7）flase 
+    System.out.println(s4.equals(s6));//（8）flase 
+
+    System.out.println(s1 == s4);//（9）false 
+    System.out.println(s1.equals(s4));//（10）true 
+}</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

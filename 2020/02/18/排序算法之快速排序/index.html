@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>排序算法之快速排序 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.1 初识快速排序&amp;#8195;&amp;#8195;快速排序(Quicksort)是对冒泡排序的一种改进。所以快速排序也属于交换排序，通过元素之间的比较和交换位置来达到排序的效果。  
+  
+&amp;#819,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">排序算法之快速排序</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">排序算法之快速排序</h1>
+        <div class="stuff">
+            <span>二月 18, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-1-初识快速排序"><a href="#1-1-初识快速排序" class="headerlink" title="1.1 初识快速排序"></a>1.1 初识快速排序</h2><p>&#8195;&#8195;快速排序(Quicksort)是对<a href="/blog/2020/01/08/排序算法之冒泡排序/" target="_blank">冒泡排序</a>的一种改进。所以快速排序也属于<strong>交换排序</strong>，通过元素之间的比较和交换位置来达到排序的效果。  </p>
+<a id="more"></a>  
+<p>&#8195;&#8195;不同的是，冒泡排序在每一轮中只把1个元素冒泡到数列的一端，而快速排序则<strong>在每一轮挑选一个基准元素，并让其他比它大的元素移动到数列的一边，比它小的元素移动到数列的另一边，从而把数列拆解成两个部分</strong>。  </p>
+<p><img src="/blog/img/2020/02/18/快速排序.png"><br><br>&#8195;&#8195;这种思路就叫作<strong>分治法</strong>。  </p>
+<p>&#8195;&#8195;每次把数列分成两部分，究竟有什么好处呢？<br>&#8195;&#8195;假如给出一个8个元素的数列，一般情况下，使用冒泡排序需要比较7轮，每一轮把一个元素移动到数列的一端，时间复杂度是O(n²)。<br>&#8195;&#8195;而快速排序的流程是什么样子呢？  </p>
+<p><img src="/blog/img/2020/02/18/快速排序流程.png"><br><br>&#8195;&#8195;如图所示，在分治法的思想下，原素列在每一轮中都被拆分成两部分，每一部分在下一轮又被分别被拆分成两部分，直到不可再分为止。<br>&#8195;&#8195;每一轮的比较和交换，需要把数组全部元素都遍历一遍，时间复杂度是O(n)。这样的遍历一共需要多少轮呢？假如元素个数是n，那么平均情况下需要logn轮，因此快速排序算法总体的平均时间复杂度是<strong>O(nlogn)</strong>。</p>
+<h2 id="1-2-基准元素的选择"><a href="#1-2-基准元素的选择" class="headerlink" title="1.2 基准元素的选择"></a>1.2 基准元素的选择</h2><p>&#8195;&#8195;基准元素，英文pivot，在分治过程中，以基准元素为中心，把其他元素移动到它的左右两边。<br>那么如何选择基准元素呢？<br>&#8195;&#8195;最简单的方式是选择数列的第一个元素。<br><img src="/blog/img/2020/02/18/基准元素选择1.png"><br><br>&#8195;&#8195;这种选择在绝大多数情况下是没有问题的。但是，假如有一个原本逆序的数列，期望排序成顺序数列，那么会出现什么情况呢？<br><img src="/blog/img/2020/02/18/逆序数列排序.png"><br><br>&#8195;&#8195;你会发现数列并没有被分成两半，每一轮都只确定了基准元素的位置。<br>&#8195;&#8195;在这种情况下数列的第1个元素要么是最小值，要么是最大值，根本无法发挥分治法的优势。<br>&#8195;&#8195;在这种极端的情况下，快速排序需要进行n轮，时间复杂度退化成了O(n²)。  </p>
+<p>&#8195;&#8195;那么，该怎么避免这种情况的发生呢？<br>&#8195;&#8195;<strong>第一种：三者取中。将序列首、尾和中间位置上的记录进行比较，选择三者中值作为基准关键字。</strong><br>&#8195;&#8195;<strong>第二种：取left和right之间的一个随机数m(left&lt;m&lt;right)，用n[m]作为基准关键字。采用这种方法得到的快速排序一般称为随机的快速排序。</strong><br>&#8195;&#8195;所以，虽然快速排序的平均时间复杂度是<strong>O(nlogn)</strong>，但最坏情况下的时间复杂度是<strong>O(n²)</strong>。  </p>
+<p>&#8195;&#8195;在后文中，为了简化步骤，省去了随机选择基准元素的过程，直接把首元素作为基准元素。  </p>
+<h2 id="1-3-元素的交换"><a href="#1-3-元素的交换" class="headerlink" title="1.3 元素的交换"></a>1.3 元素的交换</h2><p>&#8195;&#8195;选定了基准元素以后，我们要做的就是把其他的元素中小于基准元素的都交换到基准元素的一边，大于基准元素的都交换到基准元素另一边。<br>&#8195;&#8195;具体怎么操作？有两种方法。<br>&#8195;&#8195;<strong>1.双边循环法</strong><br>&#8195;&#8195;<strong>2.单边循环法</strong><br>&#8195;&#8195;给出原始数列如下，要求对其从小到大进行排序。<br><img src="/blog/img/2020/02/19/原始数列.png"><br></p>
+<h3 id="1-3-1-双边循环法"><a href="#1-3-1-双边循环法" class="headerlink" title="1.3.1 双边循环法"></a>1.3.1 双边循环法</h3><p>&#8195;&#8195;首先，选定基准元素pivot，并且设置两个指针left和right，指向数列的最左和最右两个元素。<br><img src="/blog/img/2020/02/19/双边循环1.png"><br><br>&#8195;&#8195;接下里进行<strong>第1次循环</strong>，从right指针开始，让指针所指向的元素和基准元素做比较。如果<strong>大于或等于</strong>pivot，则指针向<strong>左</strong>移动；如果<strong>小于</strong>pivot，则right指针停止移动，切换到<strong>left</strong>指针。  </p>
+<p>&#8195;&#8195;在当前数列中，1&lt;4，所以right指针停止移动，切换到left指针，进行下一步行动。  </p>
+<p>&#8195;&#8195;轮到left指针行动，让指针所指向的元素和基准元素作比较。如果<strong>小于或等于</strong>pivot，则指针向<strong>右</strong>移动；如果<strong>大于</strong>pivot，则left指针停止移动。  </p>
+<p>&#8195;&#8195;由于left开始指向的是基准元素，判定肯定相等，所以left右移1位。<br><img src="/blog/img/2020/02/19/双边循环2.png"><br><br>&#8195;&#8195;由于7 &gt; 4，left指针在元素7的位置停下。这时，让<strong>left和right指针所指向的元素进行交换</strong>。  
+<img src="/blog/img/2020/02/19/双边循环3.png"><br><br>&#8195;&#8195;接下来进行<strong>第2次循环</strong>，重新切换到right指针，向左移动。right指针先移动到8,8&gt;4，继续左移。由于2&lt;4，停止在2的位置。<br>&#8195;&#8195;按照这个思路，后续步骤如图所示。<br><img src="/blog/img/2020/02/19/双边循环4.png"><br></p>
+<p>&#8195;&#8195;<strong>双边循环法实现的快速排序代码展示，代码使用了递归的方式。</strong>  </p>
+<pre><code>public class QuickSort {
+
+    public static void sort(int[] arr,int startIndex,int endIndex){
+        //递归结束条件，startIndex&gt;=endIndex时
+        if(startIndex&gt;=endIndex){
+            return;
+        }
+        //得到基准元素的位置
+        int pivotIndex = partition(arr,startIndex,endIndex);
+        //根据基准元素，分成两部分进行递归排序
+        sort(arr,startIndex,pivotIndex-1);
+        sort(arr,pivotIndex+1,endIndex);
+    }
+
+    /**
+     * 分治（双边循环法）
+     * @param arr 带交换的数组
+     * @param startIndex 起始下标
+     * @param endIndex 结束下标
+     */
+    private static int partition(int[] arr, int startIndex, int endIndex) {
+        //取第一个位置(也可以选择随机位置)的元素作为基准元素
+        int pivot = arr[startIndex];
+        int left = startIndex;
+        int right = endIndex;
+        while(left!=right){
+            //控制right指针比较并左移
+            while(left&lt;right &amp;&amp; arr[right]&gt;pivot){
+                right--;
+            }
+            //控制left指针比较并右移
+            while(left&lt;right &amp;&amp; arr[left]&lt;=pivot){
+                left++;
+            }
+            //交换left和right指针所指向的元素
+            if(left&lt;right){
+                int tmp = arr[left];
+                arr[left]=arr[right];
+                arr[right]=tmp;
+            }
+        }
+        //pivot和指针重合点交换
+        arr[startIndex] = arr[left];
+        arr[left]= pivot;
+        return left;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{4,7,6,5,3,2,8,1};
+        sort(arr,0,arr.length-1);
+        System.out.println(Arrays.toString(arr));
+    }
+}</code></pre><p>关于基准元素选择的优化  </p>
+<pre><code>public static int partition2(int[] arr, int startIndex, int endIndex) {
+    //三数取中间值
+    int mid = startIndex + (endIndex-startIndex)/2;
+    if(arr[mid]&gt;arr[endIndex]){
+        swap(arr,mid,endIndex);
+    }
+    if(arr[startIndex]&gt;arr[endIndex]){
+        swap(arr,startIndex,endIndex);
+    }
+    if(arr[mid]&gt;arr[startIndex]){
+        swap(arr,mid,startIndex);
+    }
+    int pivot = arr[startIndex];
+    int left = startIndex;
+    int right = endIndex;
+
+    //略(代码同上面)
+
+    return left;
+}
+
+//交换位置
+public static void swap(int[] arr, int i, int j) {
+    int tmp = arr[i];
+    arr[i] = arr[j]; 
+    arr[j] = tmp;
+}</code></pre><h3 id="1-3-2-单边循环法"><a href="#1-3-2-单边循环法" class="headerlink" title="1.3.2 单边循环法"></a>1.3.2 单边循环法</h3><p>&#8195;&#8195;双边循环法从数组的两边交替遍历元素，虽然更加直观，但是代码实现相对繁琐。而单边循环法简单得多，只从数组的一边对元素进行遍历和交换。我们来看一下详细过程。<br>&#8195;&#8195;给出原始数列如下，要求从小到大进行排序。<br><img src="/blog/img/2020/02/19/原始数列2.png"><br><br>&#8195;&#8195;开始和双边循环法相似，首先选定基准元素pivot。同时，设置一个mark指针指向数列起始位置，这个mark代表<strong>小于基准元素的区域边界</strong>。  
+<img src="/blog/img/2020/02/19/单边循环1.png"><br><br>&#8195;&#8195;接下来，从基准元素的下一个位置开始遍历数组。<br>&#8195;&#8195;如果遍历到的元素大于基准元素，就继续往后遍历。<br>&#8195;&#8195;如果遍历到的元素小于基准元素，则需要做两件事：第一，把mark指针右移一位，因为小于pivot的区域边界增大了1；其二，让最新遍历到的元素和mark指针所在位置的元素交换位置，因为最新遍历到的元素归属于小于pivot的区域。<br>&#8195;&#8195;首先遍历到元素7,7&gt;4，所以继续遍历。<br><img src="/blog/img/2020/02/19/单边循环2.png"><br><br>&#8195;&#8195;接下来遍历到的是元素3,3&lt;4，所以mark指针右移1位。<br><img src="/blog/img/2020/02/19/单边循环3.png"><br><br>&#8195;&#8195;随后让元素3和mark指针所在位置的元素交换，因为元素3归属于小于pivot的区域。<br><img src="/blog/img/2020/02/19/单边循环4.png"><br><br>&#8195;&#8195;按照这个思路，继续遍历，后续步骤如图所示。<br><img src="/blog/img/2020/02/19/单边循环5.png"><br><br>&#8195;&#8195;<strong>单边循环法实现的快速排序代码展示</strong>  </p>
+<pre><code>public class QuickSort {
+
+    public static void sort(int[] arr,int startIndex,int endIndex){
+        //递归结束条件，startIndex&gt;=endIndex时
+        if(startIndex&gt;=endIndex){
+            return;
+        }
+        //得到基准元素的位置
+        int pivotIndex = partition(arr,startIndex,endIndex);
+        //根据基准元素，分成两部分进行递归排序
+        sort(arr,startIndex,pivotIndex-1);
+        sort(arr,pivotIndex+1,endIndex);
+    }
+
+    /**
+     * 分治（单边循环法）
+     * @param arr 带交换的数组
+     * @param startIndex 起始下标
+     * @param endIndex 结束下标
+     */
+    private static int partition(int[] arr, int startIndex, int endIndex) {
+        //取第一个位置(也可以选择随机位置)的元素作为基准元素
+        int pivot = arr[startIndex];
+        int mark = startIndex;
+        for(int i=startIndex+1;i&lt;=endIndex;i++){
+            if(arr[i]&lt;pivot){
+                mark++;
+                int tmp = arr[mark];
+                arr[mark] = arr[i];
+                arr[i] = tmp;
+            }
+        }
+        //遍历结束
+        arr[startIndex] = arr[mark];
+        arr[mark] = pivot;
+        return mark;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{4,7,6,5,3,2,8,1};
+        sort(arr,0,arr.length-1);
+        System.out.println(Arrays.toString(arr));
+    }
+}</code></pre><p>&#8195;&#8195;可以很明显的看出，partition方法只要一个大循环就搞定了，的确比双边循环法简单多了。  </p>
+<h2 id="1-4-非递归实现"><a href="#1-4-非递归实现" class="headerlink" title="1.4 非递归实现"></a>1.4 非递归实现</h2><p>&#8195;&#8195;<strong>绝大多数的递归逻辑，都可以用<span style="font-size:20px;color:blue;">栈</span>的方式来代替。</strong><br>&#8195;&#8195;代码中一层一层的方法调用，本身就使用了一个方法调用栈。每次进入一个新的方法，就相当于入栈，每次有方法返回，就相当于出栈。<br>&#8195;&#8195;所以，可以把原本的递归实现转化成一个栈的实现，在栈中存储每一次方法调用的参数。<br><img src="/blog/img/2020/02/19/栈实现快速排序.png"><br><br>具体代码展示   </p>
+<pre><code>public class QuickSort {
+
+    public static void sort(int[] arr,int startIndex,int endIndex){
+        Stack&lt;Map&lt;String, Integer&gt;&gt; quickSortStack = new Stack&lt;&gt;();
+        //整个数列的起止下标，以哈希形式入栈
+        Map&lt;String, Integer&gt; rootParam = new HashMap&lt;&gt;();
+        rootParam.put(&quot;startIndex&quot;, startIndex);
+        rootParam.put(&quot;endIndex&quot;, endIndex);
+        quickSortStack.push(rootParam);
+
+        //循环结束条件，栈为空时
+        while(!quickSortStack.isEmpty()){
+            Map&lt;String, Integer&gt; param = quickSortStack.pop();
+            int pivotIndex = partition(arr,param.get(&quot;startIndex&quot;),param.get(&quot;endIndex&quot;));
+            //根据基准元素分成两部分，把每一部分的起止上下标入栈
+            if(param.get(&quot;startIndex&quot;) &lt; pivotIndex-1){
+                Map&lt;String, Integer&gt; leftParam = new HashMap&lt;&gt;();
+                leftParam.put(&quot;startIndex&quot;, startIndex);
+                leftParam.put(&quot;endIndex&quot;, pivotIndex-1);
+                quickSortStack.push(leftParam);
+            }
+            if(param.get(&quot;endIndex&quot;) &gt; pivotIndex+1){
+                Map&lt;String, Integer&gt; rightParam = new HashMap&lt;&gt;();
+                rightParam.put(&quot;startIndex&quot;, pivotIndex+1);
+                rightParam.put(&quot;endIndex&quot;, endIndex);
+                quickSortStack.push(rightParam);
+            }
+        }
+    }
+
+    /**
+     * 分治（单边循环法）
+     * @param arr 带交换的数组
+     * @param startIndex 起始下标
+     * @param endIndex 结束下标
+     */
+    private static int partition(int[] arr, int startIndex, int endIndex) {
+        //取第一个位置(也可以选择随机位置)的元素作为基准元素
+        int pivot = arr[startIndex];
+        int mark = startIndex;
+        for(int i=startIndex+1;i&lt;=endIndex;i++){
+            if(arr[i]&lt;pivot){
+                mark++;
+                int tmp = arr[mark];
+                arr[mark] = arr[i];
+                arr[i] = tmp;
+            }
+        }
+        //遍历结束
+        arr[startIndex] = arr[mark];
+        arr[mark] = pivot;
+        return mark;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{4,7,6,5,3,2,8,1};
+        sort(arr,0,arr.length-1);
+        System.out.println(Arrays.toString(arr));
+    }
+}</code></pre><p><strong>PS:快速排序属于不稳定排序。</strong></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

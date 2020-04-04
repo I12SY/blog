@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据结构基础之散列表 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.什么是散列表？
+散列表也叫哈希表，是存储Key-Value映射的集合。对于某一个Key，散列表可以在接近O(1)的时间内进行读写操作。散列表通过哈希函数实现Key和数组下标的转换，通过开放寻址法,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据结构基础之散列表</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">数据结构基础之散列表</h1>
+        <div class="stuff">
+            <span>十二月 27, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-什么是散列表？"><a href="#1-什么是散列表？" class="headerlink" title="1.什么是散列表？"></a>1.什么是散列表？</h2><blockquote>
+<p>散列表也叫哈希表，是存储Key-Value映射的集合。对于某一个Key，散列表可以在接近O(1)的时间内进行读写操作。散列表通过哈希函数实现Key和数组下标的转换，通过开放寻址法和链表法来解决哈希冲突。  </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="2-哈希函数"><a href="#2-哈希函数" class="headerlink" title="2.哈希函数"></a>2.哈希函数</h2><p><strong>散列表在本质上也是一个数组。</strong><br>散列表不能像数组那样直接通过a[0]、a[1]这样的方式来访问，需要通过一个中转站<strong>哈希函数</strong>来实现Key和数组下标的转标。<br><img src="/blog/img/2019/12/27/哈希函数.png">   </p>
+<p>那么这个所谓的哈希函数是怎么实现的呢？<br>在不同的语言中，哈希函数的实现方式是不一样的。这里以java的常用集合HashMap，来看一看哈希函数在Java中的实现。<br>在Java及大多数面向对象的语言中，每一个对象都有属于自己的hashcode，这个hashcode是区分不同对象的重要标识。无论对象自身的类型是什么，他们的hashcode都是一个整型变量。<br>既然都是整型变量，想要转换成数组的下标也就不难实现了。最简单的转化方式是什么呢？就是按照数组长度进行取模运算。<br><strong>index = HashCode(Key)%Array.length</strong><br>实际上，JDK(Java Development Kit，Java语言的软件开发工具包)中的哈希函数并没有直接采用取模运算，而是利用位运算的方式来优化性能。不过在这里可以姑且简单理解成取模操作。<br>通过哈希函数，我们可以把字符串后其它类型的Key，转换成数组的下标index。  </p>
+<h2 id="3-散列表的读写操作"><a href="#3-散列表的读写操作" class="headerlink" title="3.散列表的读写操作"></a>3.散列表的读写操作</h2><p><strong>1）.写操作(put)</strong><br>写操作就是在散列表中插入新的键值对(在JDK中叫做Entry)。<br>具体怎么做？<br>第1步，通过哈希函数，把Key转化成数组下标5。<br>第2步，如果数组下标5对应的位置没有元素，就把这个Entry填充到数组下标5的位置。<br><img src="/blog/img/2019/12/27/写操作.png">  </p>
+<p>但是，由于数组的长度是有限的，当插入的Entry越来越多时，不同的Key通过哈希函数获得的下标可能是相同的。例如002936这个Key对应的数组下标是2；002947这个Key对应的数组下标也是2。<br><img src="/blog/img/2019/12/27/哈希冲突.png"><br>这种情况叫<strong>哈希冲突</strong>。  
+<strong>哈希冲突是无法避免的，既然不能避免，那就要想办法解决。解决哈希冲突主要有两种方法，一种是开放寻址法，一种是链表法。</strong>  </p>
+<p><strong>开放寻址法</strong>的原理很简单，当一个Key通过哈希函数获得对应的数组下标已被占用时，我们可以“另谋高就”，寻找下一个空位。<br>以上面的情况为例，Entry6通过哈希函数得到下标2，该下标在数组中已经有了其他元素，那么就向后移动1位，看看数组下标3的位置是否有空。直到找到空位为止。<br><img src="/blog/img/2019/12/27/哈希冲突2.png"><br><br><img src="/blog/img/2019/12/27/哈希冲突3.png"><br><br><img src="/blog/img/2019/12/27/哈希冲突4.png"><br><br>这是开放寻址法的基本思路。当然，当遇到哈希冲突时，寻址方式有很多种，不一定只是简单的寻找当前元素的后一个元素，这里只是举一个简单的示例。<br>在Java中，ThreadLocal所使用的就是开放寻址法。  </p>
+<p><strong>链表法</strong>，这种方法被应用在java的集合类HashMap中：<br>HashMap数组的每一个元素不仅是一个Entry对象，还是一个链表的头节点。每一个Entry对象通过next指针指向它的下一个Entry节点。当新来的Entry映射到与之冲突的数组位置时，只要插入到对应的链表中即可。<br><img src="/blog/img/2019/12/27/哈希冲突5.png"><br>  </p>
+<p><strong>2）.读操作(get)</strong><br>读操作就是根据给定的Key，在散列表中找到对应的Value。<br>例如调用hashMap.get(“002936”),一丝是查找Key为002936的Entry在散列表中所对应的值。  </p>
+<p>具体怎么做？<br>第1步，通过哈希函数将Key转为数组下标5.<br>第2步，找到数组下标2所对应的元素，如果这个元素的Key是002936，那么就找到了；如果这个Key不是002936也没关系，由于数组的每一个元素都与一个链表对应，我们可以顺着链表慢慢往下找，看看能不能找到与Key匹配的节点。<br><img src="/blog/img/2019/12/27/读操作.png"><br>  </p>
+<p><strong>3）.扩容(resize)</strong><br>既然散列表是基于数组实现的，那么散列表也要涉及扩容问题。<br>当经过多次元素插入，散列表达到一定饱和度时，Key映射位置发生冲突的概率会逐渐增高。这样一来，大量元素拥挤在相同的数组下标位置，形成很长的链表，对后续插入操作和查询操作的性能都有很大的影响。 </p>
+<p><img src="/blog/img/2019/12/27/散列表扩容1.png"><br> </p>
+<p>这时，散列表就需要扩展它的长度，也就是进行<strong>扩容</strong>。  
+对于JDK中的散列表实现类HashMap来说，影响其扩容的因素有两个。  </p>
+<ul>
+<li>Capacity，即HashMap的当前长度。</li>
+<li>LoadFactor，即HashMap的负载因子，默认值为0.75f。<br>衡量HashMap需要进行扩容的条件如下：  </li>
+</ul>
+<p><strong>HashMap.Size&gt;=Capacity*LoadFactory</strong>  </p>
+<p><strong>那么散列表的扩容具体做了什么操作呢？</strong><br>1.<strong>扩容</strong>，创建一个新的Entry空数组，长度是原数组的2倍。<br>2.<strong>重新Hash</strong>，遍历原Entry数组，把所有的Entry重新Hash到新数组找中（长度扩大，Hash的规则也随之改动）。<br><strong>扩容前的HashMap</strong><br><img src="/blog/img/2019/12/27/扩容前.png"><br><br><strong>扩容后的HashMap</strong><br><img src="/blog/img/2019/12/27/扩容后.png"><br>  </p>
+<p><strong>需要注意一点，关于HashMap的实现，JDK8和以前的版本有着很大的不同。当多个Entry被Hash到同一个数组下标位置时，为了提升插入和查找的效率，HashMap会把Entry的链表红黑树这种数据结构。</strong></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

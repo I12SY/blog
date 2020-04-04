@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>排序算法之桶排序 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="桶排序同样是一种线性时间的排序算法。类似于计数排序所创建的统计数组，桶排序需要创建若干个桶来协助排序。  
+  
+桶排序中所谓的”桶”是什么？每一个桶(bucket)代表一个区间范围，里面可承载一个,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">排序算法之桶排序</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">排序算法之桶排序</h1>
+        <div class="stuff">
+            <span>二月 22, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>桶排序同样是一种线性时间的排序算法。类似于计数排序所创建的统计数组，桶排序需要创建若干个桶来协助排序。  </p>
+<a id="more"></a>  
+<p>桶排序中所谓的”桶”是什么？<br>每一个桶(bucket)代表一个区间范围，里面可承载一个或多个元素（其实可以把计数排序当做桶排序的一种特殊情况，把计数排序当成每个桶里只有一个元素的情况）。<br>假设有一个非整数数列如下：<br>4.5，0.84，3.25，2.18，0.5<br>让我们看看桶排序的工作原理。<br>桶排序的第1步，就是创建这些桶，并确定每一个桶的区间范围。<br><img src="/blog/img/2020/02/24/桶排序1.png"><br><br>具体需要建立多少个桶，如何确定桶的区间范围，有很多种不同的方式。我们这里创建的桶数量等于原始数列的原始数量，除最后一个桶只包含数列最大值外，前面各个桶的区间按照比例来确定。<br>&#8195;&#8195;&#8195;&#8195;&#8195;&#8195;区间跨度 = （最大值-最小值）/（桶数量 - 1）<br>第2步，遍历原始数列，把元素对号入座放入各个桶中。<br><img src="/blog/img/2020/02/24/桶排序2.png"><br><br>第3步，对每个桶内部的元素分别进行排序（显然，只有第1个桶需要排序）。<br><img src="/blog/img/2020/02/24/桶排序3.png"><br><br>第4步，遍历所有的桶，输出所有元素。<br>0.5，0.84，2.18，3.15，4.5<br>到此为止，排序结束。  </p>
+<p><strong>代码实现</strong>  </p>
+<pre><code>public class BucketSort {
+
+    public static double[] sort(double[] arr){
+        //1.确定最大值最小值,并算出差值
+        double min = arr[0];
+        double max = arr[0];
+        for (int i = 1; i &lt; arr.length; i++) {
+            min = Math.min(min, arr[i]);
+            max = Math.max(max, arr[i]);
+        }
+        double d = max-min;
+        //2.初始化桶
+        int bucketNum = arr.length;
+        ArrayList&lt;LinkedList&lt;Double&gt;&gt; bucketList = new ArrayList&lt;&gt;(bucketNum);
+        //这里得注意一下，bucketNum ≠ bucketList.size()，
+        //在没有add数据之前bucketList.size()=0，因为new ArrayList&lt;&gt;(bucketNum)只是初始化该集合的初始容量是多大，
+        //但实际上里面还没有存放数据，所以size=0
+        //只有当add(1)时，size=1；所以不能使用条件i&lt;bucketList.size()
+        for (int i = 0; i &lt; bucketNum; i++) {
+            bucketList.add(new LinkedList&lt;Double&gt;());
+        }
+        //3.遍历原始数组，将每个元素放入桶中 （其中区间跨度 k= d/(bucketNum-1) 所属区间s = arr[i]/k）
+        for (int i = 0; i &lt; arr.length; i++) {
+            int num = (int)((arr[i]-min)*(bucketNum-1)/d);
+            bucketList.get(num).add(arr[i]);
+        }
+        //4.对每个桶内部进行排序
+        for (int i = 0; i &lt; bucketList.size(); i++) {
+            //JDK底层采用了归并排序或归并排序的优化版
+            Collections.sort(bucketList.get(i));
+        }
+        //5.输出全部元素
+        double[] sortedArray = new double[arr.length];
+        int index = 0;
+        for (LinkedList&lt;Double&gt; list : bucketList) {
+            for (Double element : list) {
+                sortedArray[index++] = element;
+            }
+        }
+        return sortedArray;
+    }
+
+    public static void main(String[] args) {
+        double[] arr = new double[]{4.5,0.84,3.25,2.18,0.5};
+        arr = sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+}</code></pre><p>在上述代码中，所有的桶都保存在ArrayList集合中，每一个桶都被定义成一个链表(LinkedList<double>)，这样便于在尾部插入元素，不会打乱相同数字的前后顺序，然后采用jdk的集合工具类Collections.sort来对桶内部的元素进行排序，Collections.sort底层采用的是归并排序或Timesort，可以把他当做成一种时间复杂度为O(nlogn)的排序，而<strong>归并是一种稳定的排序方法</strong>。所以说桶排序也属于<strong>稳定排序</strong>。  </double></p>
+<p><strong>桶排序的时间复杂度</strong><br>假设原始数列有n个元素，分为n个桶。<br>下面逐步来分析一下算法复杂度。<br>第1步，求数列最大、最小值，运算量为n。<br>第2步，创建桶空间，运算量为n。<br>第3步，把原始数列的元素分配到各个桶中，运算量为n。<br>第4步，在每个桶内部做排序，在元素分布相对均匀的情况下，所有桶的运算量之和为n。<br>第5步，输出排序序列，运算量为n。<br>因此，桶排序的总体时间复杂度为O(n)。<br>至于空间复杂度就很容易得到了，同样是O(n)。  </p>
+<p>桶排序的性能并非绝对稳定。如果元素分布极不均衡，在极端的情况下，第一个桶中有n-1个元素，最后一个桶中有1个元素。此时的时间复杂度将退化为O(nlogn)，而且还白白创建了许多空桶。<br><img src="/blog/img/2020/02/24/桶排序4.png"><br><br>所有说，并没有绝对好的算法，也没有绝对不好的算法，关键是要看具体的场景。  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

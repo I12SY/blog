@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JAVA基础知识 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.如果main方法被声明为private会怎样？
+能正常编译，但运行的时候会提示”main方法不是public的”或者说在类XXX中找不到 main 方法, 请将 main 方法定义为:publi,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">JAVA基础知识</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">JAVA基础知识</h1>
+        <div class="stuff">
+            <span>八月 14, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h3 id="1-如果main方法被声明为private会怎样？"><a href="#1-如果main方法被声明为private会怎样？" class="headerlink" title="1.如果main方法被声明为private会怎样？"></a>1.如果main方法被声明为private会怎样？</h3><blockquote>
+<p>能正常编译，但运行的时候会提示”main方法不是public的”或者说在类XXX中找不到 main 方法, 请将 main 方法定义为:public static void main(String[] args)。</p>
+</blockquote>
+<h3 id="2-如果去掉了main方法的static修饰符会怎样？"><a href="#2-如果去掉了main方法的static修饰符会怎样？" class="headerlink" title="2.如果去掉了main方法的static修饰符会怎样？"></a>2.如果去掉了main方法的static修饰符会怎样？</h3><blockquote>
+<p>能正常编译，但是会提示方法不是类XXX中的static, 请将 main 方法定义为:public static void main(String[] args)。</p>
+</blockquote>
+<h3 id="3-Java里的传引用和传值的区别是什么？"><a href="#3-Java里的传引用和传值的区别是什么？" class="headerlink" title="3.Java里的传引用和传值的区别是什么？"></a>3.Java里的传引用和传值的区别是什么？</h3><blockquote>
+<p>传引用是指传递的是地址而不是值本身，传值则是传递值的一份拷贝。</p>
+</blockquote>
+<h3 id="4-如果要重写一个对象的equals方法，还要考虑什么？"><a href="#4-如果要重写一个对象的equals方法，还要考虑什么？" class="headerlink" title="4.如果要重写一个对象的equals方法，还要考虑什么？"></a>4.如果要重写一个对象的equals方法，还要考虑什么？</h3><blockquote>
+<p>考虑hashcode。<a href="/blog/2019/08/14/重写equals-为什么需要重写hashcode/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="5-Java的”一次编写，处处运行”是如何实现的？"><a href="#5-Java的”一次编写，处处运行”是如何实现的？" class="headerlink" title="5.Java的”一次编写，处处运行”是如何实现的？"></a>5.Java的”一次编写，处处运行”是如何实现的？</h3><blockquote>
+<p>Java程序会被编译成字节码组成的class文件，这些字节码可以运行在任何平台，因此Java是平台独立的。</p>
+</blockquote>
+<h3 id="6-说明一下public-static-void-main-String-args-这段声明里每个关键字的作用"><a href="#6-说明一下public-static-void-main-String-args-这段声明里每个关键字的作用" class="headerlink" title="6.说明一下public static void main(String args[])这段声明里每个关键字的作用"></a>6.说明一下public static void main(String args[])这段声明里每个关键字的作用</h3><blockquote>
+<p>public: main方法是Java程序运行时调用的第一个方法，因此它必须对Java环境可见。所以可见性设置为public。<br>static: Java平台调用这个方法时不会创建这个类的一个实例，因此这个方法必须声明为static。<br>void: main方法没有返回值。<br>String是命令行传进参数的类型，args是指命令行传进的字符串数组。</p>
+</blockquote>
+<h3 id="7-与equals的区别"><a href="#7-与equals的区别" class="headerlink" title="7.==与equals的区别"></a>7.==与equals的区别</h3><blockquote>
+<p>(1)对于基本数据类型来说，”==”比较的是值是否相等,不可以使用” equals”比较基本数据类型(其包装类类似于String类)<br>(2)1.对于字符串(String)变量来说，”==”比较的是两个对象在内存中的首地址。(注意:s1=’abc’,s2=’abc’s1==s2(true),解释：由于s1和s2是<code>两个字符串常量</code>所生成的变量，其中所存放的内存地址是相等的)<br>&nbsp;&nbsp;&nbsp;&nbsp;2.”equals”比较字符串(String)中所包含的内容是否相同<br>(3)对于非字符串变量来说==与equals方法的作用是相同的，都是用来比较其对象在堆内存的首地址，即用来比较两个引用变量是否指向同一个地址<br><a href="/blog/2019/08/14/等于等于与equals的区别/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="8-为什么oracle-type4驱动被称作瘦驱动？"><a href="#8-为什么oracle-type4驱动被称作瘦驱动？" class="headerlink" title="8.为什么oracle type4驱动被称作瘦驱动？"></a>8.为什么oracle type4驱动被称作瘦驱动？</h3><blockquote>
+<p>oracle提供了一个type 4 JDBC驱动，被称为瘦驱动。这个驱动包含了一个oracle自己完全用Java实现的一个TCP/IP的Net8的实现，因此它是平台独立的，可以在运行时由浏览器下载，不依赖任何客户端 的oracle实现。客户端连接字符串用的是TCP/IP的地址端口，而不是数据库名的tnsname。</p>
+</blockquote>
+<pre><code>import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class JdbcTest {
+
+    public static void main(String[] args) {
+        String driver = &quot;oracle.jdbc.OracleDriver&quot;;//驱动标识
+        String url = &quot;jdbc:oracle:thin:@192.168.204.201:1521:xe&quot;;//链接字符串
+        String user = &quot;pengwei&quot;;//用户名
+        String password = &quot;123456&quot;;//密码
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        boolean flag = false;
+        try {
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url,user,password);
+            String sql = &quot;select * from PENGWEI.\&quot;emp\&quot;&quot;;
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt(&quot;id&quot;);
+                String name = rs.getString(&quot;name&quot;);
+                int age = rs.getInt(&quot;age&quot;);
+                System.out.println(&quot;id:&quot;+id+&quot; name:&quot;+name+&quot; age:&quot;+age);
+            }
+            flag = true;
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }finally{
+            if(rs!=null){
+                try {
+                    rs.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+            // 关闭执行通道
+            if(pstm!=null){
+                try {
+                    pstm.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+            // 关闭连接通道
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+        }
+
+        if(flag){
+             System.out.println(&quot;执行成功！&quot;);
+        }else{
+             System.out.println(&quot;执行失败！&quot;);
+        }
+    }
+}</code></pre><h3 id="9-介绍一下final、finally、finalize"><a href="#9-介绍一下final、finally、finalize" class="headerlink" title="9.介绍一下final、finally、finalize"></a>9.介绍一下final、finally、finalize</h3><blockquote>
+<p>1.final（常量声明）:用于声明属性，方法和类。<br>接口里声明的变量默认是final的。final类无法继承，也就是没有子类。这么做是出于基础类型的安全考虑，比如String和Integer类。这样也使得编译器进行一些优化，更容易保证线程的安全性。final方法无法重写(可以重载)。final变量的值不能改变。<br>2.finally：处理异常。<br>finally通常用于异常处理，不管有没有异常抛出都一定会执行finally里面的逻辑。比如，关闭连接通常放到finally块中完成。<br>3.finalize：帮助进行垃圾回收<br>finalize是Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，供垃圾收集时的其他资源回收，例如关闭文件等。<br>finalize()方法在一个对象被销毁和回收前会被调用。<br><a href="/blog/2019/08/14/final、finally、finalize的用法/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="10-什么是JAVA-API？"><a href="#10-什么是JAVA-API？" class="headerlink" title="10.什么是JAVA API？"></a>10.什么是JAVA API？</h3><blockquote>
+<p>Java API是大量软件组件的集合，它们提供了大量有用的功能，比如GUI组件。</p>
+</blockquote>
+<h3 id="11-GregorianCalendar类是什么东西？"><a href="#11-GregorianCalendar类是什么东西？" class="headerlink" title="11.GregorianCalendar类是什么东西？"></a>11.GregorianCalendar类是什么东西？</h3><blockquote>
+<p>GregorianCalendar 是 Calendar 的一个具体子类，提供了世界上大多数国家/地区使用的标准日历系统。<a href="/blog/2019/08/19/GregorianCalendar日历类的使用/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="12-ResourceBundle类是什么"><a href="#12-ResourceBundle类是什么" class="headerlink" title="12.ResourceBundle类是什么?"></a>12.ResourceBundle类是什么?</h3><blockquote>
+<p>ResourceBundle用来存储指定语言环境的资源，应用程序可以根据运行时的语言环境来加载这些资源，从而提供不同语言的展示。<a href="/blog/2019/08/19/ResourceBundle类的简单使用/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="13-为什么Java里没有全局变量"><a href="#13-为什么Java里没有全局变量" class="headerlink" title="13.为什么Java里没有全局变量?"></a>13.为什么Java里没有全局变量?</h3><blockquote>
+<p>全局变量是全局可见的，Java不支持全局可见的变量，因为：<code>全局变量破坏了引用透明性原则。全局变量导致了命名空间的冲突</code>。</p>
+</blockquote>
+<h3 id="14-如何将String类型转化成Number类型？"><a href="#14-如何将String类型转化成Number类型？" class="headerlink" title="14.如何将String类型转化成Number类型？"></a>14.如何将String类型转化成Number类型？</h3><blockquote>
+<p>String numString = “1000″;<br>int id=Integer.valueOf(numString).intValue();或者<br>int id=Integer.parseInt(numString);//这里直接返回一个int<br>valueOf()与parseInt()方法的区别：使用valueOf()方法会返回一个包装类对象，我们可以使用里面的一些方法</p>
+</blockquote>
+<h3 id="15-SimpleTimeZone类是什么"><a href="#15-SimpleTimeZone类是什么" class="headerlink" title="15.SimpleTimeZone类是什么?"></a>15.SimpleTimeZone类是什么?</h3><blockquote>
+<p>SimpleTimeZone提供公历日期支持。它是时区(TimeZone)的具体子类，它表示与公历使用的时区。<a href="/blog/2019/08/20/SimpleTimeZone/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="16-while循环和do-while循环有什么不同？"><a href="#16-while循环和do-while循环有什么不同？" class="headerlink" title="16.while循环和do/while循环有什么不同？"></a>16.while循环和do/while循环有什么不同？</h3><blockquote>
+<p>while结构在循环的开始判断下一个迭代是否应该继续。do/while结构在循环的结尾来判断是否将继续下一轮迭代。do结构至少会执行一次循环体。<a href="/blog/2019/08/20/while与do-while循环的区别/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="17-Locale类是什么？"><a href="#17-Locale类是什么？" class="headerlink" title="17.Locale类是什么？"></a>17.Locale类是什么？</h3><blockquote>
+<p>Locale类用来根据语言环境来动态调整程序的输出。<a href="/blog/2019/08/20/Locale类的使用/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="18-面向对象的三大基本特征，七大基本原则"><a href="#18-面向对象的三大基本特征，七大基本原则" class="headerlink" title="18.面向对象的三大基本特征，七大基本原则"></a>18.面向对象的三大基本特征，七大基本原则</h3><blockquote>
+<p>三大特征:多态，继承和封装。<br>七大基本原则(设计模式七大基本原则)：<br>1、单一职责原则（SRP）<br>2、开放封闭原则（OCP）<br>3、里氏替换原则（LSP）<br>4、依赖倒置原则（DIP）<br>5、接口隔离原则（ISP）<br>6、迪米特|最少知道原则（LKP）<br>7、合成复用原则（CAPP）<br><a href="/blog/2019/08/20/面向对象的三大基本特征，七大基本原则/" target="_blank"> &gt;&gt;更多</a>  </p>
+</blockquote>
+<h3 id="19-介绍下继承的原则"><a href="#19-介绍下继承的原则" class="headerlink" title="19.介绍下继承的原则"></a>19.介绍下继承的原则</h3><blockquote>
+<p>继承是面向对象的基本特征之一，继承机制允许创建分等级层次的类。继承就是子类继承父类的特征和行为，使得子类对象(实例)具有父类的实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为。继承机制可以很好的描述一个类的生态，也提高了代码的复用率，在java中的Object类是所有类的超类，长称作上帝类。<br><br><br>继承使得一个对象可以获取另一个对象的属性，使用继承可以让已经测试完备的功能得以复用，并且可以一次修改，所有继承的地方都同时生效。</p>
+</blockquote>
+<h3 id="20-什么是隐式的类型转化"><a href="#20-什么是隐式的类型转化" class="headerlink" title="20.什么是隐式的类型转化?"></a>20.什么是隐式的类型转化?</h3><blockquote>
+<p>隐式的类型转换，就是简单的一个类型赋值给另外一个类型，没有显示的告诉编译器发生了转化，并不是所有的类型都支持隐式的类型转换。<br>代码示例：<br>    int i = 1000;<br>    long j = i; //Implicit casting</p>
+</blockquote>
+<h3 id="21-sizeof是Java的关键字吗"><a href="#21-sizeof是Java的关键字吗" class="headerlink" title="21.sizeof是Java的关键字吗?"></a>21.sizeof是Java的关键字吗?</h3><blockquote>
+<p>不是。（是C语言里的关键字，用来求数据类型字节的函数名）</p>
+</blockquote>
+<h3 id="22-native方法是什么"><a href="#22-native方法是什么" class="headerlink" title="22.native方法是什么?"></a>22.native方法是什么?</h3><blockquote>
+<p>native方法是非Java代码实现的方法。<a href="/blog/2019/08/21/java中native的用法/" target="_blank"> &gt;&gt;更多</a>  </p>
+</blockquote>
+<h3 id="23-在System-out-println-里面-System-out-println分别是什么"><a href="#23-在System-out-println-里面-System-out-println分别是什么" class="headerlink" title="23.在System.out.println()里面,System, out, println分别是什么?"></a>23.在System.out.println()里面,System, out, println分别是什么?</h3><blockquote>
+<p>System是系统提供的预定义的final类，out是一个PrintStream对象，println是out对象里面一个重载方法。</p>
+</blockquote>
+<h3 id="24-封装，继承和多态是什么"><a href="#24-封装，继承和多态是什么" class="headerlink" title="24.封装，继承和多态是什么?"></a>24.封装，继承和多态是什么?</h3><blockquote>
+<p>1.封装：隐藏对象的属性和实现细节，仅对外公开接口，控制在程序中属性的读和修改数据的访问级别，将抽象得到的数据和行为(或功能)相结合，形成一个有机的整体，也就是将数据与操作数据的源代码进行有机的结合，形成“类”，其中数据和函数都是类的成员。<br>封装的目的是为了增强安全性和简化编程，使用者不必了解具体的实现细节，而是只要通过外部接口，以特定的访问权限来使用类的成员。<br>2.继承：继承是面向对象的基本特征之一，继承机制允许创建分等级层次的类。继承就是子类继承父类的特征和行为，使得子类对象(实例)具有父类的实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为。继承机制可以很好的描述一个类的生态，也提高了代码的复用率。<br>3.多态：多态是指同一个行为具有多个不同表现形式或形态的能力。是指一个类的实例(对象)的相同方法在不同情形有不同表现形式。<br>简单来说，多态是指一个名字多种实现。多态使得一个实体通过一个通用的方式来实现不同的操作。具体的操作是由实际的实现来决定的。<br>多态在java里有三种表现方式：方法重载、通过继承实现方法重写、通过java接口进行方法重写。<br><a href="/blog/2019/08/20/面向对象的三大基本特征，七大基本原则/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="25-显式的类型转化是什么"><a href="#25-显式的类型转化是什么" class="headerlink" title="25.显式的类型转化是什么?"></a>25.显式的类型转化是什么?</h3><blockquote>
+<p>显示类型转化就是明确的告诉了编译器来进行对象的转化。<br>代码示例：<br>long i = 70000<br>int j = (int)i;//Explicit casting</p>
+</blockquote>
+<h3 id="26-什么是Java虚拟机"><a href="#26-什么是Java虚拟机" class="headerlink" title="26.什么是Java虚拟机?"></a>26.什么是Java虚拟机?</h3><blockquote>
+<p>Java虚拟机是能移植到不同硬件平台上的软件系统。</p>
+</blockquote>
+<h3 id="27-Java中的向上类型转换和向下类型转换"><a href="#27-Java中的向上类型转换和向下类型转换" class="headerlink" title="27.Java中的向上类型转换和向下类型转换"></a>27.Java中的向上类型转换和向下类型转换</h3><blockquote>
+<p>1.向上类型转换：通俗的来讲就是将子类对象转为父类对象，此处父类可以是接口。<br>2.向下类型转换：与向上转型相反，即是把父类转为子类对象。向下转换也可以说是指由一个通用类型转换成一个具体的类型，在继承结构上向下进行。<a href="/blog/2019/08/22/Java中的向上类型转换和向下类型转换/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="28-Java的访问修饰符是什么"><a href="#28-Java的访问修饰符是什么" class="headerlink" title="28.Java的访问修饰符是什么?"></a>28.Java的访问修饰符是什么?</h3><blockquote>
+<p>访问权限修饰符是表明类成员的访问权限类型的关键字。使用这些关键字来限定程序的方法或者变量的访问权限。他们包含：<br>public：所有类都可以访问<br>protected：归属类、同一个包内以及所有的子类都可以访问(子类没在同一个包中，也可以访问)<br>default(默认)：归属类及同一个包内的其它类可以访问(如果子类没在同一个包中，不能访问)<br>private：只有归属的类才能访问</p>
+</blockquote>
+<h3 id="29-java中的类加public和不加public的区别"><a href="#29-java中的类加public和不加public的区别" class="headerlink" title="29.java中的类加public和不加public的区别"></a>29.java中的类加public和不加public的区别</h3><blockquote>
+<p>加public表示全局类，该类可以import到任何类内。<br>不加public默认为保留类，只能被同一个包内的其他类引用。</p>
+</blockquote>
+<h3 id="30-所有类的父类是什么？"><a href="#30-所有类的父类是什么？" class="headerlink" title="30.所有类的父类是什么？"></a>30.所有类的父类是什么？</h3><blockquote>
+<p>Object</p>
+</blockquote>
+<h3 id="31-Java的基本类型有哪些"><a href="#31-Java的基本类型有哪些" class="headerlink" title="31.Java的基本类型有哪些?"></a>31.Java的基本类型有哪些?</h3><blockquote>
+<p>byte、short、int、long、char、float、double、boolean</p>
+</blockquote>
+<h3 id="32-静态类型有什么特点"><a href="#32-静态类型有什么特点" class="headerlink" title="32.静态类型有什么特点?"></a>32.静态类型有什么特点?</h3><blockquote>
+<p>静态变量是和类绑定在一起的，而不是类的实例对象。每一个实例对象都共享同样一份静态变量。也就是说，一个类的静态变量只有一份，不管他有多少个对象。类变量或者说静态变量是通过static这个关键字来声明的。静态变量通常通过类名字来进行访问。当程序运行的时候这个变量就会创建直到程序结束后才会被销毁。类变量的作用域和实例变量是一样的。他的初始值和成员变量也是一样的，当变量没有被初始化的时候根据它的数据类型，会有一个默认值。类似的，静态方法是属于类的方法，而不是类对象，他的调用并不作用于类对象，也不需要创建任何类的实例。其中父类的静态方法会被子类的静态方法屏蔽，只要原来的方法没有声明为final。非静态方法不能重写静态方法，也就是说，你不能在子类中把一个静态方法改成实例方法。<br>非静态变量在每一个对象实例上都有单独的一份值。  </p>
+</blockquote>
+<h3 id="33-amp-操作符和-amp-amp-操作符有什么区别"><a href="#33-amp-操作符和-amp-amp-操作符有什么区别" class="headerlink" title="33.&amp;操作符和&amp;&amp;操作符有什么区别?"></a>33.&amp;操作符和&amp;&amp;操作符有什么区别?</h3><blockquote>
+<p>&amp;&amp;(只能作为逻辑运算符，通常也被称作短路与)，当&amp;&amp;连接多个表达式求值的时候，先计算第一个表达式，如果它返回true才会计算第二个表达式。如果第一个表达式返回false，第二个表达式就不会被求值，直接返回false，后面的表达式都不会被执行，所以被称作短路与。<br>&amp;：当它作为逻辑运算符时，不管有多少个表达式都会被执行。当他作为位运算符时，可以进行二进制之间的与运算。  </p>
+</blockquote>
+<blockquote>
+<p>|与||的区别，基本同上<br>||：当前面某个表达式计算结果为true时，后面的表达式都不会被执行<br>|：作为逻辑运算符时，所有表达式都会被执行</p>
+</blockquote>
+<h3 id="34-Java是如何处理整型的溢出和下溢的"><a href="#34-Java是如何处理整型的溢出和下溢的" class="headerlink" title="34.Java是如何处理整型的溢出和下溢的?"></a>34.Java是如何处理整型的溢出和下溢的?</h3><blockquote>
+<p>java根据类型的大小，将计算结果中的对应低阶字节存储到对应的值里面。<a href="/blog/2019/08/23/java整形溢出和下溢问题/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="35-public-static-void写成static-public-void会怎样？"><a href="#35-public-static-void写成static-public-void会怎样？" class="headerlink" title="35.public static void写成static public void会怎样？"></a>35.public static void写成static public void会怎样？</h3><blockquote>
+<p>程序能够正常编译及运行</p>
+</blockquote>
+<h3 id="36-声明变量与定义变量有何区别？"><a href="#36-声明变量与定义变量有何区别？" class="headerlink" title="36.声明变量与定义变量有何区别？"></a>36.声明变量与定义变量有何区别？</h3><blockquote>
+<p>声明变量我们只提供变量的类型和名字，并没有进行初始化。定义包括声明和初始化两个阶段<br>String  s;只是声明变量，String s = new String(“bob”);或者String s = “bob”；是变量定义。</p>
+</blockquote>
+<h3 id="37-Java支持哪种参数传递类型"><a href="#37-Java支持哪种参数传递类型" class="headerlink" title="37.Java支持哪种参数传递类型?"></a>37.Java支持哪种参数传递类型?</h3><blockquote>
+<p>Java参数都是进行传值。对于对象而言，传递的值是对象的引用，也就是说原始引用和参数引用的那个拷贝，都是指向同一个对象。</p>
+</blockquote>
+<h3 id="38-对象封装的原则是什么"><a href="#38-对象封装的原则是什么" class="headerlink" title="38.对象封装的原则是什么?"></a>38.对象封装的原则是什么?</h3><blockquote>
+<p>内聚(本题的聚合)：内聚是指一个模块内部各个部分之间的关联程度<br>耦合：耦合各个模块之前的关联程度<br><strong>封装原则：隐藏对象的属性和实现细节，仅对外公开接口，并且控制在程序中属性的读和修改数据的访问级别</strong><br>在面向对象方法中，用类来实现上面的要求。用类实现封装，用封装来实现高内聚，低耦合。<br>封装可以增强代码的安全性和简化编程，使用者不必了解具体的实现细节，而只需要通过外部接口，以特定的访问权限来使用类的成员，并同时确保使用者无法任意更改接口实现细节内部的重要属性。<br><a href="/blog/2019/08/20/面向对象的三大基本特征，七大基本原则/" target="_blank"> &gt;&gt;更多</a>  </p>
+</blockquote>
+<h3 id="39-你怎么理解变量？"><a href="#39-你怎么理解变量？" class="headerlink" title="39.你怎么理解变量？"></a>39.你怎么理解变量？</h3><blockquote>
+<p>变量是一块命名的内存区域，以便程序进行访问。变量用来存储数据，随着程序的执行，存储的数据也可能跟着改变。<a href="/blog/2019/08/27/怎么理解变量-变量是什么/" target="_blank"> &gt;&gt;更多</a>  </p>
+</blockquote>
+<h3 id="40-数值提升是什么？"><a href="#40-数值提升是什么？" class="headerlink" title="40.数值提升是什么？"></a>40.数值提升是什么？</h3><blockquote>
+<p>数值提升是指数据从一个较小的数据类型转换成为一个更大的数据类型，以便进行整型或浮点型运算。在数值提升的过程中，byte、short、char值会被转化成int类型。需要的时候int类型也可能被提升成long。long和float则有可能会被转换成double类型。<a href="/blog/2019/08/23/java整形溢出和下溢问题/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="41-Java的类型转化是什么？"><a href="#41-Java的类型转化是什么？" class="headerlink" title="41.Java的类型转化是什么？"></a>41.Java的类型转化是什么？</h3><blockquote>
+<p>从一个数据类型转换成另一个数据类型叫做类型转换。Java有两种类型转换的方式，一个显示的类型转换，一个是隐式的。  </p>
+</blockquote>
+<h3 id="42-main方法的参数里面，字符串数组的第一个参数是什么？"><a href="#42-main方法的参数里面，字符串数组的第一个参数是什么？" class="headerlink" title="42.main方法的参数里面，字符串数组的第一个参数是什么？"></a>42.main方法的参数里面，字符串数组的第一个参数是什么？</h3><blockquote>
+<p>数组是空的，没有任何元素。不像C或者C++，第一个参数默认是程序名。如果命令行没有提供任何参数的话，main方法中的String数组为空，但不是null。</p>
+</blockquote>
+<h3 id="43-怎么判断数组是null还是为空？"><a href="#43-怎么判断数组是null还是为空？" class="headerlink" title="43.怎么判断数组是null还是为空？"></a>43.怎么判断数组是null还是为空？</h3><blockquote>
+<p>输出array.length的值，如果是0，说明数组为空。如果是null，会抛出空指针异常。  </p>
+</blockquote>
+<h3 id="44-程序中可以允许多个类同时拥有都有main方法吗？"><a href="#44-程序中可以允许多个类同时拥有都有main方法吗？" class="headerlink" title="44.程序中可以允许多个类同时拥有都有main方法吗？"></a>44.程序中可以允许多个类同时拥有都有main方法吗？</h3><blockquote>
+<p>可以。当程序运行的时候，我们会指定运行的类型。JVM只会在你指定的类中查找main方法。因此多个类同时拥有main方法不存在命名冲突的问题。</p>
+</blockquote>
+<h3 id="45-静态变量在什么时候加载？编译期还是运行期？静态代码块加载的时机呢？"><a href="#45-静态变量在什么时候加载？编译期还是运行期？静态代码块加载的时机呢？" class="headerlink" title="45.静态变量在什么时候加载？编译期还是运行期？静态代码块加载的时机呢？"></a>45.静态变量在什么时候加载？编译期还是运行期？静态代码块加载的时机呢？</h3><blockquote>
+<p>当类加载器将类加载到JVM中的时候就会创建静态变量，这跟对象是否创建无关。静态变量加载的时候就会分配内存空间。静态代码块的代码只会在类第一次初始化的时候执行一次。一个类可以有多个静态代码块，他并不是类的成员，也没有返回值，并不能直接调用。静态代码块不能包含this或者super，它们通常被用来初始化静态变量。  </p>
+</blockquote>
+<h3 id="46-一个类能拥有多个main方法吗？"><a href="#46-一个类能拥有多个main方法吗？" class="headerlink" title="46.一个类能拥有多个main方法吗？"></a>46.一个类能拥有多个main方法吗？</h3><blockquote>
+<p>可以。但是只能有一个方法拥有以下签名：<br>public static void main(String[] args){}<br>否则程序将无法通过编译。编译器会警告你main方法已经存在。</p>
+</blockquote>
+<h3 id="47-简单介绍下JVM是如何工作的？"><a href="#47-简单介绍下JVM是如何工作的？" class="headerlink" title="47.简单介绍下JVM是如何工作的？"></a>47.简单介绍下JVM是如何工作的？</h3><blockquote>
+<p>JVM是一台抽象的计算机，就像真实的计算机那样，它们会将.java文件编译成.class文件(.class文件就是字节码文件)，然后用它的解释器来加载字节码。  </p>
+</blockquote>
+<h3 id="48-如何原地交换两个变量的值？"><a href="#48-如何原地交换两个变量的值？" class="headerlink" title="48.如何原地交换两个变量的值？"></a>48.如何原地交换两个变量的值？</h3><blockquote>
+<p>先把两个值相加赋值给第一个变量，然后用得到的结果减去第二个变量，赋值给第二个变量。再用第一个变量减去第二个变量，同时赋值给第一个变量。代码如下：<br>int a=5,b=10;a=a+b;b=a-b;a=a-b;<br>使用异或操作也可以交换变量。第一个方法还可能会引起溢出。抑或方法如下：int a=5,b=10;<br>a = a ^ b;<br>b = a ^ b;<br>a = a ^ b;<br><a href="/blog/2019/08/27/原地交换两个变量的值/" target="_blank"> &gt;&gt;更多</a></p>
+</blockquote>
+<h3 id="49-什么是数据的封装？"><a href="#49-什么是数据的封装？" class="headerlink" title="49.什么是数据的封装？"></a>49.什么是数据的封装？</h3><blockquote>
+<p>数据的封装一种方式是在类中创建set和get方法来访问对象的数据变量。一般来说变量是private的，而get和set方法是public的。封装还可以用来在存储数据时进行数据验证，或者对数据进行计算，或者用作自省（比如在struts中使用javabean）。把数据和功能封装到一个独立的结构中称为数据封装。封装其实就是把数据和关联的操作方法封装到一个独立的单元中，这样使用关联的这些方法才能对数据进行访问操作。封装提供的是数据安全性，他其实就是一种隐藏数据的方式。  </p>
+</blockquote>
+<h3 id="50-什么是反射API？他是如何实现的？"><a href="#50-什么是反射API？他是如何实现的？" class="headerlink" title="50.什么是反射API？他是如何实现的？"></a>50.什么是反射API？他是如何实现的？</h3><blockquote>
+<p>反射是指在运行时能查看一个类的状态及特征，并能进行动态管理。这些功能是通过一些内建类的反射API提供的，比如Class，Method，Field，Constructors等。使用的例子：java反射API的getName方法可以获取到类名。  </p>
+</blockquote>
+<pre><code>public static void main(String[] args) { 
+    try {
+        Class&lt;?&gt; clazz = Class.forName(&quot;java.lang.String&quot;);
+        Constructor&lt;?&gt; c=clazz.getConstructor(String.class);
+        Object obj = c.newInstance(&quot;123&quot;);
+        Method method = obj.getClass().getDeclaredMethod(&quot;toString&quot;);
+        System.out.println(clazz.getName());
+        System.out.println(method.invoke(obj));
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+} </code></pre><h3 id="51-JVM自身会维护缓存吗，是不是在堆中进行对象分配，操作系统的堆还是JVM自己管理的堆？为什么？"><a href="#51-JVM自身会维护缓存吗，是不是在堆中进行对象分配，操作系统的堆还是JVM自己管理的堆？为什么？" class="headerlink" title="51.JVM自身会维护缓存吗，是不是在堆中进行对象分配，操作系统的堆还是JVM自己管理的堆？为什么？"></a>51.JVM自身会维护缓存吗，是不是在堆中进行对象分配，操作系统的堆还是JVM自己管理的堆？为什么？</h3><blockquote>
+<p>是的，JVM会自身管理缓存，它在堆中创建对象，然后在栈中引用这些对象。  </p>
+</blockquote>
+<h3 id="52-虚拟内存是什么？"><a href="#52-虚拟内存是什么？" class="headerlink" title="52.虚拟内存是什么？"></a>52.虚拟内存是什么？</h3><blockquote>
+<p>虚拟内存又叫延伸内存，实际上并不存在真实的物理内存。  </p>
+</blockquote>
+<h3 id="53-方法可以同时即是static又是synchronized的吗"><a href="#53-方法可以同时即是static又是synchronized的吗" class="headerlink" title="53.方法可以同时即是static又是synchronized的吗?"></a>53.方法可以同时即是static又是synchronized的吗?</h3><blockquote>
+<p>可以。如果这样的话，JVM会获取和这个对象关联的java.lang.Class实例上的锁。这样做等于：<br>synchronized(XYZ.class){}<br><a href="/blog/2019/08/27/synchronized修饰static方法与非static方法的区别/" target="_blank"> &gt;&gt;更多</a>  </p>
+</blockquote>
+<h3 id="54-String和StringTokenizer的区别是什么"><a href="#54-String和StringTokenizer的区别是什么" class="headerlink" title="54.String和StringTokenizer的区别是什么?"></a>54.String和StringTokenizer的区别是什么?</h3><blockquote>
+<p>StringTokenizer是一个用来分割字符串的工具类。<a href="/blog/2019/08/27/StringTokenizer/" target="_blank"> &gt;&gt;更多</a>   </p>
+</blockquote>
+<h3 id="55-transient变量有什么特点？"><a href="#55-transient变量有什么特点？" class="headerlink" title="55.transient变量有什么特点？"></a>55.transient变量有什么特点？</h3><blockquote>
+<p>transient变量不会进行序列化。例如一个实现Serializable接口的类在序列化到ObjectStream的时候，transient类型的变量不会被写入流中，同时，反序列化回来的时候，对应变量的值为null。<br><a href="/blog/2019/08/28/transient关键字/" target="_blank"> &gt;&gt;更多</a>  </p>
+</blockquote>
+<h3 id="56-哪些容器使用Border布局作为它们的默认布局"><a href="#56-哪些容器使用Border布局作为它们的默认布局" class="headerlink" title="56.哪些容器使用Border布局作为它们的默认布局?"></a>56.哪些容器使用Border布局作为它们的默认布局?</h3><blockquote>
+<p>Window、Frame、Dialog</p>
+</blockquote>
+<h3 id="57-怎么理解什么是同步？"><a href="#57-怎么理解什么是同步？" class="headerlink" title="57.怎么理解什么是同步？"></a>57.怎么理解什么是同步？</h3><blockquote>
+<p>同步用来控制共享资源再多个线程间的访问，以保证同一时间内只有一个线程能访问到这个资源。<br>在非同步保护的多线程程序里面，一个线程正在修改一个共享变量的时候，可能有另外一个线程也在使用或者更新它的值，同步避免了脏数据的产生。<br>对方法进行同步：<br>public synchronized void Method1(){<br>&nbsp;&nbsp;&nbsp;&nbsp;//Appropriate method-related code.<br>}   </p>
+<p>对方法内部代码进行同步：<br>public void myFunction(){<br>&nbsp;&nbsp;&nbsp;&nbsp;synchronized (this){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Synchronized code here.<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}  </p>
+</blockquote>
+<h3 id="58-给一整型变量a，写两段代码，第一个设置a的bit3-为1，其他bit不变，怎么实现呢？"><a href="#58-给一整型变量a，写两段代码，第一个设置a的bit3-为1，其他bit不变，怎么实现呢？" class="headerlink" title="58.给一整型变量a，写两段代码，第一个设置a的bit3 为1，其他bit不变，怎么实现呢？"></a>58.给一整型变量a，写两段代码，第一个设置a的bit3 为1，其他bit不变，怎么实现呢？</h3><pre><code>public class Test {
+   public static void main(String[] args) {
+       //给一整型变量a，写两段代码，第一个设置a的bit3 为1，其他bit不变，怎么实现呢？
+       int a = 4;
+       //打印二进制
+       System.out.println(Integer.toBinaryString(a));//输出  0100
+       System.out.println(Integer.toBinaryString(a | 8));//输出 1100
+   }
+}</code></pre><p><a href="/blog/2019/08/28/给一整型变量，写两段代码，第一个设置a的bit3为1，其他bit不变，怎么实现/" target="_blank"> &gt;&gt;更多</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

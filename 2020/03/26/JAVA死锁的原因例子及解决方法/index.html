@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JAVA死锁的原因例子及解决方法 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="Java发生死锁的根本原因是：在申请锁时发生了交叉闭环申请。即线程在获得了锁A并且没有释放的情况下去申请锁B，这时，另一个线程已经获得了锁B，在释放锁B之前又要先获得锁A，因此闭环发生，陷入死锁循环,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">JAVA死锁的原因例子及解决方法</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">JAVA死锁的原因例子及解决方法</h1>
+        <div class="stuff">
+            <span>三月 26, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>Java发生死锁的根本原因是：在申请锁时发生了交叉闭环申请。即线程在获得了锁A并且没有释放的情况下去申请锁B，这时，另一个线程已经获得了锁B，在释放锁B之前又要先获得锁A，因此闭环发生，陷入死锁循环。  </p>
+<a id="more"></a>  
+<p><strong>死锁发生的例子1：</strong>  </p>
+<pre><code>public class DeadLockA extends Thread {
+
+    @Override
+    public void run() {
+        try {
+            System.out.println(&quot;LockA running&quot;);
+            while(true){
+                synchronized(Client.obj1){
+                    System.out.println(&quot;LockA locked obj1&quot;);
+                    //获取obj1后先等一会儿，让LockB有足够的时间锁住obj2
+                    Thread.sleep(100);
+                    System.out.println(&quot;LockA trying to lock obj2...&quot;);
+                    synchronized(Client.obj2){
+                        System.out.println(&quot;LockA locked obj2&quot;);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+
+class DeadLockB extends Thread {
+
+    @Override
+    public void run() {
+        try {
+            System.out.println(&quot;LockB running&quot;);
+            while(true){
+                synchronized(Client.obj2){
+                    System.out.println(&quot;LockB locked obj2&quot;);
+                    System.out.println(&quot;LockB trying to lock obj1...&quot;);
+                    synchronized(Client.obj1){
+                        System.out.println(&quot;LockB locked obj1&quot;);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}</code></pre><br>
+
+<pre><code>public class Client {
+     public static final String obj1 = &quot;obj1&quot;;
+        public static final String obj2 = &quot;obj2&quot;;
+
+        public static void main(String[] ars) {
+            new DeadLockA().start();
+            new DeadLockB().start();
+        }
+}</code></pre><p>运行结果  </p>
+<pre><code>LockA running
+LockA locked obj1
+LockB running
+LockB locked obj2
+LockB trying to lock obj1...
+LockA trying to lock obj2...</code></pre><p>结果显示两个线程最后都在等待对方释放锁，最终进入了死锁状态。<br><strong>死锁发生的例子2：</strong>  </p>
+<p>public class TestClass {</p>
+<pre><code>public synchronized void method(TestClass clazz) {
+    System.out.println(&quot;TestClass method in&quot;);
+    clazz.method2();
+    System.out.println(&quot;TestClass method out&quot;);
+}
+
+public synchronized void method2() {
+    System.out.println(&quot;TestClass method2&quot;);
+}</code></pre><p>}
+<br>  </p>
+<p>public class TestLock extends Thread {<br>    private TestClass class1;<br>    private TestClass class2;</p>
+<pre><code>public TestLock(TestClass class1, TestClass class2) {
+    this.class1 = class1;
+    this.class2 = class2;
+}
+
+@Override
+public void run() {
+    class1.method(class2);
+}</code></pre><p>}
+<br></p>
+<pre><code>public class Client {
+    public static void main(String[] ars) {
+        TestClass classA = new TestClass();
+        TestClass classB = new TestClass();
+        new TestLock(classA, classB).start();
+        new TestLock(classB, classA).start();
+    }
+}</code></pre><p>运行结果  </p>
+<pre><code>TestClass method in
+TestClass method in</code></pre><p>结果显示进入两次方法，但是并没有走完，发生死锁。<br>一旦出现死锁，整个程序既不会发生任何错误，也不会给出任何提示，只是所有线程处于阻塞状态，无法继续。java虚拟机没有提供检测，也没有采取任何措施来处理死锁的情况，所以多线程编程中，必须手动应该采取措施避免死锁。  </p>
+<p><strong>解决方法</strong><br><strong>1.调整申请锁的范围</strong>  </p>
+<pre><code>public class TestClass {
+
+    public void method(TestClass clazz) {
+        System.out.println(&quot;TestClass method in&quot;);
+        synchronized(this){
+            //do something
+        }
+        clazz.method2();
+        System.out.println(&quot;TestClass method out&quot;);
+    }
+
+    public synchronized void method2() {
+        System.out.println(&quot;TestClass method2&quot;);
+    }
+}  </code></pre><p>上面代码原来锁是加在方法上的，现在改为在方法内的一部分，这样在使用第二个锁时本身的锁已经释放了。如果减小锁的申请范围可以避免锁的申请发生闭环的话，那么就可以避免死锁。  </p>
+<p><strong>2.调整申请锁的顺序</strong><br>在有些情况下是不允许我们调整锁的范围的，比如银行转账的场景下，我们必须同时获得两个账户上的锁，才能进行操作，两个锁的申请必须发生交叉。这时要想打破死锁闭环，必须调整锁的申请顺序，总是以相同的顺序来申请锁，比如总是先申请 id 大的账户上的锁 ，然后再申请 id 小的账户上的锁，这样就无法形成导致死锁的那个闭环。</p>
+<pre><code>public class Account {
+    private int id;    // 主键
+    private String name;
+    private double balance;
+
+    public void transfer(Account from, Account to, double money){
+        if(from.getId() &gt; to.getId()){
+            synchronized(from){
+                synchronized(to){
+                    // transfer
+                }
+            }
+        }else{
+            synchronized(to){
+                synchronized(from){
+                    // transfer
+                }
+            }
+        }
+    }
+
+    public int getId() {
+        return id;
+    }
+}</code></pre><p>这样的话，即使发生了两个账户比如 id=1的和id=100的两个账户相互转账，因为不管是哪个线程先获得了id=100上的锁，另外一个线程都不会去获得id=1上的锁(因为他没有获得id=100上的锁)，只能是哪个线程先获得id=100上的锁，哪个线程就先进行转账。这里除了使用id之外，如果没有类似id这样的属性可以比较，那么也可以使用对象的hashCode()的值来进行比较。  </p>
+<p><strong>避免死锁的发生</strong><br>很多时候实际锁的交叉可能涉及很多个，要想很好的避免只能人工仔细检查，一旦我们在一个同步方法中，或者说在一个锁的保护的范围中，调用了其它对象的方法时，就要十分的小心：  </p>
+<ol>
+<li>如果其它对象的这个方法会消耗比较长的时间，那么就会导致锁被我们持有了很长的时间；   </li>
+<li>如果其它对象的这个方法是一个同步方法，那么就要注意避免发生死锁的可能性了；  </li>
+</ol>
+<p>总之是尽量避免在一个同步方法中调用其它对象的延时方法和同步方法。  </p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.csdn.net/lyabc123456/article/details/81060477" target="_blank" rel="noopener">https://blog.csdn.net/lyabc123456/article/details/81060477</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

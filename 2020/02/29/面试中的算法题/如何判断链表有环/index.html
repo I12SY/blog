@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>如何判断链表有环 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.题目有一个单向链表，表中有可能出现”环”，就像下图这样。那么，如何用程序判断该链表是否为有环链表呢？ 
+  
+
+2.解题思路首先创建两个指针p1和p2(在Java对象里就是两个对象引用)，让他们,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">如何判断链表有环</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">如何判断链表有环</h1>
+        <div class="stuff">
+            <span>二月 29, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1.题目"></a>1.题目</h2><p>有一个单向链表，表中有可能出现”环”，就像下图这样。<br>那么，如何用程序判断该链表是否为有环链表呢？<br><img src="/blog/img/2020/02/29/如何判断链表有环.png"><br> </p>
+<a id="more"></a>  
+
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2.解题思路"></a>2.解题思路</h2><p>首先创建两个指针p1和p2(在Java对象里就是两个对象引用)，让他们同时指向这个链表的头节点。然后开始一个大循环，再循环体中，让指针p1每次向后移动1个节点，让指针p2每次向后移动2个节点，然后比较两个指针指向的节点是否相同。如果相同，则可以判断出链表有环。如果不同，则继续下一次循环。<br>第1步，p1和p2都指向节点5。<br><img src="/blog/img/2020/02/29/解题思路1.png"><br><br>第2步，p1指向节点3，p2指向节点7。<br><img src="/blog/img/2020/02/29/解题思路2.png"><br><br>第3步，p1指向节点7，p2指向节点6。<br><img src="/blog/img/2020/02/29/解题思路3.png"><br><br>第4步，p1指向节点2，p2指向节点1。<br><img src="/blog/img/2020/02/29/解题思路4.png"><br><br>第5步，p1指向节点6，p2也指向节点6，p1和p2所指向的节点相同，说明链表有环。<br><img src="/blog/img/2020/02/29/解题思路5.png"><br><br>这是什么原理呢？学过小学奥数的读者，可能听说过数学上的追及问题。此方法就类似于一个追及问题。<br>在一个环形跑道上。两个运动员从同一地点起跑，一个运动员速度快，另一个运动员速度慢。当两人跑了一段时间后，速度快的运动员必然会再次追上并超过速度慢的运动员，原因很简单，因为跑道是环形的。<br>假设链表的节点数量为n，该算法的时间复杂度为O(n)。除两个指针外，没有使用任何额外的存储空间，所以空间复杂度是O(1)。  </p>
+<p><strong>代码实现</strong>  </p>
+<pre><code>public class LinkedList {
+    /**
+     * 判断链表是否有环
+     * @param head 链表头节点
+     * @return
+     */
+    public static boolean isCycle(Node head){
+        Node p1 = head;
+        Node p2 = head;
+        while(p2!=null &amp;&amp; p2.next!=null){
+            p1 = p1.next;
+            p2 = p2.next.next;
+            if(p1 == p2){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 链表节点
+     */
+    private static class Node{
+        int data;
+        Node next;
+        public Node(int data){
+            this.data=data;
+        }
+    }
+
+    public static void main(String[] args) {
+        Node node1 = new Node(5);
+        Node node2 = new Node(3);
+        Node node3 = new Node(7);
+        Node node4 = new Node(2);
+        Node node5 = new Node(6);
+        Node node6 = new Node(8);
+        Node node7 = new Node(1);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+        node5.next = node6;
+        node6.next = node7;
+        node7.next = node4;
+        System.out.println(isCycle(node1));
+    }
+}</code></pre><h2 id="3-问题扩展"><a href="#3-问题扩展" class="headerlink" title="3.问题扩展"></a>3.问题扩展</h2><h3 id="3-1-扩展问题1"><a href="#3-1-扩展问题1" class="headerlink" title="3.1 扩展问题1"></a>3.1 扩展问题1</h3><p>如果链表有环，如何求出环的长度？<br><img src="/blog/img/2020/02/29/如何求链环长度.png"><br><br><strong>解题思路</strong><br>当两个指针再次相遇，证明链表有环的时候，让两个指针从相遇点继续循环前进，并且统计前进的循环次数，直到两个指针第2次相遇。此时统计出来的前进次数就是环长。<br>因为指针p1每次走1步，指针p2就走2步，两者的速度差是1步。当两个指针再次相遇时，p2比p1多走了整整一圈。<br>因此，环长 = 每一次速度差 x 前进次数 = 前进次数。<br><strong>代码实现</strong> </p>
+<pre><code>public static int ringLength(Node head){
+    //第1次相遇后到第2次相遇时的前进次数
+    int length = 0;
+    //相遇次数
+    int count = 0;
+    Node p1 = head;
+    Node p2 = head;
+    while(p2!=null &amp;&amp; p2.next!=null){
+        p1 = p1.next;
+        p2 = p2.next.next;
+        if(p1 == p2){
+            count++;
+        }
+        //第一次相遇
+        if(count == 1){
+            length++;
+        }
+        //第二次相遇
+        if(count == 2){
+            break;
+        }
+    }
+    return length*1;
+}</code></pre><p>或者  </p>
+<pre><code>public static int ringLength(Node head){
+    //第1次相遇后到第2次相遇时的前进次数
+    int length = 0;
+    Node p1 = head;
+    Node p2 = head;
+    while(p2!=null &amp;&amp; p2.next!=null){
+        p1 = p1.next;
+        p2 = p2.next.next;
+        if(p1 == p2){//第一次相遇
+            while(p2!=null &amp;&amp; p2.next!=null){
+                p1 = p1.next;
+                p2 = p2.next.next;
+                length ++;
+                if(p1 == p2){//第二次相遇
+                    return length;
+                }
+            }
+        }
+    }
+    return length;
+}</code></pre><h3 id="3-2-扩展问题2"><a href="#3-2-扩展问题2" class="headerlink" title="3.2 扩展问题2"></a>3.2 扩展问题2</h3><p>如果链表有环，如何求出入环节点？<br><img src="/blog/img/2020/02/29/如何求出入环节点.png"><br><br>我自己的想法是借助一个Map集合或者List集合，每遍历一个节点就判断集合里面是否包含此节点，不包含就放进集合里面去，当第2次遍历到节点2时，集合里面包含了此节点，说明节点2就是入环点。此方法的时间复杂度是O(n)，由于借助了辅助集合，所以空间复杂度是O(n)。<br>但这不是最优解，此题还有最优解，不用借助辅助集合。<br><strong>解题思路</strong><br>首先我们来做一个抽象的判断。<br><img src="/blog/img/2020/03/01/抽象示意图.png"><br><br>上面是对有环链表所做的一个抽象示意图。假设从链表头节点到入环节点的距离是D，从入环点到两个指针首次相遇点的距离是S<sub>1</sub>，从首次相遇点回到入环节点的距离是S<sub>2</sub>。  
+那么当两个指针首次相遇时，各自所走的距离是多少呢？<br>指针p1一次只走1步，所走的距离是D+S<sub>1</sub> 。<br>指针p2一次走2步，多走了1整圈，所走的距离是D+S<sub>1</sub>+S<sub>2</sub>+S<sub>1</sub> = D + 2S<sub>1</sub> + S<sub>2</sub> 。<br>由于p2的速度是p1的2倍，所以所走距离也是p1的2倍，因此：<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2(D+S<sub>1</sub>) = D + 2S<sub>1</sub> + S<sub>2</sub><br>等式经过整理得出：<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;D = S<sub>2</sub><br>也就是说，从链表头节点到入环节点的距离，等于首次相遇点回到入环节点的距离。<br>这样一来，只需要把其中一个指针放回到头节点位置，另一个指针保持在首次相遇点，两个指针都是每次向前走1步。那么，他们最终相遇的节点，就是入环节点。<br><strong>是不是很神奇！我们现在用原题的例子来演示一下。</strong><br>首先，让指针p1回到链表头节点，指针p2保持在首次相遇点。<br><img src="/blog/img/2020/03/01/入环点1.png"><br><br>指针p1和p2各自前进1步。<br><img src="/blog/img/2020/03/01/入环点2.png"><br><br>指针p1和p2第2次前进。<br><img src="/blog/img/2020/03/01/入环点3.png"><br><br>指针p1和p2第3次前进，指向了同一个节点2，节点2正是有环链表的入环节点。<br><img src="/blog/img/2020/03/01/入环点4.png"><br>  </p>
+<p><strong>代码实现</strong>   </p>
+<pre><code>public static Node entryPoint(Node head){
+    Node p1 = head;
+    Node p2 = head;
+    while(p2!=null &amp;&amp; p2.next!=null){
+        p1 = p1.next;
+        p2 = p2.next.next;
+        if(p1 == p2){//第一次相遇
+            p1 = head;//把p1节点重新指向链表头节点
+            while(p2!=null){
+                //将p1和p2都设置成往前走1步
+                p1 = p1.next;
+                p2 = p2.next;
+                if(p1 == p2){//相遇时的节点即是入环节点
+                    return p1;
+                }
+            }
+        }
+    }
+    return null;
+}</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

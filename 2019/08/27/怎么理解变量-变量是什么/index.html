@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>怎么理解变量(变量是什么) - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="变量是一块命名的内存区域，以便程序进行访问。变量用来存储数据，随着程序的运行，存储的数据也可能跟着改变。  
+
+原文链接：https://blog.csdn.net/NEXTLJP/article/,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">怎么理解变量(变量是什么)</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">怎么理解变量(变量是什么)</h1>
+        <div class="stuff">
+            <span>八月 27, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>变量是一块命名的内存区域，以便程序进行访问。变量用来存储数据，随着程序的运行，存储的数据也可能跟着改变。  </p>
+<a id="more"></a>
+<p>原文链接：<a href="https://blog.csdn.net/NEXTLJP/article/details/78142303" target="_blank" rel="noopener">https://blog.csdn.net/NEXTLJP/article/details/78142303</a><br><strong>举个例子：</strong><br>想一想我们在进行1230x235这个运算的时候我们人是怎么做的呢？我们是不是先找一张草稿纸，在上面写上1230x235然后在进行运算。计算机是人发明的所以肯定是让它以我们人类的方法来进行运算的。计算机在进行1230x235这个运算的时候做的第一件事情就是：找一张草稿纸。草稿纸代表什么？代表存储。我们在草稿纸上写1230x235的目的是存储1230、235这个两个数。有的人可能就会说我不用草稿纸就可以了啊，我可以心算啊。但是你在进行心算的时候是不是知道自己在算什么呢？你为什么知道自己再算1230x235呢？这是因为你的大脑此时充当了一张草稿纸把你这两个数存在了大脑里面。  </p>
+<p>所以：在计算之前我们需要做的事情就是先把需要运算的数字存储起来，那我们存到哪里去呢？我们存到我们的变量里面去。变量你可以理解成一个存储空间的名称。就像stack和heap一样就是一个对某一种存储空间的名称。  </p>
+<p>我们在写代码的时候就应该这样写：  </p>
+<pre><code>int a = 1230;
+int b = 235;
+int mult = a * b</code></pre><p>可能有些人会这样写：  </p>
+<pre><code>int mult = 1230 * 235;</code></pre><p>这样写的话是不是以为我们没存储到1230和235呢？我们还是存储了这两个数字的，只不过是不存在我们自定义的变量中，而是存到另一个存储区域去了。  </p>
+<p>上面的例子所讲的变量都是基本类型的变量。对于引用类型的变量里有一些不同，因为引用类型变量存储的并不是一个用来运算的值，而是一个地址。真正的用来运算的值存储在另一个地方，我们称之为堆(heap)。<br>我们来看一下这个例子：  </p>
+<pre><code>String s1 = new String(&quot;a&quot;);
+String s2 = new String(&quot;a&quot;);
+String s3 = s1;
+System.out.println(&quot;s1 == s2:&quot;+(s1 == s2));  //false
+System.out.println(&quot;s1 == s3:&quot;+(s1 == s3));  //true  </code></pre><p>因为s1和s2变量存储的是地址，s1存储的第一个a字符串在堆区中的地址，s2存储的是第二个a字符串在堆区的地址。所以s1 == s2是false的。s3 == s1是true的(why?)，那是因为s1把它指向a字符串的地址copy了一份然后赋值给了s3，所以此时s1、s3指向a字符串的地址是相同的。  </p>
+<p>我们在看一个例子：  </p>
+<pre><code>String s1 = &quot;a&quot;;
+String s2 = &quot;a&quot;;
+String s3 = s1;
+System.out.println(&quot;s1 == s2:&quot;+(s1 == s2));  //true
+System.out.println(&quot;s1 == s3:&quot;+(s1 == s3));  //true</code></pre><p>注意这个例子中的a字符串不是通过new出来的，所以此时a字符串是存放在常量池中的，而在常量池中a字符串只会存在一份，而s1、s2变量存放的地址都是指向常量池中a字符串的地址，所以它们存放的都是同一个地址值。  </p>
+<p><strong>变量构成</strong><br>我们来回想一下变量的定义。是不是一般都是这种类型：  </p>
+<pre><code>int i = 6；</code></pre><p>int-变量的数据类型；i-变量名；6-变量存储的值。这三个可以称为一个变量必不可少的要素。</p>
+<p><strong>变量名</strong><br>这个的存在就很显而意见了。变量名相当于一个接口，通过变量名来操纵一个存储空间（变量）。比如前面的int i = 6；这一条语句他就进行了以下操作：<br>1.在栈中申请一个存储空间，这个申请到了的存储空间就是我们说的变量。并且给这个存储空间命名为a<br>2.a=2，即通过a这个变量名来操纵存储空间，给变量名为a的存储空间存储一个数据2。  </p>
+<p><strong>值</strong><br>变量是存储空间，变量中存储的东西就是值。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

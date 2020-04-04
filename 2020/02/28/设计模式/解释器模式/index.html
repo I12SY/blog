@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>解释器模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="解释器模式(Interpreter Pattern)提供了评估语言的语法或表达式的方式。它属于行为型模式。这种模式实现了一个表达式接口，该接口解释一个特定的上下文。这种模式被用在SQL解析、符号处理,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">解释器模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">解释器模式</h1>
+        <div class="stuff">
+            <span>二月 28, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>解释器模式(Interpreter Pattern)提供了评估语言的语法或表达式的方式。它属于行为型模式。这种模式实现了一个表达式接口，该接口解释一个特定的上下文。这种模式被用在SQL解析、符号处理引擎等。  </p>
+<a id="more"></a>  
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>给定一个语法，定义它的文法表示，并定义一个解释器，这个解释器使用该标识来解释语言中的句子。<br><strong>主要解决：</strong>对于一些固定文法构建一个解释句子的解释器。<br><strong>何时使用：</strong>如果一种特定类型的问题发生的频率足够高，那么可能就值得将该问题的各个实例表述为一个简单语言中的句子。这样就可以构建一个解释器，该解释器通过解释这些句子来解决该问题。<br><strong>如何解决：</strong>构建语法树，定义终结符与非终结符。<br><strong>关键代码：</strong>构建环境类，包好解释器之外的一些全局信息，一般是HashMap。<br><strong>应用实例：</strong>1、编译器、运算表达式计算。2、浏览器解释HTML文法，转换成网页格式显示到用户面前。<br><strong>优点：</strong>1、可扩展性比较好，灵活。2、增加了新的解释表达式的方式。3、易于实现简单文法。<br><strong>缺点：</strong>1、可利用场景比较少。2、对于复杂的文法比较难维护。3、解释器模式会引起类膨胀。4、解释器模式采用递归调用方法。<br><strong>使用场景：</strong>1、可以将一个需要解释执行的语言中的句子表示为一个抽象语法树。2、一些重复出现的问题可以用一种简单的语言表达式来进行表达。3、一个简单语法需要解释的场景。<br><strong>注意事项：</strong>可利用场景比较少，JAVA中如果碰到可以用expression4J代替。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><img src="/blog/img/2020/02/28/解释器模式结构图.png">  
+
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h2><p>AbstractExpression(抽象表达式)，声明一个抽象类，这个接口为抽象语法树中所有的节点所共享。  </p>
+<pre><code>public abstract class AbstractExpression {
+    public abstract void interpret(Context context);
+}</code></pre><p>TerminalExpression（终结符表达式），实现与文法中的终结符相关联的解释操作。实现抽象表达式中所要求的接口，主要是一个interpret()方法。文法中每一个终结符都有一个具体终结表达式与之相对应。  </p>
+<pre><code>public class TerminalExpression extends AbstractExpression {
+    @Override
+    public void interpret(Context context) {
+        System.out.println(&quot;终端解释器&quot;);
+    }
+}</code></pre><p>NonterminalExpression(非终结符表达式)，为文法中的非终结符实现解释操作。对文法中每一条规则R1、R2······Rn都需要一个具体的非终结符表达式类。通过实现抽象表达式的interpret()方法实现解释操作。解释操作以递归方式调用上面所提到的代表R1、R2······Rn中各个符号的实例变量。  </p>
+<pre><code>public class NonterminalExpression extends AbstractExpression {
+    @Override
+    public void interpret(Context context) {
+        System.out.println(&quot;非终端解释器&quot;);
+    }
+}</code></pre><p>Context，包含解释器之外的一些全局信息  </p>
+<pre><code>public class Context {
+
+    private String input;
+
+    public String getInput() {
+        return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    private String output;
+
+    public String getOutput() {
+        return output;
+    }
+
+    public void setOutput(String output) {
+        this.output = output;
+    }
+
+}</code></pre><p>客户端代码，构建表示该文法定义语言中一个特定的句子的抽象语法树。调用解释操作。  </p>
+<pre><code>public class Client {
+
+    public static void main(String[] args) {
+        Context c = new Context();
+        List&lt;AbstractExpression&gt; list = new ArrayList&lt;&gt;();
+        list.add(new TerminalExpression());
+        list.add(new NonterminalExpression());
+        list.add(new TerminalExpression());
+        list.add(new TerminalExpression());
+
+        for (AbstractExpression expression : list) {
+            expression.interpret(c);
+        }
+    }
+}</code></pre><p>运行结果  </p>
+<pre><code>终端解释器
+非终端解释器
+终端解释器
+终端解释器</code></pre><h2 id="4-实例-音乐解释器实现"><a href="#4-实例-音乐解释器实现" class="headerlink" title="4.实例(音乐解释器实现)"></a>4.实例(音乐解释器实现)</h2><img src="/blog/img/2020/02/28/音乐解释器1.png">  
+<img src="/blog/img/2020/02/28/音乐解释器2.png">  
+
+<p><strong>代码结构图</strong><br><img src="/blog/img/2020/02/28/音乐解释器结构图.png">  </p>
+<p><strong>代码示例</strong><br>演奏内容类(Context)  </p>
+<pre><code>public class PlayContext {
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+}</code></pre><p>表达式类(AbstractExpression)  </p>
+<pre><code>public abstract class Expression {
+
+    //解释器
+    public void interpret(PlayContext context){
+        if(context.getText()==null || context.getText().length()==0){
+            return;
+        }else{
+            //此方法用于将当前的演奏文本第一条命令
+            //获得命令字母和其参数值。
+            //例如&quot;O 3 E 0.5 G 0.5 A 3&quot;
+            //则playKey为O，而playValue为3
+            String text = context.getText();
+            String playKey = text.substring(0,1);
+            text = text.substring(2);
+            double playValue = Double.valueOf(text.substring(0,text.indexOf(&quot; &quot;)));
+            //获得playKey和playValue后将其从演奏文本中移除
+            //例如&quot;O 3 E 0.5 G 0.5 A 3&quot;
+            //变成了&quot;E 0.5 G 0.5 A 3&quot;
+            text = text.substring(text.indexOf(&quot; &quot;)+1);
+            context.setText(text);
+
+            excute(playKey,playValue);
+        }
+    }
+
+    //执行
+    //抽象方法&quot;执行&quot;，不同的文法子类，有不同的执行处理
+    public abstract void excute(String key,double value);
+}</code></pre><p>音符类(TerminalExpression)  </p>
+<pre><code>public class Note extends Expression {
+
+    @Override
+    public void excute(String key, double value) {
+        String note = &quot;&quot;;
+        switch(key){
+            case &quot;C&quot;:
+                note = &quot;1&quot;;
+                break;
+            case &quot;D&quot;:
+                note = &quot;2&quot;;
+                break;
+            case &quot;E&quot;:
+                note = &quot;3&quot;;
+                break;
+            case &quot;F&quot;:
+                note = &quot;4&quot;;
+                break;
+            case &quot;G&quot;:
+                note = &quot;5&quot;;
+                break;
+            case &quot;A&quot;:
+                note = &quot;6&quot;;
+                break;
+            case &quot;B&quot;:
+                note = &quot;7&quot;;
+                break;
+        }
+        System.out.print(note+&quot; &quot;);
+    }
+}</code></pre><p>音阶类(TerminalExpression)  </p>
+<pre><code>public class Scale extends Expression {
+
+    @Override
+    public void excute(String key, double value) {
+        String scale = &quot;&quot;;
+        switch((int)value){
+            case 1:
+                scale = &quot;低音&quot;;
+                break;
+            case 2:
+                scale = &quot;中音&quot;;
+                break;
+            case 3:
+                scale = &quot;高音&quot;;
+                break;
+        }
+        System.out.print(scale+&quot; &quot;);
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        PlayContext context = new PlayContext();
+        //音乐-上海滩
+        System.out.println(&quot;上海滩：&quot;);
+        context.setText(&quot;O 2 E 0.5 G 0.5 A 3 E 0.5 G 0.5 D 3 E 0.5 G 0.5 A 0.5 O 3 C 1 O 2 A 0.5 G 1 C 0.5 E 0.5 D 3 &quot;);
+        //下面的这一段代码可以使用简单工厂代替
+        Expression expression = null;
+        try {
+            while(context.getText().length()&gt;0){
+                String text = context.getText().substring(0,1);
+                switch (text) {
+                    case &quot;O&quot;://当首字母是O时，则表达式实例化为音阶
+                        expression = new Scale();
+                        break;
+                    case &quot;C&quot;:
+                    case &quot;D&quot;:
+                    case &quot;E&quot;:
+                    case &quot;F&quot;:
+                    case &quot;G&quot;:
+                    case &quot;A&quot;:
+                    case &quot;B&quot;:
+                    case &quot;P&quot;://当首字母是CDEFGAB，以及休止符P时，则表达式实例化为音符
+                        expression = new Note();
+                        break;
+                }
+                expression.interpret(context);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+}</code></pre><p>运行结果  </p>
+<pre><code>上海滩：
+中音 3 5 6 3 5 2 3 5 6 高音 1 中音 6 5 1 3 2 </code></pre><h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/interpreter-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/interpreter-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

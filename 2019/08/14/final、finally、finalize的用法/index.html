@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>final、finally、finalize的用法 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1）final关键字
+final关键字可以用来声明变量、方法和类。接口里声明的变量默认是final的。final类无法继承，也就是没有子类。这么做是出于基础类型的安全考虑，比如String和Inte,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">final、finally、finalize的用法</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">final、finally、finalize的用法</h1>
+        <div class="stuff">
+            <span>八月 14, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h1 id="1）final关键字"><a href="#1）final关键字" class="headerlink" title="1）final关键字"></a>1）final关键字</h1><blockquote>
+<p>final关键字可以用来声明变量、方法和类。接口里声明的变量默认是final的。final类无法继承，也就是没有子类。这么做是出于基础类型的安全考虑，比如String和Integer。这样也使得编译器进行一些优化，更容易保证线程的安全性。final方法无法重写(可以重载)。final变量的值不能改变。</p>
+</blockquote>
+<ul>
+<li><p>1.声明变量</p>
+<ul>
+<li><p>在定义的时候初始化</p>
+</li>
+<li><p>final变量可以在初始化块中初始化，不可以在静态初始化块中初始化</p>
+</li>
+<li><p>静态final变量可以在定义时初始化，也可以在静态初始化块中初始化，不可以在初始化块中初始化</p>
+</li>
+<li><p>final变量还可以在类的构造器中初始化，但是静态final变量不可以  </p>
+<a id="more"></a>    
+<pre><code>public class FinalTest {
+
+    public final int A = 10;//在定义时初始化
+    public final int B;{B=20;}//在初始化代码块中初始化
+
+    //非静态final变量不能在静态初始化块中初始化
+    //public final int C;static{C=30;}
+
+    //静态常量,可以在定义时初始化
+    public static final int STATIC_D = 40;
+
+    //静态常量，可以在静态初始化块中初始化
+    public static final int STATIC_E;static{STATIC_E=50;};
+
+    //静态变量不能在初始化块中初始化
+    //public static final int STATIC_F;{STATIC_F=60;};
+
+    public final int G;
+
+    //静态final变量不可以在构造器中初始化
+    //public static final int STATIC_H;
+
+    //在构造器中初始化
+    public FinalTest(){
+        G = 70;
+        //静态final变量不可以在构造器中初始化
+        //STATIC_H=80;
+
+        //给final的变量进行二次赋值时，编译会报错。
+        //A = 99;
+        //STATIC_D = 99;
+
+    }
+    //final变量未被初始化时，编译时就会报错
+    //public final int I;
+
+    //静态final变量未被初始化时，编译时就会报错
+    //public static final STATIC_J;
+}</code></pre></li>
+</ul>
+</li>
+<li><p>2.声明方法</p>
+<ul>
+<li><p>当final定义一个方法时，他表示这个方法不可以被子类重写（可以重载），但不影响他被子类继承  </p>
+<pre><code>public class FinalTest2 {
+
+    public final void TestFinal(){
+        System.out.println(&quot;父类--这是一个final方法&quot;);
+    }
+
+    public static void main(String[] args) {
+        SubClass sc = new SubClass();
+        sc.TestFinal();
+        sc.TestFinal(&quot;&quot;);
+    }
+}
+
+class SubClass extends FinalTest2{
+    //子类无法重写（override父类的final方法，否则编译时会报错
+    /*@Override
+    public void TestFinal(){
+        System.out.println(&quot;子类--重写final方法&quot;);
+    }*/
+    //但是可以重载
+    public void TestFinal(String param){
+        System.out.println(&quot;子类--重载父类TestFinal方法&quot;);
+    }
+}</code></pre></li>
+</ul>
+</li>
+<li><p>3.声明类</p>
+<ul>
+<li><p>当final定义一个类时，该类不可被继承，因此编译器在处理时会把它所有的方法当做final的，因此final类比普通类拥有更高的效率。而由关键字abstract定义的抽象类含必须由继承自它的子类重写父类中的抽象方法，因此无法同时使用final和abstract来修饰同一个类。  </p>
+</li>
+<li><p>同样的道理final也不能用来修饰接口，final的类的所有方法都不能被重写，但这并不表示final的类的属性(变量值)也是不可改变的，要想做到final类的属性值不可改变，必须给它增加final修饰  </p>
+<pre><code>public final class FinalTest3 {
+
+    int i = 20;
+    final int j = 30;
+
+    public static void main(String[] args) {
+        FinalTest3 t = new FinalTest3();
+        t.i=99;//final类FinalTest3的属性值 i是可以改变的，因为属性值i前面没final修饰
+        //t.j=49;//报错....因为j属性是final的不可以改变。
+        System.out.println(t.i);
+    }
+
+}
+
+/**
+ * 接口里声明的变量默认是final的
+ */
+public interface FinalTest4 {
+
+    int a=10;
+    //编译报错
+    //int b;
+}</code></pre></li>
+</ul>
+</li>
+</ul>
+<h1 id="2）finally关键字"><a href="#2）finally关键字" class="headerlink" title="2）finally关键字"></a>2）finally关键字</h1><p>finally只能用在try/catch语句中并且附带着一个语句块，表示这段语句最终总是被执行</p>
+<pre><code>public class Test {
+    public static void main(String[] args) {
+        try {
+            throw new NullPointerException();
+        }catch (Exception e) {
+            System.out.println(&quot;程序出了异常!&quot;);
+        } finally {
+            //这里总会被执行，不受break,return影响另如数据库连接的close()一般写在这里，可以降低程序的出错几率
+            System.out.println(&quot;执行了finally语句块&quot;);
+        }
+    }
+}</code></pre><p>那么有没有一种情况使finally语句块得不到执行呢？  </p>
+<pre><code>public class FinallyTest {
+
+    public static void main(String[] args) {
+        FinallyTest f = new FinallyTest();
+        //测试return语句
+        f.testReturn();
+        System.out.println();
+        // 测试continue语句
+        f.testContinue();
+        System.out.println();
+         // 测试break语句
+        f.testBreak();
+    }
+
+    //测试return语句
+    public ReturnClass testReturn(){
+        try {
+            return new ReturnClass();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            System.out.println(&quot;执行了finally语句&quot;);
+        }
+        System.out.println(&quot;执行了null语句&quot;);
+        return null;
+    }
+
+    //测试continue语句
+    public void testContinue(){
+        for (int i = 0; i &lt; 3; i++) {
+            try {
+                System.out.println(i);
+                 if(i == 1){
+                     System.out.println(&quot;con&quot;);
+                     continue;
+                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                System.out.println(&quot;执行了finally语句&quot;);
+            }
+        }
+    }
+    //测试break语句
+    public void testBreak(){
+        for (int i = 0; i &lt; 3; i++) {
+            try {
+                System.out.println(i);
+                 if(i == 1){
+                    break;
+                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                System.out.println(&quot;执行了finally语句&quot;);
+            }
+        }
+    }
+}
+
+class ReturnClass{
+    public ReturnClass(){
+        System.out.println(&quot;执行了return语句&quot;);
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>执行了return语句
+执行了finally语句
+
+0
+执行了finally语句
+1
+con
+执行了finally语句
+2
+执行了finally语句
+
+0
+执行了finally语句
+1
+执行了finally语句</code></pre><p>经过测试：很明显，return、continue和break都没能阻止finally语句块的执行。从输出的结果来看，return语句似乎在finally语句块之前执行了，事实真的如此吗？我们来想想看，return语句的作用是什么呢？是退出当前的方法，并将值或对象返回。如果 finally语句块是在return语句之后执行的，那么return语句被执行后就已经退出当前方法了，finally语句块又如何能被执行呢？因此，正确的执行顺序应该是这样的：编译器在编译return new ReturnClass();时，将它分成了两个步骤，new ReturnClass()和return，前一个创建对象的语句是在finally语句块之前被执行的，而后一个return语句是在finally语句块之后执行的，也就是说finally语句块是在程序退出方法之前被执行的。同样，finally语句块是在循环被跳过（continue）和中断（break）之前被执行的。</p>
+<h1 id="3）finalize关键字"><a href="#3）finalize关键字" class="headerlink" title="3）finalize关键字"></a>3）finalize关键字</h1><p>finalize，它是一个方法，属于java.lang.Object类，它的定义如下：protected void finalize()throws Throwable{}<br>众所周知finalize()方法是GC（garbagecollector)运行机制的一部分,在此我们只说说finalize()方法的作用是什么呢？finalize()方法是在GC清理它所从属的对象时被调用的，如果执行它的过程中抛出了无法捕获的异常（uncaughtexception），GC将终止对该对象的清理，并且该异常会被忽略； 直到下一次GC开始清理这个对象时，它的finalize()会被再次调用。请看下面的示例：  </p>
+<pre><code>public class Test {
+    //重写finalize()方法
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println(&quot;执行了finallize()方法&quot;);
+    }
+    public static void main(String[] args) {
+        Test t = new Test();
+        t = null;
+        System.gc();
+        //System.runFinalizersOnExit(true);
+    }
+}</code></pre><p>输出结果：执行了finallize()方法<br>程序调用了java.lang.System类的gc()方法，引起GC的执行，GC在清理t对象时调用了它的finalize()方法，因此才了上面的输出结果。调用System.gc()等同于调用下面这行代码：Runtime.getRuntime().gc();调用它们的作用只是<code>建议</code>垃圾收集器（GC）启动，清理无用的对象释放内存空间，但是GC的启动并不是一定的，这由JAVA虚拟机来决定。直到 JAVA虚拟机停止运行，些对象的finalize()可能都没被运行过，那么怎样保证所对象的这个方法在JAVA虚拟机停止运行之前一定被调用呢？答案是我们可以调用System类的另一个方法：</p>
+<pre><code>public static void runFinalizersOnExit(boolean value){
+       //othercode
+} </code></pre><p>给这个方法传入true就可以保证对象的finalize()方法在JAVA虚拟机停止运行前一定被运行了，不过遗憾的是这个方法是不安全的，它会导致有用的对象finalize()被误调用，因此已不被赞成使用了。由于finalize()属于Object类，因此所类都这个方法，Object的任意子类都可以重写（override）该方法，在其中释放系统资源或者做其它的清理工作，如关闭输入输出流。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

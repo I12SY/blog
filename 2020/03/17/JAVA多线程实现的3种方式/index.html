@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JAVA多线程实现的3种方式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="Java中线程的实现有三种方式，分别是继承Thread类、实现Runnable接口和实现Callable接口。  
+  
+1.继承Thread类，重写Run方法public class Thread,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">JAVA多线程实现的3种方式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">JAVA多线程实现的3种方式</h1>
+        <div class="stuff">
+            <span>三月 17, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>Java中线程的实现有三种方式，分别是<strong>继承Thread类、实现Runnable接口和实现Callable接口。</strong>  </p>
+<a id="more"></a>  
+<h3 id="1-继承Thread类，重写Run方法"><a href="#1-继承Thread类，重写Run方法" class="headerlink" title="1.继承Thread类，重写Run方法"></a>1.继承Thread类，重写Run方法</h3><pre><code>public class ThreadTest{
+    public static void main(String[] args) {
+        Thread1 thread1 = new Thread1();//创建实例
+        thread1.start();//启动线程
+    }
+}
+
+class Thread1 extends Thread{
+    @Override
+    public void run() {
+        //具体业务操作
+    }
+}</code></pre><h3 id="2-实现Runnable接口，重写Run方法"><a href="#2-实现Runnable接口，重写Run方法" class="headerlink" title="2.实现Runnable接口，重写Run方法"></a>2.实现Runnable接口，重写Run方法</h3><pre><code>public class ThreadTest{
+    public static void main(String[] args) {
+        new Thread(new MyRunnable()).start();
+    }
+}
+
+class MyRunnable implements Runnable{
+    @Override
+    public void run() {
+        //具体业务操作
+    }
+}</code></pre><p>其实不管是通过继承Thread类还是通过实现Runable接口来实现线程，最终都是通过Thread类的对象的API来控制线程（代理设计模式）。<br>Thread类本质上也是实现了Runnable接口，启动线程的唯一方法就是通过Thread类的start()方法。start()方法是一个native（本地）方法，它将启动一个新线程，并执行run()方法（Thread类中提供的run()方法是一个空方法）。  </p>
+<h3 id="3-实现Callable接口，重写call-方法"><a href="#3-实现Callable接口，重写call-方法" class="headerlink" title="3.实现Callable接口，重写call()方法"></a>3.实现Callable接口，重写call()方法</h3><p>Callable接口与Runnable接口的功能类似，但提供了比Runnable更强大的功能，主要表现为以下三点：<br>（1）Callable可以在任务结束后提供一个返回值，Runnable无法提供这个功能；<br>（2）Callable接口中的call()方法可以抛出异常，而Runnable的run()方法不能抛出异常，必须在run()捕获；<br>（3）运行Callable可以拿到一个Future对象，Future对象表示异步计算的结果，它提供了检查计算是否完成的方法。由于线程属于异步计算模型，因此无法从别的线程中得到函数的返回值，在这种情况下，就可以使用Future来监视目标线程调用call()方法的情况，当调用Future的get方法以获取结果时，当前线程就会阻塞，直到call()方法结束返回结果。  </p>
+<p>使用Callable接口实现线程的步骤如下：  </p>
+<p>（1）自定义类实现Callable接口，并实现该接口的call()方法；<br>（2）创建实现Callable接口的自定义类对象；<br>（3）创建执行服务；<br>（4）提交执行；<br>（5）获取结果；<br>（6）关闭服务。  </p>
+<pre><code>public class ThreadTest{
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        //创建目标对象
+        MyCallable mc1 = new MyCallable();
+        //创建执行服务
+        ExecutorService service = Executors.newFixedThreadPool(2);
+        //提交执行
+        Future&lt;String&gt; result = service.submit(mc1);
+        //获取结果
+        String r = result.get();
+        //关闭服务
+        service.shutdownNow();
+
+        System.out.println(&quot;执行结果：&quot;+r);
+    }
+}
+
+class MyCallable implements Callable&lt;String&gt;{
+    @Override
+    public String call() throws Exception {
+        //具体业务操作
+        //···
+        return &quot;成功&quot;;
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>执行结果：成功</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

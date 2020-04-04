@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>最小栈的实现 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.题目实现一个栈，该栈带有出栈(pop)、入栈(push)、取最小元素(getMin)3个方法。要保证这3个方法的时间复杂度都是O(1)。
+  
+
+2.解题思路(采用双栈)1.设原有的栈叫做栈A，,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">最小栈的实现</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">最小栈的实现</h1>
+        <div class="stuff">
+            <span>三月 01, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1.题目"></a>1.题目</h2><p>实现一个栈，该栈带有出栈(pop)、入栈(push)、取最小元素(getMin)3个方法。要保证这3个方法的时间复杂度都是O(1)。<br><img src="/blog/img/2020/03/01/最小栈题目示例.png"><br></p>
+<a id="more"></a>  
+
+<h2 id="2-解题思路-采用双栈"><a href="#2-解题思路-采用双栈" class="headerlink" title="2.解题思路(采用双栈)"></a>2.解题思路(采用双栈)</h2><p>1.设原有的栈叫做栈A，此时创建一个额外的”备胎”栈B(这个栈用来存储历史最小值)，用于辅助栈A。<br><img src="/blog/img/2020/03/01/最小栈解题思路1.png"><br><br>2.当第1个元素入栈A时，让新元素也进入栈B(第1个元素入栈时，可以把它当做是一个最小值)。这个唯一的元素是栈A的当前最小值。<br><img src="/blog/img/2020/03/01/最小栈解题思路2.png"><br><br>3.之后，每当新元素进入栈A时，比较新元素和栈A当前最小值的大小，如果小于栈A当前的最小值，则让新元素进入栈B，此时栈B的栈顶元素就是栈A当前的最小值。<br><img src="/blog/img/2020/03/01/最小栈解题思路3.png"><br><br>4.每当栈A有元素出栈时，如果出栈元素是栈A当前的最小值，则让栈B的栈顶元素也出栈。此时栈B余下的栈顶元素所指向的，是栈A中第2小的元素，代替刚才的出栈元素成为栈A的当前最小值。（备胎转正）。<br><img src="/blog/img/2020/03/01/最小栈解题思路4.png"><br><br>5.当调用getMin方法时，返回栈B的栈顶所存储的值，这也是栈A的最小值。<br>显然，这个解法中进栈、出栈、取最小值的时间复杂度都是O(1)，最坏的空间复杂度是O(n)。  </p>
+<p><strong>代码实现</strong>  </p>
+<pre><code>public class MinStack {
+    //原始栈
+    Stack&lt;Integer&gt; stackA = new Stack&lt;&gt;();
+    //备胎栈
+    Stack&lt;Integer&gt; stackB = new Stack&lt;&gt;();
+
+    /**
+     * 入栈
+     * @param element 入栈元素
+     */
+    public void push(int element){
+        stackA.push(element);
+        //如果辅助栈为空，或者新元素小于或等于辅助栈栈顶，则将新元素压入辅助栈顶
+        if(stackB.isEmpty() || element&lt;=stackB.peek()){
+            stackB.push(element);
+        }
+    }
+
+    /**
+     * 出栈
+     * @throws Exception 
+     */
+    public int pop() throws Exception{
+        if(stackA.isEmpty()){
+            throw new Exception(&quot;栈为空&quot;);
+        }
+        Integer element = stackA.pop();
+        //如果栈A的出栈元素等于栈B的栈顶元素，那么也栈B出栈
+        if(element.equals(stackB.peek())){
+            stackB.pop();
+        }
+        return element;
+    }
+
+    /**
+     * 获取栈的最小元素
+     * @return
+     * @throws Exception
+     */
+    public int getMin() throws Exception{
+        if(stackA.isEmpty()){
+            throw new Exception(&quot;栈为空&quot;);
+        }
+        return stackB.peek();
+    }
+
+    public static void main(String[] args) throws Exception{
+        MinStack stack = new MinStack();
+        stack.push(4);
+        stack.push(9);
+        stack.push(7);
+        stack.push(3);
+        stack.push(8);
+        stack.push(5);
+        System.out.println(stack.getMin());
+        stack.pop();
+        stack.pop();
+        stack.pop();
+        System.out.println(stack.getMin());
+    }
+}</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

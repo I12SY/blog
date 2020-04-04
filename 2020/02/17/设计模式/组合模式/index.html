@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>组合模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="组合模式(Composite Pattern)，又叫部分整体模式，是用于把一组相似的对象当做一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">组合模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">组合模式</h1>
+        <div class="stuff">
+            <span>二月 17, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>组合模式(Composite Pattern)，又叫部分整体模式，是用于把一组相似的对象当做一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，他创建了对象组的树形结构。<br>这种模式创建了一个包含自己对象组的类，该类提供了修改相同对象组的方式。  </p>
+<a id="more"></a>  
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>将对象组合成树形结构以表示”部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。<br><strong>主要解决：</strong>它在我们树型结构的问题中，模糊了简单元素和复杂元素的概念，客户程序可以像处理简单元素一样来处理复杂元素，从而使得客户程序与复杂元素的内部结构解耦。<br><strong>何时使用：</strong>1、你想表示对象的部分-整体层次结构(树形结构)。2、您希望用户忽略组合对象与单个对象的不同，用户将统一地使用组合结构中的所有对象。<br><strong>如何解决：</strong>树枝和叶子实现统一接口，树枝内部组合该接口。<br><strong>关键代码：</strong>树枝内部组合该接口，并且含有内部属性List，里面放Component。<br><strong>应用实例：</strong>1、算术表达式包括操作数、操作符和另一个操作数，其中，另一个操作数也可以是操作数、操作符和另一个操作数。2、在JAVA AWT和SWING中，对于Button和Checkbox是树叶，Container是树枝。<br><strong>优点：</strong>1、高层模块调用简单。2、节点自由增加。<br><strong>缺点：</strong>在使用组合模式时，其叶子和树枝的声明都是实现类，而不是接口，违反了依赖倒置原则。<br><strong>使用场景：</strong>部分、整体场景，如树形菜单，文件、文件夹的管理。<br><strong>注意事项：</strong>定义时为具体类。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><img src="/blog/img/2020/02/18/组合模式结构图.png">  
+
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h2><p>Component为组合中的对象声明接口，在适当的情况下，实现所有类共有接口的默认行为。声明接口用于访问和管理Component的子部件。  </p>
+<pre><code>public abstract class Component {
+
+    protected String name;
+
+    public Component(String name){
+        this.name=name;
+    }
+
+    //通常都用add和remove方法来提供增加或移除树枝的功能
+    public abstract void add(Component c);
+    public abstract void remove(Component c);
+    public abstract void display(int depth);
+}</code></pre><p>Leaf在组合中表示叶节点对象，叶节点没有子节点。  </p>
+<pre><code>public class Leaf extends Component{
+
+    public Leaf(String name) {
+        super(name);
+    }
+
+    /**
+     * 由于叶子节点没法再增加分支和树叶，所以add和remove方法实现它没有意义，
+     * 但这样做可以消除叶节点和枝节点在抽象层次的区别，它们具备完全一致的接口
+     */
+    @Override
+    public void add(Component c) {
+        System.out.println(&quot;Cannot add to a leaf&quot;);
+    }
+
+    @Override
+    public void remove(Component c) {
+        System.out.println(&quot;Cannot remove to a leaf&quot;);
+    }
+
+    @Override
+    public void display(int depth) {
+        //叶节点的具体方法，次数是显示其名称和级别
+        StringBuffer b = new StringBuffer();
+        for (int i = 0; i &lt; depth; i++) {
+            b.append(&quot;-&quot;);
+        }
+        System.out.println(b.toString()+name);
+    }
+
+
+}</code></pre><p>Composite定义有枝节点行为，用来存储子部件，在Component接口中实现与子部件相关的操作，比如增加add和删除remove。  </p>
+<pre><code>public class Composite extends Component{
+
+    //一个子对象集合用来存储其下属的枝节点和叶节点
+    private List&lt;Component&gt; children = new ArrayList&lt;&gt;();
+
+    public Composite(String name) {
+        super(name);
+    }
+
+    @Override
+    public void add(Component c) {
+        children.add(c);
+    }
+
+    @Override
+    public void remove(Component c) {
+        children.remove(c);
+    }
+
+    @Override
+    public void display(int depth) {
+        //显示其枝节点名称，并对其下级进行遍历
+        StringBuffer b = new StringBuffer();
+        for (int i = 0; i &lt; depth; i++) {
+            b.append(&quot;-&quot;);
+        }
+        System.out.println(b.toString()+name);
+        for (Component component : children) {
+            component.display(depth+2);
+        }
+    }
+
+}</code></pre><p>客户端代码，能通过Component接口操作组合部件的对象。  </p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        //生成树根root，根上长出两个叶LeafA 和 Leaf B
+        Composite root = new Composite(&quot;root&quot;);
+        root.add(new Leaf(&quot;Leaf A&quot;));
+        root.add(new Leaf(&quot;Leaf B&quot;));
+
+        //根上长出分支Composite X，分支上也有两叶Leaf XA 和 Leaf XB
+        Composite x = new Composite(&quot;Composite X&quot;);
+        x.add(new Leaf(&quot;Leaf XA&quot;));
+        x.add(new Leaf(&quot;Leaf XB&quot;));
+        root.add(x);
+
+        //在Composite X上再长出分支Composite XY，分支上也有两叶Leaf XYA和Leaf XYB
+        Composite xy = new Composite(&quot;Composite XY&quot;);
+        xy.add(new Leaf(&quot;Leaf XYA&quot;));
+        xy.add(new Leaf(&quot;Leaf XYB&quot;));
+        x.add(xy);
+
+        //树根又长出两叶Leaf C和Leaf D，可惜Leaf D没长牢，被风吹走了
+        root.add(new Leaf(&quot;Leaf C&quot;));
+        Leaf d = new Leaf(&quot;Leaf D&quot;);
+        root.add(d);
+        root.remove(d);
+
+        //显示大树的样子
+        root.display(1);
+    }
+}</code></pre><p>结果显示  </p>
+<pre><code>-root
+---Leaf A
+---Leaf B
+---Composite X
+-----Leaf XA
+-----Leaf XB
+-----Composite XY
+-------Leaf XYA
+-------Leaf XYB
+---Leaf C</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/composite-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/composite-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

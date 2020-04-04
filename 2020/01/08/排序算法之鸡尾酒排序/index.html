@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>排序算法之鸡尾酒排序 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="冒泡排序的每一个元素都可以像小气泡一样，根据自身的大小，一点一点地向着数组一侧移动。算法的每一轮都是从左到右来比较元素，进行单向的位置交换。那么鸡尾酒排序做了怎样的优化呢？鸡尾酒排序的元素比较和交换,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">排序算法之鸡尾酒排序</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">排序算法之鸡尾酒排序</h1>
+        <div class="stuff">
+            <span>一月 08, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>冒泡排序的每一个元素都可以像小气泡一样，根据自身的大小，一点一点地向着数组一侧移动。算法的每一轮都是<strong>从左到右来比较元素，进行单向的位置交换。</strong><br>那么鸡尾酒排序做了怎样的优化呢？<br>鸡尾酒排序的元素比较和交换过程是<strong>双向</strong>的。  </p>
+<a id="more"></a>   
+<p>现有一个无序数列{2,3,4,5,6,7,8,1}，希望对其进行从小到大的排序。<br>让我来看下鸡尾酒排序的详细过程。<br><strong>第1轮（和冒泡排序一样，8和1交换）</strong><br><img src="/blog/img/2020/01/09/鸡尾酒排序1.png"><br><br><strong>第2轮</strong><br>此时开始不一样了，我们反过来<strong>从右往左</strong>比较进行交换。<br><img src="/blog/img/2020/01/09/鸡尾酒排序2.png"><br><br><strong>第3轮（虽然实际上已经有序，但是流程并没有结束）</strong><br>在鸡尾酒排序的第3轮，需要重新<strong>从左向右</strong>比较并进行交换。<br>1和2比较，位置不变；2和3比较，位置不变……6和7比较，位置不变。<br>没有元素进行位置交换，证明已经有序，排序结束。<br>这就是鸡尾酒排序的思路。排序过程就像摆钟一样，第1轮从左向右，第2轮从右向左，第3轮从左向右…..。</p>
+<p>代码示例  </p>
+<pre><code>public static void sort(int[] arr){
+    int tmp = 0;
+    for (int i = 0; i &lt; arr.length/2; i++) {
+        //有序标记，每一轮的初始值都是true
+        boolean isSorted = true;
+        //奇数轮，从左向右比较交换
+        for (int j = i; j &lt; arr.length-i-1; j++) {
+            if(arr[j+1]&lt;arr[j]){
+                tmp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tmp;
+                //如果有值交换，所以不是有序的，标记为false
+                isSorted = false;
+            }
+        }
+        if(isSorted){
+            break;
+        }
+        //在偶数轮之前，将isSorted重新标记为true
+        isSorted = true;
+        //偶数轮，从右向左开始交换  arr.length-i-2 = arr.length-1-(i+1)
+        for (int j = arr.length-i-2; j &gt; i; j--) {
+            if(arr[j]&lt;arr[j-1]){
+                tmp = arr[j];
+                arr[j] = arr[j-1];
+                arr[j-1] = tmp;
+                //如果有值交换，所以不是有序的，标记为false
+                isSorted = false;
+            }
+        }
+        if(isSorted){
+            break;
+        }
+    }
+}</code></pre><p>PS:之前将冒泡排序时，有一种针对有序区的优化，鸡尾酒排序能否能用到呢？<br>答案：可以！<br>具体代码示例  </p>
+<pre><code>public static void sort(int[] arr){
+    int tmp = 0;
+    //有序边界
+    int sortBorder = arr.length-1;
+    //最后一次元素交换的位置
+    int pos = 0;
+    for (int i = 0; i &lt; arr.length/2; i++) {
+        //有序标记，每一轮的初始值都是true
+        boolean isSorted = true;
+        //奇数轮，从左向右比较交换
+        for (int j = i; j &lt; sortBorder; j++) {
+            if(arr[j+1]&lt;arr[j]){
+                tmp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tmp;
+                //如果有值交换，所以不是有序的，标记为false
+                isSorted = false;
+                //把无序数列的边界更新为最后一次交换元素的位置
+                pos = j;
+            }
+        }
+        if(isSorted){
+            break;
+        }
+        //下一次比较到记录位置即可
+        sortBorder = pos;
+        //在偶数轮之前，将isSorted重新标记为true
+        isSorted = true;
+        //偶数轮，从右向左开始交换
+        for (int j = sortBorder; j &gt; i; j--) {
+            if(arr[j]&lt;arr[j-1]){
+                tmp = arr[j];
+                arr[j] = arr[j-1];
+                arr[j-1] = tmp;
+                //如果有值交换，所以不是有序的，标记为false
+                isSorted = false;
+            }
+        }
+        if(isSorted){
+            break;
+        }
+    }
+}</code></pre><p>鸡尾酒排序的优点与缺点：<br>优点：能够在特定条件下，减少排序的回合数；<br>缺点：代码量几乎增加了一倍。  </p>
+<p>使用场景：<strong>大部分元素已经有序</strong>的情况。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

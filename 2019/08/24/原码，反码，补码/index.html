@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>原码，反码，补码 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="在上一篇java整型的溢出问题的文章中涉及到了原码，反码，补码的知识，这篇文章就来讲讲这些东西。原文出处：http://www.cnblogs.com/zhangziqiu/   
+一.机器数和真值,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">原码，反码，补码</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">原码，反码，补码</h1>
+        <div class="stuff">
+            <span>八月 24, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>在上一篇java整型的溢出问题的文章中涉及到了原码，反码，补码的知识，这篇文章就来讲讲这些东西。<br>原文出处：<a href="http://www.cnblogs.com/zhangziqiu/" target="_blank" rel="noopener">http://www.cnblogs.com/zhangziqiu/</a>   </p>
+<h2 id="一-机器数和真值"><a href="#一-机器数和真值" class="headerlink" title="一.机器数和真值"></a>一.机器数和真值</h2><p>在学习原码，反码和补码之前，需要先了解机器数和真值的概念。 </p>
+<a id="more"></a> 
+<h3 id="1、机器数"><a href="#1、机器数" class="headerlink" title="1、机器数"></a>1、机器数</h3><p>一个数在计算机中的二进制表示形式，叫做这个数的机器数。机器数是带符号的，在计算机中用一个数的最高位存放符号，整数位0，负数位1.  </p>
+<p>比如，十进制中的数 +3，计算机字长为8位，转换成二进制就是00000011。如果是 -3，就是10000011。</p>
+<p>那么，这里的00000011和10000011就是机器数。  </p>
+<h3 id="2-真值"><a href="#2-真值" class="headerlink" title="2.真值"></a>2.真值</h3><p>因为第一位是符号位，所以机器数的形式值就不等于真正的数值。例如上面的有符号数10000011，其最高位1代表负，其真正数值是-3而不是形式值131(10000011转换成十进制为<code>2^7+2^1+1 = 131</code>)。所以，为区别起见，将带符号位的机器数对应的真正数值称为机器数的真值。<br>例：0000 0001的真值 = +000 0001 = +1,1000 0001的真值 = -000 0001= -1。  </p>
+<h2 id="二-原码，反码，补码的基础概念和计算方法"><a href="#二-原码，反码，补码的基础概念和计算方法" class="headerlink" title="二.原码，反码，补码的基础概念和计算方法"></a>二.原码，反码，补码的基础概念和计算方法</h2><p>在探求为何机器要使用补码之前，让我们先了解原码，反码和补码的概念。对于一个数，计算机要使用一定的编码方式进行存储。原码，反码，补码是机器存储一个具体数字的编码方式。  </p>
+<h3 id="1-原码"><a href="#1-原码" class="headerlink" title="1.原码"></a>1.原码</h3><p>原码就是符号位加上真值的绝对值，即用第一位表示符号位，其余位表示值。比如如果是8位二进制：  </p>
+<blockquote>
+<p>[+1]<sub>原</sub> = 0000 0001<br>[-1]<sub>原</sub> = 1000 0001  </p>
+</blockquote>
+<p>又因为第一位是符号位，所以8位二进制数的取值范围就是(<strong>原码取值范围</strong>)：  </p>
+<blockquote>
+<p>[1111 1111,0111 1111]  </p>
+</blockquote>
+<p>即</p>
+<blockquote>
+<p>[-127,127]  </p>
+</blockquote>
+<p>原码是人脑最容易理解和计算的表示方式。  </p>
+<h3 id="2-反码"><a href="#2-反码" class="headerlink" title="2.反码"></a>2.反码</h3><p>反码的表示方法是：  </p>
+<ul>
+<li>正数的反码是其本身</li>
+<li>负数的反码是其原码的基础上，符号位不变，其余各个位取反  </li>
+</ul>
+<blockquote>
+<p>[+1] = [00000001]<sub>原</sub> = [00000001]<sub>反</sub><br>[-1] = [10000001]<sub>原</sub> = [11111110]<sub>反</sub>  </p>
+</blockquote>
+<p>可见如果一个反码表示的是负数，人脑无法直观的看出来它的数值。通常要将其转换成原码在计算。  </p>
+<h3 id="3-补码"><a href="#3-补码" class="headerlink" title="3.补码"></a>3.补码</h3><p>补码的表示方式是：  </p>
+<ul>
+<li>整数的补码就是其本身</li>
+<li>负数的补码是在其原码的基础上，符号位不变，其余各位取反，最后+1(即在反码的基础上+1)  </li>
+</ul>
+<blockquote>
+<p>[+1] = [00000001]<sub>原</sub> = [00000001]<sub>反</sub> = [00000001]<sub>补</sub><br>[-1] = [10000001]<sub>原</sub> = [11111110]<sub>反</sub> = [11111111]<sub>补</sub>  </p>
+</blockquote>
+<p>对于负数，补码表示方式也是人脑无法直观看出其数值的。通常也需要转换成原码在计算其数值。  </p>
+<h2 id="三-为何要使用原码，反码和补码"><a href="#三-为何要使用原码，反码和补码" class="headerlink" title="三.为何要使用原码，反码和补码"></a>三.为何要使用原码，反码和补码</h2><p>在开始深入学习之前，我的学习建议是先”死记硬背”上面的原码，反码和补码的表示方式以及计算方法。<br>现在我们知道了计算机可以有三种编码方式表示一个数。对于正数因为三种编码方式的结果都相同：  </p>
+<blockquote>
+<p>[+1] = [00000001]<sub>原</sub> = [00000001]<sub>反</sub> = [00000001]<sub>补</sub>  </p>
+</blockquote>
+<p>所以不过多解释。但是对于负数：  </p>
+<blockquote>
+<p>[-1] = [10000001]<sub>原</sub> = [11111110]<sub>反</sub> = [11111111]<sub>补</sub>  </p>
+</blockquote>
+<p>可见原码，反码和补码是完全不同的。既然原码才是被人脑直接识别并用于计算表示方式，为何还会有反码和补码呢？  </p>
+<p>首先，因为人脑可以知道第一位是符号位，在计算的时候我们会根据符号位，选择对真值区域的加减。(真值概念在本文中最开头)。但是对于计算机，加减乘除已经是最基础的运算，要设计的尽量简单。计算机辨别“符号位”显然会让计算机的基础电路设计变得十分复杂！于是人们想出了将符号位也参与运算的方法。我们知道，根据运算法则减去一个正数等于加上一个负数，即：1-1 = 1+（-1）=0，所以机器可以只有加法而没有减法，这样计算器的设计就更简单了。  </p>
+<p>于是人们开始探索将符号位参与运算，并且只保留加法的方法，首先来看原码：<br>计算十进制的表达式：1-1=0  </p>
+<blockquote>
+<p>1 - 1 = 1 + (-1) = [00000001]<sub>原</sub> + [10000001]<sub>原</sub> = [10000010]<sub>原</sub> = -2  </p>
+</blockquote>
+<p>如果用原码表示，让符号位也参与计算，显然对于减法来说，结果是不正确的。这也就是为何计算机内部不使用原码表示一个数。<br>为了解决原码做减法的问题，出现了反码：<br>计算十进制的表达式：1-1=0  </p>
+<blockquote>
+<p>1-1=1+(-1)=[00000001]<sub>原</sub> + [10000001]<sub>原</sub> = [00000001]<sub>反</sub> + [11111110]<sub>反</sub> = [11111111]<sub>反</sub> = [10000000]<sub>原</sub> = -0  </p>
+</blockquote>
+<p>发现用反码计算减法，结果的真值部分是正确的。而唯一的问题其实就出现在”0”这个特殊的数值上。虽然人们理解上+0和-0是一样的，但是0带符号是没有任何意义的。而且会有[0000 0000]<sub>原</sub>和[1000 0000]<sub>原</sub>两个编码表示0。<br>于是补码的出现，解决了0的符号以及两个编码的问题：  </p>
+<blockquote>
+<p>1-1=1+(-1)=[0000 0001]<sub>原</sub>+[1000 0001]<sub>原</sub>=[0000 0001]<sub>补</sub>+[1111 1111]<sub>补</sub>=[0000 0000]<sub>补</sub>=[0000 0000]<sub>原</sub>  </p>
+</blockquote>
+<p>这样0用[0000 0000]表示，而以前出现问题的-0则不存在了。而且可以用[1000 0000]表示-128:  </p>
+<blockquote>
+<p>(-1) + (-127) = [1000 0001]<sub>原</sub>+[1111 1111]<sub>原</sub>=[1111 1111]<sub>补</sub>+[1000 0001]<sub>补</sub> = [1000 0000]<sub>补</sub>  </p>
+</blockquote>
+<p>-1-127的结果应该是-128，在用补码运算的结果中，[1000 0000]<sub>补</sub>就是-128。<strong>但是注意因为实际上是使用以前的-0的补码来表示-128，所以-128并没有原码和反码表示。</strong><br>使用补码，不仅仅修复了0的符号以及存在两个编码的问题，而且还能够多表示一个最低数，这就是为什么8位二进制，使用原码或反码表示的范围为[-127,+127]，而使用补码表示的范围为[-128,127]。<br><strong>因为机器使用补码，所以对于编程中常用到的32位int类型，可以表示范围是:[-2<sup>31</sup>,2<sup>31</sup>-1]因为第一位表示的是符号位。而使用补码表示时又可以多保存一个最小值。</strong>  </p>
+<h2 id="四-原码，反码，补码-再深入"><a href="#四-原码，反码，补码-再深入" class="headerlink" title="四.原码，反码，补码 再深入"></a>四.原码，反码，补码 再深入</h2><p>计算机巧妙的把符号位参与运算，并且将减法变成了加法，背后蕴含了怎么样的数学原理呢？<br>将钟表想象成是一个1位的12进制数。如果当前时间是6点，我希望将时间设置成4点，需要怎么做呢？我们可以：  </p>
+<ul>
+<li>1.往回拨2个小时：6-2 = 4</li>
+<li>2.往前拨10个小时：（6+10）mod 12 =4</li>
+<li>3.往前拨10+12=22个小时：（6+22）mod 12 = 4</li>
+</ul>
+<p>2,3方法中mod是指取模操作，16 mod 12 = 4即用16除以12后的余数是4。<br>所以钟表往回拨(减法)的结果可以用往前拨(加法)替代！<br>现在的焦点就落在了如何用一个正数来代替一个负数。上面的例子我们能感觉出来一些端倪，发现一些规律。<br>首先介绍一个数学中相关的概念：同余。  </p>
+<h3 id="同余的概念"><a href="#同余的概念" class="headerlink" title="同余的概念"></a>同余的概念</h3><p>两个整数a，b，若它们除以整数m所得的余数相等，则称a，b对于模m同余<br>记作 a ≡ b (mod m)<br>读作 a 与 b 关于模 m 同余。<br>举例说明：  </p>
+<blockquote>
+<p>4 mod 12 = 4<br>16 mod 12 = 4<br>28 mod 12 = 4  </p>
+</blockquote>
+<p>所以4,16,28关于模12同余。</p>
+<h3 id="负数取模"><a href="#负数取模" class="headerlink" title="负数取模"></a>负数取模</h3><p>正数进行mod运算是很简单的，但是负数呢?<br>下面是关于mod运算的数学定义：  </p>
+<blockquote>
+<p><strong>x mod y = x-y⌊x / y⌋, for y≠0</strong>  </p>
+</blockquote>
+<p>上面的公式的意思是：<br>x mod y等于x减去y乘上x与y的商的下界。<br>以-3mod2举例：  </p>
+<blockquote>
+<p>-3 mod 2<br>=-3-2x⌊-3/2⌋<br>=-3-2x⌊-1.5⌋<br>=-3-2x(-2)<br>=-3+4 = 1  </p>
+</blockquote>
+<p>所以：  </p>
+<blockquote>
+<p>(-2) mod 12 =12-2=10<br>(-4) mod 12 =12-4=8<br>(-5) mod 12 =12-5=7  </p>
+</blockquote>
+<h3 id="开始证明"><a href="#开始证明" class="headerlink" title="开始证明"></a>开始证明</h3><p>再回到时钟的问题上：  </p>
+<blockquote>
+<p>回拨2小时 = 前拨10小时<br>回拨4小时 = 前拨8小时<br>回拨5小时= 前拨7小时  </p>
+</blockquote>
+<p>注意，这里发现的规律!  
+结合上面学到的同余的概念。实际上：  </p>
+<blockquote>
+<p>(-2) mod 12 = 10<br>10 mod 12 = 10  </p>
+</blockquote>
+<p>-2与10是同余的。  </p>
+<blockquote>
+<p>(-4) mod 12 =8<br>8 mod 12 =8  </p>
+</blockquote>
+<p>-4与8是同余的。<br>距离成功越来越近了，要实现用正数替代负数，只需要运用同余数的两个定理：<br>反身性：   </p>
+<blockquote>
+<p>a ≡ a(mod m)  </p>
+</blockquote>
+<p>这个定理是很显而易见的。<br>线性运算定理：  </p>
+<blockquote>
+<p>如果a ≡ b(mod m),c ≡ d(mod m)那么：<br>(1)a ± c = b ± d(mod m)<br>(2)a * c = b * d(mod m)  </p>
+</blockquote>
+<p>如果想看这个定理的证明，请看：<a href="http://baike.baidu.com/view/79282.htm" target="_blank" rel="noopener">http://baike.baidu.com/view/79282.htm</a><br>所以：  </p>
+<blockquote>
+<p>7 ≡ 7(mod 12)<br>(-2) ≡ 10(mod 12)<br>7 - 2 ≡ 7 + 10(mod 12)  </p>
+</blockquote>
+<p>现在我们为一个负数，找到了他的正数同余数。但是并不是7-2=7+10，而是7-2≡7+10（mod 12），即计算结果额余数相等。<br>接下来回到二进制的问题上，看一下：2-1=1的问题。  </p>
+<blockquote>
+<p>2-1=2+(-1)=[0000 0010]<sub>原</sub>+[1000 0001]<sub>原</sub>=[0000 0010]<sub>反</sub>+[1111 1110]<sub>反</sub>  </p>
+</blockquote>
+<p>先到这一步，-1的反码表示是1111 1110。如果这里将[1111 1110]认为是原码，则[1111 1110]<sub>原</sub>=-126,这里将符号位移去，即认为是126。<br>发现有如下规律：  </p>
+<blockquote>
+<p>(-1) mod 127 = 126<br>126  mod 127 = 126  </p>
+</blockquote>
+<p>即：  </p>
+<blockquote>
+<p>(-1) ≡ 126(mod 127)<br>2-1 ≡ 2+126(mod 127)  </p>
+</blockquote>
+<p>2-1与2+126的余数结果是相同的！而这个余数，正是我们的期望的计算结果：2-1=1<br>所以说一个数的反码，实际上是这个数对于一个膜的同余数。而这个膜并不是我们的二进制，而是所能表示的最大值!这就和钟表一样，转了一圈后总能找到在可表示范围内的一个正确的数值!  
+而2+126很显然相当于钟表转过了一轮，而因为符号位是参与计算的，正好和溢出事物最高位形成正确的运算结果。<br>既然反码可以将减法变成加法，那么现在计算机使用的补码呢？为什么在反码的基础上加1，还能得到正确的结果？  </p>
+<blockquote>
+<p>2-1=2+(-1)=[0000 0010]<sub>原</sub>+[1000 0001]<sub>原</sub>=[0000 0010]<sub>补</sub>+[1111 1111]<sub>补</sub>  </p>
+</blockquote>
+<p>如果把[1111 1111]当成原码，去除符号位，则：  </p>
+<blockquote>
+<p>[0111 1111]<sub>原</sub> = 127  </p>
+</blockquote>
+<p>其实，在反码的基础上+1，只是相当于增加了膜的值：  </p>
+<blockquote>
+<p>(-1) mod 128 = 127<br>127  mod 128 = 127<br>2-1 ≡ 2+127(mod 128)  </p>
+</blockquote>
+<p>此时相当于每128个刻度转一轮。所以用补码表示的运算结果最小值和最大值应该是[-128,128]<br>但是由于0的特殊情况，没有办法表示128，所以补码的范围是[-128,127]  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

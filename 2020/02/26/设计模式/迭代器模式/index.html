@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>迭代器模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="迭代器模式(Iterator Pattern)是Java和.Net编程环境中非常常用的设计模式。这种模式用于顺序访问集合对象的元素，不需要知道集合对象的底层表示。迭代器模式属于行为型模式。  
+  ,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">迭代器模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">迭代器模式</h1>
+        <div class="stuff">
+            <span>二月 26, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>迭代器模式(Iterator Pattern)是Java和.Net编程环境中非常常用的设计模式。这种模式用于顺序访问集合对象的元素，不需要知道集合对象的底层表示。<br>迭代器模式属于行为型模式。  </p>
+<a id="more"></a>  
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>提供一种方法顺序访问一个聚合对象中各个元素，而又无须暴露该对象的内部表示。<br><strong>主要解决：</strong>不同的方式来遍历整个聚合对象。<br><strong>何时使用：</strong>遍历一个聚合对象。<br><strong>如何解决：</strong>把元素之间游走的责任交给迭代器，而不是聚合对象。<br><strong>关键代码：</strong>定义接口：hasNext，next。<br><strong>应用实例：</strong>JAVA中的iterator。<br><strong>优点：</strong>1、他支持以不同的方式来遍历一个聚合对象。2、迭代器简化了聚合类。3、在同一个聚合上可以有多个遍历。4、在迭代器模式中，增加新的聚合类和迭代器类都很方便，无须修改原有代码。<br><strong>缺点：</strong>由于迭代器模式将存储数据和遍历数据的职责分离，增加新的聚合类需要对应增加新的迭代器类，类的个数成对增加，这个在一定程度上增加了系统的复杂性。<br><strong>使用场景：</strong>1、访问一个聚合对象的内容而无须暴露它的内部表示。2、需要为聚合对象提供多种遍历方式。3、为遍历不同的聚合结构提供一个统一的接口。<br><strong>注意事项：</strong>迭代器模式就是分离了集合对象的遍历行为，抽象出一个迭代器类来负责，这样既可以做到不暴露集合的内部结构，又可让外部代码透明地访问集合内部的数据。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><img src="/blog/img/2020/02/26/迭代器模式UML类图.png"> 
+
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h2><p>Iterator迭代器抽象类  </p>
+<pre><code>public abstract class Iterator {
+    //用于定义得到开始对象        
+    public abstract Object first();
+    //得到下一个对象
+    public abstract Object next();
+    //判断是否到结尾，也就是判断是否还有下一个元素
+    public abstract boolean isDone();//hasNext
+    //得到当前对象
+    public abstract Object currentItem();
+} </code></pre><p>Aggregate聚集抽象类  </p>
+<pre><code>public abstract class Aggregate {
+    //创建迭代器
+    public abstract Iterator createIterator();
+}</code></pre><p>ConcreteIterator具体迭代器类，继承Iterator  </p>
+<pre><code>public class ConcreteIterator extends Iterator{
+    //定义了一个具体聚集对象
+    private ConcreteAggregate aggregate;
+    private int current = 0;
+
+    //初始化时将具体的聚集对象传入
+    public ConcreteIterator(ConcreteAggregate aggregate){
+        this.aggregate=aggregate;
+    }
+
+    //得到聚集的第一个对象
+    @Override
+    public Object first() {
+        return aggregate.getItems().get(0);
+    }
+
+    //得到聚集的下一个对象
+    @Override
+    public Object next() {
+        Object ret = null;
+        current++;
+        if(current &lt; aggregate.count()){
+            ret = aggregate.getItems().get(current);
+        }
+        return ret;
+    }
+
+    //判断当前是否遍历到结尾，到结尾返回true
+    @Override
+    public boolean isDone() {
+        return current&gt;=aggregate.count()?true:false;
+    }
+
+    //返回当前的聚集对象
+    @Override
+    public Object currentItem() {
+        return aggregate.getItems().get(current);
+    }
+}</code></pre><p>ConcreteAggregate具体聚集类 继承Aggregate  </p>
+<pre><code>public class ConcreteAggregate extends Aggregate{
+
+    //声明一个List泛型变量，用于存放聚合对象
+    private List&lt;Object&gt; items = new ArrayList&lt;&gt;();
+
+    @Override
+    public Iterator createIterator() {
+        return new ConcreteIterator(this);
+    }
+
+    //返回聚集总个数
+    public int count(){
+        return items.size();
+    }
+
+    public List&lt;Object&gt; getItems() {
+        return items;
+    }
+
+    public void insert(Object o) {
+        this.items.add(o);
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Client {
+
+    public static void main(String[] args) {
+        ConcreteAggregate aggregate = new ConcreteAggregate();
+        aggregate.insert(&quot;大鸟&quot;);
+        aggregate.insert(&quot;小菜&quot;);
+        aggregate.insert(&quot;行李&quot;);
+        aggregate.insert(&quot;老外&quot;);        
+        aggregate.insert(&quot;公交内部员工&quot;);
+        aggregate.insert(&quot;小偷&quot;);
+        ConcreteIterator iterator = new ConcreteIterator(aggregate);
+        Object item = iterator.first();
+        //从第一个乘客开始
+        while(!iterator.isDone()){
+            //对面前的乘客告知买票
+            System.out.println(iterator.currentItem()+&quot; 请买车票!&quot;);
+            //下一乘客
+            iterator.next();
+        }
+    }
+}</code></pre><p>运行结果  </p>
+<pre><code>大鸟 请买车票!
+小菜 请买车票!
+行李 请买车票!
+老外 请买车票!
+公交内部员工 请买车票!
+小偷 请买车票!</code></pre><p><strong>为什么要用具体的迭代器ConcreteIterator来实现抽象的Iterator呢？而不直接访问ConcreteIterator呢？</strong><br>这里体现了一个迭代器的好处，就是<strong>当你需要对聚集有多种方式遍历时，可以考虑用迭代器模式</strong>，事实上我们不一定要从前向后遍历，也可以从后向前遍历等等，这个时候我们只需要在写一个具体的迭代器类实现抽象的Iterator，再对其部分操作进行修改就行了。  </p>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/iterator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/iterator-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据结构基础之树 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.什么是树？树是n个节点的有限集，有且仅有一个特定的称为根的节点。当n&amp;gt;1时，其余节点可分为m个互不相交的有限集，每一个集合本身又是一个树，并称为根的子树。  
+
+下面的这张图就是一个标准的,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据结构基础之树</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">数据结构基础之树</h1>
+        <div class="stuff">
+            <span>十二月 30, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-什么是树？"><a href="#1-什么是树？" class="headerlink" title="1.什么是树？"></a>1.什么是树？</h2><p><strong>树是n个节点的有限集，有且仅有一个特定的称为根的节点。当n&gt;1时，其余节点可分为m个互不相交的有限集，每一个集合本身又是一个树，并称为根的子树。</strong>  </p>
+<a id="more"></a>
+<p>下面的这张图就是一个标准的树结构。<br><img src="/blog/img/2019/12/30/树图.png"><br><br>上图中，节点1是<strong>根节点(root)</strong>；节点5、6、7、8、9是树的末端，没有”孩子”，被称为<strong>叶子节点(leaf)</strong>。图中虚线部分是根节点1的其中一个<strong>子树</strong>。  
+同时，树的结构从根节点到叶子节点，分为不同的层级。从一个节点的角度来看，上图中，节点4的上一级节点，是节点4的<strong>父节点(parent)</strong>；从节点4衍生出来的节点，是节点4的<strong>孩子节点(child)</strong>；和节点4同级，由同一个父节点衍生出来的节点，是节点4的<strong>兄弟节点(sibling)</strong>。  
+树的最大层级数，被称为树的高度或深度。显然上图这个数的高度是4。</p>
+<h2 id="2-什么是二叉树？"><a href="#2-什么是二叉树？" class="headerlink" title="2.什么是二叉树？"></a>2.什么是二叉树？</h2><p>二叉树（binary tree）是树的一种特殊形式。二叉，顾名思义，这种树的每个节点<strong>最多有2个孩子节点</strong>。注意，这里是最多有两个，也有可能只有1个，或者没有孩子节点。<br>二叉树的结构如图所示。<br><img src="/blog/img/2019/12/31/二叉树.png"><br><br>此外，二叉树还有两种特殊形式，一个叫做<strong>满二叉树</strong>，另一个叫做<strong>完全二叉树</strong>。 </p>
+<h3 id="2-1-什么是满二叉树？"><a href="#2-1-什么是满二叉树？" class="headerlink" title="2.1 什么是满二叉树？"></a>2.1 什么是满二叉树？</h3><p><strong>一个二叉树的所有非叶子节点都存在左右孩子，并且所有叶子节点都在同一层级，那么这个树就是满二叉树。</strong><br><img src="/blog/img/2019/12/31/满二叉树.png"><br><br>简单来说，满二叉树的每一个分支都是满的。  </p>
+<h3 id="2-2-什么是完全二叉树？"><a href="#2-2-什么是完全二叉树？" class="headerlink" title="2.2 什么是完全二叉树？"></a>2.2 什么是完全二叉树？</h3><p><strong>对一个有n个节点的二叉树，按层级顺序编号，则所有节点的编号为从1到n。如果这个树所有节点和同样深度的满二叉树的编号为从1到n的节点位置相同，则这个二叉树为完全二叉树。</strong><br>这个定义还真绕，看看下图就很容易理解了。<br><img src="/blog/img/2019/12/31/完全二叉树.png"><br><br>在上图中，二叉树编号从1到12的12个节点，和前面满二叉树编号从1到12的节点位置完全相对应。因此这个树是完全二叉树。<br>完全二叉树的条件没有满二叉树的条件那么苛刻；满二叉树要求所有分支都是满的；而完全二叉树只需要保证最后一个节点之前的节点都齐全即可。  </p>
+<p><strong>PS:如果还不理解完全二叉树，可以看下这个：</strong><br>①完全二叉树的倒数第二行及之前的行，都与满二叉树相同。</p>
+<p>②倒数第一行右半部分可以是空的，也可以是满的，但不能有单个的出现！</p>
+<p>③倒数第一行左半部分可以是空的，也可以是满的，也可有单个的出现，但有且只能有一个单个，且必须是它父亲的左孩子！<br>附图：<br><img src="/blog/img/2019/12/31/完全二叉树.jpg"><br><br>顺便一提性质：</p>
+<p>1.叶子结点只在最大的两层</p>
+<p>2.度为1的点只有1个或者0个(何为度为1的节点？就是只有1个孩子节点的节点，如上图的节点5)</p>
+<p>3.n0=n/2 =》n为奇，向上取整（n1=0）；n为偶，n1=1；（n为节点总数，n0表示度为0的节点个数，n1表示度为1的节点个数，n2表示度2的节点个数）</p>
+<p>二叉树可以用哪些物理存储结构来表达呢？<br><strong>1、链式存储结构</strong><br><img src="/blog/img/2019/12/31/链式存储结构.png"><br><br><strong>2、数组</strong><br><img src="/blog/img/2019/12/31/数组存储结构.png"><br><br>使用数组存储时，会按照层级顺序把二叉树的节点放到数组中对应的位置上。如果某一个节点的左孩子或右孩子空缺，则数组的相应位置也空出来。</p>
+<p>这样设计的目的是为了可以更方便的在数组中定位二叉树的孩子节点和父节点。  </p>
+<p>假设一个父节点的下标时parent，那么它的左孩子节点下标就是<strong>2xparent+1</strong>；右孩子节点下标就是<strong>2xparent+2</strong>。  </p>
+<p>反过来，假设一个左孩子的节点的下标是leftChild，那么它的父节点下标就是<strong>（leftChild-1）/2</strong>。  </p>
+<p>显然，对于一个稀疏的二叉树来说，用数组表示法是非常浪费空间的。  </p>
+<p>什么样的二叉树最适合用数组表示呢？<br>二叉堆，一种特殊的完全二叉树。</p>
+<h2 id="3-二叉树的应用？"><a href="#3-二叉树的应用？" class="headerlink" title="3.二叉树的应用？"></a>3.二叉树的应用？</h2><p>二叉树包含许多特殊的形式，每一种形式都有自己的作用，但是其最主要的应用还是在于进行<strong>查找操作和维持相对顺序</strong>这两个方面。<br><strong>3.1 查找</strong><br>二叉树的树形结构使它很适合扮演索引的角色。<br>这里我们介绍一种特殊的二叉树；<strong>二叉查找树（Binary search tree）</strong>，这二叉树的主要作用就是进行查找操作。<br>二叉查找树在二叉树的基础上增加了以下几个条件。  </p>
+<ul>
+<li><strong>如果左子树不为空，则左子树上所有节点的值均小于根节点的值</strong>  </li>
+<li><strong>如果右子树不为空，则右子树上所有节点的值均大于根节点的值</strong></li>
+<li><strong>左、右子树也都是二叉查找树</strong> </li>
+</ul>
+<p>下图就是一个二叉查找树：<br><img src="/blog/img/2019/12/31/二叉查找树.png"><br><br>二叉查找树的这些条件有什么用呢？当然是为了查找方便。<br>例如查找值为4的节点，步骤如下。<br>1.访问根节点，发现4&lt;6。<br><img src="/blog/img/2019/12/31/步骤1.png"><br><br>2.访问节点6的左孩子节点3，发现4&gt;3。<br><img src="/blog/img/2019/12/31/步骤2.png"><br><br>3.访问节点3的右孩子节点4，发现4=4，这正是要查找的节点。<br><img src="/blog/img/2019/12/31/步骤3.png"><br><br>对于一个<strong>节点分布相对均匀</strong>的二叉查找树来说，如果节点总数是n，那么搜索节点的时间复杂度就是<strong>O(logn)</strong>，和树的深度是一样的。<br>这种依靠比较大小来逐步查找的方式，和二分法查找算法非常相似。  </p>
+<p><strong>3.2 维持相对顺序</strong><br>这一点仍要从二叉查找树说起。二叉查找树要求左子树小于父节点，右子树大于父节点，正是这样保证了二叉树的有序性。<br>因此二叉查找树还有另外一个名字——<strong>二叉排序树（Binary sort tree）</strong>。  
+新插入的节点，同样要遵循二叉排序树的原则。<br>例如插入新元素5，由于5&lt;6，5&gt;3，5&gt;4，所以节点5最终会插入到节点4的右孩子位置。<br>插入新元素10，由于10&gt;6，10&gt;8，10&gt;9，所以10最终会插入到节点9的有孩子位置。<br><img src="/blog/img/2019/12/31/插入.png"><br><br>这一切看起来很顺利，然而却隐藏着一个致命的问题。什么问题呢？下面请试着在二叉查找树中一次插入9、8、7、6、5、4，看看会怎么样？<br><img src="/blog/img/2019/12/31/坡脚.png"><br><br>变成“坡脚”了，不仅外观看起来变得怪异了，查询节点的时间复杂度也退化成了O（n）。<br>怎么解决这个问题呢？这就涉及二叉树的<strong>自平衡</strong>了。二叉树自平衡的方式有很多种，如红黑树、AVL树、树堆等。这里暂不做详细介绍，后续了解。<br>除二叉查找树以外，<strong>二叉堆</strong>也维持着相对顺序。不过二叉堆的条件要宽松一些，只要求父节点比它的左右孩子都大，后续了解。  </p>
+<h2 id="4-二叉树的遍历？"><a href="#4-二叉树的遍历？" class="headerlink" title="4.二叉树的遍历？"></a>4.二叉树的遍历？</h2><p>很多内容见此文章<a href="/blog/2019/12/31/二叉树的遍历/" target="_blank"> &gt;&gt;二叉树的遍历</a>。  </p>
+<h2 id="5-什么是二叉堆？"><a href="#5-什么是二叉堆？" class="headerlink" title="5.什么是二叉堆？"></a>5.什么是二叉堆？</h2><p>很多内容见此文章<a href="/blog/2020/01/03/二叉堆/" target="_blank"> &gt;&gt;二叉堆</a>。  </p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.csdn.net/weixin_38220948/article/details/86629109" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38220948/article/details/86629109</a><br><a href="https://zhidao.baidu.com/question/525358502688180405.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/525358502688180405.html</a><br><a href="https://www.cnblogs.com/xiaogua918/p/4181561.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaogua918/p/4181561.html</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ResourceBundle类的简单使用 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="ResourceBundle用来存储指定语言环境的资源，应用程序可以根据运行时的语言环境来加载这些资源，从而提供不同语言的展示。  
+测试及验证：下面我们来模拟一个多语言的环境  
+定义四个资源文件,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">ResourceBundle类的简单使用</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">ResourceBundle类的简单使用</h1>
+        <div class="stuff">
+            <span>八月 19, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>ResourceBundle用来存储指定语言环境的资源，应用程序可以根据运行时的语言环境来加载这些资源，从而提供不同语言的展示。  </p>
+<p>测试及验证：<br>下面我们来模拟一个多语言的环境  </p>
+<pre><code>定义四个资源文件：res_en_US.properties、res_zh_CN.properties、res_zh.properties、res.properties
+res_en_US.properties：cancelKey=cancel
+res_zh_CN.properties：cancelKey=\u53D6\u6D88（取消）
+res_zh.properties：cancelKey=\u53D6\u6D88zh（取消zh）
+res.properties：cancelKey=\u53D6\u6D88default（取消default）
+命名规则按照：资源名+_语言_国别.properties，每个资源文件中定义了本地化的信息，那么系统如何取到对应的资源文件呢？</code></pre><p>代码：  </p>
+<a id="more"></a>
+<pre><code>public static void main(String[] args) {
+        /**
+         * 其中new Locale(&quot;zh&quot;, &quot;CN&quot;);这个对象就告诉了程序你的本地化信息，就拿这个来说吧：
+         * 程序首先会去classpath下寻找res_zh_CN.properties
+         * 若不存在，那么会去找res_zh.properties，若还是不存在，则会去寻找res.properties，
+         * 要还是找不到的话，那么就该抛异常了：MissingResourceException
+         */
+        ResourceBundle bundle = ResourceBundle.getBundle(&quot;res&quot;, new Locale(&quot;zh&quot;, &quot;CN&quot;));
+        String cancel = bundle.getString(&quot;cancelKey&quot;);
+        System.out.println(cancel);//取消
+
+        bundle = ResourceBundle.getBundle(&quot;res&quot;, new Locale(&quot;zh&quot;));
+        cancel = bundle.getString(&quot;cancelKey&quot;);
+        System.out.println(cancel);//取消zh
+
+        bundle = ResourceBundle.getBundle(&quot;res&quot;, Locale.US);
+        cancel = bundle.getString(&quot;cancelKey&quot;);
+        System.out.println(cancel);//cancel
+
+        bundle = ResourceBundle.getBundle(&quot;res&quot;, Locale.getDefault());
+        cancel = bundle.getString(&quot;cancelKey&quot;);
+        System.out.println(cancel);//取消
+
+        bundle = ResourceBundle.getBundle(&quot;res&quot;, Locale.GERMAN);
+        cancel = bundle.getString(&quot;cancelKey&quot;);
+        System.out.println(cancel);//取消   why?    
+}</code></pre><p>输出结果：  </p>
+<pre><code>取消
+取消zh
+cancel
+取消
+取消</code></pre><p>这里前四个都在我们的预期范围之内，但是最后一个GERMAN，应该会去使用res.properties这个资源包吧？怎么使用了res_zh_CH.properties？  </p>
+<pre><code>原来ResourceBundle为我们提供了一个fallback（也就是一个备用方案），这个备用方案就是根据当前系统的语言环境来得到的本地化信息。
+所以若是找不到GERMAN的，之后就会去找CHINA了，所以找到了res_zh_CH.properties这个资源包
+这点我也是看了源代码才明白的，下面就贴上一些关键的源代码：
+ResourceBundle baseBundle = null;
+for (Locale targetLocale = locale;targetLocale != null;
+     targetLocale = control.getFallbackLocale(baseName, targetLocale)) {// 这里就是去拿备用方案的
+         // do something 我们暂时不关心
+}
+跟踪control.getFallbackLocale(baseName, targetLocale)看看备用方案到底是什么？
+public Locale getFallbackLocale(String baseName, Locale locale) {
+    if (baseName == null) {
+         throw new NullPointerException();
+    }
+    Locale defaultLocale = Locale.getDefault();
+    return locale.equals(defaultLocale) ? null : defaultLocale;
+}</code></pre><p>除此之外我们还可以将类作为ResourceBundle，使用类，还可以使用除字符串值外的其它类型资源。与属性文件类似，可以创建带有 bundle base名称与语言后缀的一组类。</p>
+<pre><code>在i18n文件夹下创建两个类，分别为：
+import java.util.ListResourceBundle;
+
+public class MyClassBundle extends ListResourceBundle{
+
+    @Override
+    protected Object[][] getContents() {
+        return contents;
+    }
+
+    private Object[][] contents = {  
+            { &quot;price&quot;   , new Double(10.00) },  
+            { &quot;currency&quot;, &quot;EUR&quot; },  
+    };
+
+}
+
+public class MyClassBundle_da extends ListResourceBundle {  
+
+    @Override  
+    protected Object[][] getContents() {  
+        return contents;  
+    }  
+
+    private Object[][] contents = {  
+            { &quot;price&quot;   , new Double(75.00) },  
+            { &quot;currency&quot;, &quot;DKK&quot; },  
+    };  
+
+}</code></pre><p>然后编写一个测试类：</p>
+<pre><code>public class ListResourceBundleTest {
+
+    //将类作为ResourceBundle
+    /**
+     * 也可以使用一组类来获取资源，使用类，还可以使用除字符串值外的其它类型资源。
+     * 与属性文件类似，可以创建带有 bundle base名称与语言后缀的一组类。
+     */
+    public static void main(String[] args) {
+
+        Locale locale = new Locale(&quot;de&quot;, &quot;DE&quot;); //no bundle for German -&gt; default  
+        ResourceBundle bundle = ResourceBundle.getBundle(&quot;i18n.MyClassBundle&quot;, locale);  
+
+        System.out.println(&quot;price   : &quot; + bundle.getObject(&quot;price&quot;));  
+        System.out.println(&quot;currency: &quot; + bundle.getObject(&quot;currency&quot;));  
+
+
+        locale = new Locale(&quot;da&quot;, &quot;DK&quot;);  
+        bundle = ResourceBundle.getBundle(&quot;i18n.MyClassBundle&quot;, locale);  
+
+        System.out.println(&quot;price   : &quot; + bundle.getObject(&quot;price&quot;));  
+        System.out.println(&quot;currency: &quot; + bundle.getObject(&quot;currency&quot;));  
+
+    }
+}</code></pre><p>输出结果：  </p>
+<pre><code>price   : 10.0
+currency: EUR
+price   : 75.0
+currency: DKK</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>策略模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="在策略模式（Strategy Pattern）中，一个类的行为或其算法可以在运行时更改。这种类型的设计模式属于行为型模式。在策略模式中，我们创建表示各种策略的对象和一个行为随着策略对象改变而改变的c,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">策略模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">策略模式</h1>
+        <div class="stuff">
+            <span>九月 09, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>在策略模式（Strategy Pattern）中，一个类的行为或其算法可以在运行时更改。这种类型的设计模式属于行为型模式。<br>在策略模式中，我们创建表示各种策略的对象和一个行为随着策略对象改变而改变的context对象。策略对象改变context对象的执行算法。  </p>
+<a id="more"></a>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>定义一系列的算法把他们一个个的封装起来，并且使他们之间可以互相替换(<strong>策略模式的最大特点是使得算法可以在不影响客户端的情况下发生变化，从而改变不同的功能</strong>)。<br><strong>主要解决：</strong>在多种算法相似的情况下，使用if…else所带来的复杂和难以维护。<br><strong>何时使用：</strong>一个系统有许多许多类，而区分它们的只是它们的直接行为。<br><strong>如何解决：</strong>将这些算法封装成一个一个的类，任意的替换。<br><strong>关键代码：</strong>实现同一个接口。<br><strong>应用实例：</strong> 1、诸葛亮的锦囊妙计，每一个锦囊就是一个策略。2、旅行的出游方式，选择骑自行车、坐汽车，每一种旅行方式都是一个策略。3、JAVA AWT中的LayoutManager。<br><strong>优点：</strong> 1、算法可以自由切换。2、避免使用多重条件判断。3、扩展性好。<br><strong>缺点：</strong>1、策略类会增多。2、所有策略类都需要对外暴露。<br><strong>使用场景：</strong> 1、如果在一个系统里面有许多类，它们之间的区别仅在于它们的行为，那么使用策略模式可以动态地让一个对象在许多行为中选择一种行为。2、一个系统需要动态地在几种算法中选择一种。3、如果一个对象有很多的行为，如果不用恰当的模式，这些行为就只好使用多重的条件选择语句来实现。<br><strong>注意事项：</strong>如果一个系统的策略模式多于四个，就需要考虑使用混合模式，解决策略类膨胀的问题。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><h3 id="2-1-UML类图"><a href="#2-1-UML类图" class="headerlink" title="2.1 UML类图"></a>2.1 UML类图</h3><img src="/blog/img/2019/09/16/1.png">   
+
+<h3 id="2-2-角色组成"><a href="#2-2-角色组成" class="headerlink" title="2.2 角色组成"></a>2.2 角色组成</h3><p>抽象策略角色：策略类，通常由一个接口或抽象类实现。<br>具体策略角色：包装了相关的算法和行为。<br>环境角色：持有一个策略类的引用，最终给客户端调用。</p>
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h2><p>我们将创建一个定义活动的Strategy接口和实现Strategy接口的实体策略类。Context是一个使用了某种策略的类。<br>StrategyPatternDemo，我们的演示类使用Context在它所配置或使用的策略改变时的行为变化。<br><img src="/blog/img/2019/09/16/strategy_pattern_uml_diagram.jpg">   </p>
+<p>1、创建一个接口  </p>
+<pre><code>public interface Strategy {
+    public int doOperation(int num1,int num2);
+}</code></pre><p>2、创建实现接口的实体类  </p>
+<pre><code>class OperationAdd implements Strategy {
+    @Override
+    public int doOperation(int num1,int num2) {
+        return num1+num2;
+    }
+}
+class OperationSubstract implements Strategy {
+    @Override
+    public int doOperation(int num1, int num2) {
+        return num1-num2;
+    }
+}
+class OperationMultiply implements Strategy {
+    @Override
+    public int doOperation(int num1, int num2) {
+        return num1*num2;
+    }
+}</code></pre><p>3、创建context类  </p>
+<pre><code>public class Context {
+    private Strategy strategy;
+    public Context(Strategy strategy){
+        this.strategy=strategy;
+    }
+
+    public int executeStrategy(int num1, int num2){
+        return strategy.doOperation(num1, num2);
+    }
+}</code></pre><p>4、使用Context来查看当它改变策略Strategy时的行为变化  </p>
+<pre><code>public class StrategyPatternDemo {
+    public static void main(String[] args) {
+        Context context = new Context(new OperationAdd());
+        System.out.println(&quot;10 + 5 = &quot; + context.executeStrategy(10, 5));
+
+        context = new Context(new OperationSubstract());      
+        System.out.println(&quot;10 - 5 = &quot; + context.executeStrategy(10, 5));
+
+        context = new Context(new OperationMultiply());    
+        System.out.println(&quot;10 * 5 = &quot; + context.executeStrategy(10, 5));
+    }
+}</code></pre><p>5、运行结果  </p>
+<pre><code>10 + 5 = 15
+10 - 5 = 5
+10 * 5 = 50</code></pre><h2 id="4-策略与简单工厂结合"><a href="#4-策略与简单工厂结合" class="headerlink" title="4.策略与简单工厂结合"></a>4.策略与简单工厂结合</h2><p>修改Context类  </p>
+<pre><code>public class Context {
+    private Strategy strategy;
+    public Context(String type){
+        switch (type) {
+        case &quot;+&quot;:
+            this.strategy=new OperationAdd();
+            break;
+        case &quot;-&quot;:
+            this.strategy=new OperationSubstract();
+            break;
+        case &quot;*&quot;:
+            this.strategy=new OperationMultiply();
+            break;
+        }
+
+    }
+
+    public int executeStrategy(int num1, int num2){
+        return strategy.doOperation(num1, num2);
+    }
+}  </code></pre><p>修改测试类  </p>
+<pre><code>public class StrategyPatternDemo {
+    public static void main(String[] args) {
+        Context context = new Context(&quot;+&quot;);
+        System.out.println(&quot;10 + 5 = &quot; + context.executeStrategy(10, 5));
+
+        context = new Context(&quot;-&quot;);      
+        System.out.println(&quot;10 - 5 = &quot; + context.executeStrategy(10, 5));
+
+        context = new Context(&quot;*&quot;);    
+        System.out.println(&quot;10 * 5 = &quot; + context.executeStrategy(10, 5));
+    }
+}</code></pre><h2 id="5-策略模式与简单工厂的区别"><a href="#5-策略模式与简单工厂的区别" class="headerlink" title="5.策略模式与简单工厂的区别"></a>5.策略模式与简单工厂的区别</h2><p><strong>相似点</strong>：在模式结构上，两者很相似。<br><strong>差异</strong>：  </p>
+<ul>
+<li>用途不一样<br>工厂是创建型模式，它的作用就是创建对象。<br>策略模式是行为型模式，它的作用是让一个对象在许多行为中选择一种行为。  </li>
+<li>关注点不一样<br>一个关注对象创建。<br>一个关注行为的封装。  </li>
+<li>解决不同的问题<br>工厂模式是创建型的设计模式，它接受指令，创建出符合要求的实例；它主要解决的是资源的统一分发，将对象的创建完全独立出来，让对象的创建和具体的使用客户无关。主要应用在多数据库选择，类库文件加载等。<br>策略模式是为了解决策略的切换与扩展，更简洁的说是定义策略族，分别封装起来，让他们之间可以相互替换，策略模式让策略的变化独立于使用策略的客户。  </li>
+<li>工厂相当于黑盒子，策略相当于白盒子。 </li>
+</ul>
+<h2 id="6-举例说明"><a href="#6-举例说明" class="headerlink" title="6.举例说明"></a>6.举例说明</h2><ul>
+<li>工厂模式<br>有一天你决定去吃培根披萨，首先得选择店铺，A店和B店都有培根披萨；<br>你点了A店的培根披萨，过了二十分钟，你的披萨就来了就可以吃到了。但这个披萨是怎么做的，到底面粉放了多少，培根放了多少，佐料放了多少，有多少道工序，你是不需要管的，你需要的是一个美味培根披萨。</li>
+<li>策略模式<br>在披萨店，你要一个培根披萨，老板说有标准的pizza，也可以自己去做。原料有培根、面粉、佐料。工序有1、2、3工序，你自己去做吧。然后你就需要自己去做，到底放多少培根，放多少面粉，放多少佐料，这都你自己来决定，工序1、2、3，你是怎么实现的，都你自己决定。最后你得到了披萨。</li>
+</ul>
+<h2 id="7-参考文章"><a href="#7-参考文章" class="headerlink" title="7.参考文章"></a>7.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/strategy-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/strategy-pattern.html</a><br><a href="https://www.cnblogs.com/chenwolong/archive/2018/01/09/clms.html" target="_blank" rel="noopener">https://www.cnblogs.com/chenwolong/archive/2018/01/09/clms.html</a><br><a href="https://baike.baidu.com/item/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/646307?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/646307?fr=aladdin</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

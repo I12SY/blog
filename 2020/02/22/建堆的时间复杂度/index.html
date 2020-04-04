@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>为什么建堆的时间复杂度是O(n)? - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="我们通过画图来理解，来推算建堆的时间复杂度。  
+  
+构件二叉堆，也就是把一个无序的完全二叉树调整为二叉堆，本质就是让所有非叶子节点依次“下沉”。详情见二叉堆中的构建二叉堆小节，这里就不做过多讲述,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">为什么建堆的时间复杂度是O(n)?</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">为什么建堆的时间复杂度是O(n)?</h1>
+        <div class="stuff">
+            <span>二月 22, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>我们通过画图来理解，来推算建堆的时间复杂度。  </p>
+<a id="more"></a>  
+<p>构件二叉堆，也就是把一个无序的完全二叉树调整为二叉堆，本质就是让所有非叶子节点依次“下沉”。详情见<a href="/blog/2020/01/03/二叉堆/" target="_blank">二叉堆</a>中的构建二叉堆小节，这里就不做过多讲述了。  </p>
+<p>现如下有一颗深度为4的树:<br><img src="/blog/img/2020/02/22/二叉堆.png"><br>  </p>
+<p>我们首先从最后一个非叶子节点开始作比较，也就是倒数第二层最右边的节点开始。这一层的节点都要执行子节点的比较然后交换(如果顺序是对的就不用交换了)。倒数第三层呢？则会选择其子节点进行比较和交换，如果没交换就可以不用再执行下去了。如果交换了，那么又要选择一支子树进行比较和交换等等。我们现在来推导一下比较次数：  </p>
+<p>倒数第2层(也就是第3层)：有2<sup>(3-1)=2</sup>=4个节点(其中3表示当前层数)，需要比较2<sup>(3-1)=2</sup>x(4-3)=4(该节点下的子树深度=树高-当前层数)次。<br>倒数第3层(也就是第2层)：有2<sup>(2-1)=1</sup>=2个节点，需要比较2<sup>(2-1)=1</sup>x(4-2)=4次。<br>倒数第4层(也就是第1层)：有2<sup>(1-1)=0</sup>=1个节点，需要比较2<sup>(1-1)=0</sup>x(4-1)=3次。  </p>
+<p>那么现在假设树高h，i表示当前层数，那么每一层的时间计算为S=2<sup>(i-1)</sup>x(h-i)。2<sup>(i-1)</sup> 表示该层上有多少个元素(跟堆的重建过程不一样的是，这里对每一层的元素都要进行交换的操作。但是对于堆的重建，只需要选择一个分支进行比较)，( h - i) 表示子树上要比较的次数，如果在最差的条件下，就是比较次数后还要交换；因为这个是常数，所以提出来后可以忽略。<br>所以：<br>S = 2<sup>(h-2)</sup>x1 + 2<sup>(h-3)</sup>x2+…..+2<sup>0</sup>x(h-1) ① ===&gt; （因为叶子层不用交换，所以i从 h-1 开始到 1；（h-2）怎么来的？因为最后一个非叶子节点在h-1层，而h-1层的节点个数为2<sup>(h-1-1)</sup>）  
+通过观察公式可知，该求和公式为等差数列和等比数列的乘积，因此用错位想减发求解，给公式左右两侧同时乘以2，可知：<br>2S =  2<sup>(h-1)</sup>x1 + 2<sup>(h-2)</sup>x2+…..+2<sup>1</sup>x(h-1)②<br>②式-①式得：<br>S = 2<sup>(h-1)</sup> + 2<sup>(h-2)</sup> + 2^<sup>(h-3)</sup> ….. + 2 - (h-1)<br>除最后一项外，就是一个等比数列了，直接用求和公式：<br><img src="/blog/img/2020/02/21/等比数列求和.jpg"><br><br>得到结果：<br>S = 2<sup>h</sup>-2-（h-1）=  2<sup>h</sup>-h-1；因为具有n个元素的平衡二叉树，树高为㏒n，所以把h=logn带入式子中可以得出结果：<br>S = n - logn -1，所以时间复杂度为：O(n)（堆的初始化过程）  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据结构基础之数组 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.什么是数组？
+数组对应的英文是array，是由有限个相同类型的变量所组成的有序集合，数组中的每一个变量被称为元素。数组是最为简单、最为常用的数据结构。它的物理存储方式是顺序存储。访问方式是随机访,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据结构基础之数组</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">数据结构基础之数组</h1>
+        <div class="stuff">
+            <span>十二月 26, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-什么是数组？"><a href="#1-什么是数组？" class="headerlink" title="1.什么是数组？"></a>1.什么是数组？</h2><blockquote>
+<p>数组对应的英文是array，是由有限个相同类型的变量所组成的有序集合，数组中的每一个变量被称为元素。数组是最为简单、最为常用的数据结构。它的物理存储方式是顺序存储。访问方式是随机访问。利用数组下标查找数组元素的时间复杂度是O(1)，中间插入、删除数组元素的时间复杂度是O(n)。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="2-数组在内存中的顺序存储，具体是什么样子呢？"><a href="#2-数组在内存中的顺序存储，具体是什么样子呢？" class="headerlink" title="2.数组在内存中的顺序存储，具体是什么样子呢？"></a>2.数组在内存中的顺序存储，具体是什么样子呢？</h2><blockquote>
+<p>内存是由一个个连续的内存单元组成的，每一个内存单元都有自己的地址。在这些内存单元中，有些被其他数据占用了，有些是空闲的。<br>数组中的每一个元素，都存储在小小的内存单元中，并且元素之间紧密排列既不能打乱元素的存储顺序，也不能跳过某个存储单元进行存储。  </p>
+</blockquote>
+<p><img src="/blog/img/2019/12/14/内存单元存储数组数据示意图.png"><br><br>在上图中，橙色的格子代表空闲中的存储单元，灰色的格子代表已占用的存储单元，而红色的连续格子代表数组在内存中的位置。<br>不同类型的数组，每个元素所占的字节个数也不同，本图只是一个简单的示意图。  </p>
+<h2 id="3-数组的基本操作"><a href="#3-数组的基本操作" class="headerlink" title="3.数组的基本操作"></a>3.数组的基本操作</h2><p><strong>1).读取元素</strong></p>
+<pre><code>int[] array = new int[]{3,1,2,5,4,9,7,2};
+//输出数组中下标为3的元素
+System.out.println(array[3]);     </code></pre><p><strong>2).更新元素</strong>    </p>
+<pre><code>int[] array = new int[]{3,1,2,5,4,9,7,2};
+//给数组下标为5的元素赋值
+array[5] = 10;
+//输出数组中下标为5的元素
+System.out.println(array[5]);</code></pre><p><strong>3).插入元素（存在尾部插入、中间插入、超范围插入三种情况）</strong></p>
+<pre><code>public class Test {
+
+    private int[] array;
+    //数组实际元素的数量
+    private int size;
+
+    public Test(int capacity){
+        this.array = new int[capacity];
+        this.size=0;
+    }
+
+    /**
+     * 数组插入元素
+     * @param element 插入元素
+     * @param index 插入位置
+     */
+    public void insert(int element,int index)throws Exception{
+        if(index&lt;0 || index&gt;size){
+            throw new IndexOutOfBoundsException(&quot;超出数组实际元素范围&quot;);
+        }
+        //如果实际元素达到数组容量上限，则对数组进行扩容
+        if(size&gt;=array.length){
+            resize();
+        }
+
+        //从右向左，将元素逐个向右挪1位
+        for(int i=size-1;i&gt;=index;i--){        
+            array[i+1] = array[i];
+        }
+        //腾出的位置放入新元素
+        array[index]=element;
+        size++;
+    }
+
+    /**
+     * 输出数组
+     */
+    public void output(){
+        for (int i = 0; i &lt; array.length; i++) {
+            System.out.print(array[i]+&quot; &quot;);
+        }
+        System.out.println();
+    }
+
+    /**
+     * 数组扩容
+     */
+    public void resize(){
+        int[] arrayNew = new int[this.array.length*2];
+        //从旧数组复制到新数组
+        System.arraycopy(array, 0, arrayNew, 0, array.length);
+        array = arrayNew;
+    }
+
+    public static void main(String[] args)throws Exception {
+        Test t = new Test(4);
+        t.insert(3, 0);
+        t.insert(7, 1);
+        t.insert(9, 2);
+        t.insert(5, 3);
+        t.output();
+        t.insert(6, 1);
+        t.output();
+    }
+}</code></pre><p><strong>4).删除元素</strong></p>
+<pre><code>/**
+ * 数组删除元素
+ * @param index 删除的位置
+ * @return
+ * @throws Exception
+ */
+public int delete(int index)throws Exception{
+    //访问数组下标是否有超出范围
+    if(index &lt;0 || index &gt;= size){
+        throw new IndexOutOfBoundsException(&quot;超出数组实际元素范围&quot;);
+    }
+    int deleteElement = array[index];
+    //从左向右循环，将元素逐个向左挪1位
+    for(int i=index;i&lt;size-1;i++){
+        array[i]=array[i+1];
+    }
+    array[size-1]=0;
+    size--;
+    return deleteElement;
+}</code></pre><h2 id="4-数组的优势劣势"><a href="#4-数组的优势劣势" class="headerlink" title="4.数组的优势劣势"></a>4.数组的优势劣势</h2><blockquote>
+<p>数组拥有非常高效的随机访问能力，只要给出下标，就可以用常量时间找到对应元素。有一种高效查找元素的算法叫做二分法查找，就是利用了数组的这个优势。<br>至于数组的劣势，体现在插入和删除元素方面。由于数组元素连续紧密的存储在内存中，插入、删除都会导致大量元素被迫移动，影响效率。<br>总的来说，数组所适合的是<strong>读操作多、写操作少</strong>的场景，而链表恰恰与此相反。</p>
+</blockquote>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

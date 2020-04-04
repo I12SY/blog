@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>排序算法之冒泡排序 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="冒泡排序的英文名是bubble sort，它是一种基础的交换排序。  
+大家都喝过汽水，汽水中常常有许多小小的气泡哗啦哗啦飘到上面来。这是因为组成小气泡的二氧化碳比水轻，所以小气泡可以一点一点的向上,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">排序算法之冒泡排序</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">排序算法之冒泡排序</h1>
+        <div class="stuff">
+            <span>一月 08, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>冒泡排序的英文名是<strong>bubble sort</strong>，它是一种基础的<strong>交换排序</strong>。  
+大家都喝过汽水，汽水中常常有许多小小的气泡哗啦哗啦飘到上面来。这是因为组成小气泡的二氧化碳比水轻，所以小气泡可以一点一点的向上浮动。<br>冒泡排序之所以叫冒泡排序，正是因为这种排序算法的每一个元素都可以向小气泡一样，根据自身大小，一点一点的向着数组的一侧移动。<br>按照冒泡排序的思想，我们要<strong>把相邻的元素两两比较，当一个元素大于右侧相邻元素时，交换他们的位置；当一个元素小于或等于右侧相邻元素时，位置不变。</strong></p>
+<a id="more"></a>
+<p>例如有一个由8个数字组成的无序数列{5,8,6,3,9,2,1,7}，希望按从小到大的顺序对其排序。<br>详细步骤如下：<br><img src="/blog/img/2020/01/08/冒泡排序1.png"><br><br>这样一来，元素9最为最大的元素，就像汽水一样”漂”到了最右侧。当然这只是第一轮排序结束了。数列最右侧元素9的位置可以认为是一个有序区域，有序区域目前只有1个元素。  </p>
+<p>接下来我们进行第2轮排序。<br><img src="/blog/img/2020/01/08/冒泡排序2.png"><br><br>后续的交换细节，不详细描述了，第3轮到第7轮的状态如下。<br><img src="/blog/img/2020/01/08/冒泡排序3.png"><br><br>至此为止，所有元素都是有序的了，这就是冒泡排序的整体思路。<br>冒泡排序是一种<strong>稳定排序</strong>，值相等的元素并不会打乱原本的顺序。由于该排序算法的每一轮都要遍历所有元素，总共遍历(元素数量-1)轮，所以平均时间复杂度是O(n<sup>2</sup>)。  </p>
+<p><strong>冒泡排序第1版</strong>代码示例如下：  </p>
+<pre><code>public class BubbleSort {
+
+    public static void sort(int[] arr){
+        for (int i = 0; i &lt; arr.length-1; i++) {
+            for (int j = 0; j &lt; arr.length-i-1; j++) {
+                int temp = 0;
+                if(arr[j]&gt;arr[j+1]){
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{5,8,6,3,9,2,1,7};
+        sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+}</code></pre><p>代码非常简单，使用双循环进行排序。外循环控制所有的回合，内部循环实现每一轮的冒泡处理，先进行元素比较，在进行元素交换。  </p>
+<p><strong>冒泡排序的优化</strong>  </p>
+<p><img src="/blog/img/2020/01/08/冒泡排序优化1.png"><br><br>从上图可以看出，很明显经过第6轮排序后，整个数列已经是有序的了。可是排序算法仍然兢兢业业地继续执行了第7轮排序。<br>在这种情况下，如果能判断出数列已经有序，并做出标记，那么剩下的几轮排序就不必执行了，可以提前结束工作。  </p>
+<p><strong>冒泡排序第2版</strong>代码示例如下：  </p>
+<pre><code>public static void sort(int[] arr){
+    for (int i = 0; i &lt; arr.length-1; i++) {
+        //有序标记，每一轮初始值都是true
+        boolean isSorted = true;
+        for (int j = 0; j &lt; arr.length-i-1; j++) {
+            int temp = 0;
+            if(arr[j]&gt;arr[j+1]){
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+                //如果有值交换，所以不是有序的，标记为false
+                isSorted = false;
+            }
+        }
+        if(isSorted){
+            break;
+        }
+    }
+}</code></pre><p><strong>这只是冒泡排序的优化的第一步，我们还可以进一步来提升它的性能。</strong><br>为了说明这个问题，这次以一个新的数列为例。<br><img src="/blog/img/2020/01/08/冒泡排序优化2.png"><br><br>这个数列的特点是前半部分元素（3、4、2、1）无序，后半部分元素（5、6、7、8）按升序排列，并且后半部分元素中的最小值也大于前半部分元素的最大值。<br>下面按照冒泡排序的思路来进行排序，看一看具体效果。<br><strong>第1轮</strong><br><img src="/blog/img/2020/01/08/冒泡排序优化3.png"><br><br>元素4和5比较，发现4小于5，所以位置不变。<br>…..<br>元素7和8比较，发现7小于8，所以位置不变。<br>第1轮结束，数列有序区包含1个元素。<br><img src="/blog/img/2020/01/08/冒泡排序优化4.png"><br><br><strong>第2轮</strong><br>元素3和2比较，发现3大于2，所以3和2交换。<br><img src="/blog/img/2020/01/08/冒泡排序优化5.png"><br><br>元素3和4比较，发现3小于4，所以位置不变。<br>……<br>元素6和7比较，发现6小于7，所以位置不变。<br>第2轮结束，数列的有序区包含2个元素。<br><img src="/blog/img/2020/01/08/冒泡排序优化6.png"><br><br>到这里你就会发现，其实右面的许多元素已经是有序的了，可是每一轮还是白白地比较了许多次。<br><strong>这个问题的关键点在于对数列有序区的界定。</strong><br>按照现有的逻辑，有序区的长度和排序的轮数是相等的。例如第1轮排序过后的有序区长度1，第2轮排序过后的有序区长度是2…..<br>实际上，数列真正的有序区可能会大于这个长度，如上述例子中在第2轮排序时，后面5个元素实际上都已经属于排序区了。后面很多元素的比较都是没有意义的。<br>那么，该如何避免这种情况呢？我们可以在每一轮排序后，记录下来最后一次元素交换的位置，该位置即为无序数列的边界，再往后就是有序区了。  </p>
+<p><strong>冒泡排序第3版</strong>代码示例如下：  </p>
+<pre><code>public static void sort(int[] arr){
+    //最后一个交换位置元素的下标
+    int pos=0;
+    //无序数列的边界，每次比较只需要比到这里为止
+    int sortBoder = arr.length-1;
+    for (int i = 0; i &lt; arr.length-1; i++) {
+        //有序标记，每一轮初始值都是true
+        boolean isSorted = true;
+        for (int j = 0; j &lt; sortBoder; j++) {
+            int temp = 0;
+            if(arr[j]&gt;arr[j+1]){
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+                //如果有值交换，所以不是有序的，标记为false
+                isSorted = false;
+                //把无序数列的边界更新为最后一次交换元素的位置
+                pos = j;
+            }
+        }
+        if(isSorted){
+            break;
+        }
+        sortBoder = pos;//下一次比较到记录位置即可
+    }
+}    </code></pre><p>其实这仍然不是最优的，还有一种排序算法叫做<strong><a href="/blog/2020/01/08/排序算法之鸡尾酒排序/" target="_blank">鸡尾酒排序</a></strong>，是基于冒泡排序的一种升级排序法。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

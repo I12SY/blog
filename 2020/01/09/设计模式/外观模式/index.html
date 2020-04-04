@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>外观模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="再讲外观模式之前，我们先讲点其他的。炒过股票的朋友应该都清楚，炒股是一门技术活，涉及的专业知识也比较深。一般刚入股市的新手其实都不会炒股票，一般都是跟风选股或者凭感觉选股。自己的钱买了股票后，股票天,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">外观模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">外观模式</h1>
+        <div class="stuff">
+            <span>一月 09, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>再讲外观模式之前，我们先讲点其他的。<br>炒过股票的朋友应该都清楚，炒股是一门技术活，涉及的专业知识也比较深。一般刚入股市的新手其实都不会炒股票，一般都是跟风选股或者凭感觉选股。自己的钱买了股票后，股票天天都在变化，非常关心的很，特别是刚开始，都希望能涨涨涨，尽管不现实，不过赚钱的人还是有的。不过一打开股票软件，一千多只股票，红红绿绿，又是指数大盘，又是个股K线指标，一下又说基本面如何如何重要，一下又说什么有题材可以赚大钱，头晕眼花，迷茫困惑呀。  </p>
+<a id="more"></a>
+<p>特别是新股民在没有足够了解证券知识的情况下去炒股，基本是亏钱的。毕竟要学习的东西实在太多了，不具备这些知识就很难做好。这是有人就会想“要是有懂行的人帮帮忙就好了”。  </p>
+<p>没错，确实有“人”能帮忙，那就是——基金。它就是你的帮手。它将投资者分散的资金集中起来，交给专业的人士进行管理，投资于股票、债券、外汇等领域，而基金投资的收益归持有者投资者所有，管理机构收取一定的托管管理费用。由于基金会买几十支好的股票，不会因为某个股票的大跌而影响收益，尽管每个人的钱不多，但大家放在一起，反而容易达到好的投资效果。我们需要做的只是选对基金与基金管理人！  </p>
+<p>但是自己做股票就不一样了，承担的风险就变大了。因为我们需要自己去了解股票的各种信息，需要预测它的未来，还要买入和卖出，非专业人士是很难做到的。专业的基金经理人相对专业，所以不容易像散户那么盲目。  </p>
+<p>大家想想，投资者买股票，做不好的原因是什么？这和我们软件开发中的什么类似？而投资者去买基金，基金经理人用这些钱做投资，然后大家获利，又体现了什么？  </p>
+<p><strong>耦合性过高</strong>，由于投资者对众多股票的联系太多，反而不利于操作，这在软件中是不是就称为<strong>耦合性过高</strong>。而有了基金以后，变成用户只需要和基金打交道，关心基金的上涨和下跌就够了，而实际上的操作是基金经理人在与上千只股票和其他投资品打交道。  </p>
+<p>回到正题，我之所以讲这么多股票与基金的东西，其实是因为这里提到了一个在面向对象开发当中用的非常多的一个设计模式——外观模式(Facade Pattern)。  </p>
+<p>为了讲清它，我们先试着把股民炒股票的代码写出来。<br><strong>股民炒股代码</strong><br>代码结构图<br><img src="/blog/img/2020/01/09/股民炒股结构图.png"><br>具体股票、国债、房产类  </p>
+<pre><code>//股票1
+public class Stock1 {
+    //卖股票
+    public void sell(){
+        System.out.println(&quot;卖出股票&quot;);
+    }
+    //买股票
+    public void buy(){
+        System.out.println(&quot;买入股票&quot;);
+    }
+}
+//股票2
+class Stock2 {
+    //代码类似股票1，略
+}
+//股票3
+class Stock3 {
+    //代码类似股票1，略
+}
+//国债1
+class NationalDebt1{
+    //代码类似股票1，略
+}
+//房地产1
+class Realty1{
+    //代码类似股票1，略
+}</code></pre><p>客户端调用  </p>
+<pre><code>public static void main(String[] args) {
+    Stock1 gu1 = new Stock1();
+    Stock2 gu2 = new Stock2();
+    Stock3 gu3 = new Stock3();
+    NationalDebt1 nd1 = new NationalDebt1();
+    Realty1 rt1 = new Realty1();
+
+    //用户需要了解股票、国债、房产情况，需要参与这些项目的具体买和卖。耦合性很高。
+    gu1.buy();
+    gu2.buy();
+    gu3.buy();
+    nd1.buy();
+    rt1.buy();
+
+    gu1.sell();
+    gu2.sell();
+    gu3.sell();
+    nd1.sell();
+    rt1.sell();
+}</code></pre><p><strong>那么我们现在增加基金类代码，又该如何做？</strong><br>代码结构图<br><img src="/blog/img/2020/01/09/基金结构图.png"><br>基金类如下  </p>
+<pre><code>//基金类
+public class Fund {
+    Stock1 gu1;
+    Stock2 gu2;
+    Stock3 gu3;
+    NationalDebt1 nd1;
+    Realty1 rt1;
+
+    public Fund(){
+         gu1 = new Stock1();
+         gu2 = new Stock2();
+         gu3 = new Stock3();
+         nd1 = new NationalDebt1();
+         rt1 = new Realty1();
+    }
+
+    public void buyFund(){
+        gu1.buy();
+        gu2.buy();
+        gu3.buy();
+        nd1.buy();
+        rt1.buy();
+    }
+
+    public void sellFund(){
+        gu1.sell();
+        gu2.sell();
+        gu3.sell();
+        nd1.sell();
+        rt1.sell();
+    }
+}</code></pre><p>客户端调用  </p>
+<pre><code>public static void main(String[] args) {
+    Fund jijin = new Fund();
+    //基金购买
+    jijin.buyFund();
+    //基金赎回
+    jijin.sellFund();
+    //此时用户不需要了解股票，甚至可以对股票一无所知，所以买了基金就回家睡觉，一段时间后在赎回就可以大把数钱。
+    //参与股票的具体买卖都由基金公司完成。客户端的代码就非常简洁明了
+}</code></pre><h2 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h2><p>外观模式又称门面模式，隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口。这种类型的设计属于结构型模型，它向现有的系统添加一个接口，来隐藏系统的复杂性。<br>这种模式涉及到一个单一的类，该类提供了客户端请求的简化方法和对现有系统类方法的委托调用。</p>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>为子系统的一组接口提供一个一致的界面，外观模式定义了一个高层结构，这个接口使得这一子系统更加容易使用。<br><strong>主要解决：</strong>降低访问复杂系统的内部子系统时的复杂度，简化客户端与之的接口。<br><strong>何时使用：</strong>1、客户端不需要知道系统内部的复杂联系，整个系统只需要提供一个”接待员”即可。2、定义系统的入口。<br><strong>如何解决：</strong>客户端不与系统耦合，外观类与系统耦合。<br><strong>关键代码：</strong>在客户端和复杂系统之间再加一层，这一层将调用顺序、依赖关系等处理好。<br><strong>应用实例：</strong>1、去医院看病，可能要去挂号、门诊、划价、取药，让患者或患者家属觉得很复杂，如果有提供接待人员，只让接待人员来处理，就很方便。2、JAVA的三层开发模式。<br><strong>优点：</strong>1、减少系统相互依赖。2、提高灵活性 。3、提高了安全性。<br><strong>缺点：</strong>不符合开闭原则，如果需要改东西很麻烦，继承重写都不合适。<br><strong>使用场景：</strong>1、为复杂的模块或子系统提供外界访问的模块。2、子系统相对独立。3、预防低水平人员带来的风险。<br><strong>注意事项：</strong>在层次化结构中，可以使用外观模式定义系统中每一层的入口。 </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><h3 id="2-1-UML类图"><a href="#2-1-UML类图" class="headerlink" title="2.1 UML类图"></a>2.1 UML类图</h3><img src="/blog/img/2020/01/09/外观模式结构图.png">   
+
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h2><p>四个子系统的类  </p>
+<pre><code>public class SubSystemOne {
+    public void methodOne(){
+        System.out.println(&quot;子系统方法一&quot;);
+    }
+}
+class SubSystemTwo {
+    public void methodTwo(){
+        System.out.println(&quot;子系统方法二&quot;);
+    }
+}
+class SubSystemThree {
+    public void methodThree(){
+        System.out.println(&quot;子系统方法三&quot;);
+    }
+}
+class SubSystemFour {
+    public void methodFour(){
+        System.out.println(&quot;子系统方法四&quot;);
+    }
+}</code></pre><p>外观类  </p>
+<pre><code>//外观类，它需要了解所有的子系统的方法和属性，进行组合，以备外界调用
+public class Facade {
+    SubSystemOne one;
+    SubSystemTwo two;
+    SubSystemThree three;
+    SubSystemFour four;
+
+    public Facade(){
+        one = new SubSystemOne();
+        two = new SubSystemTwo();
+        three = new SubSystemThree();
+        four = new SubSystemFour();
+    }
+
+    public void methodA(){
+        System.out.println(&quot;方法组A() ----&quot;);
+        one.methodOne();
+        two.methodTwo();
+        four.methodFour();
+    }
+    public void methodB(){
+        System.out.println(&quot;方法组B() ----&quot;);
+        two.methodTwo();
+        three.methodThree();
+    }
+}</code></pre><p>客户端调用  </p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        Facade facade = new Facade();
+        facade.methodA();
+        facade.methodB();
+        //由于facade的作用，客户端可以根本不知3个子系统类的存在
+    }
+}</code></pre><p>对于面向对象有一定基础的朋友，即使没听过外观模式，也完全有可能在很多时候使用它，外观模式很完美的体现了依赖倒转原则和迪米特法则（最少知道原则）的思想，所以是非常常用的模式之一。  </p>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/facade-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/facade-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

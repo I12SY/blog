@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>工厂方法模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.定义工厂方法模式（FACTORY METHOD），又称工厂模式、多态工厂模式和虚拟构造器模式，通过定义工厂父类负责定义创建对象的公共接口，而子类负责生成具体的对象。  
+
+2.模式简介工厂方法（,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">工厂方法模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">工厂方法模式</h1>
+        <div class="stuff">
+            <span>八月 28, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h2><p>工厂方法模式（FACTORY METHOD），又称工厂模式、多态工厂模式和虚拟构造器模式，通过定义工厂父类负责定义创建对象的公共接口，而子类负责生成具体的对象。  </p>
+<a id="more"></a>
+<h2 id="2-模式简介"><a href="#2-模式简介" class="headerlink" title="2.模式简介"></a>2.模式简介</h2><p>工厂方法（Factory Method）模式的意义是定义一个创建产品对象的工厂接口，将实际创建工作延迟到子类当中。核心工厂类不在负责产品的创建，将核心类成为一个抽象工厂角色，仅负责具体工厂子类必须实现的接口，这样进一步抽象化的好处是使得工厂方法模式可以使系统在不修改具体工厂角色的情况下引进新的产品。  </p>
+<p>工厂方法模式是<a href="/blog/2019/08/28/设计模式/简单工厂模式/">简单工厂模式</a>的衍生，解决了许多简单工厂模式的问题。首先完全实现”开放 - 关闭原则”，实现了可扩展。其次更复杂的结构层次，可以应用于产品结果复杂的场合。  </p>
+<p>工厂方法模式对简单工厂模式进行了抽象。有一个抽象的Factory类(可以是抽象类和接口)，这个类将不再负责具体的产品生产，而是只制定一些规范，具体的生产工作由其子类去完成。在这个模式中，工厂类和产品类往往可以依次对应。即一个抽象工厂对应一个抽象产品，一个具体工厂对应一个具体产品，这个具体的工厂就负责生产对应的产品。  </p>
+<p>工厂方法模式(Factory Method pattern)是最典型的<a href="/blog/2019/08/29/设计模式/模板方法模式/">模板方法模式</a>(Template Method pattern)应用。  </p>
+<h2 id="2-角色结构"><a href="#2-角色结构" class="headerlink" title="2.角色结构"></a>2.角色结构</h2><p>工厂方法模式类图<br><img src="/blog/img/2019/08/29/1.png"><br>抽象工厂(Creator)角色：是工厂方法模式的核心，与应用程序无关。任何在模式中创建的对象的工厂类必须实现这个接口。  </p>
+<p>具体工厂(Concrete Creator)角色：这是实现抽象工厂接口的具体工厂类，包含与应用程序密切相关的逻辑，并且受到应用程序调用以创建产品对象。在上图中有两个这样的角色：BulbCreator与TubeCreator。  </p>
+<p>抽象产品(Product)角色：工厂方法模式所创建的对象的超类型，也就是产品对象的共同父类或共同拥有的接口。在上图中，这个角色是Light。  </p>
+<p>具体产品(Concrete Product)角色：这个角色实现了抽象产品角色所定义的接口。某具体产品有专门的具体工厂创建，他们之间往往一一对应。  </p>
+<h2 id="3-优点"><a href="#3-优点" class="headerlink" title="3.优点"></a>3.优点</h2><ul>
+<li>更符合开-闭原则<br>新增一种产品时，只需要增加相应的具体产品类和相应的工厂子类即可  <blockquote>
+<p>简单工厂模式需要修改工厂类的判断逻辑</p>
+</blockquote>
+</li>
+<li>符合单一职责原则<br>每个具体的工厂类只负责创建相应的产品  <blockquote>
+<p>简单工厂中的工厂类存在复杂的switch逻辑判断  </p>
+</blockquote>
+</li>
+<li>不使用静态工厂方法，可以形成基于继承的等级结构。<blockquote>
+<p>简单工厂模式的工厂类使用静态工厂方法  </p>
+</blockquote>
+</li>
+</ul>
+<p>总结：工厂模式可以说是简单工厂模式的进一步抽象和拓展，在保留了简单工厂的封装优点的同时，让扩展变得简单，让继承变得可行，增加了多态性的体现。  </p>
+<h2 id="4-缺点"><a href="#4-缺点" class="headerlink" title="4.缺点"></a>4.缺点</h2><ul>
+<li>添加新产品时，除了增加新产品类外，还要提供与之对应的具体工厂类，系统类的个数将成对增加，在一定程度上增加了系统的复杂度；同时，有更多的类需要编译和运行，会给系统带来一些额外的开销；</li>
+<li>由于考虑到系统的可扩展性，需要引入抽象层，在客户端代码中均使用抽象层进行定义，增加了系统的抽象性和理解难度，且在实现时可能需要用到DOM、反射等技术，增加了系统的实现难度。</li>
+<li>虽然保证了工厂方法内的对修改关闭，但对于使用工厂方法的类，如果要更换另外一种产品，仍然需要修改实例化的具体工厂类；</li>
+<li>一个具体工厂只能创建一种具体产品</li>
+</ul>
+<h2 id="5-应用场景"><a href="#5-应用场景" class="headerlink" title="5.应用场景"></a>5.应用场景</h2><p>第一种情况是对于某个产品，调用者清楚地知道应该使用哪个具体工厂服务，实例化该具体工厂，生产出具体的产品来。Java Collection中的iterator() 方法即属于这种情况。  </p>
+<p>第二种情况，只是需要一种产品，而不想知道也不需要知道究竟是哪个工厂为生产的，即最终选用哪个具体工厂的决定权在生产者一方，它们根据当前系统的情况来实例化一个具体的工厂返回给使用者，而这个决策过程对于使用者来说是透明的。  </p>
+<h2 id="6-例子"><a href="#6-例子" class="headerlink" title="6.例子"></a>6.例子</h2><p>对<a href="/blog/2019/08/28/设计模式/简单工厂模式/">简单工厂模式</a>的中那个计算器控制台程序例子做一点改造：  </p>
+<p>1.创建运算类(抽象产品类):  </p>
+<pre><code>public abstract class Operation {
+
+    private double number1 = 0;
+    private double number2 = 0;
+
+    public double getNumber1() {
+        return number1;
+    }
+    public void setNumber1(double number1) {
+        this.number1 = number1;
+    }
+    public double getNumber2() {
+        return number2;
+    }
+    public void setNumber2(double number2) {
+        this.number2 = number2;
+    }
+
+    public double getResult() throws Exception{
+        return 0;
+    }
+}</code></pre><p>2.加减乘除类继承运算类(具体产品类)，重写getResult方法：  </p>
+<pre><code>/**
+ *加法类 
+ */
+class OperationAdd extends Operation{
+    @Override
+    public double getResult() throws Exception{
+        return getNumber1()+getNumber2();
+    }
+}
+/**
+ *减法类 
+ */
+class OperationSub extends Operation{
+    @Override
+    public double getResult() throws Exception{
+        return getNumber1()-getNumber2();
+    }
+}
+/**
+ *乘法类 
+ */
+class OperationMul extends Operation{
+    @Override
+    public double getResult() throws Exception{
+        return getNumber1()*getNumber2();
+    }
+}
+/**
+ *除法类 
+ */
+class OperationDiv extends Operation{
+    @Override
+    public double getResult() throws Exception{
+        if(getNumber2()==0){
+            throw new Exception(&quot;除数不能为：0&quot;);
+        }
+        return getNumber1()/getNumber2();
+    }
+}</code></pre><p>3.创建抽象工厂类，定义具体工厂的公共接口：  </p>
+<pre><code>public interface IFactory {
+    Operation createOperation();
+}</code></pre><p>4.创建具体工厂类，定义创建对应具体产品实例的方法：  </p>
+<pre><code>//加法工厂
+class AddFactory implements IFactory{
+    @Override
+    public Operation createOperation() {
+        return new OperationAdd();
+    }
+}
+//减法工厂
+class SubFactory implements IFactory{
+    @Override
+    public Operation createOperation() {
+        return new OperationSub();
+    }
+}
+//乘法工厂
+class MulFactory implements IFactory{
+    @Override
+    public Operation createOperation() {
+        return new OperationMul();
+    }
+}
+//除法工厂
+class DivFactory implements IFactory{
+    @Override
+    public Operation createOperation() {
+        return new OperationDiv();
+    }
+}</code></pre><p>5.客户端测试：  </p>
+<pre><code>public class Test {
+    public static void main(String[] args) throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(&quot;请输入第一个数：&quot;);
+        double number1 = scanner.nextDouble();
+        System.out.println(&quot;请输入第二个数：&quot;);
+        double number2 = scanner.nextDouble();
+        IFactory factory = new AddFactory();//创建一个加法工厂
+        Operation oper = factory.createOperation();
+        oper.setNumber1(number1);
+        oper.setNumber2(number2);
+        double result = oper.getResult();
+        System.out.println(&quot;运算结果：&quot;+result);
+        scanner.close();
+    }
+}</code></pre><h2 id="7-参考文章"><a href="#7-参考文章" class="headerlink" title="7.参考文章"></a>7.参考文章</h2><p><a href="https://www.jianshu.com/p/d0c444275827" target="_blank" rel="noopener">https://www.jianshu.com/p/d0c444275827</a><br><a href="https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2361103?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2361103?fr=aladdin</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a><br><br><br><br>PS:可以这么理解简单工厂模式和工厂方法模式：<br>简单工厂模式：就是所有的产品都在一个工厂里面生产，这个工厂里面有多条生产线，我们只要告诉这个工厂我们需要一个产品时，这个工厂就会去找对应的生产线为我们生产产品，我们不需要关心，也不知道工厂是通过哪条生产线为我们生产产品的。然后当我们需要生产一个新的产品的时候，就新增一条生产线用来生产新的产品，在这过程中就有可能就会影响到其他的生产线的工作。  </p>
+<p>工厂方法模式：就是有多个工厂，每个工厂就一条生产线只生产一样产品，当我们需要生产一个产品时，需要我们去找到对应的工厂，告诉他我们需要你的产品。当我们需要生产一个新的产品时，就创建一个新的工厂来生产这个产品，这样也不会影响其他的工厂的工作。缺点就是工厂过多，难以维护。  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

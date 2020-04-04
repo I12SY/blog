@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>寻找全排列的下一个数 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.题目给出一个正整数，找出这个正整数所有数字全排列的下一个数。说通俗一点就是在一个整数所包含数字的全部组合中，找到一个大于且仅大于原数的新整数。然我们来举几个例子。如果输入12345，则返回123,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">寻找全排列的下一个数</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">寻找全排列的下一个数</h1>
+        <div class="stuff">
+            <span>三月 03, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1.题目"></a>1.题目</h2><p>给出一个正整数，找出这个正整数所有数字全排列的下一个数。<br>说通俗一点就是在一个整数所包含数字的全部组合中，找到一个大于且仅大于原数的新整数。然我们来举几个例子。<br>如果输入12345，则返回12354。<br>如果输入12354，则返回12435。<br>如果输入12435，则返回12534。  </p>
+<a id="more"></a>  
+
+<h2 id="2-解题思路"><a href="#2-解题思路" class="headerlink" title="2.解题思路"></a>2.解题思路</h2><p>首先我们可以知道的一点就是，如果是固定的几个数字，应该是在<strong>逆序排列</strong>的情况下最大，在<strong>顺序排列</strong>的情况下最小。<br>举一个例子。<br>给出1、2、3、4、5这几个数字。<br>最大的组合：<strong>54321</strong> 。<br>最小的组合：<strong>12345</strong> 。<br>没错，数字的顺序和逆序，是全排列中的两种极端情况。<br>那么普遍情况下，一个数和它最接近的全排列数存在什么关联呢？  </p>
+<p>例如给出整数12354，它包含的数字的1、2、3、4、5，如何找到这些数字全排列之后仅大于原数的新整数呢？<br>为了和原数接近，我们需要<strong>尽量保持高位不变，低位在最小的范围内变换顺序</strong> 。<br>至于变换顺序的范围大小，取决于当前整数的<strong>逆序区域</strong> 。<br><img src="/blog/img/2020/03/03/全排列1.png"><br><br>如图所示，12354的逆序区域是最后两位，仅看这两位已经是当前的最大组合。如想最接近原数，又比原数大，必须从<strong>倒数第3位</strong>开始改变。<br>怎样改变呢？12354的倒数第3位是3，我们需要从后面的逆序区域找到大于3的最小数字，让其和3的位置进行互换。<br><img src="/blog/img/2020/03/03/全排列2.png"><br><br>互换后的临时结果是12453，倒数第3位已经确定，这个时候最后两位仍然是逆序状态。我们要把最后两位<strong>转变为顺序状态</strong>，以此保证在倒数第3位数值为4的情况下，后两位尽可能的小。<br><img src="/blog/img/2020/03/03/全排列3.png"><br><br>这样一来就得到了想要的结果<strong>12435</strong> 。  </p>
+<p><strong>获得全排列下一个数的3个步骤</strong><br>1.从后向前查看逆序区域，找到逆序区域的前一位，也就是数字置换的边界。<br>2.让逆序区域的前一位和逆序区域中大于它的最小值的数字交换位置。<br>3.把原来的逆序区域转换为顺序状态。  </p>
+<p><strong>代码实现</strong>  </p>
+<pre><code>public class Exercise {
+
+    public static Integer findNearestNumber(int num){
+        //1.将整数按位数拆分
+        int[] numbers = splitNum(num);
+        //2.从后向前找查看逆序区域，找到逆序区域的前一位，也就是数字置换的边界
+        int index = findTansferPoint(numbers);
+        //如果数字置换边界是0，说明整个数组已经逆序，无法得到更大的相同数字组成的整数，返回null
+        if(index == 0){
+            return null;
+        }
+        //3.把逆序区域的前一位和逆序区域中刚刚大于它的数字交换位置  
+        exchangeHead(numbers,index);
+        //4.把原来的逆序区域转为顺序
+        reverse(numbers,index);
+        //5.输出数字
+        return outputNum(numbers);
+    }
+
+    private static Integer outputNum(int[] numbers){
+        String numStr = &quot;&quot;;
+        for (int i = 0; i &lt; numbers.length; i++) {
+            numStr +=numbers[i];
+        }
+        return Integer.valueOf(numStr);
+    }
+
+    private static void reverse(int[] numbers, int index) {
+        for (int i = index,j=numbers.length-1; i&lt;j; i++,j--) {
+            int temp = numbers[i];
+            numbers[i] = numbers[j];
+            numbers[j] = temp;
+        }
+    }
+
+    private static void exchangeHead(int[] numbers, int index) {
+        int head = numbers[index-1];
+        for (int i = numbers.length-1; i &gt; 0 ; i--) {
+            if(head &lt; numbers[i]){
+                numbers[index-1] = numbers[i];
+                numbers[i] = head;
+                break;
+            }
+        }
+    }
+
+    private static int findTansferPoint(int[] numbers) {
+        for (int i = numbers.length-1; i&gt;0; i--) {
+            if(numbers[i]&gt;numbers[i-1]){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private static int[] splitNum(int num){
+        String numStr = String.valueOf(num);
+        int[] numbers = new int[numStr.length()];
+        for (int i = 0; i &lt; numStr.length(); i++) {
+            numbers[i] = numStr.charAt(i)-&apos;0&apos;;
+        }
+        return numbers;
+    }
+
+    public static void main(String[] args) {
+        Integer num = 12345;
+        //打印12345之后的10个全排列整数
+        for (int i = 0; i &lt; 10; i++) {
+            num = findNearestNumber(num);
+            System.out.println(num);
+        }
+    }
+}</code></pre><p>这种解法拥有一个“高大上”的名字：<strong>字典序算法</strong> 。<br>该算法每个个步骤的每一步的时间复杂度都是O(n)，所以整体时间复杂度也是O(n)。  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

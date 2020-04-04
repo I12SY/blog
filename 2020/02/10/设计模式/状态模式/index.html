@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>状态模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="在状态模式(State Pattern)中，类的行为是基于它的状态改变的。这种类型的设计模式属于行为型模式。在状态模式中，我们创表示各种状态的对象和一个行为随着状态对象改变而改变的context对象,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">状态模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">状态模式</h1>
+        <div class="stuff">
+            <span>二月 10, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>在状态模式(State Pattern)中，类的行为是基于它的状态改变的。这种类型的设计模式属于行为型模式。<br>在状态模式中，我们创表示各种状态的对象和一个行为随着状态对象改变而改变的context对象。  </p>
+<a id="more"></a>  
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>允许对象在内部状态发生改变时改变他的行为，对象看起来好像修改了它的类。<br><strong>主要解决：</strong>对象的行为依赖于它的状态(属性)，并且可以根据它的状态改变而改变它的相关行为。<br><strong>何时使用：</strong>代码中包含大量与对象状态有关的条件语句。<br><strong>如何解决：</strong>将各种具体的状态类抽象出来。<br><strong>关键代码：</strong>通常命令模式的接口只有一个方法。而状态模式的接口中有一个或者多个方法。而且，状态模式的实现类的方法，一般返回值，或者是改变实例变量的值。也就是说，状态模式一般和对象的状态有关。实现类的方法有不同的功能，覆盖接口中的方法。状态模式和命令模式一样，也可以用于消除if…else等条件选择语句。<br><strong>应用实例：</strong>1、打篮球的时候运动员可以有正常状态、不正常状态和超常状态。2、曾侯乙编钟中，’钟是抽象接口’，’钟A’等是具体状态，’曾侯乙编钟’是具体环境(Context)。<br><strong>优点：</strong>1、将与特定状态相关的行为局部化，并且将不同状态的行为分割开来。2、将特定的状态相关的行为都放入一个对象中，由于所有与状态相关的代码都存在于某个ConcreteState中，所以通过定义新的子类可以很容易的增加新的状态和转换。说白了，这样做的目的就是为了消除庞大的条件分支语句，状态模式通过把各种状态转移逻辑分布到State的子类之间，来减少相互间的依赖。<br><strong>缺点：</strong>1、状态模式的使用必然会增加系统类和对象的个数。2、状态模式的结构与实现都较为复杂，如果使用不当将导致程序结构和代码的混乱。3、状态模式对”开闭原则”的支持并不太好，对于可以切换状态的状态模式，增加新的状态类需要修改那些负责状态转换的源代码，否则无法切换到新增状态，而且修改某个状态类的行为也需要修改对应类的源代码。<br><strong>使用场景：</strong>1、行为随状态改变而改变的场景。2、条件、分支语句的代替者。<br><strong>注意事项：</strong>在行为受到约束的时候使用状态模式，而且状态不超过5个。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><img src="/blog/img/2020/02/10/状态模式结构图.png">  
+
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h2><p>State类，抽象状态类，定义一个接口以封装与Context的一个特定状态相关的行为。  </p>
+<pre><code>public abstract class State {
+    public abstract void handle(Context context);
+}</code></pre><p>ConcreteSate类，具体状态，每一个子类实现一个与Context的一个状态相关的行为。  </p>
+<pre><code>public class ConcreteStateA extends State{
+
+    @Override
+    public void handle(Context context) {
+        context.setState(new ConcreteStateB());//设置ConcreteStateA的下一个状态是ConcreteStateB
+    }
+
+}
+
+class ConcreteStateB extends State{
+
+    @Override
+    public void handle(Context context) {
+        context.setState(new ConcreteStateA());//设置ConcreteStateB的下一个状态是ConcreteStateA
+    }
+
+}</code></pre><p>Context类，维护一个ConcreteState子类的实例，这个实例定义当前的状态。  </p>
+<pre><code>public class Context {
+
+    private State state;
+
+    public Context(State state){//定义Context的初始状态
+        this.state=state;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+        System.out.println(&quot;当前状态：&quot;+state);
+    }
+
+    public void request(){
+        state.handle(this);//对请求做处理并且指向下一个状态
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Client {
+
+    public static void main(String[] args) {
+        Context c =new Context(new ConcreteStateA());
+
+        //不断请求同时更改状态
+        c.request();
+        c.request();
+        c.request();
+        c.request();
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>当前状态：设计模式.状态模式.ConcreteStateB@15db9742
+当前状态：设计模式.状态模式.ConcreteStateA@6d06d69c
+当前状态：设计模式.状态模式.ConcreteStateB@7852e922
+当前状态：设计模式.状态模式.ConcreteStateA@4e25154f</code></pre><h2 id="4-与策略模式的区别"><a href="#4-与策略模式的区别" class="headerlink" title="4.与策略模式的区别"></a>4.与策略模式的区别</h2><p>在行为类设计模式中，状态模式和<a href="/blog/2019/09/09/设计模式/策略模式/" target="_blank">策略模式</a>是亲兄弟，两者非常相似，两个模式的实现类图基本一致。  </p>
+<p><strong>策略模式：</strong>策略模式的客户端必须对所有的策略类相当了解，明确在当前场景下各种策略的利弊，权衡当前场景下应该使用哪种策略，也就是说策略类对客户端是暴露的。<br><strong>状态模式：</strong>状态模式依赖于其状态的变化时其内部的行为发生变化，将动作委托到代表当前状态的对象，对外表现为类发生了变化。    </p>
+<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/state-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/state-pattern.html</a><br><a href="https://www.cnblogs.com/m7777/p/7723879.html" target="_blank" rel="noopener">https://www.cnblogs.com/m7777/p/7723879.html</a><br><a href="https://www.cnblogs.com/pokid/p/10474340.html" target="_blank" rel="noopener">https://www.cnblogs.com/pokid/p/10474340.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

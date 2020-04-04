@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>建造者模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="建造者模式(Builder Pattern)使用多个简单的对象一步一步构建成一个复杂的对象。这种类型的设计模式属于创建型模式，他提供了一种创建对象的最佳方式。一个Builder类会一步一步构造最终的,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">建造者模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">建造者模式</h1>
+        <div class="stuff">
+            <span>一月 23, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>建造者模式(Builder Pattern)使用多个简单的对象一步一步构建成一个复杂的对象。这种类型的设计模式属于创建型模式，他提供了一种创建对象的最佳方式。<br>一个Builder类会一步一步构造最终的对象。该Builder类是独立于其他对象的。  </p>
+<a id="more"></a>  
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>将一个复杂的结构与其表示相分离，使得同样的构建过程可以创建不同的表示。<br><strong>主要解决：</strong>主要解决在软件系统中，有时候面临着“一个复杂对象”的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这个复杂对象的各个部分经常面临着剧烈的变化，但是将它们组合在一起的算法却相对稳定。<br><strong>何时使用：</strong>一些基本部件不会变，而其组合经常变化的时候。<br><strong>如何解决：</strong>将变与不变分离开。<br><strong>关键代码：</strong>建造者：创建和提供实例，导演(指挥者类)：管理建造出来的实例的依赖关系。<br><strong>应用实例：</strong>1、去肯德基，汉堡、可乐、薯条、炸鸡翅等是不变的，而其组合是经常变化的，生成出所谓的“套餐”。2、JAVA中的StringBuilder。<br><strong>优点：</strong>1、建造者独立，易扩展。2、便于控制细节风险。<br><strong>缺点：</strong>1、产品必须有共同点，范围有限制。2、如内部变化复杂，会有很多的建造类。<br><strong>使用场景：</strong>1、需要生成的对象具有复杂的内部结构。2、需要生成的对象内部属性本身相互依赖。<br><strong>注意事项：</strong>与工厂模式的区别是：建造者模式更加关注与零件装配的顺序。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><img src="/blog/img/2020/01/23/建造者模式结构图.png">  
+
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h2><p>Prodcut类——产品类，由多个部件组成。  </p>
+<pre><code>public class Product {
+    List&lt;String&gt; parts = new ArrayList&lt;&gt;();
+
+    /**
+     * 添加产品部件
+     * @param part
+     */
+    public void add(String part){
+        parts.add(part);
+    }
+
+    /**
+     * 列举所有产品
+     */
+    public void show(){
+        System.out.println(&quot;产品 创建 ----&quot;);
+        for (String part : parts) {
+            System.out.println(part);
+        }
+    }
+}</code></pre><p>Builder类——抽象建造者类，确定产品由两个部件partA和partB组成，并声明一个得到产品建造后结果的方法getResult。  </p>
+<pre><code>public abstract class Builder {
+    public abstract void buildPartA();
+    public abstract void buildPartB();
+    public abstract Product getResult();
+}</code></pre><p>ConcreteBuilder1类——具体建造者类。  </p>
+<pre><code>public class ConcreteBuilder1 extends Builder{
+
+    Product product = new Product();
+
+    @Override
+    public void buildPartA() {
+        product.add(&quot;部件A&quot;);
+    }
+
+    @Override
+    public void buildPartB() {
+        product.add(&quot;部件B&quot;);
+    }
+
+    @Override
+    public Product getResult() {
+        return product;
+    }
+
+}</code></pre><p>ConcreteBuilder2类——具体建造者类。  </p>
+<pre><code>public class ConcreteBuilder2 extends Builder {
+
+    Product product = new Product();
+
+    @Override
+    public void buildPartA() {
+        product.add(&quot;部件X&quot;);
+    }
+
+    @Override
+    public void buildPartB() {
+        product.add(&quot;部件Y&quot;);
+    }
+
+    @Override
+    public Product getResult() {
+        return product;
+    }
+
+}</code></pre><p>Director——指挥者类。  </p>
+<pre><code>public class Director {
+
+    //用来指挥建造过程
+    public void construct(Builder builder){
+        builder.buildPartA();
+        builder.buildPartB();
+    }
+}</code></pre><p>客户端代码，客户不需要知道具体的建造过程。  </p>
+<pre><code>public class Client {
+
+    public static void main(String[] args) {
+        Director director = new Director();
+        Builder b1 = new ConcreteBuilder1();
+        Builder b2 = new ConcreteBuilder2();
+        //指挥者用ConcreteBuilder1的方法来构建产品
+        director.construct(b1);
+        Product p1 = b1.getResult();
+        p1.show();
+        //指挥者用ConcreteBuilder2的方法来构建产品
+        director.construct(b2);
+        Product p2 = b2.getResult();
+        p2.show();
+    }
+}</code></pre><p>输出结果  </p>
+<pre><code>产品 创建 ----
+部件A
+部件B
+产品 创建 ----
+部件X
+部件Y</code></pre><p><strong>PS:</strong>所以说，<strong>建造者模式是在当创建复杂对象的算法应该独立于该对象的组成部分以及它们的装配方法时适用的模式。</strong>  </p>
+<h2 id="4-建造者模式之链式写法-推荐"><a href="#4-建造者模式之链式写法-推荐" class="headerlink" title="4.建造者模式之链式写法(推荐)"></a>4.建造者模式之链式写法(推荐)</h2><p>链式写法是在原型基础上做优化，有些时候Builder的创建部分有默认值，或者不需要的情况下，而产生的不同的product，通过以上方式，就需要修改Director类个Builder类，再或者根据不同的创建顺序，生成不同的结果，也需要修改Director类。Director似乎显得很不稳定和多余。可以通过Builder自身的调用逻辑来生成Product，即链式调用。<br>实体Product类  </p>
+<pre><code>public class Product {
+
+    private String partA;
+    private String partB;
+
+    public Product(Builder builder){
+        this.partA = builder.partA;
+        this.partB = builder.partB;
+    }
+
+    public String getPartA() {
+        return partA;
+    }
+
+    public void setPartA(String partA) {
+        this.partA = partA;
+    }
+
+    public String getPartB() {
+        return partB;
+    }
+
+    public void setPartB(String partB) {
+        this.partB = partB;
+    }
+
+    public static Builder newBuilder(){
+        return new Builder();
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Product [partA=&quot; + partA + &quot;, partB=&quot; + partB + &quot;]&quot;;
+    }
+
+    public static final class Builder{
+        private String partA;
+        private String partB;
+
+        public Builder buildPartA(String partA){
+            this.partA = partA;
+            return this;
+        }
+
+        public Builder buildPartB(String partB){
+            this.partB = partB;
+            return this;
+        }
+
+        public Product build(){
+            return new Product(this);
+        }
+
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Client {
+
+    public static void main(String[] args) {
+        Product product = new Product.Builder()
+                .buildPartA(&quot;部件A&quot;)
+                .buildPartB(&quot;部件B&quot;)
+                .build();
+        System.out.println(product.toString());
+    }
+}</code></pre><p><strong>总结：</strong>  </p>
+<ul>
+<li>Director角色并非多余，能把复杂的Product创建过程对外隐藏，使Builder部件和创建过程分离，各方易于扩展，降低了耦合度。  </li>
+<li>链式写法较多用于<strong>通过链式调用分部组装对象</strong>，本质还是创建一个对象。 </li>
+<li>在组装过程中的<strong>算法是多变的</strong>，每一步的调用次数、调用顺序都可能会影响最终结果。而组件的装配方式是<strong>稳定不变的</strong>,每个调用算法都是独立影响最终变化的。  </li>
+</ul>
+<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/builder-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/builder-pattern.html</a><br><a href="https://www.jianshu.com/p/8481e9094ec5" target="_blank" rel="noopener">https://www.jianshu.com/p/8481e9094ec5</a><br><a href="https://www.jianshu.com/p/8e871becd9cf" target="_blank" rel="noopener">https://www.jianshu.com/p/8e871becd9cf</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

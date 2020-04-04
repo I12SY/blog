@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>排序算法之插入排序 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="插入排序(Insertion sort)是一种简单直观且稳定的排序算法。如果有一个已经有序的数据序列，要求在这个已经排好的数据序列中插入一个数，但要求插入后此数据序列仍然有序，这个时候就要用到一种新,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">排序算法之插入排序</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">排序算法之插入排序</h1>
+        <div class="stuff">
+            <span>二月 12, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>插入排序(Insertion sort)是一种简单直观且稳定的排序算法。如果有一个已经有序的数据序列，要求在这个已经排好的数据序列中插入一个数，但要求插入后此数据序列仍然有序，这个时候就要用到一种新的排序方法————插入排序，算法适用于少量数据的排序，时间复杂度O(n²)。是稳定的排序方法。插入算法要把排序的数组分成两个部分：第一部分包含了这个数组的所有元素，但将最后一个元素除外(让数组多一个空间才有插入的位置)，而第二部分就只包含这一个元素(即待插入元素)。在第一部分排序完成后，再将这个最后元素插入到已排好序的第一部分中。  </p>
+<a id="more"></a>  
+<p>插入排序包含：直接插入排序、折半插入排序（二分插入排序）和链表插入排序。  </p>
+<h2 id="1-直接插入排序"><a href="#1-直接插入排序" class="headerlink" title="1.直接插入排序"></a>1.直接插入排序</h2><p><img src="/blog/img/2020/02/12/直接插入排序.png"><br>  </p>
+<p><strong>代码展示</strong><br><strong>直接插入排序</strong>代码示例如下： </p>
+<pre><code>public static void sort(int[] arr){
+    int j,target;
+    //假定第一个元素被放到了正确的位置上
+    //这样，仅需遍历1 - (n-1)轮
+    for (int i = 1; i &lt; arr.length; i++) {
+        j = i;
+        target = arr[i];
+        while(j&gt;0 &amp;&amp; target&lt;arr[j-1]){
+            arr[j]=arr[j-1];
+            j--;
+        }
+        arr[j]=target;
+    }
+}</code></pre><p>算法分析<br>1.当初始序列为正序时，只需要外循环n-1次，每次进行一次比较。无需移动元素。此时比较次数(C<sub>min</sub>)和移动次数(M<sub>min</sub>)达到最小值。<br>C<sub>min</sub> = n-1;<br>M<sub>min</sub> = 0；<br>此时时间复杂度为O(n)。<br>2.当初始序列为反序时，需要外循环n-1次，每次排序中待插入的元素都要和[0,i-1]中的i个元素进行比较且要将这i个元素后移i次，再加上target=arr[i]与arr[j]=target的两次移动，每趟移动次数为i+2，此时比较次数和移动次数达到最大值。<br>C<sub>max</sub> = 1+2+…+(n-1) = n(n-1)/2=O(n²);<br>M<sub>max</sub> = （1+2）+ （2+2）+…..+（n-1+2）=（n-1）(n+4)/2=O(n²)；<br>3.在直接插入排序中只使用了i，j，tartget这三个辅助元素，与问题规模无关，空间复杂度为O(1)。<br>4.相同元素的相对位置不变，如果两个元素相同，插入元素放在相同元素后面。是一种稳定排序。  </p>
+<h2 id="2-折半插入排序"><a href="#2-折半插入排序" class="headerlink" title="2.折半插入排序"></a>2.折半插入排序</h2><p><strong>原理：</strong>折半插入算法是对直接插入排序算法的改进，排序原理同直接插入排序算法。<br><strong>算法思想：</strong><br>折半排序利用二分法的思想，在一个有序的序列中，找到新元素在该序列中的位置，然后插入。如图1所示，共有n个元素，前i个元素已经是有序序列，现在要将第i个元素插入其中。折半插入排序需要做两步工作：找到待插入元素的位置、插入。<br><img src="/blog/img/2020/02/14/折半插入排序1.png"><br><br>首先要定义两个指针(不是语法里面的指针，是下标的意思)low和high用于寻找a[i]的插入位置，low指向a[0]，high指向a[i-1]，中点mid=(low+high)/2。<br><img src="/blog/img/2020/02/14/折半插入排序2.png"><br><br>如图2所示二分法的思想是，比较a[i]与a[mid]的大小，若a[i]&gt;a[mid]，说明a[i]的位置应该在mid ~ high之间，将区间[low,high]缩短为[mid+1,high]，令指针low=mid+1；若a[i]&lt;=a[mid]，说明a[i]的位置应该在low ~ mid之间，将区间压缩为[low,mid-1]，令指针high=mid-1。每次折半之后，a[i]的位置应该在[low,high]之间。 </p>
+<p>如此循环，low与high渐渐靠近，直到low&gt;high跳出循环，a[i]的位置找到，low即为a[i]应该放置的位置。 </p>
+<p>找到a[i]的位置之后进行插入，先将a[low] ~ a[i-1]这些元素向后平移一个元素的位置，然后将a[i]放到low位置。  </p>
+<p><strong>代码展示</strong><br><strong>折半插入排序</strong>代码示例如下： </p>
+<pre><code>public static void sort(int[] arr){
+    int low,high,mid,temp;
+    for (int i = 1; i &lt; arr.length; i++) {//开始 以a[0]作为有序序列，从a[1]开始找到当前元素a[i]应该放置的位置 
+        low = 0;
+        high = i-1;
+        temp = arr[i];
+        while(low&lt;=high){//二分思想循环寻找a[i]的位置 
+            mid = (low+high)/2;
+            if(arr[mid]&lt;arr[i]){
+                low = mid+1;//low指针增加
+            }else{
+                high = mid-1;//high指针减小 
+            }
+        }
+        for (int j = i; j &gt; low; j--) {//将元素向后平移
+            arr[j] = arr[j-1];
+        }
+        arr[low] = temp;//将元素temp = a[i] 放置到low位置 
+    }
+}</code></pre><p><strong>算法分析：</strong>一个细节：为什么内层的循环while(low&lt;=high){…}结束之后以low作为a[i]应该放置的位置?<br><strong>第一种情况：a[mid] &lt; a[i] &lt;=  a[high]：</strong><br>第N-2步时，mid=(low+high)/2，如果a[i]&gt;a[mid]，low=mid+1，这样就到了第N-1步，low与high重合，high=mid-1，这样就到了第N步，high&lt;low，退出循环，此时位置high就是第N-2步的位置mid，所以此时，a[high]&lt;a[i]&lt;=a[low]，所以low就是a[i]应该放置的位置。<br><img src="/blog/img/2020/02/14/折半插入排序3.png"><br><br><strong>第二种情况：a[low] &lt;=  a[i] &lt;  a[mid]：</strong><br> 第N-2步，mid=(low+high) / 2，如果a[i] &lt;= a[mid]，high = mid-1，这样就到了第N-1步，low与high重合，mid=(low+high)/2=low=high，由于a[i]&gt;a[low]=a[mid]，所以low=mid+1，这样就到了第N步，high&lt;low，退出循环，此时位置low就是第N-2步的位置mid，那么此时，a[high]&lt;a[i]&lt;=a[low]，所以low就是a[i]应该放置的位置。<br><img src="/blog/img/2020/02/14/折半插入排序4.png"><br>  </p>
+<h2 id="3-链表插入排序（单链表）"><a href="#3-链表插入排序（单链表）" class="headerlink" title="3.链表插入排序（单链表）"></a>3.链表插入排序（单链表）</h2><p>顾名思义对链表进行插入排序。<br>1.链表无法像数组一样随机访问，对于每个节点，需从头遍历获取合适位置。<br>2.因为需要调换节点的位置，需要基于节点的前导节点进行操作，因此需要为原始链表创建一个虚拟头节点，左右原始头节点的前导节点。  </p>
+<p><strong>代码展示</strong><br><strong>链表插入排序</strong>代码示例如下： </p>
+<pre><code>//定义三个指针 pre, cur, lat
+//pre    cur    lat
+// h  -&gt;  4  -&gt;  2  -&gt;  5  -&gt;  3  -&gt;  null
+public class ListInsertSort {
+    public static Node sort(Node head){
+        Node h = new Node(Integer.MIN_VALUE);//创建一个虚拟的头节点，作为原始头节点的前导节点，便于后面的操作，该虚拟有节点的值最小
+        h.next=head;
+        Node pre = h;
+        Node cur = head;
+        Node lat;
+        while(cur!=null){
+            lat = cur.next; // 记录下一个要插入排序的值
+            if(lat!=null &amp;&amp; lat.data&lt;cur.data){// 只有 cur.next 比 cur 小才需要向前寻找插入点
+                // 寻找插入点，从 pre 开始遍历 （每次都是头节点 h 开始向后遍历，因为单向链表是无法从后往前遍）
+                while (pre.next != null &amp;&amp; pre.next.data &lt; lat.data) { // 如果当前节点的值小于要插入排序的值
+                    pre = pre.next; // 继续向后移动
+                }
+                // 找到要插入的位置，此时 pre 节点后面的位置就是 lat 要插入的位置
+                // 交换 pre 跟 lat 节点需要一个 temp 节点来临时保存下插入位置 node 后 next
+                Node tmp = pre.next;
+                // 在 pre 节点后面插入
+                pre.next=lat;
+                // 此时 cur 节点还是 pre 所在的节点，所以其 next 要指向插入节点 lat 指向的 next
+                cur.next = lat.next;
+                // 插入lat节点后，把记录的原先插入位置后续的 next 节点传给它
+                lat.next=tmp;
+                // 由于每次都是从前往后找插入位置，但是单向链表是无法从后往前遍历，所以需要每次插入完成后要让 pre 复位
+                pre = h;
+            }else{
+                // 到这直接把 cur 指针指向到下一个
+                cur = lat;
+            }
+        }
+        return h.next;
+    }
+
+    public static void print(Node node){
+        while(node!=null){
+            System.out.print(node.data+&quot; &quot;);
+            node = node.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Node head = new Node(4);
+        head.next = new Node(2);
+        head.next.next = new Node(5);
+        head.next.next.next = new Node(3);
+        ListInsertSort.print(head);
+        head = sort(head);
+        ListInsertSort.print(head);
+    }
+}
+
+class Node{
+    int data;
+    Node next;
+    public Node(int data){
+        this.data=data;
+    }
+}</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://baike.baidu.com/item/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/7214992?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/7214992?fr=aladdin</a><br><a href="https://www.jianshu.com/p/7cf0656e76dd" target="_blank" rel="noopener">https://www.jianshu.com/p/7cf0656e76dd</a><br><a href="https://www.cnblogs.com/sunbines/p/9158757.html" target="_blank" rel="noopener">https://www.cnblogs.com/sunbines/p/9158757.html</a><br><a href="https://www.cnblogs.com/tensory/p/6590799.html" target="_blank" rel="noopener">https://www.cnblogs.com/tensory/p/6590799.html</a><br><a href="https://www.jianshu.com/p/9dc6511be2e6" target="_blank" rel="noopener">https://www.jianshu.com/p/9dc6511be2e6</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

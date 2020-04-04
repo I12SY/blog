@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>桥接模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="桥接(Bridge)模式是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型模式，它是通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。这种模式涉及到一个作为桥接的接,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">桥接模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">桥接模式</h1>
+        <div class="stuff">
+            <span>二月 26, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>桥接(Bridge)模式是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型模式，它是通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。<br>这种模式涉及到一个作为桥接的接口，使得实体类的功能独立于接口实现类，这两种类型的类可被结构化改变而互不影响。  </p>
+<a id="more"></a>  
+<h2 id="1-凭什么你的游戏我不可以玩"><a href="#1-凭什么你的游戏我不可以玩" class="headerlink" title="1.凭什么你的游戏我不可以玩"></a>1.凭什么你的游戏我不可以玩</h2><img src="/blog/img/2020/02/26/凭什么你的游戏我不可以玩1.png">   
+<img src="/blog/img/2020/02/26/凭什么你的游戏我不可以玩2.png">   
+
+<h2 id="2-紧耦合的程序演化"><a href="#2-紧耦合的程序演化" class="headerlink" title="2.紧耦合的程序演化"></a>2.紧耦合的程序演化</h2><p>上面的对话蕴含了两种完全不同的思维方式：手机硬件软件和PC硬件软件。<br>现在我们来看个例子：现在有一个N品牌手机，它有一个小游戏，我要玩游戏，程序如何写？<br>第1步：先写一个次品牌的游戏类<br>第2步：再用客户端调用即可  </p>
+<p>游戏类  </p>
+<pre><code>//N品牌的手机中的游戏
+public class HandsetGame{
+    public void run(){
+        System.out.println(&quot;运行N品牌手机游戏&quot;);
+    }
+}  </code></pre><p>客户端代码  </p>
+<pre><code>HandsetGame game = new HandsetGame();
+game.run();</code></pre><p>很好，现在又有一个M品牌的手机，也有小游戏，客户端也可以调用，如何做？<br>可以知道现在有两个品牌，都有游戏，从面向对象的思想来说，应该有一个父类”手机品牌游戏”，然后让N和M品牌的手机游戏都继承于它。所以基本代码如下：<br>手机游戏类  </p>
+<pre><code>public class HandsetGame{
+    public void run(){}
+}</code></pre><p>M品牌手机游戏和N品牌手机游戏  </p>
+<pre><code>public class HandsetMGame extends HandsetGame{
+    @Override
+    public void run(){
+        System.out.println(&quot;运行M品牌手机游戏&quot;);
+    }
+}
+
+class HandsetNGame extends HandsetGame{
+    @Override
+    public void run(){
+        System.out.println(&quot;运行N品牌手机游戏&quot;);
+    }
+}</code></pre><p>然后，由于手机都需要通讯录功能，于是N品牌和M品牌都增加了通讯录的增删改查功能。又如何处理？<br>这里开始就变得稍微有点麻烦了，那就意味着，父类应该是’手机品牌’，下有’手机品牌M’和’手机品牌N’，每个子类下各有’通讯录’和’游戏’子类。<br>代码结构图如下<br><img src="/blog/img/2020/02/26/手机品牌结构图1.png">  </p>
+<p>手机类  </p>
+<pre><code>public class HandsetBrand {
+    public void run() {}
+}  </code></pre><p>手机品牌N和手机品牌M类  </p>
+<pre><code>//手机品牌M
+class HandsetBrandM extends HandsetBrand{
+
+}
+//手机品牌N
+class HandsetBrandN extends HandsetBrand{
+
+}</code></pre><p>下属各自通讯录类和游戏类  </p>
+<pre><code>//手机品牌M的游戏
+class HandsetBrandMGame extends HandsetBrandM{
+    @Override
+    public void run() {
+        System.out.println(&quot;运行M品牌手机游戏&quot;);
+    }
+}
+//手机品牌N的游戏
+class HandsetBrandNGame extends HandsetBrandN{
+    @Override
+    public void run() {
+        System.out.println(&quot;运行N品牌手机游戏&quot;);
+    }
+}
+//手机品牌M的通讯录
+class HandsetBrandMAddressList extends HandsetBrandM{
+    @Override
+    public void run() {
+        System.out.println(&quot;运行M品牌手机通讯录&quot;);
+    }
+}
+//手机品牌N的通讯录
+class HandsetBrandNAddressList extends HandsetBrandN{
+    @Override
+    public void run() {
+        System.out.println(&quot;运行N品牌手机通讯录&quot;);
+    }
+}</code></pre><p>客户端调用代码  </p>
+<pre><code>public static void main(String[] args) {
+    HandsetBrand ab;
+    ab = new HandsetBrandMAddressList();
+    ab.run();
+
+    ab = new HandsetBrandMGame();
+    ab.run();
+
+    ab = new HandsetBrandNAddressList();
+    ab.run();
+
+    ab = new HandsetBrandNGame();
+    ab.run();
+}</code></pre><p>现在我们需要在每个品牌都增加一个MP3音乐播放功能，怎么做？<br>在每个品牌下面都增加一个子类。<br>其实这两个子类差别并不大，但是由于目前程序限制，现在因为品牌不同，增加功能就必须要这样的。<br>那么现在又来一家新的手机品牌’S’，它也有游戏、通讯录、MP3音乐播放功能，又如何处理？<br>如果在增加’手机品牌S’类和三个下属功能子类。这好像有点麻烦了。<br>如果后续还需要再增加’输入法’功能、’拍照’功能，再增加’L品牌’、’X品牌’那你的类如何写？<br>你可能会想到下面这种方式：<br><img src="/blog/img/2020/02/26/手机品牌结构图2.png"><br>但实际问题还是没有得到解决，要是增加手机功能或是增加品牌都会产生很大的影响。<br>问题出在哪？<br>其实大部分人刚开始学会用面向对象的继承时，感觉它既新颖又功能强大，所以只要可以用，就都用上继承。这就好比是’有了新锤子，所有的东西看上去都成了钉子’。但事实上，很多情况用继承会带来麻烦。比如，<strong>对象的继承关系是在编译时就定义好了，所以无法在运行时改变从父类继承的实现。子类的实现与它的父类有非常紧密的依赖关系，以至于父类实现中的任何变化必然会导致子类发生变化。当你需要复用子类时，如果继承下来的实现不适合解决新的问题，则父类必须被重写或被其他更适合的类替换。这种依赖关系限制了灵活性并最终限制了复用性</strong>。  
+在上面的继承结构中，如果不断的增加新的品牌或新功能，类会越来越多的。<br>其实在面向对象设计中，我们还有一个很重要的设计原则，那就是<strong>合成/聚合复用原则</strong>。即优先使用对象合成/聚合，而不是类继承。  </p>
+<h2 id="3-合成-聚合复用原则"><a href="#3-合成-聚合复用原则" class="headerlink" title="3.合成/聚合复用原则"></a>3.合成/聚合复用原则</h2><p><strong>合成/聚合复用原则(CAPP)</strong>，尽量使用合成/聚合，尽量不要使用类继承。<br>合成(Composition，也有翻译成组合)和聚合(Aggregation)都是关联的特殊种类。<strong>聚合表示一种弱的’拥有’关系，体现的是A对象可以包含B对象，但B对象不是A对象的一部分；合成则是一种强的’拥有’关旭，体现了严格的部分和整体的关系，部分和整体的生命周期一样</strong>。比方说，大雁有两个翅膀，翅膀与大雁是部分和整体的关系，并且它们的生命周期是相同的，于是大雁和翅膀是合成关系。而大雁是群居动物，所以每只大雁都是属于一个雁群，一个雁群可以有多只大雁，所以大雁和雁群是聚合关系。<br><img src="/blog/img/2020/02/26/大雁关系图.png"><br>合成/聚合复用原则的好处是，<strong>优先使用对象的合成/聚合将有助于你保持每个类被封装，并被集中在单个任务上。这样类和类继承层次会保持较小规模，并且不太可能增长为不可控制的庞然大物</strong>。  
+就像刚才的例子，我们要学会用对象的职责，而不是结构来考虑问题。其实答案就在之前我们聊到的手机与PC电脑的差别上。<br>上面的例子中手机是不同的品牌公司，各自做自己的软件，就像我们现在设计的一样，而PC却是硬件厂商做硬件，软件厂商做软件，组合起来才是可以用的机器。<br>我们这个例子中其实是应该有个’手机品牌’抽象类和’手机软件’抽象类，让不同的品牌和功能分别继承于它们，这样要增加新的产品或新的功能都不用影响其他类了。  </p>
+<p>结构图<br><img src="/blog/img/2020/02/26/手机品牌结构图3.png"><br>还有个问题，手机品牌和手机软件之间的关系呢？<br>应该是手机品牌包含有手机软件，但是软件并不是品牌的一部分，所以它们之间是聚合关系。  </p>
+<p>结构图<br><img src="/blog/img/2020/02/26/手机品牌结构图4.png"><br>接下来就是代码实现了。  </p>
+<h2 id="4-松耦合的程序"><a href="#4-松耦合的程序" class="headerlink" title="4.松耦合的程序"></a>4.松耦合的程序</h2><p>手机软件抽象类  </p>
+<pre><code>//手机软件
+public abstract class HandsetSoft {
+    public abstract void run();
+}  </code></pre><p>游戏、通讯录等具体类</p>
+<pre><code>//手机游戏
+class HandsetGame extends HandsetSoft{
+    @Override
+    public void run() {
+        System.out.println(&quot;运行手机游戏&quot;);
+    }
+}
+//手机通讯录
+class HandsetAddressList extends HandsetSoft{
+    @Override
+    public void run() {
+        System.out.println(&quot;运行手机通讯录&quot;);
+    }
+}</code></pre><p>手机品牌类  </p>
+<pre><code>//手机品牌
+public abstract class HandsetBrand {
+    protected HandsetSoft soft;
+
+    //设置手机软件
+    public void setHandsetSoft(HandsetSoft soft){
+        this.soft=soft;
+    }
+
+    //运行
+    public abstract void run();
+}</code></pre><p>品牌N品牌M具体类  </p>
+<pre><code>//手机品牌N
+class HandsetBrandN extends HandsetBrand{
+    @Override
+    public void run() {
+        soft.run();
+    }
+}
+//手机品牌M
+class HandsetBrandM extends HandsetBrand{
+    @Override
+    public void run() {
+        soft.run();
+    }
+}</code></pre><p>客户端调用代码  </p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        HandsetBrand ab;
+        ab = new HandsetBrandN();
+
+        ab.setHandsetSoft(new HandsetGame());
+        ab.run();
+
+        ab.setHandsetSoft(new HandsetAddressList());
+        ab.run();
+
+        ab = new HandsetBrandM();
+
+        ab.setHandsetSoft(new HandsetGame());
+        ab.run();
+
+        ab.setHandsetSoft(new HandsetAddressList());
+        ab.run();
+    }
+}</code></pre><p>现在代码是不感觉好多了。现在如果要增加一个功能，比如MP3音乐播放功能，那么只要增加这个类就好了。不会影响其他任何类。类的个数增加也只是一个。 </p>
+<pre><code>//手机MP3播放
+class HandsetMP3 extends HandsetSoft{
+    @Override
+    public void run() {
+        System.out.println(&quot;运行手机MP3播放&quot;);
+    }
+} </code></pre><p>如果是增加S品牌，只需要增加一个品牌子类就可以了。个数也是一个，不会影响其他类的改动。  </p>
+<pre><code>//手机品牌S
+class HandsetBrandS extends HandsetBrand{
+    @Override
+    public void run() {
+        soft.run();
+    }
+}</code></pre><p>这显然也符合了我们之前的一个设计原则——<strong>开放-封闭原则</strong>。  
+所以说盲目的使用继承当然会造成麻烦，其本质原因是：继承是一种强耦合的结构。父类变，子类就必须要变。所以我们在用继承时，一定要在是’is-a’的关系时在考虑使用，而不是任何时候去使用。<br>之所以要讲这个例子，是为了引申到一个设计原则——桥接模式，刚才的那个结构图中，两个抽象类之间是不是有一条线，就像一座桥。  </p>
+<h2 id="5-桥接模式"><a href="#5-桥接模式" class="headerlink" title="5.桥接模式"></a>5.桥接模式</h2><p><strong>桥接模式(Bridge)</strong>，将抽象部分与它的实现部分分离，使它们都可以独立的变化。<br><strong>什么叫抽象与它的实例分离，这并不是说，让抽象类与其派生类分离，因为这没有任何意义。实现指的是抽象类和它的派生类用来实现自己的对象</strong>。就刚才的例子而言，就像是让’手机’既可以是按照品牌来分类，也可以按照功能来分类。  </p>
+<p>按品牌分类实现结构图<br><img src="/blog/img/2020/02/26/手机品牌结构图1.png">   </p>
+<p>按软件分类实现结构图<br><img src="/blog/img/2020/02/26/手机品牌结构图2.png"> </p>
+<p>由于实现的方式有多种，桥接模式的核心意图就是把这些实现独立出来，让它们各自的变化。这就使得每种实现的变化不会影响其他实现，从而达到应对变化的目的。<br><img src="/blog/img/2020/02/26/手机品牌结构图4.png">   </p>
+<h2 id="6-桥接模式基本代码"><a href="#6-桥接模式基本代码" class="headerlink" title="6.桥接模式基本代码"></a>6.桥接模式基本代码</h2><img src="/blog/img/2020/02/26/桥接模式结构图.png">
+
+<p>Implementor类  </p>
+<pre><code>public abstract class Implementor {
+    public abstract void operation();
+}</code></pre><p>ConcreteImplementorA和ConcreteImplementorB等派生类  </p>
+<pre><code>class ConcreteImplementorA extends Implementor{
+    @Override
+    public void operation() {
+        System.out.println(&quot;具体实现A的方法执行&quot;);
+    }
+} 
+class ConcreteImplementorB extends Implementor{
+    @Override
+    public void operation() {
+        System.out.println(&quot;具体实现B的方法执行&quot;);
+    }
+} </code></pre><p>Abstraction类  </p>
+<pre><code>public class Abstraction {
+    protected Implementor implementor;
+
+    public void setImplementor(Implementor implementor){
+        this.implementor=implementor;
+    }
+
+    public void operation(){
+        implementor.operation();
+    }
+}</code></pre><p>RefinedAbstraction类  </p>
+<pre><code>class RefinedAbstraction extends Abstraction{
+    @Override
+    public void operation() {
+        super.operation();
+    }
+}</code></pre><p>客户端实现  </p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        Abstraction ab = new RefinedAbstraction();
+
+        ab.setImplementor(new ConcreteImplementorA());
+        ab.operation();
+
+        ab.setImplementor(new ConcreteImplementorB());
+        ab.operation();
+    }
+}</code></pre><p>PS:桥接模式所说的’将抽象与它的实现部分分离’，不太好理解，我们可以这么理解就是<strong>实现系统可能有多角度分类，每一种分类都有可能变化，那么就把这种多角度分离出来让他们独立变化，减少它们之间的耦合</strong>。 </p>
+<h2 id="7-其他"><a href="#7-其他" class="headerlink" title="7.其他"></a>7.其他</h2><p><strong>主要解决：</strong>在有多种可能会变化的情况下，用继承会造成类爆炸问题，扩展起来不灵活。<br><strong>何时使用：</strong>实现系统可能有多个角度分类，每一种角度都可能变化。<br><strong>如何解决：</strong>把这种多角度分类分离出来，让它们独立变化，减少它们之间耦合。<br><strong>关键代码：</strong>抽象类依赖实现类。<br><strong>应用实例：</strong>1、猪八戒从天蓬元帅转世投胎到猪，转世投胎的机制将尘世划分为两个等级，即：灵魂和肉体，前者相当于抽象化，后者相当于实现化。生灵通过功能的委派，调用肉体对象的功能，使得生灵可以动态地选择。 2、墙上的开关，可以看到的开关是抽象的，不用管里面具体怎么实现的。<br><strong>优点：</strong>1、抽象和实现的分离。 2、优秀的扩展能力。 3、实现细节对客户透明。<br><strong>缺点：</strong>桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程。<br><strong>使用场景：</strong>1、如果一个系统需要在构件的抽象化角色和具体化角色之间增加更多的灵活性，避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系。 2、对于那些不希望使用继承或因为多层次继承导致系统类的个数急剧增加的系统，桥接模式尤为适用。 3、一个类存在两个独立变化的维度，且这两个维度都需要进行扩展。<br><strong>注意事项：</strong>对于两个独立变化的维度，使用桥接模式再适合不过了。  </p>
+<h2 id="8-参考文章"><a href="#8-参考文章" class="headerlink" title="8.参考文章"></a>8.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/bridge-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/bridge-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

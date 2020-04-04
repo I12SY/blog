@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JAVA面试题整理 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.说说你的项目，用了 SpringCloud 哪些功能？  
+
+基础功能：&amp;emsp;&amp;emsp;服务治理(服务注册与发现:Eureka、consul、zookeeper)&amp;emsp;&amp;emsp;,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">JAVA面试题整理</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">JAVA面试题整理</h1>
+        <div class="stuff">
+            <span>三月 15, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/blog/tags/java/">java</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/blog/tags/面试/">面试</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-说说你的项目，用了-SpringCloud-哪些功能？"><a href="#1-说说你的项目，用了-SpringCloud-哪些功能？" class="headerlink" title="1.说说你的项目，用了 SpringCloud 哪些功能？"></a>1.说说你的项目，用了 SpringCloud 哪些功能？</h2><a id="more"></a>  
+<blockquote>
+<p><strong>基础功能：</strong><br>&emsp;&emsp;服务治理(服务注册与发现:Eureka、consul、zookeeper)<br>&emsp;&emsp;客户端负载均衡（Spring Cloud Ribbon）<br>&emsp;&emsp;服务容错保护(熔断器Spring Cloud Hystrix)<br>&emsp;&emsp;声名式服务调用(Feign实现声明式Rest调用)<br>&emsp;&emsp;API网关服务(Spring Cloud Zuul)<br>&emsp;&emsp;分布式配置中心(Spring Cloud Config)<br><strong>高级功能：</strong><br>&emsp;&emsp;消息总线： Spring  Cloud Bus<br>&emsp;&emsp;消息驱动的微服务： Spring Cloud Stream<br>&emsp;&emsp;分布式服务跟踪： Spring  Cloud Sleuth  </p>
+</blockquote>
+<h2 id="2-谈谈服务治理"><a href="#2-谈谈服务治理" class="headerlink" title="2.谈谈服务治理"></a>2.谈谈服务治理</h2><blockquote>
+<p><a href="https://blog.csdn.net/fly910905/article/details/100023415" target="_blank" rel="noopener">https://blog.csdn.net/fly910905/article/details/100023415</a>  </p>
+</blockquote>
+<h2 id="3-熟悉-Mysql-吗？说说索引"><a href="#3-熟悉-Mysql-吗？说说索引" class="headerlink" title="3.熟悉 Mysql 吗？说说索引"></a>3.熟悉 Mysql 吗？说说索引</h2><details>
+<summary><mark><font color="darkred">点击查看详细内容</font></mark></summary>
+
+<blockquote>
+<p><strong>什么是索引吗？：</strong>索引其实是一种数据结构，能够帮助我们快速的检索数据库中的数据。<br><strong>那么索引具体采用的哪种数据结构呢？</strong><br>&emsp;&emsp;常见的MySQL主要有两种结构：Hash索引和B+ Tree索引，我们使用的是InnoDB引擎，默认的是B+树。<br><strong>既然你提到InnoDB使用的B+ Tree的索引模型，那么你知道为什么采用B+ 树吗？这和Hash索引比较起来有什么优缺点吗？</strong><br>&emsp;&emsp;因为Hash索引底层是哈希表，哈希表是一种以key-value存储数据的结构，所以多个数据在存储关系上是完全没有任何顺序关系的，所以，对于区间查询是无法直接通过索引查询的，就需要全表扫描。所以，哈希索引只适用于等值查询的场景。而B+ Tree是一种多路平衡查询树，所以他的节点是天然有序的（左子节点小于父节点、父节点小于右子节点），所以对于范围查询的时候不需要做全表扫描。<br>&emsp;&emsp;B+ Tree索引和Hash索引区别：哈希索引适合等值查询，但是无法进行范围查询，哈希索引没办法利用索引完成排序，哈希索引不支持多列联合索引的最左匹配规则，如果有大量重复键值得情况下，哈希索引的效率会很低，因为存在哈希碰撞问题。<br><strong>常用的索引有：</strong><br>&emsp;&emsp;<strong>主键索引：</strong>primary key, 是特殊的唯一索引，在一张表中只能定义一个主键索引，主键用于唯一标识一条记录，使用关键字PRIMARY KEY创建，不允许重复，不允许为空。<br>&emsp;&emsp;<strong>唯一索引：</strong>unique，创建索引的列的值唯一，允许为空。<br>&emsp;&emsp;<strong>普通索引：</strong>index，它的唯一任务就是加快对数据的访问速度普通索引允许被索引的数据列包含重复的值，如果能确定某个数据列将只包含彼此间各不相同的值，在为这个数据列创建索引的时候就应该用关键字UNIQUE将它定义为唯一索引。<br>&emsp;&emsp;索引可以覆盖多个数据列，像INDEX（columnA，columnB)索引，就是联合索引，<br>&emsp;&emsp;索引可以极大的提高数据的查询速度，但是会降低插入、删除、更新表的速度，因为在执行这些操作的时候，还要操作索引文件，MySQL不仅要保存数据，还要保存一下索引文件。<br><strong>聚簇索引、覆盖索引</strong><br><strong>刚刚我们聊到B+ Tree ，那你知道B+ Tree的叶子节点都可以存哪些东西吗？</strong><br>&emsp;&emsp;InnoDB的B+ Tree可能存储的是整行数据，也有可能是主键的值。<br><strong>那这两者有什么区别吗？</strong><br>&emsp;&emsp;在 InnoDB 里，索引B+ Tree的叶子节点存储了整行数据的记录，也被称之为聚簇索引。而索引B+ Tree的叶子节点存储相应行数据的聚集索引键（即主键），并不包含行记录的全部数据，被称之为非聚簇索引(辅助索引)，当通过辅助索引来查询数据时，InnoDB存储引擎会遍历辅助索引找到主键，然后再通过主键在聚集索引中找到完整的行记录数据。<br><strong>那么，聚簇索引和非聚簇索引，在查询数据的时候有区别吗？</strong><br>&emsp;&emsp;我：聚簇索引查询会更快？ 面试官：为什么呢？ 我：因为主键索引树的叶子节点直接就是我们要查询的整行数据了。而非主键索引的叶子节点是主键的值，查到主键的值以后，还需要再通过主键的值再进行一次查询。<br><strong>刚刚你提到主键索引查询只会查一次，而非主键索引需要回表查询多次。（后来我才知道，原来这个过程叫做回表）是所有情况都是这样的吗？非主键索引一定会查询多次吗？</strong><br>&emsp;&emsp;我：（额、这个问题我回答的不好，后来我自己查资料才知道，通过覆盖索引也可以只查询一次）<br>&emsp;&emsp;覆盖索引：覆盖索引（covering index）指一个查询语句的执行只用从索引中就能够取得，不必从数据表中读取。也可以称之为实现了索引覆盖。 当一条查询语句符合覆盖索引条件时，MySQL只需要通过索引就可以返回查询所需要的数据，这样避免了查到索引后再返回表操作，减少I/O提高效率。 如，表covering_index_sample中有一个普通索引 idx_key1_key2(key1,key2)。当我们通过SQL语句：select key2 from covering_index_sample where key1 = ‘keytest’;的时候，就可以通过覆盖索引查询，无需回表。<br><strong>联合索引、最左前缀匹配</strong><br><strong>你们在创建索引的时候都会考虑哪些因素呢？</strong><br>&emsp;&emsp;我们一般对于查询概率比较高，经常作为where条件的字段设置索引。<br><strong>那你们有用过联合索引吗？那你们在创建联合索引的时候，需要做联合索引多个字段之间顺序你们是如何选择的呢？</strong><br>&emsp;&emsp;我们把识别度最高的字段放到最前面（where子句中使用最频繁的一列放在最左边）。<br><strong>为什么这么做呢？（这里要考的是最左前缀匹配）</strong><br>&emsp;&emsp;在创建多列索引时，我们根据业务需求，where子句中使用最频繁的一列放在最左边，因为MySQL索引查询会遵循最左前缀匹配的原则，即最左优先，在检索数据时从联合索引的最左边开始匹配。所以当我们创建一个联合索引的时候，如(key1,key2,key3)，相当于创建了（key1）、(key1,key2)和(key1,key2,key3)三个索引，这就是最左匹配原则。<br><strong>索引下推、查询优化</strong><br><strong>你们线上用的MySQL是哪个版本啊呢？（我们用的是5.7）那你知道在MySQL 5.6中，对索引做了哪些优化吗？（有一个比较重要的 ：Index Condition Pushdown Optimization） **  
+&emsp;&emsp;Index Condition Pushdown（索引下推） MySQL 5.6引入了索引下推优化，默认开启，使用SET optimizer_switch = ‘index_condition_pushdown=off’;可以将其关闭。官方文档中给的例子和解释如下： people表中（zipcode，lastname，firstname）构成一个索引<br>&emsp;&emsp; SELECT * FROM people WHERE zipcode=’95054′ AND lastname LIKE ‘%etrunia%’ AND address LIKE ‘%Main Street%’;<br>&emsp;&emsp;如果没有使用索引下推技术，则MySQL会通过zipcode=’95054’从存储引擎中查询对应的数据，返回到MySQL服务端，然后MySQL服务端基于lastname LIKE ‘%etrunia%’和address LIKE ‘%Main Street%’来判断数据是否符合条件。 如果使用了索引下推技术，则MYSQL首先会返回符合zipcode=’95054’的索引，然后根据lastname LIKE ‘%etrunia%’和address LIKE ‘%Main Street%’来判断索引是否符合条件。如果符合条件，则根据该索引来定位对应的数据，如果不符合，则直接reject掉。 有了索引下推优化，可以在有like条件查询的情况下，减少回表次数。<br>**你们创建的那么多索引，到底有没有生效，或者说你们的SQL语句有没有使用索引查询你们有统计过吗？</strong><br>&emsp;&emsp;这个还没有统计过，除非遇到慢SQL的时候我们才会去排查。<br><strong>那排查的时候，有什么手段可以知道有没有走索引查询呢？</strong><br>&emsp;&emsp;可以通过explain查看sql语句的执行计划，通过执行计划来分析索引使用情况。<br><strong>那什么情况下会发生明明创建了索引，但是执行的时候并没有通过索引呢？</strong><br>&emsp;&emsp;查询优化器：一条SQL语句的查询，可以有不同的执行方案，至于最终选择哪种方案，需要通过优化器进行选择，选择执行成本最低的方案。 在一条单表查询语句真正执行之前，MySQL的查询优化器会找出执行该语句所有可能使用的方案，对比之后找出成本最低的方案。这个成本最低的方案就是所谓的执行计划。 优化过程大致如下： 1、根据搜索条件，找出所有可能使用的索引 2、计算全表扫描的代价 3、计算使用不同索引执行查询的代价 4、对比各种执行方案的代价，找出成本最低的那一个。<br><strong>mysql中的索引采用前缀匹配选择，B+树存储结构，查询的时间复杂度为O(logkn)，如果不使用索引，将会进行顺序查找，时间复杂度为O(n)。</strong><br><strong>使用索引的注意事项：</strong><br><strong>1.索引不会包含有NULL值的列</strong><br>&emsp;&emsp;只要列中包含有NULL值都将不会被包含在索引中，复合索引中只要有一列含有NULL值，那么这一列对于此复合索引就是无效的。所以我们在数据库设计时不要让字段的默认值为NULL。<br><strong>2.使用短索引</strong><br>&emsp;&emsp;对串列进行索引，如果可能应该指定一个前缀长度。例如，如果有一个CHAR(255)的列，如果在前10个或20个字符内，多数值是惟一的，那么就不要对整个列进行索引。短索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作<br><strong>3.索引列排序</strong><br>&emsp;&emsp;MySQL查询只使用一个索引，因此如果where子句中已经使用了索引的话，那么order by中的列是不会使用索引的。因此数据库默认排序可以符合要求的情况下不要使用排序操作；尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。<br><strong>4.like语句操作</strong><br>&emsp;&emsp;一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。<br><strong>5.不要在列上进行运算</strong><br>&emsp;&emsp;select * from users where YEAR(adddate)&lt;2007; 将在每个行上进行运算，这将导致索引失效而进行全表扫描，因此我们可以改成 select * from users where adddate&lt;‘2007-01-01’;<br><strong>6.尽量不使用NOT IN和&lt;&gt;操作</strong><br>&emsp;&emsp;当有Null空值时，可能会造成查询结果不准确<br>&emsp;&emsp;解决办法：<br>&emsp;&emsp;&emsp;&emsp;1.使用EXISTS 或 NOT EXISTS 代替<br>&emsp;&emsp;&emsp;&emsp;2.用JOIN 代替<br><a href="https://blog.csdn.net/dxyzhbb/article/details/100099493" target="_blank" rel="noopener">https://blog.csdn.net/dxyzhbb/article/details/100099493</a></p>
+</blockquote>
+</details>
+
+<h2 id="4-如何实现一个单例模式"><a href="#4-如何实现一个单例模式" class="headerlink" title="4.如何实现一个单例模式"></a>4.如何实现一个单例模式</h2><blockquote>
+<p><a href="/blog/2019/09/08/设计模式/单例模式/" target="_blank">单例模式</a>  </p>
+</blockquote>
+<h2 id="5-平时使用了哪些线程池"><a href="#5-平时使用了哪些线程池" class="headerlink" title="5.平时使用了哪些线程池"></a>5.平时使用了哪些线程池</h2><blockquote>
+<p><a href="/blog/2020/03/17/线程池/" target="_blank">线程池</a>    </p>
+</blockquote>
+<h2 id="6-如何实现免登陆功能（cookie-session？）"><a href="#6-如何实现免登陆功能（cookie-session？）" class="headerlink" title="6.如何实现免登陆功能（cookie session？）"></a>6.如何实现免登陆功能（cookie session？）</h2><details>
+<summary><mark><font color="darkred">点击查看详细内容</font></mark></summary>
+
+<blockquote>
+<p><strong>Cookie的机制</strong><br>&emsp;&emsp;Cookie是浏览器（User Agent）访问一些网站后，这些网站存放在客户端的一组数据，用于使网站等跟踪用户，实现用户自定义功能。<br>&emsp;&emsp;Cookie的Domain和Path属性标识了这个Cookie是哪一个网站发送给浏览器的；Cookie的Expires属性标识了Cookie的有 效时间，当Cookie的有效时间过了之后，这些数据就被自动删除了。<br>&emsp;&emsp;如果不设置过期时间，则表示这个Cookie生命周期为浏览器会话期间，只要关闭浏览器窗口，Cookie就消失了。这种生命期为浏览会话期的 Cookie被称为会话Cookie。会话Cookie一般不保存在硬盘上而是保存在内存里。如果设置了过期时间，浏览器就会把Cookie保存到硬盘 上，关闭后再次打开浏览器，这些Cookie依然有效直到超过设定的过期时间。存储在硬盘上的Cookie可以在不同的浏览器进程间共享，比如两个IE窗 口。而对于保存在内存的Cookie，不同的浏览器有不同的处理方式。<br><strong>Session的机制</strong><br>&emsp;&emsp;Session是存放在服务器端的类似于HashTable结构（每一种Web开发技术的实现可能不一样，下文直接称之为HashTable）来存放用户 数据，当浏览器第一次发送请求时，服务器自动生成了一个HashTable和一个Session ID用来唯一标识这个HashTable，并将其通过响应发送到浏览器。当浏览器第二次发送请求，会将前一次服务器响应中的Session ID放在请求中一并发送到服务器上，服务器从请求中提取出Session ID，并和保存的所有Session ID进行对比，找到这个用户对应的HashTable。<br>&emsp;&emsp;一般情况下，服务器会在一定时间内（默认20分钟）保存这个HashTable，过了时间限制，就会销毁这个HashTable。在销毁之前，程序员可以 将用户的一些数据以Key和Value的形式暂时存放在这个HashTable中。当然，也有使用数据库将这个HashTable序列化后保存起来的，这 样的好处是没了时间的限制，坏处是随着时间的增加，这个数据库会急速膨胀，特别是访问量增加的时候。一般还是采取前一种方式，以减轻服务器压力。  <img src="/blog/img/2020/03/17/Cookie与Session的区别.jpg"><br><strong>一些网站的3天免登陆是如何做到的？</strong><br>&emsp;&emsp;方式一：首先想到的是使用cookie保存用户登录信息，设置有效期，在用户下次访问时免去登录环节，直接通过cookie获取用户信息。<br>&emsp;&emsp;方式二：直接将session会话保存，用户下次访问时，继续使用这个session。<br>&emsp;&emsp;相比之下session显得更加安全，但是，大家知道，session会随着浏览器的关闭而消失（确切的说，是在客户端消失，服务器端的session存活周期取决于相应配置），当用户下次启动浏览器，访问网站时，又会得到由网站自动分配的新的session。那么，问题来了：<br><strong>如何做到关闭浏览器后到下次登录时session仍然有效？</strong><br>&emsp;&emsp;思路：<br>&emsp;&emsp;1、在用户登录成功时，创建session对象，保存用户信息<br>&emsp;&emsp;2、将此session的sessionid保存到cookie中<br>&emsp;&emsp;3、同时将sessionid于session对应关系存储到应用域中，以便后面可以根据sessionid来获取到session<br>&emsp;&emsp;4、在用户关闭浏览器，重新打开浏览器访问网站时，读取用户的cookie，得到sessionid<br>&emsp;&emsp;5、根据sessionid获取到第3步存储到应用域中的session对象<br>&emsp;&emsp;6、从session中读取用户信息  </p>
+</blockquote>
+</details>
+
+<h2 id="7-Map接口有哪些类？"><a href="#7-Map接口有哪些类？" class="headerlink" title="7.Map接口有哪些类？"></a>7.Map接口有哪些类？</h2><details>
+<summary><mark><font color="darkred">点击查看详细内容</font></mark></summary>
+
+<blockquote>
+<p>Map提供了一种映射关系，其中的元素是以键值对（key-value）的形式存储的，能够实现根据key快速查找value；<br>Map中的键值对以Entry类型的对象实例形式存在；<br>键（key值）不可重复，value值可以重复，一个value值可以和很多key值形成对应关系，每个键最多只能映射到一个值。<br><strong>HahsMap</strong><br>&emsp;&emsp;基于哈希表(散列表)的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）除实现了Map接口外还实现了Cloneable，Serializable，继承了AbstractMap抽象类。<br>&emsp;&emsp;此类不保证映射的顺序，特别是它不保证该顺序恒久不变。<br>&emsp;&emsp;特点：<br>&emsp;&emsp;键无序，唯一，类似于Set集合<br>&emsp;&emsp;值有序，可重复，类似于List<br>&emsp;&emsp;底层数据结构是哈希表，保证键唯一<br>&emsp;&emsp;允许键为null，值为null<br><strong>LinkedHashMap</strong><br>&emsp;&emsp;Map 接口的哈希表和链表(双向链表)实现，具有可预知的迭代顺序（按照插入顺序输出结果）。<br>&emsp;&emsp;特点：<br>&emsp;&emsp;键有序，唯一，<br>&emsp;&emsp;值有序，可重复，类似于List<br>&emsp;&emsp;底层数据结构是哈希表和链表，哈希表保证键唯一，链表保证键有序<br><strong>TreeMap</strong><br>&emsp;&emsp;Map 基于红黑树（Red-Black tree）的 NavigableMap 实现。该映射根据其键的自然顺序进行排序，或者根据创建映射时提供的 Comparator 进行排序，具体取决于使用的构造方法。<br>&emsp;&emsp;特点：<br>&emsp;&emsp;键可排序，唯一，<br>&emsp;&emsp;值有序，可重复，类似于List<br>&emsp;&emsp;底层数据结构是自平衡的二叉树，可排序<br>&emsp;&emsp;排序方式类似于TreeSet，分为自然排序和比较器排序，具体取决于使用的构造方法<br><strong>HashTable</strong><br>&emsp;&emsp;此类实现一个哈希表，该哈希表将键映射到相应的值。任何非 null 对象都可以用作键或值。<br>&emsp;&emsp;特点：<br>&emsp;&emsp;不允许null键和null值<br>&emsp;&emsp;线程安全，效率低<br>&emsp;&emsp;HashMap和Hashtable的区别:<br>&emsp;&emsp;HashMap是不安全的不同步的效率高的，允许null键和null值；Hashtable是安全的同步的效率低的 不允许null键和null值<br>底层都是哈希表结构。<br><strong>WeakHashMap</strong><br>&emsp;&emsp;以弱键实现的基于哈希表的 Map。在 WeakHashMap 中，当某个键不再正常使用时，将自动移除其条目。更精确地说，对于一个给定的键，其映射的存在并不阻止垃圾回收器对该键的丢弃，这就使该键成为可终止的，被终止，然后被回收。<br>&emsp;&emsp;丢弃某个键时，其条目从映射中有效地移除，因此，该类的行为与其他的 Map 实现有所不同。<br><strong>EnumMap</strong><br>键是枚举类型  </p>
+</blockquote>
+</details>
+
+<h2 id="8-HashMap为什么会导致CPU100"><a href="#8-HashMap为什么会导致CPU100" class="headerlink" title="8.HashMap为什么会导致CPU100%?"></a>8.HashMap为什么会导致CPU100%?</h2><blockquote>
+<p><a href="/blog/2020/03/18/HashMap为什么会导致CPU100/" target="_blank">HashMap为什么会导致CPU100%的原因</a> </p>
+</blockquote>
+<h2 id="9-接口的意义"><a href="#9-接口的意义" class="headerlink" title="9.接口的意义"></a>9.接口的意义</h2><blockquote>
+<p><strong>为了更好的将设计与实现分离,能够间接达到多继承的效果</strong><br>Java中接口顾名思义就是用来接收数据的一个端口，用来给不同类或前后端做通信用的。<br>Java接口是一系列方法的声明，是一些方法特征的集合，一个接口只有方法的特征没有方法的实现，因此这些方法可以在不同的地方被不同的类实现，而这些实现可以具有不同的行为（功能）。<br><strong>接口的规范和特性</strong><br>&emsp;&emsp;在java中接口interface定义了使用此接口的类的规范，也就是一些变量和抽象方法。<br>&emsp;&emsp;接口中的成员变量默认为 public static final 修饰的静态常量。<br>&emsp;&emsp;默认方法为 public abstract修饰的抽象方法。  </p>
+</blockquote>
+<h2 id="10-抽象类的意义"><a href="#10-抽象类的意义" class="headerlink" title="10.抽象类的意义"></a>10.抽象类的意义</h2><blockquote>
+<p><strong>对代码的维护和重用</strong><br><strong>1.因为抽象类不能实例化对象，所以必须要有子类来实现它之后才能使用。这样就可以把一些具有相同属性和方法的组件进行抽象，这样更有利于代码和程序的维护。</strong><br>&emsp;&emsp;比如本科和研究生可以抽象成学生，他们有相同的属性和方法。这样当你对其中某个类进行修改时会受到父类的限制，这样就会提醒开发人员有些东西不能进行随意修改，这样可以对比较重要的东西进行统一的限制，也算是一种保护，对维护会有很大的帮助。<br><strong>2.当又有一个具有相似的组件产生时，只需要实现该抽象类就可以获得该抽象类的那些属性和方法。</strong><br>&emsp;&emsp;比如学校又新产生了专科生这类学生，那么专科生直接继承学生，然后对自己特有的属性和方法进行补充即可。这样对于代码的重用也是很好的体现。<br><strong>所以，Java中抽象类对于代码的维护和重用有很好的帮助，也是Java面向对象的一个重要体现。</strong>  </p>
+</blockquote>
+<h2 id="11-抽象类与接口类的相同点与区别"><a href="#11-抽象类与接口类的相同点与区别" class="headerlink" title="11.抽象类与接口类的相同点与区别"></a>11.抽象类与接口类的相同点与区别</h2><blockquote>
+<p><strong>相同点</strong><br>&emsp;&emsp;1.不能实例化<br>&emsp;&emsp;2.包含未实现的方法声明<br>&emsp;&emsp;3.派生类必须实现未实现的方法，抽象类是抽象方法，接口则是所有成员(不仅是方法包括其他成员)<br><strong>不同点</strong><br>&emsp;&emsp;1.类可以实现无限个接口，但仅能从一个抽象（或任何其他类型）类继承，从抽象类派生的类仍可实现接口，从而得出接口是用来解决多重继承问题的。<br>&emsp;&emsp;2.抽象类当中可以存在非抽象的方法，可接口不能，且它里面的方法只是一个声明必须用public来修饰没有具体实现的方法。<br>&emsp;&emsp;3.抽象类中的成员变量可以被不同的修饰符来修饰，可接口中的成员变量默认的都是静态常量（static final）。<br>&emsp;&emsp;4.类是对对象的抽象，抽象类是对类的抽象；接口是对行抽象。接口是对类（行为）进行的抽象，而抽象是对类整体（字段、属性、方法）的抽象。如果只关注行为抽象，那么也可以认为接口就是抽象类。总之，不论是接口、抽象类、类甚至对象，都是在不同层次、不同角度进行抽象的结果，它们的共性，就是抽象。<br>&emsp;&emsp;5.如果行为跨越不同类的对象，可使用接口；对于一些相似的类对象，用继承抽象类。<br>&emsp;&emsp;6.抽象类：强调的是is-a关系，抽象类中定义的是共性特征。接口：强调的是like-a关系,接口中定义的是扩展功能。<br>&emsp;&emsp;7.抽象类是自底向上抽象出来的，而接口则是自顶向下设计出来的。从设计的角度来说，抽象类是从子类中发现公共的东西，泛化出父类，然后子类继承父类，而接口是根本不知子类的存在，方法是如何实现还不确定，预先定义。    </p>
+</blockquote>
+<h2 id="12-内部类的作用"><a href="#12-内部类的作用" class="headerlink" title="12.内部类的作用"></a>12.内部类的作用</h2><blockquote>
+<p>将一个类定义在另一个类里面或者一个方法里面，这样的类称为内部类。<br><strong>内部类的分类</strong><br>&emsp;&emsp;1.成员内部类<br>&emsp;&emsp;2.局部内部类<br>&emsp;&emsp;3.静态内部类<br>&emsp;&emsp;4.匿名内部类<br><strong>作用</strong><br>&emsp;&emsp;1.内部类可以很好的实现隐藏<br> &emsp;&emsp;&emsp;&emsp;一般的非内部类，是不允许有 private 与protected权限的，但内部类可以 。<br>&emsp;&emsp;2．内部类拥有外围类的所有元素的访问权限(可以实现回调功能)<br>&emsp;&emsp;3.可是实现多重继承<br>&emsp;&emsp;4.可以避免修改接口而实现同一个类中两种同名方法的调用。<br><a href="/blog/2020/03/18/内部类/" target="_blank"> &gt;&gt;内部类</a> </p>
+</blockquote>
+<h2 id="13-父类的静态方法能否被子类重写，为什么？"><a href="#13-父类的静态方法能否被子类重写，为什么？" class="headerlink" title="13.父类的静态方法能否被子类重写，为什么？"></a>13.父类的静态方法能否被子类重写，为什么？</h2><details>
+<summary><mark><font color="darkred">点击查看详细内容</font></mark></summary>
+
+<blockquote>
+<p><strong>不能</strong><br>&emsp;&emsp;JAVA的静态方法形式上可以重写，但是本质上不是JAVA的重写，所以答案是不能。  </p>
+</blockquote>
+<pre><code>class Fruit{
+
+    static String color = &quot;五颜六色&quot;;
+    static public void call() {
+        System.out.println(&quot;这是一个水果&quot;);
+    }
+}
+
+public class Banana extends Fruit{
+
+    static String color = &quot;黄色&quot;;
+    static public void call() {
+        System.out.println(&quot;这是一个香蕉&quot;);
+    }
+
+    public static void main(String[] args) {
+
+        Fruit fruit = new Banana();
+        System.out.println(fruit.color);    //五颜六色
+        fruit.call();         //这是一个水果
+    }
+}</code></pre><blockquote>
+<p><strong>为什么？</strong><br>&emsp;&emsp;静态方法只与类有关，不与实例有关，重写只适用于实例方法，不适用于静态方法。<br>&emsp;&emsp;非静态方法，按重写规则，调用相应的类的实现方法，而静态方法只与类有关。<br>&emsp;&emsp;因为静态方法是程序一运行就已经分配好了内存地址，而且该地址是固定的，所有引用到该方法的对象（父类或者子类）所指向的始终是同一个内存地址中的数据，即该静态方法。如果子类定义了相同名称的静态方法，只会新增一个内存地址，并不会重写。<br><strong>重写指的是根据运行时对象的类型来决定调用哪个方法，而不是根据编译时的类型。</strong><br><strong>静态属性和静态方法是否可以被继承?</strong><br>可以被继承，如果子类中有相同的静态方法和静态变量，那么父类的方法以及变量就会被覆盖。要想调用就就必须使用父类来调用。  </p>
+</blockquote>
+<pre><code>class Fruit{
+
+    static String color = &quot;五颜六色&quot;;
+    static String xingzhuang = &quot;奇形怪状&quot;;
+    static public void call() {
+        System.out.println(&quot;这是一个水果&quot;);
+    }
+    static public void test() {
+        System.out.println(&quot;这是没有被子类覆盖的方法&quot;);
+    }
+}
+
+public class Banana extends Fruit{
+
+    static String color = &quot;黄色&quot;;
+    static public void call() {
+        System.out.println(&quot;这是一个香蕉&quot;);
+    }
+
+    public static void main(String[] args) {
+
+        Banana banana = new Banana();    
+        banana.test();     //这是没有被子类覆盖的方法
+        banana.call();     //调用Banana类中的call方法    这是一个香蕉
+        Fruit.call();         //调用Fruit类中的方法 这是一个水果
+
+        System.out.println(banana.xingzhuang + &quot; &quot; + banana.color);   //奇形怪状 黄色
+    }
+}</code></pre></details> 
+
+<h2 id="14-举1-2个排序算法，并使用java代码实现"><a href="#14-举1-2个排序算法，并使用java代码实现" class="headerlink" title="14.举1-2个排序算法，并使用java代码实现"></a>14.举1-2个排序算法，并使用java代码实现</h2><blockquote>
+<p><a href="/blog/2020/01/08/排序算法/" target="_blank">排序算法</a> </p>
+</blockquote>
+<h2 id="15-列举java的集合和继承关系"><a href="#15-列举java的集合和继承关系" class="headerlink" title="15.列举java的集合和继承关系"></a>15.列举java的集合和继承关系</h2><blockquote>
+<img src="/blog/img/2020/03/18/Java的集合和继承关系.jpg">  
+</blockquote>
+<h2 id="16-java虚拟机的特性"><a href="#16-java虚拟机的特性" class="headerlink" title="16.java虚拟机的特性"></a>16.java虚拟机的特性</h2><blockquote>
+<p>&emsp;&emsp;Java语言的一个非常重要的特点就是与平台的无关性。而使用Java虚拟机是实现这一特点的关键(体现了可移植性强)。一般的高级语言如果要在不同的平台上运行，至少需要编译成不同的目标代码。而引入Java语言虚拟机后，Java语言在不同平台上运行时不需要重新编译。Java语言使用模式Java虚拟机屏蔽了与具体平台相关的信息，使得Java语言编译程序只需生成在Java虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。Java虚拟机在执行字节码时，把字节码解释成具体平台上的机器指令执行。  </p>
+</blockquote>
+<h2 id="17-哪些情况下的对象会被垃圾回收机制处理掉"><a href="#17-哪些情况下的对象会被垃圾回收机制处理掉" class="headerlink" title="17.哪些情况下的对象会被垃圾回收机制处理掉"></a>17.哪些情况下的对象会被垃圾回收机制处理掉</h2><blockquote>
+<p>1.没有引用指向<br>2.只有弱引用指向并且不回收弱引用对象的话存储区无空间<br>3.虚引用指向的对象<br><strong>有什么方法可以让GC判断对象是否可以回收？</strong><br>1.引用计数法(可能会造成内存泄漏，大部分虚拟机不采用此方法进行垃圾回收)<br>2.可达性分析算法<br><a href="https://cloud.tencent.com/developer/article/1332790" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1332790</a><br><a href="https://www.cnblogs.com/l199616j/p/11297583.html" target="_blank" rel="noopener">https://www.cnblogs.com/l199616j/p/11297583.html</a>   </p>
+</blockquote>
+<h2 id="18-内存溢出和内存泄漏"><a href="#18-内存溢出和内存泄漏" class="headerlink" title="18.内存溢出和内存泄漏"></a>18.内存溢出和内存泄漏</h2><details>
+<summary><mark><font color="darkred">点击查看详细内容</font></mark></summary>
+
+<blockquote>
+<p><strong>内存泄漏：</strong> 是指程序在申请内存后，无法释放已申请的内存空间，一次内存泄漏似乎不会有大的影响，但内存泄漏堆积后的后果就是内存溢出。<br><strong>内存溢出：</strong> 指程序申请内存时，没有足够的内存供申请者使用，或者说，给了你一块存储int类型数据的存储空间，但是你却存储long类型的数据，那么结果就是内存不够用，此时就会报错OOM,即所谓的内存溢出。<br>&emsp;&emsp;通俗的说就是停车场（堆）保安（gc）让很久不用的废弃车子(无用的对象)从车位上挪走，但是这个车子又没办法挪走。这就是内存泄漏。停车场所有的车位都有车子占用了，再来车子没地了，或者说给你一个小汽车的停车位（int），你非要停一辆高铁(Long)，这就是内存溢出。<br>&emsp;&emsp;<strong>内存泄露量大到一定程度会导致内存溢出。但是内存溢出不一定是内存泄露引起的。</strong><br><strong>常见的内存泄漏：</strong><br><strong>1、单例造成的内存泄漏</strong><br>&emsp;&emsp;由于单例的静态特性，使得它的生命周期和应用的生命周期一样长，如果一个对象已经不再需要使用了，而单例对象还持有该对象的引用，就会使该对象不能被正确的回收，从而导致内存泄漏。<br><strong>2、非静态内部类创建静态实例造成的内存泄漏</strong><br>&emsp;&emsp;非静态内部类默认会持有外部类的引用，而该非静态内部类又创建了一个静态的实例，该实例的生命周期和应用一样长，这就导致了该静态实例一直会持有该Activity的引用，从而导致Activity的内存资源不能被正确回收。<br><strong>3、Handler造成的内存泄漏</strong><br>&emsp;&emsp;handler发送的消息在当前handler的消息队列中，如果此时activity finish掉了，那么消息队列的消息依旧会由handler进行处理，若此时handler声明为内部类（非静态内部类），我们知道内部类天然持有外部类的实例引用，那么就会导致activity无法回收，进而导致activity泄露。<br><strong>4、线程造成的内存泄漏</strong><br>&emsp;&emsp;如果任务在Activity销毁之前还未完成，那么将导致Activity的内存资源无法被回收，从而造成内存泄漏。<br><strong>5、资源未关闭，造成内存泄漏</strong><br>&emsp;&emsp;对于使用了BraodcastReceiver, ContentObserver, File, Cursor, Stream, Bitmap 等資源，立垓在Activity銷毀肘及吋美閉或者注銷，否則込些湊源将不会被回收，从而造成内存泄漏。<br><strong>6、使用ListView吋造成的内存泄漏</strong><br>&emsp;&emsp;构造Adapter时，没有使用缓存的convertView，Adapter中引用了Activity如何避免内存泄漏。有时需要点击ListView条目里的某个按钮实现界面跳转，getView()方法inflate布局的时候需要上下文，而且点击按钮后的跳转逻辑也需要上下文。所以我们经常会把Activity传入到Adapter中，如果Adapter中有很多耗时操作，可能就会防止Activity finish的时候被回收。<br><strong>7、集合容器中的内存泄露</strong><br>&emsp;&emsp;我们通常把一些对象的引用加入到了集合容器（比如ArrayList）中，当我们不需要该对象时，并没有把它的引用从集合中清理掉，这样这个集合就会越来越大。如果这个集合是static的话，那情况就更严重了。<br><strong>8、WebView 造成的泄露</strong><br>&emsp;&emsp;当我们不要使用WebView对象时，应该调用它的destory()函数来销毁它，并释放其占用的内存，否则其长期占用的内存也不能被回收，从而造成内存泄露。<br>内存泄漏与解决办法详解：<a href="https://www.jianshu.com/p/90caf813682d" target="_blank" rel="noopener">https://www.jianshu.com/p/90caf813682d</a><br><strong>常见内存溢出：</strong><br>1.内存中加载的数据量过于庞大，如一次从数据库取出过多数据；<br>2.集合类中有对对象的引用，使用完后未清空，使得JVM不能回收；<br>3.代码中存在死循环或循环产生过多重复的对象实体；<br>4.使用的第三方软件中的BUG；<br>5.启动参数内存值设定的过小<br><strong>内存溢出的解决方案：</strong><br>第一步，修改JVM启动参数，直接增加内存。(-Xms，-Xmx参数一定不要忘记加。)<br>第二步，检查错误日志，查看“OutOfMemory”错误前是否有其 它异常或错误。<br>第三步，对代码进行走查和分析，找出可能发生内存溢出的位置。  </p>
+</blockquote>
+</details>  
+
+<h2 id="19-进程和线程的区别"><a href="#19-进程和线程的区别" class="headerlink" title="19.进程和线程的区别"></a>19.进程和线程的区别</h2><blockquote>
+<p><a href="/blog/2020/03/17/线程池/" target="_blank">线程池</a>    </p>
+</blockquote>
+<h2 id="20-常见的排序算法时间复杂度"><a href="#20-常见的排序算法时间复杂度" class="headerlink" title="20.常见的排序算法时间复杂度"></a>20.常见的排序算法时间复杂度</h2><blockquote>
+<img src="/blog/img/2020/03/19/常见排序算法的时间复杂度.jpg">  
+</blockquote>
+<h2 id="21-ArrayList和HashMap的实现原理"><a href="#21-ArrayList和HashMap的实现原理" class="headerlink" title="21.ArrayList和HashMap的实现原理"></a>21.ArrayList和HashMap的实现原理</h2><blockquote>
+<p>ArrayList的底层实现是一个数组，动态的数组，能自动扩容。<br>HashMap底层实现其实也是一个数组，该数组存放的元素是一个entry键值对，同时数组的每个元素也是一个链表的头节点，HashMap经过hash函数将值存放在对应的数组下标中，一般是根据存储元素 hashcode值%数组长度 得到数组的下标。   </p>
+</blockquote>
+<h2 id="22-Java中-和equals的区别，equals和hashCode的区别"><a href="#22-Java中-和equals的区别，equals和hashCode的区别" class="headerlink" title="22.Java中==和equals的区别，equals和hashCode的区别"></a>22.Java中==和equals的区别，equals和hashCode的区别</h2><blockquote>
+<p>1.对于8大基本数据类型来说，==比较的是值的内容是否相等。没有equals方法。<br>2.对于String数据类型以及Integer等包装类来说，==比较的是地址值，equals比较的是内容是否相等。<br>3.对于引用类型来说，==和equals比较的都是地址值。<br>4.equals和hashCode是属于Object的两个不同的方法，但是在进行equals比较时，需要用到hashcode。   </p>
+</blockquote>
+<h2 id="23-java中int-char-long各占多少字节数"><a href="#23-java中int-char-long各占多少字节数" class="headerlink" title="23.java中int char long各占多少字节数"></a>23.java中int char long各占多少字节数</h2><blockquote>
+<p>int 4个字节（1个字节占8位）<br>char 2个字节<br>long 8个字节<br><br> </p>
+<p>byte 1个字节（ -128（-2^7）~127(2^7-1) ）<br>short 2个字节<br>boolean 至少1字节<br>float  4字节 单精度浮点数字长32位，尾数长度23，指数长度8,指数偏移量127；<br>double 8字节 双精度浮点数字长64位，尾数长度52，指数长度11，指数偏移量1023；<br><strong>英文字母：</strong><br>字节数 : 1;编码：GB2312<br>字节数 : 1;编码：GBK<br>字节数 : 1;编码：ISO-8859-1<br>字节数 : 1;编码：UTF-8<br><strong>中文汉字：</strong><br>字节数 : 2;编码：GB2312<br>字节数 : 2;编码：GBK<br>字节数 : 1;编码：ISO-8859-1<br>字节数 : 3;编码：UTF-8<br><a href="https://www.cnblogs.com/jiftle/p/10864492.html" target="_blank" rel="noopener">https://www.cnblogs.com/jiftle/p/10864492.html</a>  </p>
+</blockquote>
+<h2 id="24-java-int与integer的区别"><a href="#24-java-int与integer的区别" class="headerlink" title="24.java int与integer的区别"></a>24.java int与integer的区别</h2><blockquote>
+<p>1、Integer是int的包装类，里面包含了一些操作int数据的方法，int则是java的一种基本数据类型<br>2、Integer变量必须实例化后才能使用，而int变量不需要<br>3、Integer实际是对象的引用，当new一个Integer时，实际上是生成一个指针指向此对象；而int则是直接存储数据值<br>4、Integer的默认值是null，int的默认值是0  </p>
+</blockquote>
+<h2 id="25-string-stringbuffer-stringbuilder-区别"><a href="#25-string-stringbuffer-stringbuilder-区别" class="headerlink" title="25.string stringbuffer stringbuilder 区别"></a>25.string stringbuffer stringbuilder 区别</h2><blockquote>
+<p><strong>String</strong><br>String底层是一个final类型的字符数组，所以String的值是不可变的，每次对String的操作都会生成新的String对象，造成内存浪费。<br><img src="/blog/img/2020/03/19/String.png"><br><strong>StringBuffer和StringBuilder</strong><br>而StringBuffer和StringBuilder就不一样了，他们两都继承了AbstractStringBuilder抽象类，从AbstractStringBuilder抽象类中我们可以看到<br><img src="/blog/img/2020/03/19/StringBuffer和StringBuilder.png"><br>他们的底层都是可变的字符数组，所以在进行频繁的字符串操作时，建议使用StringBuffer和StringBuilder来进行操作。<br>StringBuilder 和 StringBuffer 之间的最大不同在于 StringBuilder 的方法不是线程安全的（不能同步访问）由于 StringBuilder 相较于StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。<br><a href="https://blog.csdn.net/TTTZZZTTTZZZ/article/details/84892985" target="_blank" rel="noopener">https://blog.csdn.net/TTTZZZTTTZZZ/article/details/84892985</a>  </p>
+</blockquote>
+<h2 id="26-Java多态"><a href="#26-Java多态" class="headerlink" title="26.Java多态"></a>26.Java多态</h2><blockquote>
+<p>多态是指同一个行为具有多个不同表现形式或形态的能力。是指一个类的实例(对象)的相同方法在不同情形有不同表现形式。<br>简单来说，多态是指一个名字多种实现。多态使得一个实体通过一个通用的方式来实现不同的操作。具体的操作是由实际的实现来决定的。<br>多态在java里有三种表现方式：方法重载、通过继承实现方法重写、通过java接口进行方法重写。  </p>
+</blockquote>
+<h2 id="27-什么导致线程阻塞"><a href="#27-什么导致线程阻塞" class="headerlink" title="27.什么导致线程阻塞?"></a>27.什么导致线程阻塞?</h2><blockquote>
+<p>阻塞状态的线程的特点是：该线程放弃CPU的使用，暂停运行，只有等到导致阻塞的原因消除之后才恢复运行。或者是被其他的线程中断，该线程也会退出阻塞状态，同时抛出InterruptedException。<br>1）线程执行了Thread.sleep(intmillsecond);方法，当前线程放弃CPU，睡眠一段时间，然后再恢复执行<br>2）线程执行一段同步代码，但是尚且无法获得相关的同步锁，只能进入阻塞状态，等到获取了同步锁，才能回复执行。<br>3）线程执行了一个对象的wait()方法，直接进入阻塞状态，等待其他线程执行notify()或者notifyAll()方法。<br>4）线程执行某些IO操作，因为等待相关的资源而进入了阻塞状态。比如说监听system.in，但是尚且没有收到键盘的输入，则进入阻塞状态。  </p>
+</blockquote>
+<h2 id="28-容器类之间的区别"><a href="#28-容器类之间的区别" class="headerlink" title="28.容器类之间的区别"></a>28.容器类之间的区别</h2><blockquote>
+<p>总体上分为两大类Collection接口和Map接口，然后Collection接口下面又包含List、set（HashSet、treeSet、LinkedSet）接口。<br><img src="/blog/img/2020/03/18/Java的集合和继承关系.jpg">  </p>
+</blockquote>
+<h2 id="29-ArrayMap-VS-HashMap"><a href="#29-ArrayMap-VS-HashMap" class="headerlink" title="29.ArrayMap VS HashMap"></a>29.ArrayMap VS HashMap</h2><blockquote>
+<p>&emsp;&emsp;HashMap内部是使用一个默认容量为16的数组来存储数据的，而数组中每一个元素却又是一个链表的头结点，所以，更准确的来说，HashMap内部存储结构是使用哈希表的拉链结构（数组+链表），这种存储数据的方法叫做拉链法 。 <br><br>&emsp;&emsp;ArrayMap是一个&lt;key,value&gt;映射的数据结构，它设计上更多的是考虑内存的优化，内部是使用两个数组进行数据存储，一个数组记录key的hash值，另外一个数组记录Value值，它和SparseArray一样，也会对key使用二分法进行从小到大排序，在添加、删除、查找数据的时候都是先使用二分查找法得到相应的index，然后通过index来进行添加、查找、删除等操作，所以，应用场景和SparseArray的一样，如果在数据量比较大的情况下，那么它的性能将退化至少50%。<br><br><strong>ArrayMap应用场景</strong><br>1.数据量不大，最好在千级以内<br>2.数据结构类型为Map类型<br><a href="https://www.cnblogs.com/clwydjgs/p/9185574.html" target="_blank" rel="noopener">https://www.cnblogs.com/clwydjgs/p/9185574.html</a><br><a href="https://www.jianshu.com/p/999be2ee763a" target="_blank" rel="noopener">https://www.jianshu.com/p/999be2ee763a</a>  </p>
+</blockquote>
+<h2 id="30-Switch能否用string做参数？"><a href="#30-Switch能否用string做参数？" class="headerlink" title="30.Switch能否用string做参数？"></a>30.Switch能否用string做参数？</h2><blockquote>
+<p>能  
+java7以后新增的<br><strong>为什么jdk1.7后又可以用string类型作为switch参数呢？</strong><br>其实，jdk1.7并没有新的指令来处理switch string，而是通过调用switch中string.hashCode,将string转换为int从而进行判断。<br><a href="https://blog.csdn.net/wjhelloworld/article/details/78439118" target="_blank" rel="noopener">https://blog.csdn.net/wjhelloworld/article/details/78439118</a>  </p>
+</blockquote>
+<h2 id="31-Object有哪些公用方法？"><a href="#31-Object有哪些公用方法？" class="headerlink" title="31.Object有哪些公用方法？"></a>31.Object有哪些公用方法？</h2><blockquote>
+<p>(1)clone():保护方法，实现对象的浅复制，只有实现了Cloneable接口才可以调用该方法<br>(2)getClass()：final方法，获得运行时的类。<br>(3)toString():该方法用得比较多，一般子类都有覆盖。<br>(4)finalize():该方法用于释放资源，因为无法确定方法什么时候被调用，很少使用。<br>(5)equals():该方法是非常重要的一个方法。一般equals和==是不一样的，但是在Object中两者是一样的。子类一般都要重写这个方法。<br>(6)hashCode():该方法用于哈希查找，可以减少在查找中使用equals的次数，重写了equals方法一般都要重写hashCode方法。<br>(7)wait():wait方法就是使当前线程等待该对象的锁，当前线程必须是该对象的拥有者，也就是具有该对象的锁。wait()方法一直等待，直到获得锁或者被中断。wait(long timeout)设定一个超时间隔，如果在规定时间内没有获得锁就返回。<br>调用该方法后当前线程进入睡眠状态，直到以下事件发生。<br>（7.1）其他线程调用了该对象的notify方法。<br>（7.2）其他线程调用了该对象的notifyAll方法。<br>（7.3）其他线程调用了interrupt中断该线程。<br>（7.4）时间间隔到了。<br>(8)notify():该方法唤醒在该对象上等待的某个线程。<br>(9)notifyAll():该方法唤醒在该对象上等待的所有线程。  </p>
+</blockquote>
+<h2 id="32-Java的四种引用，强弱软虚，用到的场景"><a href="#32-Java的四种引用，强弱软虚，用到的场景" class="headerlink" title="32.Java的四种引用，强弱软虚，用到的场景"></a>32.Java的四种引用，强弱软虚，用到的场景</h2><blockquote>
+<p><a href="https://blog.csdn.net/heminghung/article/details/51379143" target="_blank" rel="noopener">https://blog.csdn.net/heminghung/article/details/51379143</a>  </p>
+</blockquote>
+<h2 id="33-hashcode的作用"><a href="#33-hashcode的作用" class="headerlink" title="33.hashcode的作用"></a>33.hashcode的作用</h2><blockquote>
+<p>当我们向一个集合中添加某个元素，集合会首先调用hashCode方法。这样就可以直接定位它所存储的位置，若该处没有其他元素，则直接保存。若该处已经有元素存在，就调用equals方法来匹配这两个元素是否相同，相同则不存，不同则散列到其他位置。这样处理，<strong>当我们存入大量元素时就可以大大减少调用equals()方法的次数，极大地提高了效率。</strong><br><a href="https://www.jianshu.com/p/c7fc90711913" target="_blank" rel="noopener">https://www.jianshu.com/p/c7fc90711913</a>  </p>
+</blockquote>
+<h2 id="34-ArrayList、LinkedList、Vector的区别"><a href="#34-ArrayList、LinkedList、Vector的区别" class="headerlink" title="34.ArrayList、LinkedList、Vector的区别"></a>34.ArrayList、LinkedList、Vector的区别</h2><blockquote>
+<p><strong>1.基本区别：</strong> 三个类都实现了List接口，都是有序集合，数据是允许重复的；ArrayList 和Vector都是基于数组实现存储的，集合中的元素的位置都是有顺序即连续的；LinkedList是基于双向链表实现存储的，集合中的元素的位置是不连续的<br><strong>2.性能区别：</strong> Vector和ArrayList底层实现原理一致，但是Vector是线程安全的，因此性能比ArrayList差很多；LinkedList相比于集合Vector和ArrayList在插入,修改，删除等操作上速度较快，但是随机访问的性能较差<br><strong>3.安全区别：</strong> Vector是使用了synchronized同步锁是线程安全的，ArrayList和LinkedList都是线程不安全的<br><strong>4.原理区别：</strong> ArrayList与Vector都有初始的容量大小，当存储的元素的个数超过了容量时，就需要增加存储空间，Vector默认增长为原来两倍，而ArrayList的增长为原来的1.5倍；ArrayList与Vector都可以设置初始空间大小，Vector还可以设置增长的空间大小，而ArrayList没有提供设置增长空间的方法。 </p>
+</blockquote>
+<h2 id="35-Map、Set、List、Queue、Stack的特点与用法。"><a href="#35-Map、Set、List、Queue、Stack的特点与用法。" class="headerlink" title="35.Map、Set、List、Queue、Stack的特点与用法。"></a>35.Map、Set、List、Queue、Stack的特点与用法。</h2><blockquote>
+<p><strong>Map:</strong> Map用于保存具有”映射关系”的数据，因此Map集合里保存着两组值，一组值用于保存Map里的key，另外一组值用于保存Map里的value。 key和value都可以是任何引用类型的数据。Map的key不允许重复，即同一个Map对象的任何两个key通过equals方法比较结果总是返回false。<br><strong>Set:</strong> Set集合类似于一个罐子，”丢进”Set集合里的多个对象之间没有明显的顺序。Set继承自Collection接口，不能包含有重复元素(记住，这是整个Set类层次的共有属性)。 Set判断两个对象相同不是使用”==”运算符，而是根据equals方法。<br><strong>List:</strong> List集合代表一个元素有序、可重复的集合，集合中每个元素都有其对应的顺序索引。 List集合允许加入重复元素，因为它可以通过索引来访问指定位置的集合元素。List集合默认按元素的添加顺序设置元素的索引。<br><strong>Stack：</strong> Stack是Vector提供的一个子类，用于模拟”栈”这种数据结构(后进先出LIFO)<br>方法:push、pop、peek、empty、seatch<br><strong>queue：</strong> Queue用于模拟”队列”这种数据结构(先进先出FIFO)。队列的头部保存着队列中存放时间最长的元素，队列的尾部保存着队列中存放时间最短的元素。 新元素插入(offer)到队列的尾部，访问元素(poll)操作会返回队列头部的元素，队列不允许随机访问队列中的元素。结合生活中常见的排队就会很好理解这个概念。  </p>
+</blockquote>
+<h2 id="36-HashMap和ConcurrentHashMap的区别，HashMap的底层源码。"><a href="#36-HashMap和ConcurrentHashMap的区别，HashMap的底层源码。" class="headerlink" title="36.HashMap和ConcurrentHashMap的区别，HashMap的底层源码。"></a>36.HashMap和ConcurrentHashMap的区别，HashMap的底层源码。</h2><blockquote>
+<p>&emsp;&emsp;Hashmap本质是数组加链表。根据key取得hash值，然后计算出数组下标，如果多个key对应到同一个下标，就用链表串起来，新插入的在前面。<br>&emsp;&emsp;ConcurrentHashMap：在hashMap的基础上，ConcurrentHashMap将数据分为多个segment(段)，默认16个（concurrency level），然后每次操作对一个segment(段)加锁，避免多线程锁的几率，提高并发效率。<br>&emsp;&emsp;ConcurrentHashMap融合了hashtable和hashmap二者的优势。<br>hashtable是做了同步的，hashmap未考虑同步。所以hashmap在单线程情况下效率较高。hashtable在的多线程情况下，同步操作能保证程序执行的正确性。<br>但是hashtable每次同步执行的时候都要锁住整个结构。看下图：<img src="/blog/img/2020/03/20/CurrentHashMap.jpg"><br>&emsp;&emsp;图左侧清晰的标注出来，lock每次都要锁住整个结构。<br>&emsp;&emsp;ConcurrentHashMap正是为了解决这个问题而诞生的。<br>&emsp;&emsp;ConcurrentHashMap锁的方式是稍微细粒度的(分段锁)。ConcurrentHashMap将hash表分为16个桶（默认值），诸如get,put,remove等常用操作只锁当前需要用到的桶。<br>&emsp;&emsp;从ConcurrentHashMap代码中可以看出，它引入了一个“分段锁”的概念，具体可以理解为把一个大的Map拆分成N个小的HashTable，根据key.hashCode()来决定把key放到哪个HashTable中。<br>&emsp;&emsp;在ConcurrentHashMap中，就是把Map分成了N个Segment，put和get的时候，都是现根据key.hashCode()算出放到哪个Segment中：<br>&emsp;&emsp;试想，原来 只能一个线程进入，现在却能同时16个写线程进入（写线程才需要锁定，而读线程几乎不受限制，之后会提到），并发性的提升是显而易见的。<br>&emsp;&emsp;更令人惊讶的是ConcurrentHashMap的读取并发，因为在读取的大多数时候都没有用到锁定，所以读取操作几乎是完全的并发操作，而写操作锁定的粒度又非常细，比起之前又更加快速（这一点在桶更多时表现得更明显些）。只有在求size等操作时才需要锁定整个表。  </p>
+</blockquote>
+<h2 id="37-Collection包结构，与Collections的区别。"><a href="#37-Collection包结构，与Collections的区别。" class="headerlink" title="37.Collection包结构，与Collections的区别。"></a>37.Collection包结构，与Collections的区别。</h2><blockquote>
+<p>Collection是集合类的顶级接口，实现它的接口和类主要有List和Set接口，以及他们的子类。<br>Collections是针对集合类的一个帮助类，提供操作集合的工具方法。一系列静态方法实现对各种集合的<strong>搜索、排序、线程安全化</strong>等操作。服务于java的Collection的框架。  </p>
+</blockquote>
+<h2 id="38-try-catch-finally，try里有return，finally还执行么？"><a href="#38-try-catch-finally，try里有return，finally还执行么？" class="headerlink" title="38.try catch finally，try里有return，finally还执行么？"></a>38.try catch finally，try里有return，finally还执行么？</h2><blockquote>
+<p>(1)、不管有木有出现异常，finally块中代码都会执行；<br>(2)、当try和catch中有return时，finally仍然会执行(finally语句块是在程序退出方法之前被执行的)；<br>(3)、在try语句中，try要把返回的结果放置到不同的局部变量当中，执行finaly之后，从中取出返回结果，因此，即使finaly中对变量进行了改变，但是不会影响返回结果，因为使用栈保存返回值，即使在finaly当中进行数值操作，但是影响不到之前保存下来的具体的值，所以return影响不了基本类型的值，这里使用的栈保存返回值。而如果修改list，map，自定义类等引用类型时，在进入了finaly之前保存了引用的地址， 所以在finaly中引用地址指向的内容改变了，影响了返回值。<br>具体参考此文章：<a href="/blog/2019/08/14/final、finally、finalize的用法/" target="_blank">final、finally、finalize的用法</a>   </p>
+</blockquote>
+<h2 id="39-Excption与Error包结构。OOM你遇到过哪些情况，SOF你遇到过哪些情况。"><a href="#39-Excption与Error包结构。OOM你遇到过哪些情况，SOF你遇到过哪些情况。" class="headerlink" title="39.Excption与Error包结构。OOM你遇到过哪些情况，SOF你遇到过哪些情况。"></a>39.Excption与Error包结构。OOM你遇到过哪些情况，SOF你遇到过哪些情况。</h2><blockquote>
+<p>Excption与Error的顶级接口都是Throwable。Java将可抛出(Throwable)的结构分为三种类型：被检查的异常(CheckedException)，运行时异常(RuntimeException)，错误(Error)。<br><strong>OOM：</strong><br>1，OutOfMemoryError异常（Java Heap溢出）一般的异常信息：java.lang.OutOfMemoryError:Java heap spacess。<br>2.虚拟机栈和本地方法栈溢出<br>3.运行时常量池溢出<br>4.方法区溢出<br><strong>SOF（堆栈溢出 StackOverflow）：</strong><br>StackOverflowError 的定义：当应用程序递归太深而发生堆栈溢出时，抛出该错误。<br><a href="https://blog.csdn.net/qiuchaoxi/article/details/79788993" target="_blank" rel="noopener">https://blog.csdn.net/qiuchaoxi/article/details/79788993</a>  </p>
+</blockquote>
+<h2 id="40-Java面向对象的三个特征与含义。"><a href="#40-Java面向对象的三个特征与含义。" class="headerlink" title="40.Java面向对象的三个特征与含义。"></a>40.Java面向对象的三个特征与含义。</h2><blockquote>
+<p>封装、继承、多态。<br>具体看这：<a href="/blog/2019/08/20/面向对象的三大基本特征，七大基本原则/" target="_blank">面向对象的三大基本特征，七大基本原则</a>   </p>
+</blockquote>
+<h2 id="41-Override和Overload的含义去区别。"><a href="#41-Override和Overload的含义去区别。" class="headerlink" title="41.Override和Overload的含义去区别。"></a>41.Override和Overload的含义去区别。</h2><blockquote>
+<p>Override：方法重写，同名同参同返回值<br>Overload：方法重载 ，同名不同参，返回值也可以不同   </p>
+</blockquote>
+<h2 id="42-Static-class-与non-static-class的区别。"><a href="#42-Static-class-与non-static-class的区别。" class="headerlink" title="42.Static class 与non static class的区别。"></a>42.Static class 与non static class的区别。</h2><blockquote>
+<p>&emsp;&emsp;内部静态类不需要有指向外部类的引用。但非静态内部类需要持有对外部类的引用。非静态内部类能够访问外部类的静态和非静态成员。静态类不能访问外部类的非静态成员。他只能访问外部类的静态成员。一个非静态内部类不能脱离外部类实体被创建，一个非静态内部类可以访问外部类的数据和方法，因为他就在外部类里面。<br>根据Oracle官方的说法：<br>&emsp;&emsp;Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes.<br>&emsp;&emsp;Non-static nested classes are called inner classes.<br>&emsp;&emsp;从字面上看，一个被称为静态嵌套类，一个被称为内部类。<br>&emsp;&emsp;从字面的角度解释是这样的：<br>&emsp;&emsp;什么是嵌套？嵌套就是我跟你没关系，自己可以完全独立存在，但是我就想借你的壳用一下，来隐藏一下我自己（真TM猥琐）。<br>&emsp;&emsp;什么是内部？内部就是我是你的一部分，我了解你，我知道你的全部，没有你就没有我。（所以内部类对象是以外部类对象存在为前提的）    </p>
+</blockquote>
+<h2 id="43-java多态的实现原理"><a href="#43-java多态的实现原理" class="headerlink" title="43. java多态的实现原理"></a>43. java多态的实现原理</h2><blockquote>
+<p>&emsp;&emsp;多态是指同一个行为具有多个不同表现形式或形态的能力。是指一个类实例(对象)的相同方法在不同情形有不同表现形式。多态机制使具有不同内部结构的对象可以共享相同的外部接口。这就意味着，虽然针对不同对象的具体操作不同，但通过一个公共的类，它们(那些操作)可以通过相同的方式给予调用。<br><strong>多态存在的三个必要条件：</strong><br>&emsp;&emsp;1.继承(接口)<br>&emsp;&emsp;2.重写(子类继承父类后对父类方法进行重新定义)<br>&emsp;&emsp;3.父类引用指向子类对象<br>&emsp;&emsp;简言之，<strong>多态其实是在继承的基础上的。</strong>比如说今天我们要去动物园参观动物，那么你说我们去参观兔子、参观绵羊、参观狮子、参观豹子都是对的，但你不能说我们去参观汽车。在这个例子中，子类具有多态性：除了使用自己的身份，还能充当父类。<br>具体看这：<a href="/blog/2019/08/20/面向对象的三大基本特征，七大基本原则/" target="_blank">面向对象的三大基本特征，七大基本原则</a>  </p>
+</blockquote>
+<h2 id="44-线程同步的方法：sychronized、lock、reentrantLock等。"><a href="#44-线程同步的方法：sychronized、lock、reentrantLock等。" class="headerlink" title="44.线程同步的方法：sychronized、lock、reentrantLock等。"></a>44.线程同步的方法：sychronized、lock、reentrantLock等。</h2><blockquote>
+<p>&emsp;&emsp;synchronized是托管给JVM执行的，而lock是java写的控制锁的代码。<br>&emsp;&emsp;synchronized原始采用的是CPU悲观锁机制，即线程获得的是独占锁。独占锁意味着其他线程只能依靠阻塞来等待线程释放锁。而在CPU转换线程阻塞时会引起线程上下文切换，当有很多线程竞争锁的时候，会引起CPU频繁的上下文切换导致效率很低。<br>&emsp;&emsp;Lock用的是乐观锁方式。每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直到成功为止。<br>&emsp;&emsp;<strong>ReentrantLock:</strong> 一个可重入的互斥锁 Lock，它具有与使用 synchronized 方法和语句所访问的<strong>隐式监视器</strong>锁相同的一些基本行为和语义，但功能更强大。<br>&emsp;&emsp;ReentrantLock必须在finally中释放锁，否则后果很严重，编码角度来说使用synchronized更加简单，不容易遗漏或者出错。<br>&emsp;&emsp;ReentrantLock提供了可轮询的锁请求，他可以尝试的去取得锁，如果取得成功则继续处理，取得不成功，可以等下次运行的时候处理，所以不容易产生死锁，而synchronized则一旦进入锁请求要么成功，要么一直阻塞，所以更容易产生死锁。<br>&emsp;&emsp;synchronized的话，锁的范围是整个方法或synchronized块部分；而Lock因为是方法调用，可以跨方法，灵活性更大<br>&emsp;&emsp;一般情况下都是用synchronized原语实现同步，除非下列情况使用ReentrantLock<br>&emsp;&emsp;①某个线程在等待一个锁的控制权的这段时间需要中断<br>&emsp;&emsp;②需要分开处理一些wait-notify，ReentrantLock里面的Condition应用，能够控制notify哪个线程<br>&emsp;&emsp;③具有公平锁功能，每个到来的线程都将排队等候  </p>
+</blockquote>
+<h2 id="45-锁的等级：方法锁、对象锁、类锁"><a href="#45-锁的等级：方法锁、对象锁、类锁" class="headerlink" title="45.锁的等级：方法锁、对象锁、类锁"></a>45.锁的等级：方法锁、对象锁、类锁</h2><details>
+<summary><mark><font color="darkred">点击查看详细内容</font></mark></summary>
+
+<blockquote>
+<p><strong>1.方法锁：</strong> 通过在方法声明中加入 synchronized关键字来声明 synchronized 方法。<br>synchronized方法控制对类成员变量的访问：  </p>
+<ul>
+<li>每个类实例对应一把锁  </li>
+<li>每个synchronized方法都必须获得调用该方法的类实例的锁方能执行，否则所属线程阻塞</li>
+<li>方法一旦执行，就独占该锁，直到从该方法返回时才将锁释放，此后被阻塞的线程方能获得该锁，重新进入可执行状态 </li>
+<li>所有声明为synchronized的成员函数中至多只有一个处于可执行状态，从而有效避免了类成员变量的访问冲突。</li>
+</ul>
+<p><strong>2.对象锁（实例对象锁）：</strong> 当一个对象中有synchronized method或synchronized block的时候调用此对象的同步方法或进入其同步区域时，就必须先获得对象锁。如果此对象的对象锁已被其他调用者占用，则需要等待此锁被释放。（<strong>方法锁也是对象锁</strong>）  </p>
+<ul>
+<li>Java的所有对象都含有1个互斥锁，这个锁由JVM自动获取和释放。</li>
+<li>线程进入synchronized方法的时候获取该对象的锁，当然如果已经有线程获取了这个对象的锁，那么当前线程会等待；</li>
+<li>synchronized方法正常返回或者抛异常而终止，JVM会自动释放对象锁。这里也体现了用synchronized来加锁的1个好处，<strong>方法抛异常的时候，锁仍然可以由JVM来自动释放。</strong>　  </li>
+</ul>
+<p>对象锁的两种形式：  </p>
+</blockquote>
+<pre><code>public class Test {
+    // 对象锁：形式1(方法锁) 
+    public synchronized void Method1(){ 
+        System.out.println(&quot;我是对象锁也是方法锁&quot;); 
+        try{ 
+            Thread.sleep(500); 
+        } catch (InterruptedException e){ 
+            e.printStackTrace(); 
+        } 
+
+    } 
+
+    // 对象锁：形式2（代码块形式） 
+    public void Method2(){ 
+        synchronized (this){ 
+            System.out.println(&quot;我是对象锁&quot;); 
+            try{ 
+                Thread.sleep(500); 
+            } catch (InterruptedException e){ 
+                e.printStackTrace(); 
+            } 
+        } 
+
+    } 
+}</code></pre><blockquote>
+<p><strong>3.类锁（Class对象锁）</strong><br>&emsp;&emsp;类锁即synchronized修饰静态的方法或代码块。<br>&emsp;&emsp;由于一个class不论被实例化多少次，其中的静态方法和静态变量在内存中都只有一份。所以，一旦一个静态的方法被申明为synchronized。此类所有的实例化对象在调用此方法，共用同一把锁，我们称之为类锁。<br>&emsp;&emsp;类锁与对象锁区别为：<br>&emsp;&emsp;<strong>对象锁是用来控制实例方法之间的同步，类锁是用来控制静态方法（或静态变量互斥体）之间的同步</strong><br>&emsp;&emsp;类锁只是一个概念上的东西，并不是真实存在的，它只是用来帮助我们理解锁定实例方法和静态方法的区别的。<br>&emsp;&emsp;Java类可能会有很多个对象，但是只有1个Class对象，也就是说类的不同实例之间共享该类的Class对象。Class对象其实也仅仅是1个Java对象，只不过有点特殊而已。由于每个Java对象都有1个互斥锁，而类的静态方法是需要Class对象。所以所谓的类锁，不过是Class对象的锁而已。获取类的Class对象有好几种，最简单的就是［类名.class］的方式。<br>&emsp;&emsp;示例代码如下： </p>
+</blockquote>
+<pre><code>public class Test {
+     // 类锁：形式1 
+    public static synchronized void Method1(){ 
+        System.out.println(&quot;我是类锁一号&quot;); 
+        try{ 
+            Thread.sleep(500); 
+        } catch (InterruptedException e){ 
+            e.printStackTrace(); 
+        } 
+
+    } 
+
+    // 类锁：形式2 
+    public void Method2(){ 
+        synchronized (Test.class){ 
+            System.out.println(&quot;我是类锁二号&quot;); 
+            try{ 
+                Thread.sleep(500); 
+            } catch (InterruptedException e){ 
+                e.printStackTrace(); 
+            } 
+        } 
+    } 
+}   </code></pre><p>原文：<a href="https://www.cnblogs.com/cherish010/p/8337706.html" target="_blank" rel="noopener">https://www.cnblogs.com/cherish010/p/8337706.html</a>  </p>
+</details>  
+
+<h2 id="46-写出生产者消费者模式"><a href="#46-写出生产者消费者模式" class="headerlink" title="46.写出生产者消费者模式"></a>46.写出生产者消费者模式</h2><blockquote>
+<p>具体参考此文章：<a href="/blog/2020/03/20/生产者消费者模式/" target="_blank">生产者消费者模式</a>  </p>
+</blockquote>
+<h2 id="47-ThreadLocal的设计理念与作用。"><a href="#47-ThreadLocal的设计理念与作用。" class="headerlink" title="47.ThreadLocal的设计理念与作用。"></a>47.ThreadLocal的设计理念与作用。</h2><details>
+<summary><mark><font color="darkred">点击查看详细内容</font></mark></summary>
+
+<blockquote>
+<p>Java中的ThreadLocal类允许我们创建只能被同一个线程读写的变量。因此，如果一段代码含有一个ThreadLocal变量的引用，即使两个线程同时执行这段代码，它们也无法访问到对方的ThreadLocal变量。   </p>
+</blockquote>
+<pre><code>public class ThreadLocalExample {
+
+    public static class MyRunnable implements Runnable{
+
+        private ThreadLocal&lt;Integer&gt; threadLocal = new ThreadLocal&lt;&gt;();
+
+        private int a=0;
+
+        @Override
+        public void run() {
+            a = (int)(Math.random()*100);
+            threadLocal.set(a);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(a+&quot;--&quot;+threadLocal.get());
+        }
+    }
+
+    public static void main(String[] args) {
+        MyRunnable sharedRunnableInstance = new MyRunnable();
+        Thread thread1 = new Thread(sharedRunnableInstance);
+        Thread thread2 = new Thread(sharedRunnableInstance);
+        thread1.start();
+        thread2.start();
+    }
+}  </code></pre><p>输出结果  </p>
+<pre><code>26--27
+26--26</code></pre><p>很明显普通变量a的值被第二个线程覆盖了，而使用了ThreadLocal对象之后，他们明显无法看到对方保存的值。<br><a href="https://blog.csdn.net/u011860731/article/details/48733073" target="_blank" rel="noopener">https://blog.csdn.net/u011860731/article/details/48733073</a>   </p>
+</details>
+
+<h2 id="48-Concurrent包里的其他东西：ArrayBlockingQueue、CountDownLatch等等。"><a href="#48-Concurrent包里的其他东西：ArrayBlockingQueue、CountDownLatch等等。" class="headerlink" title="48.Concurrent包里的其他东西：ArrayBlockingQueue、CountDownLatch等等。"></a>48.Concurrent包里的其他东西：ArrayBlockingQueue、CountDownLatch等等。</h2><details>
+<summary><mark><font color="darkred">点击查看详细内容</font></mark></summary>
+
+<blockquote>
+<p>1.<strong>BlockingQueue(阻塞队列)：</strong>如果BlockingQueue是空的，从BlockingQueue取东西的操作将会被阻断进入等待状态，直到BlockingQueue进了东西才会被唤醒，同样，如果BlockingQueue是满的，任何试图往里存东西的操作也会被阻断进入等待状态，直到BlockingQueue里有空间时才会被唤醒继续操作。<br><br><strong>BlockingQueue有四个具体的实现类:</strong><br><strong>ArrayBlockingQueue：</strong>规定大小的BlockingQueue，其构造函数必须带一个int参数来指明其大小。其所含的对象是以FIFO（先入先出）顺序排序的。<br><strong>LinkedBlockingQueue：</strong>大小不定的BlockingQueue，若其构造函数带一个规定大小的参数，生成的BlockingQueue有大小限制，若不带大小参数，所生成的BlockingQueue的大小由Integer.MAX_VALUE来决定。其所含的对象是以FIFO顺序排序的。<br><strong>PriorityBlockingQueue：</strong>类似于LinkedBlockingQueue,但其所含对象的排序不是FIFO，而是依据对象的自然排序顺序或者是构造函数所带的Comparator决定的顺序。<br><strong>SynchronousQueue：</strong>特殊的BlockingQueue，对其的操作必须是放和取交替完成的。<br><br>2.<strong>semaphore：Java 并发库</strong> 的Semaphore 可以很轻松完成信号量控制，Semaphore可以控制某个资源可被同时访问的个数，acquire()获取一个许可，如果没有就等待，而release()释放一个许可。比如在Windows下可以设置共享文件的最大客户端访问个数。<br><br>3.<strong>countdownLatch：</strong> CountDownLatch的一个非常典型的应用场景是：有一个任务想要往下执行，但必须要等到其他的任务执行完毕后才可以继续往下执行。假如我们这个想要继续往下执行的任务调用一个CountDownLatch对象的await()方法，其他的任务执行完自己的任务后调用同一个CountDownLatch对象上的countDown()方法，这个调用await()方法的任务将一直阻塞等待，直到这个CountDownLatch对象的计数值减到0为止。（当每个线程调用countdown方法直到将countdownlatch方法创建时数减为0时，那么之前调用await（）方法的线程才会继续执行。有一点注意，那就是只执行一次，不能到0以后重新执行）。<br><br>4.<strong>CyclicBarrier：</strong>类有一个整数初始值，此值表示将在同一点同步的线程数量。当其中一个线程到达确定点，它会调用await() 方法来等待其他线程。当线程调用这个方法，CyclicBarrier阻塞线程进入休眠直到其他线程到达。当最后一个线程调用CyclicBarrier 类的await() 方法，它唤醒所有等待的线程并继续执行它们的任务。（当等待的线程数量达到CyclicBarrier线程指定的数量以后（调用await方法的线程数），才一起往下执行，否则大家都在等待，注意：如果达到指定的线程数量的时候：则可以重新计数，上面的过程可以循环）。<br><br>5.CountDownLatch是减计数方式，计数==0时释放所有等待的线程；CyclicBarrier是加计数方式，计数达到构造方法中参数指定的值时释放所有等待的线程。<br><a href="https://www.cnblogs.com/feicheninfo/p/9679042.html" target="_blank" rel="noopener">https://www.cnblogs.com/feicheninfo/p/9679042.html</a>  </p>
+</blockquote>
+</details> 
+
+<h2 id="49-wait-和sleep-的区别。"><a href="#49-wait-和sleep-的区别。" class="headerlink" title="49.wait()和sleep()的区别。"></a>49.wait()和sleep()的区别。</h2><details>
+<summary><mark><font color="darkred">点击查看详细内容</font></mark></summary>
+
+<blockquote>
+<p>sleep()是使线程暂停执行一段时间的方法。wait()也是一种使线程暂停执行的方法。例如，当线程执行wait()方法时候，会释放当前的锁，然后让出CPU，进入等待状态。并且可以调用notify（）方法或者notifyAll（）方法通知正在等待的其他线程。notify（）方法仅唤醒一个线程（等待队列中的第一个线程）并允许他去获得锁。notifyAll（）方法唤醒所有等待这个对象的线程并允许他们去竞争获得锁。具体区别如下：<br>1)  原理不同。sleep()方法是Thread类的静态方法，是线程用来控制自身流程的，他会使此线程暂停执行一段时间，而把执行机会让给其他线程，等到计时时间一到，此线程会自动苏醒。例如，当线程执行报时功能时，每一秒钟打印出一个时间，那么此时就需要在打印方法前面加一个sleep()方法，以便让自己每隔一秒执行一次，该过程如同闹钟一样。而wait()方法是object类的方法，用于线程间通信，这个方法会使当前拥有该对象锁的进程等待，直到其他线程调用notify（）方法或者notifyAll（）时才醒来，不过开发人员也可以给他指定一个时间，自动醒来。<br>2)  对锁的 处理机制不同。由于sleep()方法的主要作用是让线程暂停执行一段时间，时间一到则自动恢复，不涉及线程间的通信，因此，调用sleep()方法并不会释放锁。而wait()方法则不同，当调用wait()方法后，线程会释放掉他所占用的锁，从而使线程所在对象中的其他synchronized数据可以被其他线程使用。<br>3)  使用区域不同。wait()方法必须放在同步控制方法和同步代码块中使用，sleep()方法则可以放在任何地方使用。sleep()方法必须捕获异常，而wait()、notify（）、notifyAll（）不需要捕获异常。在sleep的过程中，有可能被其他对象调用他的interrupt（），产生InterruptedException。由于sleep不会释放锁标志，容易导致死锁问题的发生，因此一般情况下，推荐使用wait（）方法。<br><a href="https://blog.csdn.net/qiuchaoxi/article/details/79837568" target="_blank" rel="noopener">https://blog.csdn.net/qiuchaoxi/article/details/79837568</a></p>
+</blockquote>
+</details> 
+
+<h2 id="50-foreach与正常for循环效率对比"><a href="#50-foreach与正常for循环效率对比" class="headerlink" title="50.foreach与正常for循环效率对比"></a>50.foreach与正常for循环效率对比</h2><blockquote>
+<p>对于for循环就是调用get(i)取得元素，而对于foreach是通过iterator实现的遍历。<br>对于ArrayList来说，它是通过一个数组实现的，可以随机存取；但是LinkedList是通过链表实现的，for循环时要获取第i个元素必须从头开始遍历，而iterator遍历就是从头开始遍历，遍历完只需要一次，所以for循环需要的时间远远超过foreach循环。<br>总结：<br>对于数组来说，for和foreach循环效率差不多，但是对于链表来说，for循环效率明显比foreach低。  </p>
+</blockquote>
+<h2 id="51-Java-IO与NIO"><a href="#51-Java-IO与NIO" class="headerlink" title="51.Java IO与NIO"></a>51.Java IO与NIO</h2><blockquote>
+<p><strong>概念：</strong><br>NIO即New IO，这个库是在JDK1.4中才引入的。NIO和IO有相同的作用和目的，但实现方式不同，NIO主要用到的是块，所以NIO的效率要比IO高很多。在Java API中提供了两套NIO，一套是针对标准输入输出NIO，另一套就是网络编程NIO。<br><strong>区别：</strong><br><strong>1、面向流与面向缓冲：</strong>Java IO和NIO之间第一个最大的区别是，IO是面向流的，NIO是面向缓冲区的。 Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。 Java NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。<br><strong>2、阻塞与非阻塞IO：</strong>Java IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。Java NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取，而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。<br><strong>3、选择器（Selectors）</strong>Java NIO的选择器允许一个单独的线程来监视多个输入通道，你可以注册多个通道使用一个选择器，然后使用一个单独的线程来“选择”通道：这些通道里已经有可以处理的输入，或者选择已准备写入的通道。这种选择机制，使得一个单独的线程很容易来管理多个通道。<br><a href="https://www.jianshu.com/p/fc3542868c84" target="_blank" rel="noopener">https://www.jianshu.com/p/fc3542868c84</a>  </p>
+</blockquote>
+<h2 id="52-反射的作用与原理"><a href="#52-反射的作用与原理" class="headerlink" title="52.反射的作用与原理"></a>52.反射的作用与原理</h2><blockquote>
+<p><strong>概念：</strong><br>反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；<br>对于任意一个对象，都能够调用它的任意一个方法和属性；<br>这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。<br><strong>作用：</strong><br>1.在运行时判断任意一个对象所属的类；<br>2.在运行时构造任意一个类的对象；<br>3.在运行时判断任意一个类所具有的成员变量和方法；<br>4.在运行时调用任意一个对象的方法；<br>5.生成动态代理。  </p>
+</blockquote>
+<h2 id="53-泛型常用特点，List-lt-String-gt-能否转为List-lt-Object-gt-。"><a href="#53-泛型常用特点，List-lt-String-gt-能否转为List-lt-Object-gt-。" class="headerlink" title="53.泛型常用特点，List&lt;String&gt;能否转为List&lt;Object&gt;。"></a>53.泛型常用特点，List&lt;String&gt;能否转为List&lt;Object&gt;。</h2><blockquote>
+<p>不能。<br>String 是 Object 的子类型，但是 List&lt;String&gt; 不是 List&lt;Object&gt; 的子类型<br><a href="https://developer.aliyun.com/ask/128778?spm=a2c6h.13159736" target="_blank" rel="noopener">https://developer.aliyun.com/ask/128778?spm=a2c6h.13159736</a>  </p>
+</blockquote>
+<h2 id="54-解析XML的几种方式的原理与特点：DOM、SAX、PULL"><a href="#54-解析XML的几种方式的原理与特点：DOM、SAX、PULL" class="headerlink" title="54.解析XML的几种方式的原理与特点：DOM、SAX、PULL"></a>54.解析XML的几种方式的原理与特点：DOM、SAX、PULL</h2><blockquote>
+<p>DOM:会一次性将所有内容读取到内存中，便于操作；支持删除、修改，重新排列等多种功能。不适合占用内存大的数据结构。<br>SAX:解析采用事件驱动型。解析效率高，占用内存少;可以随时停止解析。<br>PULL解析：解析原理类似SAX解析。不同点：pull读取xml文件后出发相应的事件调用方法返回的是数字；pull可以在程序中复制，想解析到那里就可以停止在哪里。  </p>
+</blockquote>
+<h2 id="55-Java1-7与1-8新特性"><a href="#55-Java1-7与1-8新特性" class="headerlink" title="55.Java1.7与1.8新特性"></a>55.Java1.7与1.8新特性</h2><blockquote>
+<p><a href="/blog/2020/03/26/JAVA7与JAVA8的新特性/" target="_blank">JAVA7与JAVA8的新特性</a>   </p>
+</blockquote>
+<h2 id="56-设计模式：单例、工厂、适配器、责任链、观察者等等"><a href="#56-设计模式：单例、工厂、适配器、责任链、观察者等等" class="headerlink" title="56.设计模式：单例、工厂、适配器、责任链、观察者等等"></a>56.设计模式：单例、工厂、适配器、责任链、观察者等等</h2><blockquote>
+<p><a href="/blog/2019/08/28/设计模式/" target="_blank">设计模式</a> </p>
+</blockquote>
+<h2 id="57-JNI的使用"><a href="#57-JNI的使用" class="headerlink" title="57.JNI的使用"></a>57.JNI的使用</h2><blockquote>
+<p><a href="/blog/2019/08/21/java中native的用法/" target="_blank">java中native的用法</a></p>
+</blockquote>
+<h2 id="58-JVM面试知识点整理"><a href="#58-JVM面试知识点整理" class="headerlink" title="58.JVM面试知识点整理"></a>58.JVM面试知识点整理</h2><blockquote>
+<p><a href="/blog/2020/03/26/JVM面试知识点/" target="_blank">JVM面试知识点</a>  </p>
+</blockquote>
+<h2 id="59-java死锁的原因例子及解决方法"><a href="#59-java死锁的原因例子及解决方法" class="headerlink" title="59.java死锁的原因例子及解决方法"></a>59.java死锁的原因例子及解决方法</h2><blockquote>
+<p>Java发生死锁的根本原因是：在申请锁时发生了交叉闭环申请。即线程在获得了锁A并且没有释放的情况下去申请锁B，这时，另一个线程已经获得了锁B，在释放锁B之前又要先获得锁A，因此闭环发生，陷入死锁循环。  </p>
+</blockquote>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

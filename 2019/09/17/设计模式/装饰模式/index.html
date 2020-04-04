@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>装饰模式 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="装饰模式又叫装饰器模式(Decorator Pattern)允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。这种模式创建了一个装饰,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">装饰模式</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">装饰模式</h1>
+        <div class="stuff">
+            <span>九月 17, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>装饰模式又叫装饰器模式(Decorator Pattern)允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。<br>这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。  </p>
+<a id="more"></a>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><strong>意图：</strong>动态的给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。<br><strong>主要解决：</strong>一般的，我们为了扩展一个类经常使用继承的方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会膨胀。<br><strong>何时使用：</strong>在不想增加很多子类的情况下扩展类。<br><strong>如何解决：</strong>将具体功能职责划分，同时继承装饰者模式。<br><strong>关键代码：</strong>1、Component类充当抽象角色，不应该具体实现。2、修饰类引用和继承Component类，具体扩展类重写父类方法。<br><strong>应用实例：</strong> 1、孙悟空有 72 变，当他变成”庙宇”后，他的根本还是一只猴子，但是他又有了庙宇的功能。 2、不论一幅画有没有画框都可以挂在墙上，但是通常都是有画框的，并且实际上是画框被挂在墙上。在挂在墙上之前，画可以被蒙上玻璃，装到框子里；这时画、玻璃和画框形成了一个物体。<br><strong>优点：</strong> 装饰类和被装饰类可以独立发展，不会互相耦合，装饰模式是继承的一个替代模式，装饰模式可以动态扩展一个实现类的功能。<br><strong>缺点：</strong>多层装饰比较复杂。<br><strong>使用场景：</strong> 1、扩展一个类的功能。2、动态增加功能，动态撤销。<br><strong>注意事项：</strong>可替代继承。  </p>
+<h2 id="2-模式原理"><a href="#2-模式原理" class="headerlink" title="2.模式原理"></a>2.模式原理</h2><h3 id="2-1-UML类图"><a href="#2-1-UML类图" class="headerlink" title="2.1 UML类图"></a>2.1 UML类图</h3><img src="/blog/img/2019/09/17/1.png">   
+
+<h2 id="3-基本代码实现"><a href="#3-基本代码实现" class="headerlink" title="3.基本代码实现"></a>3.基本代码实现</h2><p>Component类  </p>
+<pre><code>public abstract class Component{
+    public abstract void operation();
+}  </code></pre><p>ConcreteComponent类  </p>
+<pre><code>public class ConcreteComponent extends Component{
+    @Override
+    public void operation() {
+        System.out.println(&quot;具体的操作对象&quot;);
+    }
+}</code></pre><p>Decorator类  </p>
+<pre><code>public class Decorator extends Component{
+
+    Component component;
+
+    public void setComponent(Component component){
+        this.component=component;
+    }
+
+    @Override
+    public void operation() {
+        if(component!=null){
+            component.operation();
+        }
+    }
+}</code></pre><p>ConcreteDecoratorA类</p>
+<pre><code>public class ConcreteDecoratorA extends Decorator{
+    private String addedState;
+    @Override
+    public void operation() {
+        super.operation();
+        addedState = &quot;New State&quot;;
+        System.out.println(&quot;具体装饰对象A的操作&quot;);
+    }
+}</code></pre><p>ConcreteDecoratorB类</p>
+<pre><code>public class ConcreteDecoratorB extends Decorator{
+    @Override
+    public void operation() {
+        super.operation();
+        addedBehavior();
+        System.out.println(&quot;具体装饰对象B的操作&quot;);
+    }
+
+    private void addedBehavior() {
+
+    }
+}</code></pre><p>客户端代码  </p>
+<pre><code>public class Client {
+    public static void main(String[] args) {
+        ConcreteComponent c = new ConcreteComponent();
+        ConcreteDecoratorA d1 = new ConcreteDecoratorA();
+        ConcreteDecoratorB d2 = new ConcreteDecoratorB();
+
+        //装饰过程
+        d1.setComponent(c);
+        d2.setComponent(d1);
+        d2.operation();
+    }
+}</code></pre><p>运行结果  </p>
+<pre><code>具体的操作对象
+具体装饰对象A的操作
+具体装饰对象B的操作</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/decorator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/decorator-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>    </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

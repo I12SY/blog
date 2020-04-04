@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SQL相关面试知识 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="整理了一些数据库的相关开发规范。  
+  
+一、数据库sql开发规范（SQL优化）1.SELECT子句中避免使用*
+在select子句中使用* 号会降低执行效率。使用select * 的时候，数据库,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">SQL相关面试知识</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">SQL相关面试知识</h1>
+        <div class="stuff">
+            <span>三月 18, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>整理了一些数据库的相关开发规范。  </p>
+<a id="more"></a>  
+<h1 id="一、数据库sql开发规范（SQL优化）"><a href="#一、数据库sql开发规范（SQL优化）" class="headerlink" title="一、数据库sql开发规范（SQL优化）"></a>一、数据库sql开发规范（SQL优化）</h1><h2 id="1-SELECT子句中避免使用"><a href="#1-SELECT子句中避免使用" class="headerlink" title="1.SELECT子句中避免使用*"></a>1.SELECT子句中避免使用*</h2><blockquote>
+<p>在select子句中使用* 号会降低执行效率。使用select * 的时候，数据库在解析过程中会查询数据字段，将* 依次替换成所有的字段名。其次如果新增表字段，程序中存在insert into XXX select * 的话，可能会导致程序运行报错。  </p>
+</blockquote>
+<h2 id="2-对分区表进行查询时，尽量把分区键作为查询条件的第一个条件"><a href="#2-对分区表进行查询时，尽量把分区键作为查询条件的第一个条件" class="headerlink" title="2.对分区表进行查询时，尽量把分区键作为查询条件的第一个条件"></a>2.对分区表进行查询时，尽量把分区键作为查询条件的第一个条件</h2><h2 id="3-使用group-by替换distinct"><a href="#3-使用group-by替换distinct" class="headerlink" title="3.使用group by替换distinct"></a>3.使用group by替换distinct</h2><blockquote>
+<p>1）DISTINCT和GROUP BY都需要进行排序操作，但DISTINCT是要排序整个的查询数据，而GROUP BY是在分组后进行排序。<br>2）做执行计划的时候可以看出DISTINCT的CPU成本是高于GROUP BY的， 但由于GROUP BY会先形成一个内嵌视力再做count， 所以GROUP BY的IO成本高于DISTINCT。当一个表的分组字段不是唯一的但取唯一值时， GROUP BY的执行效率会比DISTINCT高。 当分组字段是唯一值时，GROUP BY的执行效率和DISTINCT一样。  </p>
+</blockquote>
+<h2 id="4-SQL嵌套层数不能过多"><a href="#4-SQL嵌套层数不能过多" class="headerlink" title="4.SQL嵌套层数不能过多"></a>4.SQL嵌套层数不能过多</h2><blockquote>
+<p>SQL嵌套层数过多会影响最优执行计划的生成，执行计划容易变化，最终造成SQL执行效率降低，影响数据库的稳定性。因此规范SQL嵌套层数不宜过多。  </p>
+</blockquote>
+<h2 id="5-无条件删除表中数据时，用TRUNCATE代替DELETE"><a href="#5-无条件删除表中数据时，用TRUNCATE代替DELETE" class="headerlink" title="5.无条件删除表中数据时，用TRUNCATE代替DELETE"></a>5.无条件删除表中数据时，用TRUNCATE代替DELETE</h2><blockquote>
+<p>TRUNCATE清空表数据时，自增长的键会重新从1开始增加。  </p>
+</blockquote>
+<h2 id="6-用EXISTS替代IN"><a href="#6-用EXISTS替代IN" class="headerlink" title="6.用EXISTS替代IN"></a>6.用EXISTS替代IN</h2><blockquote>
+<p>使用exists的执行效率比使用in更高。  </p>
+</blockquote>
+<h2 id="7-尽可能用UNION-ALL替换UNION"><a href="#7-尽可能用UNION-ALL替换UNION" class="headerlink" title="7.尽可能用UNION ALL替换UNION"></a>7.尽可能用UNION ALL替换UNION</h2><blockquote>
+<p>当SQL语句需要UNION两个查询结果集合时，这两个结果集合会以UNION ALL的方式被合并， 然后在输出最终结果前进行排序。<br>如果用UNION ALL替代UNION，就不需排序，提高了查询效率。</p>
+</blockquote>
+<h2 id="8-避免使用NOT"><a href="#8-避免使用NOT" class="headerlink" title="8.避免使用NOT"></a>8.避免使用NOT</h2><blockquote>
+<p>NOT运算符包含在另外一个逻辑运算符中，这就是不等于（&lt;&gt;）运算符。换句话说，即使不在查询WHERE子句中显式地加入NOT词，NOT仍在运算符中。<br>SELECT * FROM EMPLOYEE WHERE SALARY &lt;&gt; 3000;<br>对这个查询，可以改写为不使用NOT：<br>SELECT * FROM EMPLOYEE WHERE SALARY &lt; 3000 OR SALARY &gt; 3000;<br>虽然这两种查询的结果一样，但是第二种查询方案会比第一种查询方案更快些。第二种查询对SALARY列使用索引，而第一种查询则不能使用索引。  </p>
+</blockquote>
+<h2 id="9-子查询改写成表连接查询"><a href="#9-子查询改写成表连接查询" class="headerlink" title="9.子查询改写成表连接查询"></a>9.子查询改写成表连接查询</h2><blockquote>
+<p>通常来说，表关联(left join)的执行效率比子查询更高。<br>但是并不是所有的子查询都可以改写成表关联的方式，只有当表关联的字段存在唯一性时才可以改写，否则重复字段会产生笛卡尔积。  </p>
+</blockquote>
+<h2 id="10-索引不会包含有NULL值的列"><a href="#10-索引不会包含有NULL值的列" class="headerlink" title="10.索引不会包含有NULL值的列"></a>10.索引不会包含有NULL值的列</h2><blockquote>
+<p>只要列中包含有NULL值都将不会被包含在索引中，复合索引中只要有一列含有NULL值，那么这一列对于此复合索引就是无效的。所以我们在数据库设计时不要让字段的默认值为NULL。  </p>
+</blockquote>
+<h2 id="11-使用短索引"><a href="#11-使用短索引" class="headerlink" title="11.使用短索引"></a>11.使用短索引</h2><blockquote>
+<p>对串列进行索引，如果可能应该指定一个前缀长度。例如，如果有一个CHAR(255)的列，如果在前10个或20个字符内，多数值是惟一的，那么就不要对整个列进行索引。短索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作  </p>
+</blockquote>
+<h2 id="12-索引列排序"><a href="#12-索引列排序" class="headerlink" title="12.索引列排序"></a>12.索引列排序</h2><blockquote>
+<p>MySQL查询只使用一个索引，因此如果where子句中已经使用了索引的话，那么order by中的列是不会使用索引的。因此数据库默认排序可以符合要求的情况下不要使用排序操作；尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引。  </p>
+</blockquote>
+<h2 id="13-like语句操作"><a href="#13-like语句操作" class="headerlink" title="13.like语句操作"></a>13.like语句操作</h2><blockquote>
+<p>一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。  </p>
+</blockquote>
+<h2 id="14-不要在列上进行运算"><a href="#14-不要在列上进行运算" class="headerlink" title="14.不要在列上进行运算"></a>14.不要在列上进行运算</h2><blockquote>
+<p>select * from users where YEAR(adddate)&lt;2007; 将在每个行上进行运算，这将导致索引失效而进行全表扫描，因此我们可以改成 select * from users where adddate&lt;‘2007-01-01’;  </p>
+</blockquote>
+<h2 id="15-尽量不使用NOT-IN和-lt-gt-操作"><a href="#15-尽量不使用NOT-IN和-lt-gt-操作" class="headerlink" title="15.尽量不使用NOT IN和&lt;&gt;操作"></a>15.尽量不使用NOT IN和&lt;&gt;操作</h2><blockquote>
+<p>当有Null空值时，可能会造成查询结果不准确<br>解决办法：<br>    1.使用EXISTS 或 NOT EXISTS 代替<br>    2.用JOIN 代替  </p>
+</blockquote>
+<h2 id="16-limit-分布优化，先利用ID定位，再分页"><a href="#16-limit-分布优化，先利用ID定位，再分页" class="headerlink" title="16.limit 分布优化，先利用ID定位，再分页"></a>16.limit 分布优化，先利用ID定位，再分页</h2><h2 id="17-or条件优化，多个or条件可以用union-all对结果进行合并（union-all结果可能重复）"><a href="#17-or条件优化，多个or条件可以用union-all对结果进行合并（union-all结果可能重复）" class="headerlink" title="17.or条件优化，多个or条件可以用union all对结果进行合并（union all结果可能重复）"></a>17.or条件优化，多个or条件可以用union all对结果进行合并（union all结果可能重复）</h2><h2 id="18-不必要的排序-见12"><a href="#18-不必要的排序-见12" class="headerlink" title="18.不必要的排序(见12)"></a>18.不必要的排序(见12)</h2><h2 id="19-where代替having-having-检索完所有记录，才进行过滤"><a href="#19-where代替having-having-检索完所有记录，才进行过滤" class="headerlink" title="19.where代替having,having 检索完所有记录，才进行过滤"></a>19.where代替having,having 检索完所有记录，才进行过滤</h2><h2 id="20-对多个字段进行等值查询时，联合索引"><a href="#20-对多个字段进行等值查询时，联合索引" class="headerlink" title="20.对多个字段进行等值查询时，联合索引"></a>20.对多个字段进行等值查询时，联合索引</h2><h1 id="二、数据库建表规范"><a href="#二、数据库建表规范" class="headerlink" title="二、数据库建表规范"></a>二、数据库建表规范</h1><h2 id="1-分区"><a href="#1-分区" class="headerlink" title="1.分区"></a>1.分区</h2><blockquote>
+<p>除定量维表外，其他表都需要创建成分区表。  </p>
+</blockquote>
+<h2 id="2-压缩"><a href="#2-压缩" class="headerlink" title="2.压缩"></a>2.压缩</h2><blockquote>
+<p>数据库所有表都需要进行压缩，以减少数据库表空间的使用。<br>ORACLE中设置为压缩表： alter table schema.table_name compress for query high;<br>DB2中设置为压缩表：alter table schema.table_name compress yes;  </p>
+</blockquote>
+<h2 id="3-GP临时表的创建及使用"><a href="#3-GP临时表的创建及使用" class="headerlink" title="3.GP临时表的创建及使用"></a>3.GP临时表的创建及使用</h2><pre><code>1） 模式
+    临时表创建在MASATMP模式下，方便统一管理。
+2） 命名
+    临时表命名规范： masatmp.tmp_[姓名简称]_[预计清理日期]_[自定义]。
+    姓名简称： 如lc
+    预计清理日期： 0代表按默认保存周期。 也可自定义清理日期， 如20180930，但保存时间不能超过2个月。
+    如： masatmp.tmp_lc_0_lcceshi、masatmp.tmp_lc_20180930_lcceshi。
+3） 保存周期
+    规范临时表，按指定的保存周期保存。默认保存30天， 自定义的按设定好的保存（设定的保存周期不能超过2个月）。
+    不规范临时表仅保留7天；
+    在数据库存储资源不足的情况下， 无需确认可全部清空临时表。</code></pre><h1 id="三、常见面试题"><a href="#三、常见面试题" class="headerlink" title="三、常见面试题"></a>三、常见面试题</h1><h2 id="1-事务的四大特性"><a href="#1-事务的四大特性" class="headerlink" title="1.事务的四大特性"></a>1.事务的四大特性</h2><pre><code>原子性，原子性是指事务包含的所有操作要么全部成功，要么全部失败回滚。失败回滚的操作事务，将不能对事物有任何影响。
+
+隔离性，隔离性是指当多个用户并发访问数据库时，比如同时访问一张表，数据库每一个用户开启的事务，不能被其他事务所做的操作干扰，多个并发事务之间，应当相互隔离
+
+一致性，事务前后，数据总额一致。一致性是指事务必须使数据库从一个一致性状态变换到另一个一致性状态，也就是说一个事务执行之前和执行之后都必须处于一致性状态。  
+例如完整性约束a+b=10，一个事务改变了a，那么b也应随之改变。
+
+持久性，持久性是指事务的操作，一旦提交，对于数据库中数据的改变是永久性的，即使数据库发生故障也不能丢失已提交事务所完成的改变。</code></pre><h2 id="2-数据库隔离级别"><a href="#2-数据库隔离级别" class="headerlink" title="2.数据库隔离级别"></a>2.数据库隔离级别</h2><pre><code>1）读未提交（Read Uncommitted）
+    读未提交，顾名思义，就是可以读到未提交的内容。
+    因此，在这种隔离级别下，查询是不会加锁的，也由于查询的不加锁，所以这种隔离级别的一致性是最差的，可能会产生“脏读”、“不可重复读”、“幻读”。
+    如无特殊情况，基本是不会使用这种隔离级别的。
+2）读已提交（Read Committed）
+    读已提交，顾名思义，就是只能读到已经提交了的内容。
+    这是各种系统中最常用的一种隔离级别，也是SQL Server和Oracle的默认隔离级别。这种隔离级别能够有效的避免脏读，但除非在查询中显示的加锁，如：
+    select * from T where ID=2 lock in share mode;
+    select * from T where ID=2 for update;
+    不然，普通的查询是不会加锁的。
+    那为什么“读提交”同“读未提交”一样，都没有查询加锁，但是却能够避免脏读呢？
+    这就要说道另一个机制“快照（snapshot）”，而这种既能保证一致性又不加锁的读也被称为“快照读（Snapshot Read）”
+    假设没有“快照读”，那么当一个更新的事务没有提交时，另一个对更新数据进行查询的事务会因为无法查询而被阻塞，这种情况下，并发能力就相当的差。
+    而“快照读”就可以完成高并发的查询，不过，“读提交”只能避免“脏读”，并不能避免“不可重复读”和“幻读”。
+3）可重复读（Repeated Read）
+    可重复读，顾名思义，就是专门针对“不可重复读”这种情况而制定的隔离级别，自然，它就可以有效的避免“不可重复读”。而它也是MySql的默认隔离级别。  
+    在这个级别下，普通的查询同样是使用的“快照读”，但是，和“读提交”不同的是，当事务启动时，就不允许进行“修改操作（Update）”了，而“不可重复读”恰恰是因为两次读取之间进行了数据的修改，因此，“可重复读”能够有效的避免“不可重复读”，但却避免不了“幻读”，因为幻读是由于“插入或者删除操作（Insert or Delete）”而产生的。
+4）串行化（Serializable）
+    这是数据库最高的隔离级别，这种级别下，事务“串行化顺序执行”，也就是一个一个排队执行。  
+    这种级别下，“脏读”、“不可重复读”、“幻读”都可以被避免，但是执行效率奇差，性能开销也最大，所以基本没人会用。
+
+为什么会出现“脏读”？因为没有“select”操作没有规矩。
+
+为什么会出现“不可重复读”？因为“update”操作没有规矩。
+
+为什么会出现“幻读”？因为“insert”和“delete”操作没有规矩。  </code></pre><p><a href="https://baijiahao.baidu.com/s?id=1611918898724887602&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1611918898724887602&amp;wfr=spider&amp;for=pc</a>  </p>
+<h2 id="3-MYSQL的两种存储引擎区别（事务、锁级别等等），各自的适用场景"><a href="#3-MYSQL的两种存储引擎区别（事务、锁级别等等），各自的适用场景" class="headerlink" title="3.MYSQL的两种存储引擎区别（事务、锁级别等等），各自的适用场景"></a>3.MYSQL的两种存储引擎区别（事务、锁级别等等），各自的适用场景</h2><blockquote>
+<p>MYISAM:不支持外键，表锁，插入数据时，锁定整个表，查表总行数时，不需要全表扫描<br>INNODB:支持外键，行锁，查表总行数时，全表扫描</p>
+</blockquote>
+<h2 id="4-索引有B-索引和hash索引"><a href="#4-索引有B-索引和hash索引" class="headerlink" title="4.索引有B+索引和hash索引"></a>4.索引有B+索引和hash索引</h2><blockquote>
+<p>Hash:hash索引，等值查询效率高，不能排序,不能进行范围查询<br>B+:数据有序,范围查询<br>因为Hash索引底层是哈希表，哈希表是一种以key-value存储数据的结构，所以多个数据在存储关系上是完全没有任何顺序关系的，所以，对于区间查询是无法直接通过索引查询的，就需要全表扫描。所以，哈希索引只适用于等值查询的场景。而B+ Tree是一种多路平衡查询树，所以他的节点是天然有序的（左子节点小于父节点、父节点小于右子节点），所以对于范围查询的时候不需要做全表扫描。<br>B+ Tree索引和Hash索引区别：哈希索引适合等值查询，但是无法进行范围查询，哈希索引没办法利用索引完成排序，哈希索引不支持多列联合索引的最左匹配规则，如果有大量重复键值得情况下，哈希索引的效率会很低，因为存在哈希碰撞问题。  </p>
+</blockquote>
+<h2 id="5-聚集索引和非聚集索引"><a href="#5-聚集索引和非聚集索引" class="headerlink" title="5.聚集索引和非聚集索引"></a>5.聚集索引和非聚集索引</h2><blockquote>
+<p>聚集索引:数据按索引顺序存储，中子结点存储真实的物理数据<br>非聚集索引:存储指向真正数据行的指针  </p>
+</blockquote>
+<h2 id="6-索引的优缺点，什么时候使用索引，什么时候不能使用索引"><a href="#6-索引的优缺点，什么时候使用索引，什么时候不能使用索引" class="headerlink" title="6.索引的优缺点，什么时候使用索引，什么时候不能使用索引"></a>6.索引的优缺点，什么时候使用索引，什么时候不能使用索引</h2><blockquote>
+<p>索引其实是一种数据结构，能够帮助我们快速的检索数据库中的数据。<br>索引最大的好处是提高查询速度，缺点是更新数据时效率低，因为要同时更新索引。对数据进行频繁查询进建立索引，如果要频繁更改数据不建议使用索引。<br>索引可以极大的提高数据的查询速度，但是会降低插入、删除、更新表的速度，因为在执行这些操作的时候，还要操作索引文件，MySQL不仅要保存数据，还要保存一下索引文件。</p>
+</blockquote>
+<h2 id="7-InnoDB索引和MyISAM索引的区别"><a href="#7-InnoDB索引和MyISAM索引的区别" class="headerlink" title="7.InnoDB索引和MyISAM索引的区别"></a>7.InnoDB索引和MyISAM索引的区别</h2><blockquote>
+<p>一是主索引的区别，InnoDB的数据文件本身就是索引文件。而MyISAM的索引和数据是分开的。<br>二是辅助索引的区别：InnoDB的辅助索引data域存储相应记录主键  </p>
+</blockquote>
+<h2 id="8-索引的底层实现（B-树，为何不采用红黑树，B树）重点"><a href="#8-索引的底层实现（B-树，为何不采用红黑树，B树）重点" class="headerlink" title="8.索引的底层实现（B+树，为何不采用红黑树，B树）重点"></a>8.索引的底层实现（B+树，为何不采用红黑树，B树）重点</h2><blockquote>
+<p>红黑树:增加，删除，红黑树会进行频繁的调整，来保证红黑树的性质，浪费时间<br>B树也就是B-树:B树，查询性能不稳定，查询结果高度不致，每个结点保存指向真实数据的指针，相比B+树每一层每屋存储的元素更多，显得更高一点。<br>B+树:B+树相比较于另外两种树,显得更矮更宽，查询层次更浅  </p>
+</blockquote>
+<h2 id="9-B-树的实现"><a href="#9-B-树的实现" class="headerlink" title="9.B+树的实现"></a>9.B+树的实现</h2><pre><code>一个m阶的B+树具有如下几个特征：
+1.有k个子树的中间节点包含有k个元素（B树中是k-1个元素），每个元素不保存数据，只用来索引，所有数据都保存在叶子节点。
+2.所有的叶子结点中包含了全部元素的信息，及指向含这些元素记录的指针，且叶子结点本身依关键字的大小自小而大顺序链接。
+3.所有的中间节点元素都同时存在于子节点，在子节点元素中是最大（或最小）元素</code></pre><h2 id="10-为什么使用B-Tree"><a href="#10-为什么使用B-Tree" class="headerlink" title="10.为什么使用B+Tree"></a>10.为什么使用B+Tree</h2><pre><code>索引查找过程中就要产生磁盘I/O消耗,主要看IO次数，和磁盘存取原理有关。
+根据B-Tree的定义，可知检索一次最多需要访问h个节点。数据库系统的设计者巧妙利用了磁盘预读原理，
+将一个节点的大小设为等于一个页，这样每个节点只需要一次I/O就可以完全载入
+局部性原理与磁盘预读</code></pre><h2 id="11-索引最左前缀问题"><a href="#11-索引最左前缀问题" class="headerlink" title="11.索引最左前缀问题"></a>11.索引最左前缀问题</h2><blockquote>
+<p>如果对三个字段建立联合索引，如果第二个字段没有使用索引，第三个字段也使用不到索引了<br>在创建多列索引时，我们根据业务需求，where子句中使用最频繁的一列放在最左边，因为MySQL索引查询会遵循最左前缀匹配的原则，即最左优先，在检索数据时从联合索引的最左边开始匹配。所以当我们创建一个联合索引的时候，如(key1,key2,key3)，相当于创建了（key1）、(key1,key2)和(key1,key2,key3)三个索引，这就是最左匹配原则。  </p>
+</blockquote>
+<h2 id="12-索引失效条件"><a href="#12-索引失效条件" class="headerlink" title="12.索引失效条件"></a>12.索引失效条件</h2><blockquote>
+<p>条件是or,如果还想让or条件生效，给or每个字段加个索引<br>like查询，以%开头<br>内部函数<br>对索引列进行计算<br>is null不会用，is not null 会用  </p>
+</blockquote>
+<h2 id="13-long-query怎么解决"><a href="#13-long-query怎么解决" class="headerlink" title="13.long_query怎么解决"></a>13.long_query怎么解决</h2><blockquote>
+<p>设置参数，开启慢日志功能，得到耗时超过一定时间的sql  </p>
+</blockquote>
+<h2 id="14-varchar和char的使用场景"><a href="#14-varchar和char的使用场景" class="headerlink" title="14.varchar和char的使用场景"></a>14.varchar和char的使用场景</h2><blockquote>
+<p>varchar:字符长度经常变的<br>char:用字符长度固定的  </p>
+</blockquote>
+<h2 id="15-数据库连接池的作用"><a href="#15-数据库连接池的作用" class="headerlink" title="15.数据库连接池的作用"></a>15.数据库连接池的作用</h2><blockquote>
+<p>维护一定数量的连接，减少创建连接的时间<br>更快的响应时间<br>统一的管理  </p>
+</blockquote>
+<h2 id="16-分库分表，主从复制，读写分离"><a href="#16-分库分表，主从复制，读写分离" class="headerlink" title="16.分库分表，主从复制，读写分离"></a>16.分库分表，主从复制，读写分离</h2><blockquote>
+<p>读写分离，读从库，写主库<br>spring配置两个数据库，通过AOP（面向切面编程），在写或读方法前面进行判断得到动态切换数据源。  </p>
+</blockquote>
+<h2 id="17-数据库三范式"><a href="#17-数据库三范式" class="headerlink" title="17.数据库三范式"></a>17.数据库三范式</h2><pre><code>级别    概念
+1NF    属性不可分
+2NF    非主键属性，完全依赖于主键属性
+3NF    非主键属性无传递依赖</code></pre><h2 id="18-关系型数据库和非关系型数据库区别"><a href="#18-关系型数据库和非关系型数据库区别" class="headerlink" title="18.关系型数据库和非关系型数据库区别"></a>18.关系型数据库和非关系型数据库区别</h2><p><strong>关系型数据库</strong> </p>
+<pre><code> 优点
+
+1、容易理解：二维表结构是非常贴近逻辑世界一个概念，关系模型相对网状、层次等其他模型来说更容易理解；
+
+2、使用方便：通用的SQL语言使得操作关系型数据库非常方便；
+3、易于维护：丰富的完整性(实体完整性、参照完整性和用户定义的完整性)大大减低了数据冗余和数据不一致的概率；
+4、支持SQL，可用于复杂的查询。
+5.支持事务
+
+缺点
+1、为了维护一致性所付出的巨大代价就是其读写性能比较差；
+2、固定的表结构；
+3、不支持高并发读写需求；
+4、不支持海量数据的高效率读写</code></pre><p><strong>非关系型数据库</strong>   </p>
+<pre><code>1、使用键值对存储数据；
+2、分布式；
+优点
+无需经过sql层的解析，读写性能很高
+基于键值对，数据没有耦合性，容易扩展
+存储数据的格式：nosql的存储格式是key,value形式
+缺点
+不提供sql支持</code></pre><h2 id="19-数据库中join的inner-join-outer-join-cross-join"><a href="#19-数据库中join的inner-join-outer-join-cross-join" class="headerlink" title="19.数据库中join的inner join, outer join, cross join"></a>19.数据库中join的inner join, outer join, cross join</h2><pre><code>1.以A，B两张表为例
+A left join B
+选出A的所有记录，B表中没有的以null 代替
+right join 同理
+
+2.inner join
+选出A,B两个表相匹配的行记录
+
+3.cross join (笛卡尔积)
+A中的每一条记录和B中的每一条记录生成一条记录
+例如A中有4条，B中有4条，cross join 就有16条记录</code></pre><h2 id="20-有哪些锁-select时怎么加排它锁"><a href="#20-有哪些锁-select时怎么加排它锁" class="headerlink" title="20.有哪些锁,select时怎么加排它锁"></a>20.有哪些锁,select时怎么加排它锁</h2><pre><code>锁         概念
+乐观锁        自己实现，通过版本号
+悲观锁        共享锁，多个事务，只能读不能写，加 lock in share mode
+排它锁        一个事务，只能写，for update
+行锁        作用于数据行
+表锁        作于用表</code></pre><h2 id="21-死锁怎么解决"><a href="#21-死锁怎么解决" class="headerlink" title="21.死锁怎么解决"></a>21.死锁怎么解决</h2><blockquote>
+<p>找到进程号，kill 进程  </p>
+</blockquote>
+<h2 id="22-最左匹配原则"><a href="#22-最左匹配原则" class="headerlink" title="22.最左匹配原则"></a>22.最左匹配原则</h2><pre><code>最左匹配原则是针对索引的
+举例来说：两个字段（name,age）建立联合索引，如果where age=12这样的话，是没有利用到索引的，
+这里我们可以简单的理解为先是对name字段的值排序，然后对age的数据排序，如果直接查age的话，这时就没有利用到索引了，
+查询条件where name=‘xxx’ and age=xx 这时的话，就利用到索引了，再来思考下where age=xx and name=’xxx‘ 这个sql会利用索引吗，
+按照正常的原则来讲是不会利用到的，但是优化器会进行优化，把位置交换下。这个sql也能利用到索引了</code></pre>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

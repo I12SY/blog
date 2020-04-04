@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HashMap为什么会导致CPU100%? - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="这个问题相关的知识点，有以下几个：1.HashMap 的底层数据结构是什么？2.什么是哈希碰撞？如何该解决这个问题？3.什么是扩展因子？它有什么用？4.还有对HashMap源码的理解，为什么Hash,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">HashMap为什么会导致CPU100%?</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">HashMap为什么会导致CPU100%?</h1>
+        <div class="stuff">
+            <span>三月 18, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p>这个问题相关的知识点，有以下几个：<br>1.HashMap 的底层数据结构是什么？<br>2.什么是哈希碰撞？如何该解决这个问题？<br>3.什么是扩展因子？它有什么用？<br>4.还有对HashMap源码的理解，为什么HashMap会导致死循环？  </p>
+<a id="more"></a>  
+<h2 id="1-HashMap-的底层数据结构"><a href="#1-HashMap-的底层数据结构" class="headerlink" title="1.HashMap 的底层数据结构"></a>1.HashMap 的底层数据结构</h2><p>先来说 HashMap 的底层数据结构，看过 HashMap 的源码我们就会发现，JDK 1.7 和 JDK 1.8 HashMap 的组成是不同的，JDK 1.7 HashMap 的组成是数组 + 链表的形式，而 JDK 1.8 新增了红黑树的数据结构，当 HashMap 中的链表长度大于 8 时，链表结构就会转换为红黑树，如下图所示：<br><img src="/blog/img/2020/03/18/HashMap底层数据结构.png"><br></p>
+<h2 id="2-哈希碰撞及解决方案"><a href="#2-哈希碰撞及解决方案" class="headerlink" title="2.哈希碰撞及解决方案"></a>2.哈希碰撞及解决方案</h2><p>所谓的<strong>哈希碰撞指的是不同的值，经过哈希之后得到的值确是相同的，这种情况就叫做哈希碰撞或哈希冲突。</strong> 解决哈希碰撞的常用方法是：<strong>开放定址法和链表地址法</strong> ，而<strong>HashMap 采用的就是链表地址法。</strong> 它的<strong>实现原理就是将 HashMap 中相同的哈希值以链表的形式存储起来。</strong>  </p>
+<h2 id="3-扩展因子（负载因子）"><a href="#3-扩展因子（负载因子）" class="headerlink" title="3.扩展因子（负载因子）"></a>3.扩展因子（负载因子）</h2><p>既然哈希表是基于数组实现的，那么哈希表也要涉及扩容问题。<br>当经过多次元素插入，哈希表达到一定饱和度时，Key映射位置发生冲突的概率会逐渐增高。这样一来，大量元素拥挤在相同的数组下标位置，形成很长的链表，对后续插入操作和查询操作的性能都有很大的影响。<br>这时，哈希表就需要扩展它的长度，也就是进行扩容。 对于JDK中的哈希表实现类HashMap来说，影响其扩容的因素有两个。  </p>
+<ul>
+<li>Capacity，即HashMap的当前长度。  </li>
+<li>LoadFactor，即HashMap的负载因子，默认值为0.75f。<br>衡量HashMap需要进行扩容的条件如下：   </li>
+</ul>
+<p><strong>HashMap.Size&gt;=Capacity*LoadFactory</strong><br><img src="/blog/img/2020/03/18/加载因子.png"><br><br><strong>那么散列表的扩容具体做了什么操作呢？</strong><br>1.扩容，创建一个新的Entry空数组，长度是原数组的2倍。<br>2.重新Hash，遍历原Entry数组，把所有的Entry重新Hash到新数组找中（长度扩大，Hash的规则也随之改动）。  </p>
+<h2 id="4-HashMap死循环分析"><a href="#4-HashMap死循环分析" class="headerlink" title="4.HashMap死循环分析"></a>4.HashMap死循环分析</h2><p>HashMap 导致 CPU 100% 的原因就是因为 HashMap 死循环导致的，那 HashMap 是如何造成死循环的？接下来我们一起来看。  </p>
+<p>以 JDK 1.7 为例，假设 HashMap 的默认大小为 2，HashMap 本身中有一个键值 key(5)，我们再使用两个线程：t1 添加 key(3)，t2 添加 key(7)，首先两个线程先把 key(3) 和 key(7) 都添加到 HashMap 中，此时因为 HashMap 的长度不够用了就会进行扩容操作，然后这时线程 t1 在执行到 Entry&lt;K,V&gt; next = e.next; 时，交出了 CPU 的使用权，源代码如下：  </p>
+<pre><code>void transfer(Entry[] newTable, boolean rehash) {
+    int newCapacity = newTable.length;
+    for (Entry&lt;K,V&gt; e : table) {
+        while(null != e) {
+            Entry&lt;K,V&gt; next = e.next; // 线程一执行此处
+            if (rehash) {
+                e.hash = null == e.key ? 0 : hash(e.key);
+            }
+            int i = indexFor(e.hash, newCapacity);
+            e.next = newTable[i];
+            newTable[i] = e;
+            e = next;
+        }
+    }
+}</code></pre><p>那么此时线程 t1 中的 e 指向了 key(3)，而 next 指向了 key(7) ；之后线程 t2 重新 rehash 之后链表的顺序被反转，链表的位置变成了 key(5) -&gt; key(7) -&gt; key(3)，其中 “-&gt;” 用来表示下一个元素，当 t1 重新获得执行权之后，先执行 newTalbe[i] = e 把 key(3) 的 next 设置为 key(7)，而下次循环时查询到 key(7) 的 e.next 为 key(3)，于是就形 成了 key(3) 和 key(7) 的环形引用，就导致了死循环的产生，如下图所示：<br><img src="/blog/img/2020/03/18/死循环.jpg"><br><br>HashMap 发生死循环的一个重要原因是 JDK 1.7 时链表的插入是首部倒序插入的（头插法，会引起死循环），而 JDK 1.8 时已经变成了尾部插入（JDK1.8之后是因为加入了红黑树使用尾插法，能够避免出现逆序且链表死循环的问题），有人把这个死循环的问题反馈给了 Sun 公司，但它们认为这不是一个问题，因为 HashMap 本身就是非线程安全的，如果要在多线程使用建议使用 ConcurrentHashMap 替代 HashMap。  </p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>二叉堆 - xiyou</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="xiyou,"> 
+    <meta name="description" content="1.什么是二叉堆？二叉堆本质上是一种完全二叉树，它分为两个类型：1.最大堆2.最小堆  
+ 
+什么是最大堆呢？最大堆的任何一个父节点的值，都大于或等于它左、右孩子节点的值。什么是最小堆呢？最小堆的任,"> 
+    <meta name="author" content="xiyou"> 
+    <link rel="alternative" href="atom.xml" title="xiyou" type="application/atom+xml"> 
+    <link rel="icon" href="/blog/img/favicon.png"> 
+    
+    <link rel="stylesheet" href="/blog/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">xiyou</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://xiyou13921.gitee.io/blog"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">二叉堆</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">二叉堆</h1>
+        <div class="stuff">
+            <span>一月 03, 2020</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="1-什么是二叉堆？"><a href="#1-什么是二叉堆？" class="headerlink" title="1.什么是二叉堆？"></a>1.什么是二叉堆？</h2><p>二叉堆本质上是一种完全二叉树，它分为两个类型：<br><strong>1.最大堆</strong><br><strong>2.最小堆</strong>  </p>
+<a id="more"></a> 
+<p>什么是最大堆呢？最大堆的任何一个父节点的值，都<strong>大于或等于</strong>它左、右孩子节点的值。<br><img src="/blog/img/2020/01/03/最大堆.png"><br><br>什么是最小堆呢？最小堆的任何一个父节点的值，都<strong>小于或等于</strong>它左、右孩子节点的值。<br><img src="/blog/img/2020/01/03/最小堆.png"><br><br>二叉堆的根节点叫<strong>堆顶</strong>。  
+最大堆和最小堆的特点决定了：最大堆的堆顶是整个堆中的<strong>最大元素</strong>；最小堆的堆顶是整个堆中的<strong>最小元素</strong>。  </p>
+<h2 id="2-二叉堆的自我调整"><a href="#2-二叉堆的自我调整" class="headerlink" title="2.二叉堆的自我调整"></a>2.二叉堆的自我调整</h2><p>对于二叉堆，有如下几种操作。<br><strong>1.插入节点</strong><br><strong>2.删除节点</strong><br><strong>3.构建二叉堆</strong><br>这几种操作都基于堆的自我调整。所谓堆的自我调整，就是把一个不符合堆性质的完全二叉树，调整成一个堆。下面以最小堆为例，看一看二叉堆是如何进行自我调整的。  </p>
+<h3 id="2-1-插入节点"><a href="#2-1-插入节点" class="headerlink" title="2.1 插入节点"></a>2.1 插入节点</h3><p>当二叉堆插入节点时，插入位置时完全二叉堆树的最后一个位置。例如插入一个新节点，值是0。<br><img src="/blog/img/2020/01/03/最小堆插入步骤1.png"><br><br>这时，新节点的父节点5比0大，显然不符合最小堆的性质，于是让新节点“上浮”和父节点交换位置。<br><img src="/blog/img/2020/01/03/最小堆插入步骤2.png"><br><br>同理，新节点继续上浮。<br><img src="/blog/img/2020/01/03/最小堆插入步骤3.png"><br><br>继续比较，最终新节点0“上浮”到了堆顶的位置。<br><img src="/blog/img/2020/01/03/最小堆插入步骤4.png"><br>   </p>
+<h3 id="2-2-删除节点"><a href="#2-2-删除节点" class="headerlink" title="2.2 删除节点"></a>2.2 删除节点</h3><p>二叉堆删除节点过程和插入节点过程正好相反，所删除的是处于堆顶的节点，例如删除最小堆的堆顶节点1。<br><img src="/blog/img/2020/01/03/最小堆删除节点1.png"><br><br>这时为了维持完全二叉树的结构，我们把堆的最后一个元素10临时补偿到原本堆顶的位置。<br><img src="/blog/img/2020/01/03/最小堆删除节点2.png"><br><br>接下来，让暂处堆顶位置的节点10和它的左、右进行比较，如果左、右孩子中最小的一个（显然是节点2）比节点10小，那么让节点10“下沉”。<br><img src="/blog/img/2020/01/03/最小堆删除节点3.png"><br><br>同理，节点10继续“下沉”。<br><img src="/blog/img/2020/01/03/最小堆删除节点4.png"><br><br>这样一来二叉堆就得到了调整。  </p>
+<h3 id="2-3-构建二叉堆"><a href="#2-3-构建二叉堆" class="headerlink" title="2.3 构建二叉堆"></a>2.3 构建二叉堆</h3><p>构件二叉堆，也就是把一个无序的完全二叉树调整为二叉堆，本质就是让<strong>所有非叶子节点依次“下沉”</strong>。  
+下面是一个无序完全二叉树的例子，如下图所示。<br><img src="/blog/img/2020/01/03/构建二叉堆1.png"><br><br>首先从最后一个非叶子节点开始，也就是节点10开始。如果节点10大于它左、右孩子节点中最小的一个，则节点10“下沉”。<br><img src="/blog/img/2020/01/03/构建二叉堆2.png"><br><br>接下来轮到节点3，如果节点3大于它左、右孩子节点中最小的一个，则节点3“下沉”。<br><img src="/blog/img/2020/01/03/构建二叉堆3.png"><br><br>然后轮到节点1，如果节点1大于它左、右孩子节点中最小的一个，则节点1“下沉”。事实上节点1小于它的左、右孩子，所以不用改变。<br>同理轮到节点7时，节点7需要“下沉”。<br><img src="/blog/img/2020/01/03/构建二叉堆4.png"><br><br>节点7继续比较，继续“下沉”。<br><img src="/blog/img/2020/01/03/构建二叉堆5.png"><br><br>经过上述几轮比较和“下沉”操作，最终每一节都小于它的左、右孩子节点，一个无序的完全二叉堆就被构建成了一个最小堆。  </p>
+<p><strong>PS:堆的插入操作是单一节点的“上浮”，堆的删除操作是单一节点的“下沉”，这两个操作的平均交换次数都是堆高度的一半，所以时间复杂度是O(logn)。但是构建堆的时间复杂度是O(n)。</strong>  </p>
+<h2 id="3-二叉堆的代码实现"><a href="#3-二叉堆的代码实现" class="headerlink" title="3.二叉堆的代码实现"></a>3.二叉堆的代码实现</h2><p>在展示代码前，我们需要注意一点：二叉堆虽然是一个完全二叉树，但它的存储方式并不是链式存储，而是顺序存储。也就是二叉堆的所有节点都存储在数组中。<br><img src="/blog/img/2020/01/03/二叉堆在数组中的存储方式.png"><br><br>假设父节点的下标是parent，那么它的左孩子节点下标就是<strong>2xparent+1</strong>；右孩子节点下标就是<strong>2xparent+2</strong>。  
+上面的例子中节点6包含节点9和节点10两个孩子节点。其中节点6在数组中的小标为3，那么节点9在数组中的下标是7(7=3x2+1)，节点10在数组中的下标是8(8=3x2+2)。  </p>
+<p>代码实例  </p>
+<pre><code>/**
+ * &quot;上浮&quot;操作
+ * @param array 待调整的堆
+ */
+public static void upAdjust(int[] array){
+    int childIndex = array.length-1;
+    int parentIndex = (childIndex-1)/2;
+    //临时保存插入的叶子节点的值，用于最后的赋值
+    int temp = array[childIndex];
+    while(childIndex&gt;0 &amp;&amp; temp&lt;array[parentIndex]){
+        //无须真正交换，单向赋值即可
+        array[childIndex]=array[parentIndex];
+        childIndex = parentIndex;
+        parentIndex = (childIndex-1)/2;
+    }
+    array[childIndex] = temp;
+    System.out.println(Arrays.toString(array));
+}
+
+/**
+ * 删除节点
+ * @param array 待调整的堆
+ * @param parentIndex 要删除的节点位置
+ */
+public static void deleteElementAdjust(int[] array,int parentIndex)throws Exception{
+    if(parentIndex&lt;0 || parentIndex&gt;=array.length){
+        throw new Exception(&quot;数组下标越界&quot;);
+    }
+    //把最后一个元素，临时补充到最后被删除节点位置
+    array[parentIndex] = array[array.length-1];
+    int[] newArray = new int[array.length-1];
+    System.arraycopy(array, 0, newArray, 0, array.length-1);
+    downAdjust(newArray,0,newArray.length);
+    System.out.println(Arrays.toString(newArray));
+}
+
+/**
+ * &quot;下沉&quot;操作
+ * @param array 待调整的堆
+ * @param parentIndex 要&quot;下沉&quot;父节点
+ * @param length 堆的有效大小
+ */
+public static void downAdjust(int[] array,int parentIndex,int length){
+    //临时保存父节点的值，用于最后的赋值
+    int temp = array[parentIndex];
+    int childIndex = parentIndex*2+1;
+    while(childIndex&lt;array.length){
+        //如果存在右孩子，且右孩子小于左孩子的值，则定位到右孩子
+        if(childIndex+1&lt;array.length &amp;&amp; array[childIndex+1]&lt;array[childIndex]){
+            childIndex++;
+        }
+        //如果父节点小于左、右孩子的值，直接跳出循环
+        if(temp&lt;array[childIndex]){
+            break;
+        }
+        //无须真正交换，单向赋值
+        array[parentIndex]=array[childIndex];
+        parentIndex = childIndex;
+        childIndex = parentIndex*2+1;
+    }
+    array[parentIndex] = temp;
+}
+
+/**
+ * 构建堆
+ * @param array 待调整的堆
+ */
+public static void buildHeap(int[] array){
+    for(int i = (array.length-2)/2;i&gt;=0;i--){
+        downAdjust(array,i,array.length);
+    }
+    System.out.println(Arrays.toString(array));
+}
+
+public static void main(String[] args) throws Exception {
+    //插入节点
+    int[] array = new int[]{1,3,2,6,5,7,8,9,10,0};
+    upAdjust(array);
+    //删除节点
+    array = new int[]{1,3,2,6,5,7,8,9,10};
+    deleteElementAdjust(array,0);
+    //构建二叉堆
+    array = new int[]{7,1,3,10,5,2,8,9,6};
+    buildHeap(array);
+}</code></pre><p>代码中有一个优化的点，就是在父节点和孩子节点做连续交换时，并不一定真的要交换，只需要把交换一方的值存入temp变量，做单向覆盖，循环结束后，再把temp的值存入交换后的最终位置即可。  </p>
+<p><strong>PS:二叉堆是实现</strong><a href="/blog/2020/01/06/堆排序/" target="_blank">堆排序</a><strong>及</strong><a href="/blog/2020/01/06/优先队列/" target="_blank">优先队列</a><strong>的基础。</strong></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-enable="false" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/blog/js/plugin.js"></script>
+<script src="/blog/js/typed.js"></script>
+<script src="/blog/js/diaspora.js"></script>
+<link rel="stylesheet" href="/blog/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/blog/photoswipe/default-skin/default-skin.css">
+<script src="/blog/photoswipe/photoswipe.min.js"></script>
+<script src="/blog/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
