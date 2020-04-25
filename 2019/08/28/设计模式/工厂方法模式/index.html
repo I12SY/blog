@@ -18,7 +18,7 @@
 <meta property="og:description" content="1.定义工厂方法模式（FACTORY METHOD），又称工厂模式、多态工厂模式和虚拟构造器模式，通过定义工厂父类负责定义创建对象的公共接口，而子类负责生成具体的对象。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://xiyou13921.gitee.io/blog/img/2019/08/29/1.png">
-<meta property="og:updated_time" content="2020-01-09T07:36:31.620Z">
+<meta property="og:updated_time" content="2020-04-25T14:14:20.641Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工厂方法模式">
 <meta name="twitter:description" content="1.定义工厂方法模式（FACTORY METHOD），又称工厂模式、多态工厂模式和虚拟构造器模式，通过定义工厂父类负责定义创建对象的公共接口，而子类负责生成具体的对象。">
@@ -328,7 +328,8 @@ class DivFactory implements IFactory{
         System.out.println(&quot;运算结果：&quot;+result);
         scanner.close();
     }
-}</code></pre><h2 id="7-参考文章"><a href="#7-参考文章" class="headerlink" title="7.参考文章"></a>7.参考文章</h2><p><a href="https://www.jianshu.com/p/d0c444275827" target="_blank" rel="noopener">https://www.jianshu.com/p/d0c444275827</a><br><a href="https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2361103?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2361103?fr=aladdin</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a><br><br><br><br>PS:可以这么理解简单工厂模式和工厂方法模式：<br>简单工厂模式：就是所有的产品都在一个工厂里面生产，这个工厂里面有多条生产线，我们只要告诉这个工厂我们需要一个产品时，这个工厂就会去找对应的生产线为我们生产产品，我们不需要关心，也不知道工厂是通过哪条生产线为我们生产产品的。然后当我们需要生产一个新的产品的时候，就新增一条生产线用来生产新的产品，在这过程中就有可能就会影响到其他的生产线的工作。  </p>
+}</code></pre><h2 id="7-参考文章"><a href="#7-参考文章" class="headerlink" title="7.参考文章"></a>7.参考文章</h2><p><a href="https://www.jianshu.com/p/d0c444275827" target="_blank" rel="noopener">https://www.jianshu.com/p/d0c444275827</a><br><a href="https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2361103?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2361103?fr=aladdin</a>  </p>
+<p><br><br><br>PS:可以这么理解简单工厂模式和工厂方法模式：<br>简单工厂模式：就是所有的产品都在一个工厂里面生产，这个工厂里面有多条生产线，我们只要告诉这个工厂我们需要一个产品时，这个工厂就会去找对应的生产线为我们生产产品，我们不需要关心，也不知道工厂是通过哪条生产线为我们生产产品的。然后当我们需要生产一个新的产品的时候，就新增一条生产线用来生产新的产品，在这过程中就有可能就会影响到其他的生产线的工作。  </p>
 <p>工厂方法模式：就是有多个工厂，每个工厂就一条生产线只生产一样产品，当我们需要生产一个产品时，需要我们去找到对应的工厂，告诉他我们需要你的产品。当我们需要生产一个新的产品时，就创建一个新的工厂来生产这个产品，这样也不会影响其他的工厂的工作。缺点就是工厂过多，难以维护。  </p>
 
       

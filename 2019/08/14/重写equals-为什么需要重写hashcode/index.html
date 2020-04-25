@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="xiyou">
 <meta property="og:description" content="1.首先看一个例子,不考虑重写hashcode的情况import java.util.HashMap; import java.util.Objects;  public class Test {     public static void main(String[] args) {         Student s1 = new Student(&amp;quot;张三&amp;quot;,18,&amp;quot">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-14T14:43:48.991Z">
+<meta property="og:updated_time" content="2020-04-25T14:11:14.540Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重写equals,为什么需要重写hashcode">
 <meta name="twitter:description" content="1.首先看一个例子,不考虑重写hashcode的情况import java.util.HashMap; import java.util.Objects;  public class Test {     public static void main(String[] args) {         Student s1 = new Student(&amp;quot;张三&amp;quot;,18,&amp;quot">
@@ -293,7 +293,8 @@ class Student{
       2、按照下面的公式，把步骤1中计算得到的散列码C组合到result中：
            result = 31*result+c。
    c、返回result。
-   d、写完hashCode方法之后，问自己“是否相等的实例具有相等的散列码”。如果不是的话，找出原因，并修改。可以通过org.apache.commons.lang.builder.HashCodeBuilder这个工具类来方便的重写hashCode方法。</code></pre>
+   d、写完hashCode方法之后，问自己“是否相等的实例具有相等的散列码”。如果不是的话，找出原因，并修改。可以通过org.apache.commons.lang.builder.HashCodeBuilder这个工具类来方便的重写hashCode方法。</code></pre><p><a href="/blog/2020/04/25/资源整理/" target="blank">《Effective Java》</a>  </p>
+
       
 
       

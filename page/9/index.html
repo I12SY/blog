@@ -162,6 +162,90 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-设计模式分类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/09/08/设计模式分类/">设计模式分类</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/09/08/设计模式分类/" class="archive-article-date">
+  	<time datetime="2019-09-08T12:49:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <table>
+<thead>
+<tr>
+<th><strong>范围\目的</strong></th>
+<th align="left"><strong>创建型模式</strong></th>
+<th align="left"><strong>结构型模式</strong></th>
+<th align="left"><strong>行为型模式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>类模式</strong></td>
+<td align="left">工厂方法模式</td>
+<td align="left">（类）适配器模式</td>
+<td align="left">解释器模式<br>模板方法模式</td>
+</tr>
+<tr>
+<td><strong>对象模式</strong></td>
+<td align="left">抽象工厂模式<br>建造者模式<br>原型模式<br>单例模式</td>
+<td align="left">（对象）适配器模式<br>桥接模式<br>组合模式<br>装饰模式<br>外观模式<br>享元模式<br>代理模式</td>
+<td align="left">职责链模式<br>命令模式<br>迭代器模式<br>中介者模式<br>备忘录模式<br>观察者模式<br>状态模式<br>策略模式<br>访问者模式</td>
+</tr>
+</tbody></table>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/09/08/设计模式分类/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-设计模式/模板方法模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -722,78 +806,6 @@ void clear_bit3(void)
       
         <p class="article-more-link">
           <a class="article-more-a" href="/blog/2019/08/27/synchronized修饰static方法与非static方法的区别/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-原地交换两个变量的值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/27/原地交换两个变量的值/">原地交换两个变量的值</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/27/原地交换两个变量的值/" class="archive-article-date">
-  	<time datetime="2019-08-27T09:39:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>就以int a=5,b=10;为例子：  </p>
-<p><strong>第一种方法，也是最常见的一种方法</strong>  </p>
-<blockquote>
-<p>int a=5,b=10;a=a+b; b=a-b; a=a-b;  </p>
-</blockquote>
-<p><strong>第二种方法，使用异或操作，第一种方法还可能会引起溢出</strong>  </p>
-<blockquote>
-<p>a = a ^ b;<br>b = a ^ b;<br>a = a ^ b;  </p>
-</blockquote>
-<p>异或的运算规律：两个操作数的位中，相同则结果为0，不同则结果为1。<br>例子中a=5的二进制码为：0101，b=10的二进制码为：1010，因此<br>a=a^b=0101 ^ 1010 = 1111<br>b=a^b=1111 ^ 1010 = 0101  ===&gt;5<br>a=a^b=1111 ^ 0101 = 1010  ===&gt;10</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/27/原地交换两个变量的值/">展开全文 >></a>
         </p>
       
 

@@ -162,6 +162,78 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-原地交换两个变量的值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/08/27/原地交换两个变量的值/">原地交换两个变量的值</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/08/27/原地交换两个变量的值/" class="archive-article-date">
+  	<time datetime="2019-08-27T09:39:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>就以int a=5,b=10;为例子：  </p>
+<p><strong>第一种方法，也是最常见的一种方法</strong>  </p>
+<blockquote>
+<p>int a=5,b=10;a=a+b; b=a-b; a=a-b;  </p>
+</blockquote>
+<p><strong>第二种方法，使用异或操作，第一种方法还可能会引起溢出</strong>  </p>
+<blockquote>
+<p>a = a ^ b;<br>b = a ^ b;<br>a = a ^ b;  </p>
+</blockquote>
+<p>异或的运算规律：两个操作数的位中，相同则结果为0，不同则结果为1。<br>例子中a=5的二进制码为：0101，b=10的二进制码为：1010，因此<br>a=a^b=0101 ^ 1010 = 1111<br>b=a^b=1111 ^ 1010 = 0101  ===&gt;5<br>a=a^b=1111 ^ 0101 = 1010  ===&gt;10</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/08/27/原地交换两个变量的值/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-怎么理解变量-变量是什么" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -741,74 +813,6 @@ Locale l3 = new Locale(&quot;en&quot;, &quot;US&quot;, &quot;SiliconValley&quot;
       
         <p class="article-more-link">
           <a class="article-more-a" href="/blog/2019/08/20/while与do-while循环的区别/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SimpleTimeZone" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/08/20/SimpleTimeZone/">SimpleTimeZone</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/08/20/SimpleTimeZone/" class="archive-article-date">
-  	<time datetime="2019-08-20T06:53:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>SimpleTimeZone提供公历日期支持。它是时区(TimeZone)的具体子类，它表示与公历使用的时区。  </p>
-<ul>
-<li>这个类持有GMT的偏移，称为原始偏移。</li>
-<li>这个类还拥有开始和结束的夏令时安排的规则。  </li>
-</ul>
-<p>例子：  </p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/08/20/SimpleTimeZone/">展开全文 >></a>
         </p>
       
 

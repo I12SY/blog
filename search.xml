@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>资源整理</title>
+    <url>/blog/2020/04/25/%E8%B5%84%E6%BA%90%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<p>这里整理了本博客的一些资源文件，提供下载：<br>链接：<a href="https://pan.baidu.com/s/1AO1Cj3j-lxjz9XmED7c-eQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1AO1Cj3j-lxjz9XmED7c-eQ</a><br>提取码：lgzo </p>
+<p>如果链接失效，请加我QQ或微信<br>QQ:2783251472<br>微信：happy_wei_wei</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Spring面试题</title>
     <url>/blog/2020/03/31/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
     <content><![CDATA[<p><a href="https://www.kanzhun.com/news/zc_k-mianshitimuspringmianshiti/" target="_blank" rel="noopener">https://www.kanzhun.com/news/zc_k-mianshitimuspringmianshiti/</a>  </p>
@@ -4452,7 +4459,7 @@ class ConcreteElementB extends Element{
         o.accept(v1);
         o.accept(v2);
     }
-}</code></pre><h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/visitor-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/visitor-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a> </p>
+}</code></pre><h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/visitor-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/visitor-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -4650,7 +4657,7 @@ class ConcreteElementB extends Element{
     }
 }</code></pre><p>运行结果  </p>
 <pre><code>上海滩：
-中音 3 5 6 3 5 2 3 5 6 高音 1 中音 6 5 1 3 2 </code></pre><h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/interpreter-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/interpreter-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+中音 3 5 6 3 5 2 3 5 6 高音 1 中音 6 5 1 3 2 </code></pre><h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/interpreter-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/interpreter-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -4729,7 +4736,7 @@ class ConcreteElementB extends Element{
 具体Flyweight：  20
 具体Flyweight：  19
 具体Flyweight：  18
-不共享的具体Flyweight：  17</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/flyweight-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/flyweight-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+不共享的具体Flyweight：  17</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/flyweight-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/flyweight-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -4825,7 +4832,7 @@ class ConcreteColleague2 extends Colleague{
     }
 }</code></pre><p>运行结果  </p>
 <pre><code>同事2得到消息  吃过饭了吗？
-同事1得到消息  没有，你打算请客？</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/mediator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/mediator-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+同事1得到消息  没有，你打算请客？</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/mediator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/mediator-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -4909,7 +4916,7 @@ class ConcreteHandler3 extends Handler{
         int request = (int)(Math.random()*30);
         h1.handlerRequest(request);
     }
-}</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/chain-of-responsibility-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/chain-of-responsibility-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+}</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/chain-of-responsibility-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/chain-of-responsibility-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -4971,7 +4978,7 @@ public class Invoker {
         invoker.setCommand(command);
         invoker.executeCommand();
     }
-}</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/command-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/command-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+}</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/command-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/command-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -5198,7 +5205,7 @@ class ConcreteImplementorB extends Implementor{
     }
 }</code></pre><p>PS:桥接模式所说的’将抽象与它的实现部分分离’，不太好理解，我们可以这么理解就是<strong>实现系统可能有多角度分类，每一种分类都有可能变化，那么就把这种多角度分离出来让他们独立变化，减少它们之间的耦合</strong>。 </p>
 <h2 id="7-其他"><a href="#7-其他" class="headerlink" title="7.其他"></a>7.其他</h2><p><strong>主要解决：</strong>在有多种可能会变化的情况下，用继承会造成类爆炸问题，扩展起来不灵活。<br><strong>何时使用：</strong>实现系统可能有多个角度分类，每一种角度都可能变化。<br><strong>如何解决：</strong>把这种多角度分类分离出来，让它们独立变化，减少它们之间耦合。<br><strong>关键代码：</strong>抽象类依赖实现类。<br><strong>应用实例：</strong>1、猪八戒从天蓬元帅转世投胎到猪，转世投胎的机制将尘世划分为两个等级，即：灵魂和肉体，前者相当于抽象化，后者相当于实现化。生灵通过功能的委派，调用肉体对象的功能，使得生灵可以动态地选择。 2、墙上的开关，可以看到的开关是抽象的，不用管里面具体怎么实现的。<br><strong>优点：</strong>1、抽象和实现的分离。 2、优秀的扩展能力。 3、实现细节对客户透明。<br><strong>缺点：</strong>桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程。<br><strong>使用场景：</strong>1、如果一个系统需要在构件的抽象化角色和具体化角色之间增加更多的灵活性，避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系。 2、对于那些不希望使用继承或因为多层次继承导致系统类的个数急剧增加的系统，桥接模式尤为适用。 3、一个类存在两个独立变化的维度，且这两个维度都需要进行扩展。<br><strong>注意事项：</strong>对于两个独立变化的维度，使用桥接模式再适合不过了。  </p>
-<h2 id="8-参考文章"><a href="#8-参考文章" class="headerlink" title="8.参考文章"></a>8.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/bridge-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/bridge-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+<h2 id="8-参考文章"><a href="#8-参考文章" class="headerlink" title="8.参考文章"></a>8.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/bridge-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/bridge-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -5313,7 +5320,7 @@ class ConcreteImplementorB extends Implementor{
 老外 请买车票!
 公交内部员工 请买车票!
 小偷 请买车票!</code></pre><p><strong>为什么要用具体的迭代器ConcreteIterator来实现抽象的Iterator呢？而不直接访问ConcreteIterator呢？</strong><br>这里体现了一个迭代器的好处，就是<strong>当你需要对聚集有多种方式遍历时，可以考虑用迭代器模式</strong>，事实上我们不一定要从前向后遍历，也可以从后向前遍历等等，这个时候我们只需要在写一个具体的迭代器类实现抽象的Iterator，再对其部分操作进行修改就行了。  </p>
-<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/iterator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/iterator-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/iterator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/iterator-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -6109,7 +6116,7 @@ public static void swap(int[] arr, int i, int j) {
 -----Composite XY
 -------Leaf XYA
 -------Leaf XYB
----Leaf C</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/composite-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/composite-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+---Leaf C</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/composite-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/composite-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -6203,7 +6210,7 @@ public static void swap(int[] arr, int i, int j) {
 }</code></pre><p>输出结果  </p>
 <pre><code>state=On
 state=Off
-state=On</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/memento-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/memento-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+state=On</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/memento-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/memento-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -6244,7 +6251,7 @@ state=On</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="he
         Target target = new Adapter();
         target.request();
     }
-}</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/adapter-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/adapter-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+}</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/adapter-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/adapter-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -6453,7 +6460,7 @@ class ConcreteStateB extends State{
 当前状态：设计模式.状态模式.ConcreteStateB@7852e922
 当前状态：设计模式.状态模式.ConcreteStateA@4e25154f</code></pre><h2 id="4-与策略模式的区别"><a href="#4-与策略模式的区别" class="headerlink" title="4.与策略模式的区别"></a>4.与策略模式的区别</h2><p>在行为类设计模式中，状态模式和<a href="/blog/2019/09/09/设计模式/策略模式/" target="_blank">策略模式</a>是亲兄弟，两者非常相似，两个模式的实现类图基本一致。  </p>
 <p><strong>策略模式：</strong>策略模式的客户端必须对所有的策略类相当了解，明确在当前场景下各种策略的利弊，权衡当前场景下应该使用哪种策略，也就是说策略类对客户端是暴露的。<br><strong>状态模式：</strong>状态模式依赖于其状态的变化时其内部的行为发生变化，将动作委托到代表当前状态的对象，对外表现为类发生了变化。    </p>
-<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/state-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/state-pattern.html</a><br><a href="https://www.cnblogs.com/m7777/p/7723879.html" target="_blank" rel="noopener">https://www.cnblogs.com/m7777/p/7723879.html</a><br><a href="https://www.cnblogs.com/pokid/p/10474340.html" target="_blank" rel="noopener">https://www.cnblogs.com/pokid/p/10474340.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/state-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/state-pattern.html</a><br><a href="https://www.cnblogs.com/m7777/p/7723879.html" target="_blank" rel="noopener">https://www.cnblogs.com/m7777/p/7723879.html</a><br><a href="https://www.cnblogs.com/pokid/p/10474340.html" target="_blank" rel="noopener">https://www.cnblogs.com/pokid/p/10474340.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -6632,7 +6639,7 @@ class ConcreteStateB extends State{
 <li>链式写法较多用于<strong>通过链式调用分部组装对象</strong>，本质还是创建一个对象。 </li>
 <li>在组装过程中的<strong>算法是多变的</strong>，每一步的调用次数、调用顺序都可能会影响最终结果。而组件的装配方式是<strong>稳定不变的</strong>,每个调用算法都是独立影响最终变化的。  </li>
 </ul>
-<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/builder-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/builder-pattern.html</a><br><a href="https://www.jianshu.com/p/8481e9094ec5" target="_blank" rel="noopener">https://www.jianshu.com/p/8481e9094ec5</a><br><a href="https://www.jianshu.com/p/8e871becd9cf" target="_blank" rel="noopener">https://www.jianshu.com/p/8e871becd9cf</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/builder-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/builder-pattern.html</a><br><a href="https://www.jianshu.com/p/8481e9094ec5" target="_blank" rel="noopener">https://www.jianshu.com/p/8481e9094ec5</a><br><a href="https://www.jianshu.com/p/8e871becd9cf" target="_blank" rel="noopener">https://www.jianshu.com/p/8e871becd9cf</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -6793,7 +6800,7 @@ public class Facade {
         //由于facade的作用，客户端可以根本不知3个子系统类的存在
     }
 }</code></pre><p>对于面向对象有一定基础的朋友，即使没听过外观模式，也完全有可能在很多时候使用它，外观模式很完美的体现了依赖倒转原则和迪米特法则（最少知道原则）的思想，所以是非常常用的模式之一。  </p>
-<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/facade-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/facade-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/facade-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/facade-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -8480,7 +8487,7 @@ public class Resume implements Serializable{
 工作经历：  1998-2006   YY企业
 张三   男   29
 工作经历：  1998-2003   ZZ企业</code></pre><p>好了，此时输出结果已经达到了我们的要求！</p>
-<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/prototype-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/prototype-pattern.html</a><br><a href="https://blog.csdn.net/qq_40709468/article/details/82316418" target="_blank" rel="noopener">https://blog.csdn.net/qq_40709468/article/details/82316418</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/prototype-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/prototype-pattern.html</a><br><a href="https://blog.csdn.net/qq_40709468/article/details/82316418" target="_blank" rel="noopener">https://blog.csdn.net/qq_40709468/article/details/82316418</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -8580,7 +8587,7 @@ public class Resume implements Serializable{
 观察者Z的新状态是ABC
 观察者X的新状态是abc
 观察者Y的新状态是abc
-观察者Z的新状态是abc</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/observer-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/observer-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+观察者Z的新状态是abc</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/observer-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/observer-pattern.html</a>   </p>
 ]]></content>
   </entry>
   <entry>
@@ -9013,7 +9020,7 @@ public class CglibMainTest {
 工程师正在吃饭
 ###   end invocation</code></pre><p>相关jar包下载：<br><a href="/blog/attachs/cglib-3.2.6.jar" target="blank">cglib-3.2.6.jar</a><br><a href="/blog/attachs/asm-all-6.0_BETA.jar" target="blank">asm-all-6.0_BETA.jar</a> </p>
 <p><strong>jdk动态代理和cglib动态代理的区别：</strong><br>1）jdk动态代理只能对实现了接口的类生成代理，而不能针对类<br>2）CGLIB动态代理是针对类实现代理，主要是对指定的类生成一个子类，覆盖其中的方法</p>
-<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/proxy-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/proxy-pattern.html</a><br><a href="https://blog.csdn.net/WangQYoho/article/details/77584832" target="_blank" rel="noopener">https://blog.csdn.net/WangQYoho/article/details/77584832</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/proxy-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/proxy-pattern.html</a><br><a href="https://blog.csdn.net/WangQYoho/article/details/77584832" target="_blank" rel="noopener">https://blog.csdn.net/WangQYoho/article/details/77584832</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -9084,7 +9091,7 @@ public class CglibMainTest {
 }</code></pre><p>运行结果  </p>
 <pre><code>具体的操作对象
 具体装饰对象A的操作
-具体装饰对象B的操作</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/decorator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/decorator-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>    </p>
+具体装饰对象B的操作</code></pre><h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/decorator-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/decorator-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -9187,7 +9194,7 @@ class OperationMultiply implements Strategy {
 <li>工厂模式<br>有一天你决定去吃培根披萨，首先得选择店铺，A店和B店都有培根披萨；<br>你点了A店的培根披萨，过了二十分钟，你的披萨就来了就可以吃到了。但这个披萨是怎么做的，到底面粉放了多少，培根放了多少，佐料放了多少，有多少道工序，你是不需要管的，你需要的是一个美味培根披萨。</li>
 <li>策略模式<br>在披萨店，你要一个培根披萨，老板说有标准的pizza，也可以自己去做。原料有培根、面粉、佐料。工序有1、2、3工序，你自己去做吧。然后你就需要自己去做，到底放多少培根，放多少面粉，放多少佐料，这都你自己来决定，工序1、2、3，你是怎么实现的，都你自己决定。最后你得到了披萨。</li>
 </ul>
-<h2 id="7-参考文章"><a href="#7-参考文章" class="headerlink" title="7.参考文章"></a>7.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/strategy-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/strategy-pattern.html</a><br><a href="https://www.cnblogs.com/chenwolong/archive/2018/01/09/clms.html" target="_blank" rel="noopener">https://www.cnblogs.com/chenwolong/archive/2018/01/09/clms.html</a><br><a href="https://baike.baidu.com/item/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/646307?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/646307?fr=aladdin</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>  </p>
+<h2 id="7-参考文章"><a href="#7-参考文章" class="headerlink" title="7.参考文章"></a>7.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/strategy-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/strategy-pattern.html</a><br><a href="https://www.cnblogs.com/chenwolong/archive/2018/01/09/clms.html" target="_blank" rel="noopener">https://www.cnblogs.com/chenwolong/archive/2018/01/09/clms.html</a><br><a href="https://baike.baidu.com/item/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/646307?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/646307?fr=aladdin</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -9321,7 +9328,7 @@ class OperationMultiply implements Strategy {
 <pre><code>public enum Singleton {
     INSTANCE;
     public void whateverMethod(){}
-}</code></pre><h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/singleton-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/singleton-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>    </p>
+}</code></pre><h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5.参考文章"></a>5.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/singleton-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/singleton-pattern.html</a>    </p>
 <br>
 <br>
 
@@ -9583,7 +9590,7 @@ public class TestPaperB extends Paper{
         b.question3();
     }
 }</code></pre><p>代码结构图<br><img src="/blog/img/2019/09/01/3.png">   </p>
-<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/template-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/template-pattern.html</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>    </p>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/template-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/template-pattern.html</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -9896,7 +9903,7 @@ public class TestPaperB extends Paper{
 <h3 id="3-6-用反射-配置文件实现数据访问程序"><a href="#3-6-用反射-配置文件实现数据访问程序" class="headerlink" title="3.6 用反射+配置文件实现数据访问程序"></a>3.6 用反射+配置文件实现数据访问程序</h3><p>在资源文件夹下添加一个db.properties文件，内容如下：  </p>
 <pre><code>db=Sqlserver</code></pre><p>修改DataAccess类  </p>
 <pre><code>private static final String DB=ResourceBundle.getBundle(&quot;db&quot;).getString(&quot;db&quot;);</code></pre><p>这样的话我们就不用去修改代码来控制数据库的切换啦。这个程序写到这基本上就是满分了。</p>
-<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/abstract-factory-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/abstract-factory-pattern.html</a><br><a href="https://www.jianshu.com/p/7deb64f902db" target="_blank" rel="noopener">https://www.jianshu.com/p/7deb64f902db</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a>    </p>
+<h2 id="4-参考文章"><a href="#4-参考文章" class="headerlink" title="4.参考文章"></a>4.参考文章</h2><p><a href="https://www.runoob.com/design-pattern/abstract-factory-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/abstract-factory-pattern.html</a><br><a href="https://www.jianshu.com/p/7deb64f902db" target="_blank" rel="noopener">https://www.jianshu.com/p/7deb64f902db</a>    </p>
 <p>PS:三大工厂模式的区别<br>1、简单工厂模式：由一个工厂对象来决定创建出哪一个产品类的实例。<br>2、工厂方法模式：通过定义工厂父类负责定义创建对象的公共接口，而子类负责创建具体的产品，也就是将实际创建操作延迟到子类当中。<br>3、抽象工厂模式：提供一个创建一系列相关或相互依赖对象的接口，而无需指定他们具体的类。  </p>
 ]]></content>
   </entry>
@@ -10045,7 +10052,8 @@ class DivFactory implements IFactory{
         System.out.println(&quot;运算结果：&quot;+result);
         scanner.close();
     }
-}</code></pre><h2 id="7-参考文章"><a href="#7-参考文章" class="headerlink" title="7.参考文章"></a>7.参考文章</h2><p><a href="https://www.jianshu.com/p/d0c444275827" target="_blank" rel="noopener">https://www.jianshu.com/p/d0c444275827</a><br><a href="https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2361103?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2361103?fr=aladdin</a><br><a href="/blog/attachs/大话设计模式.pdf" target="blank">大话设计模式</a><br><br><br><br>PS:可以这么理解简单工厂模式和工厂方法模式：<br>简单工厂模式：就是所有的产品都在一个工厂里面生产，这个工厂里面有多条生产线，我们只要告诉这个工厂我们需要一个产品时，这个工厂就会去找对应的生产线为我们生产产品，我们不需要关心，也不知道工厂是通过哪条生产线为我们生产产品的。然后当我们需要生产一个新的产品的时候，就新增一条生产线用来生产新的产品，在这过程中就有可能就会影响到其他的生产线的工作。  </p>
+}</code></pre><h2 id="7-参考文章"><a href="#7-参考文章" class="headerlink" title="7.参考文章"></a>7.参考文章</h2><p><a href="https://www.jianshu.com/p/d0c444275827" target="_blank" rel="noopener">https://www.jianshu.com/p/d0c444275827</a><br><a href="https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2361103?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/2361103?fr=aladdin</a>  </p>
+<p><br><br><br>PS:可以这么理解简单工厂模式和工厂方法模式：<br>简单工厂模式：就是所有的产品都在一个工厂里面生产，这个工厂里面有多条生产线，我们只要告诉这个工厂我们需要一个产品时，这个工厂就会去找对应的生产线为我们生产产品，我们不需要关心，也不知道工厂是通过哪条生产线为我们生产产品的。然后当我们需要生产一个新的产品的时候，就新增一条生产线用来生产新的产品，在这过程中就有可能就会影响到其他的生产线的工作。  </p>
 <p>工厂方法模式：就是有多个工厂，每个工厂就一条生产线只生产一样产品，当我们需要生产一个产品时，需要我们去找到对应的工厂，告诉他我们需要你的产品。当我们需要生产一个新的产品时，就创建一个新的工厂来生产这个产品，这样也不会影响其他的工厂的工作。缺点就是工厂过多，难以维护。  </p>
 ]]></content>
   </entry>
@@ -10239,6 +10247,7 @@ class OperationDiv extends Operation{
 <li>23.<a href="/blog/2020/02/28/设计模式/解释器模式/" target="_blank">解释器模式</a></li>
 <li>24.<a href="/blog/2020/02/28/设计模式/访问者模式/" target="_blank">访问者模式</a></li>
 </ul>
+<p><a href="/blog/2020/04/25/资源整理/" target="blank">大话设计模式</a>  </p>
 ]]></content>
   </entry>
   <entry>
@@ -12126,7 +12135,8 @@ class Student{
       2、按照下面的公式，把步骤1中计算得到的散列码C组合到result中：
            result = 31*result+c。
    c、返回result。
-   d、写完hashCode方法之后，问自己“是否相等的实例具有相等的散列码”。如果不是的话，找出原因，并修改。可以通过org.apache.commons.lang.builder.HashCodeBuilder这个工具类来方便的重写hashCode方法。</code></pre>]]></content>
+   d、写完hashCode方法之后，问自己“是否相等的实例具有相等的散列码”。如果不是的话，找出原因，并修改。可以通过org.apache.commons.lang.builder.HashCodeBuilder这个工具类来方便的重写hashCode方法。</code></pre><p><a href="/blog/2020/04/25/资源整理/" target="blank">《Effective Java》</a>  </p>
+]]></content>
   </entry>
   <entry>
     <title>JAVA基础知识</title>
